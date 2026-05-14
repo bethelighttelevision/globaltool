@@ -1,50 +1,41 @@
 import { MetadataRoute } from 'next'
+import { blogPosts } from '../data/posts'
  
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://toolsnappy.netlify.app'
+  const baseUrl = 'https://toolsnappy.com'
   
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/seo-analyzer`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/bg-remover`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/crypto`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/ai-hook`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/terms`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.3,
-    },
-  ]
+  const staticPages = [
+    '',
+    '/seo-analyzer',
+    '/bg-remover',
+    '/crypto',
+    '/ai-hook',
+    '/blog',
+    '/contact',
+    '/privacy-policy',
+    '/terms',
+    '/youtube-seo',
+    '/instagram-caption',
+    '/tiktok-hashtags',
+    '/word-counter',
+    '/password-gen',
+    '/json-formatter',
+    '/base64-converter',
+    '/pdf-converter',
+    '/meta-tags',
+  ].map(route => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: route === '' ? 'daily' : 'weekly' as any,
+    priority: route === '' ? 1 : 0.8,
+  }));
+
+  const blogPages = blogPosts.map(post => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as any,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...blogPages];
 }

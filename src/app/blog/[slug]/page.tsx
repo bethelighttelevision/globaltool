@@ -125,6 +125,26 @@ export default function BlogPostPage({ params }: BlogPostProps) {
       </div>
 
       <div style={{ marginTop: '80px' }}>
+        <h2 style={{ fontSize: '32px', marginBottom: '32px' }}>Related Articles</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+          {blogPosts
+            .filter(p => p.slug !== params.slug)
+            .slice(0, 3)
+            .map(related => (
+              <Link key={related.id} href={`/blog/${related.slug}`} style={{ textDecoration: 'none' }}>
+                <div className="glass-panel h-full" style={{ padding: '0', overflow: 'hidden', height: '100%' }}>
+                  <img src={related.image} alt={related.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
+                  <div style={{ padding: '20px' }}>
+                    <h4 style={{ fontSize: '18px', color: 'var(--foreground)', marginBottom: '8px', lineHeight: 1.4 }}>{related.title}</h4>
+                    <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>{related.excerpt.slice(0, 80)}...</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+        </div>
+      </div>
+
+      <div style={{ marginTop: '80px' }}>
         <AdSensePlaceholder type="footer" />
       </div>
     </div>

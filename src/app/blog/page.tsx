@@ -25,7 +25,26 @@ export default function BlogPage() {
 
       <AdSensePlaceholder type="header" />
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px', marginTop: '40px' }}>
+      {/* Featured Post */}
+      <div style={{ marginTop: '40px', marginBottom: '60px' }}>
+        <Link href={`/blog/${blogPosts[0].slug}`} style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '0', padding: '0', overflow: 'hidden' }}>
+            <div style={{ height: '350px' }}>
+              <img src={blogPosts[0].image} alt={blogPosts[0].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <div style={{ padding: '40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <span style={{ color: 'var(--accent)', fontWeight: '700', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '0.1em', marginBottom: '12px', display: 'block' }}>Featured Article</span>
+              <h2 style={{ fontSize: '32px', color: 'var(--foreground)', marginBottom: '16px', lineHeight: 1.2 }}>{blogPosts[0].title}</h2>
+              <p style={{ color: 'var(--muted)', fontSize: '16px', lineHeight: 1.6, marginBottom: '24px' }}>{blogPosts[0].excerpt}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent)', fontWeight: '600' }}>
+                Read Featured Article <ArrowRight size={18} />
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
         {blogPosts.map((post) => (
           <Link href={`/blog/${post.slug}`} key={post.id} style={{ textDecoration: 'none' }}>
             <div className="glass-panel" style={{ height: '100%', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s ease' }}>
