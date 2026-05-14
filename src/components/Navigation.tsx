@@ -6,7 +6,20 @@ export default function Navigation() {
     <nav className="glass-nav">
       <div className="content-container" style={{ height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.png" alt="ToolSnappy Logo" style={{ height: '35px', width: 'auto' }} />
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img 
+              src="/logo.png" 
+              alt="ToolSnappy Logo" 
+              style={{ 
+                height: '38px', 
+                width: '38px', 
+                borderRadius: '50%', 
+                objectFit: 'cover',
+                border: '1.5px solid rgba(255,255,255,0.1)',
+                boxShadow: '0 0 15px rgba(0,210,255,0.3)'
+              }} 
+            />
+          </div>
           <div style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'var(--font-heading)', color: 'var(--foreground)', letterSpacing: '1px' }}>
             TOOL<span style={{ color: 'var(--accent)' }}>SNAPPY</span>
           </div>

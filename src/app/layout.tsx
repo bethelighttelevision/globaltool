@@ -26,14 +26,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.png" />
+      </head>
       <body className="font-sans antialiased bg-background text-foreground" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navigation />
         <main style={{ flex: 1 }}>{children}</main>
         <footer style={{ marginTop: 'auto', padding: '60px 24px 40px', borderTop: '1px solid var(--card-border)', background: 'rgba(255,255,255,0.02)' }}>
           <div className="content-container">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '40px' }}>
-              <div>
-                <h3 style={{ fontSize: '18px', marginBottom: '16px', color: '#fff' }}>ToolSnappy</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <img src="/logo.png" alt="ToolSnappy" style={{ height: '32px', borderRadius: '50%' }} />
+                  <h3 style={{ fontSize: '18px', margin: 0, color: '#fff' }}>ToolSnappy</h3>
+                </div>
                 <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.6 }}>The world's most advanced 100% free tool suite. Engineered for speed, privacy, and digital dominance in 2026.</p>
               </div>
               <div>
