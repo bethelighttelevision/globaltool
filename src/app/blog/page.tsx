@@ -1,4 +1,5 @@
 import React from 'react';
+// Final build trigger
 import Link from 'next/link';
 import { blogPosts } from '../../data/posts';
 import AdSensePlaceholder from '../../components/AdSensePlaceholder';
