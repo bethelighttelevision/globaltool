@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface AdProps {
-  type: 'header' | 'mid-content' | 'footer';
+  type: 'header' | 'mid-content' | 'footer' | 'sidebar';
   width?: string;
   height?: string;
 }
