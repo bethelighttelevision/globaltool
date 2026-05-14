@@ -13,7 +13,7 @@ export default function Navigation() {
         <div style={{ display: 'flex', gap: '32px', fontSize: '15px', fontWeight: '500' }}>
           <Link href="/seo-analyzer" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>SEO Audit</Link>
           <Link href="/bg-remover" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>BG Remover</Link>
-          <Link href="/crypto" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>ROI Calc</Link>
+          <Link href="/crypto" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Crypto Calc</Link>
           <Link href="/ai-hook" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>AI Hook</Link>
         </div>
       </div>
