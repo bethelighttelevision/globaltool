@@ -21,7 +21,7 @@ export default function PrivacyPolicy() {
           <p>Last Updated: May 14, 2026</p>
           
           <h2>1. Introduction</h2>
-          <p>Welcome to Global Utility Toolbox. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
+          <p>Welcome to ToolSnappy. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
 
           <h2>2. Information We Collect</h2>
           <p>We do not require user accounts or store personal data like names or email addresses for the usage of our tools. However, we may collect certain information automatically when you visit, use or navigate the Website. This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as your IP address, browser and device characteristics.</p>
