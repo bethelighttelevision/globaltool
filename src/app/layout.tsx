@@ -10,12 +10,12 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   title: {
-    default: "Global Utility Toolbox | #1 Free SEO & Social Media Suite 2026",
-    template: "%s | Global Utility Toolbox"
+    default: "ToolSnappy | #1 Free SEO & Social Media Suite 2026",
+    template: "%s | ToolSnappy"
   },
-  description: "Access 12+ professional, high-performance utility tools for SEO, Social Media, Crypto, and Developer productivity. Engineered for the USA market.",
-  keywords: ["SEO Tools", "Social Media Tools", "Crypto Calculator", "AI Hook Generator", "Global Utility Toolbox"],
-  authors: [{ name: "Global Utility Toolbox Team" }],
+  description: "Access 12+ professional, high-performance utility tools for SEO, Social Media, Crypto, and Developer productivity. Engineered for speed and precision.",
+  keywords: ["SEO Tools", "Social Media Tools", "Crypto Calculator", "AI Hook Generator", "ToolSnappy"],
+  authors: [{ name: "ToolSnappy Team" }],
   viewport: "width=device-width, initial-scale=1",
 };
 
@@ -33,7 +33,7 @@ export default function RootLayout({
           <div className="content-container">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '40px' }}>
               <div>
-                <h3 style={{ fontSize: '18px', marginBottom: '16px', color: '#fff' }}>Global Utility Toolbox</h3>
+                <h3 style={{ fontSize: '18px', marginBottom: '16px', color: '#fff' }}>ToolSnappy</h3>
                 <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.6 }}>The world's most advanced 100% free tool suite. Engineered for speed, privacy, and digital dominance in 2026.</p>
               </div>
               <div>
@@ -54,7 +54,7 @@ export default function RootLayout({
               </div>
             </div>
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
-              <p style={{ color: 'var(--muted)', fontSize: '12px' }}>&copy; 2026 Global Utility Toolbox. All rights reserved.</p>
+              <p style={{ color: 'var(--muted)', fontSize: '12px' }}>&copy; 2026 ToolSnappy. All rights reserved.</p>
               <div style={{ display: 'flex', gap: '20px' }}>
                 <AdSensePlaceholder type="footer" />
               </div>

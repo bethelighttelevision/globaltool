@@ -5,9 +5,9 @@ export default function Navigation() {
   return (
     <nav className="glass-nav">
       <div className="content-container" style={{ height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Link href="/" style={{ textDecoration: 'none' }}>
-          <div style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'var(--font-heading)', color: 'var(--foreground)' }}>
-            GLOBAL<span style={{ color: 'var(--accent)' }}>TOOLBOX</span>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'var(--font-heading)', color: 'var(--foreground)', letterSpacing: '1px' }}>
+            TOOL<span style={{ color: 'var(--accent)' }}>SNAPPY</span>
           </div>
         </Link>
         <div style={{ display: 'flex', gap: '32px', fontSize: '15px', fontWeight: '500' }}>
