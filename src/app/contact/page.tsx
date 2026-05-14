@@ -6,9 +6,14 @@ import { ArrowLeft, Mail, Send, CheckCircle2 } from 'lucide-react';
 
 export default function ContactUs() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSending(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setSending(false);
     setSubmitted(true);
   };
 
@@ -54,8 +59,14 @@ export default function ContactUs() {
                 <textarea className="input-field" placeholder="How can we help you?" style={{ height: '150px', resize: 'none' }} required></textarea>
               </div>
 
-              <button type="submit" className="premium-button" style={{ width: '100%', fontSize: '18px' }}>
-                <Send size={20} /> Send Message
+              <button type="submit" className="premium-button" style={{ width: '100%', fontSize: '18px' }} disabled={sending}>
+                {sending ? (
+                  <>Processing...</>
+                ) : (
+                  <>
+                    <Send size={20} /> Send Message
+                  </>
+                )}
               </button>
             </form>
           )}

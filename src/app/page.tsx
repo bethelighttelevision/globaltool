@@ -19,9 +19,9 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Global Utility Toolbox | #1 Free SEO & Social Media Suite 2026',
-  description: 'Access 12+ professional tools: Page SEO Analyzer, Crypto ROI Calculator, AI Hook Generator, YouTube SEO Optimizer, Instagram Captions, and TikTok Hashtags. 100% Free.',
-  keywords: 'Page SEO Analyzer, Free SEO Tools 2026, Best AI Hook Generator, YouTube SEO Tool, Instagram Caption Generator, TikTok Hashtag Generator, Crypto Profit Calculator USA, PDF to SVG, Word Counter SEO, Image to Base64, Secure Password Generator',
+  title: 'ToolSnappy | #1 Free SEO & Social Media Suite 2026',
+  description: 'Access 12+ professional tools: Page SEO Analyzer, AI Background Remover, Crypto ROI Calculator, AI Hook Generator, and TikTok SEO tools. 100% Free for creators.',
+  keywords: 'ToolSnappy, Free SEO Tools 2026, Best AI Hook Generator, AI Background Remover, Crypto Profit Calculator USA, YouTube SEO Tool, Instagram Caption Generator, TikTok Hashtag Generator',
 };
 
 export default function Home() {
