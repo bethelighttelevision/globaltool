@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   keywords: ["SEO Tools", "Social Media Tools", "Crypto Calculator", "AI Hook Generator", "ToolSnappy"],
   authors: [{ name: "ToolSnappy Team" }],
   viewport: "width=device-width, initial-scale=1",
+  verification: {
+    google: "Xn6Zt8lIq-9cJatOao-NCss6EJHLFKgZLEXF2n78rwQ",
+  },
 };
 
 export default function RootLayout({
