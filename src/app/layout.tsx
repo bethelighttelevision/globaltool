@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   authors: [{ name: "ToolSnappy Team" }],
   viewport: "width=device-width, initial-scale=1",
   verification: {
-    google: "Xn6Zt8lIq-9cJatOao-NCss6EJHLFKgZLEXF2n78rwQ",
+    google: "SLVPBBxmjf4OTG8ool0m5oHhotoFZiK5K_16cpautYs",
   },
 };
 
