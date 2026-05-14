@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
     date: 'May 14, 2026',
     category: 'SEO',
     excerpt: 'Stop guessing why your site isn\'t on page 1. Learn how to perform a professional SEO audit in 10 minutes.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 Hey there, fellow creator! 
 
@@ -54,7 +54,7 @@ SEO isn't rocket science; it's about consistency. Start by fixing these 3 techni
     date: 'May 14, 2026',
     category: 'Design',
     excerpt: 'You don\'t need Photoshop to get professional product photos. Learn the secret to removing backgrounds for free.',
-    image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 If you’re trying to sell products online or grow your personal brand, you know the struggle. You take a great photo, but the background is... well, distracting. Maybe there’s a messy room behind you, or the lighting makes the floor look dull.
 
@@ -88,7 +88,7 @@ Don't let a messy background hold your business back. With the right tools, you 
     date: 'May 14, 2026',
     category: 'Finance',
     excerpt: 'Crypto is volatile, but your strategy shouldn\'t be. Learn how to calculate your potential profits and set realistic targets.',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 Let's talk about the elephant in the room: **FOMO (Fear Of Missing Out).**
 
@@ -120,7 +120,7 @@ Crypto is a game of math, not luck. If you use tools to plan your exits, you're 
     date: 'May 14, 2026',
     category: 'Social Media',
     excerpt: 'Why do some videos get millions of views while others get zero? It all comes down to the first 2 seconds.',
-    image: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 How many videos did you skip within the first second today? Probably most of them. Now, why did you stop on that one specific video? 
 
@@ -157,7 +157,7 @@ Your content is great, but nobody will see it if they don't stop scrolling. Mast
     date: 'May 14, 2026',
     category: 'SEO',
     excerpt: 'Is your traffic dropping? You might be making these common SEO mistakes without even knowing it.',
-    image: 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 SEO is a moving target. What worked in 2024 might actually hurt you in 2026. Most people are making the same "sneaky" mistakes that Google's algorithm hates.
 
@@ -186,7 +186,7 @@ Use our SEO Analyzer to quickly spot if your page has technical issues that migh
     date: 'May 14, 2026',
     category: 'Productivity',
     excerpt: 'Are you overwhelmed with daily tasks? Discover how a suite of simple AI utility tools can automate your workflow.',
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 I used to be a "hustle culture" addict. Then, I realized something: **Tools are leverage.**
 
@@ -215,7 +215,7 @@ I got tired of having 20 different tabs open. I wanted a single place where ever
     date: 'May 14, 2026',
     category: 'E-commerce',
     excerpt: 'Boost your sales by 30% with professional product photos. Learn how to meet e-commerce marketplace requirements.',
-    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 If you’ve ever tried to list a product on Amazon, you’ve seen the requirement: *"Main image must have a pure white background."*
 
@@ -237,7 +237,7 @@ I designed the **ToolSnappy BG Remover** to be "E-commerce Ready." It handles hi
     date: 'May 14, 2026',
     category: 'Finance',
     excerpt: 'Are you a "panic seller" or a "greedy holder"? Discover the psychological traps of crypto trading.',
-    image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 I once sold a coin at a 40% loss because I saw a scary headline. Two hours later, it hit a new "All-Time High."
 
@@ -264,7 +264,7 @@ I built the **ToolSnappy Crypto ROI Tool** to give you a clear, emotionless view
     date: 'May 14, 2026',
     category: 'SEO',
     excerpt: 'Want more organic traffic? Discover the hidden SEO strategies that the big blogs use to stay on page one.',
-    image: 'https://images.unsplash.com/photo-1562577309-4932fdd64cd1?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 Why do some blogs seem to rank for everything? It’s because they understand the **"Core Ranking Signals"** that Google’s AI prioritizes in 2026.
 
@@ -288,7 +288,7 @@ I use our **SEO Analyzer** every time I publish. It takes 10 seconds to make sur
     date: 'May 14, 2026',
     category: 'Technology',
     excerpt: 'Are you using the right tools? Check out our list of must-have web utilities that will help you grow.',
-    image: 'https://images.unsplash.com/photo-1484417855591-d4a60e812117?q=80&w=800&auto=format&fit=crop',
+    image: '/blog-banner.png',
     content: `
 To stand out, you need to be faster and more professional. Here are the 10 tools every creator should have.
 

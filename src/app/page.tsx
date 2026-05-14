@@ -15,7 +15,8 @@ import {
   Image as ImageIcon,
   TrendingUp,
   Search,
-  Globe
+  Globe,
+  ZoomIn
 } from 'lucide-react';
 
 export const metadata = {
@@ -125,13 +126,23 @@ export default function Home() {
         </Link>
 
         <Link href="/bg-remover" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', border: '1px solid var(--accent)' }}>
+          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', borderTop: '4px solid var(--accent)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Eraser size={24} color="var(--accent)" />
-              <span className="tag-badge" style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}>AI NEW</span>
+              <ImageIcon size={24} color="var(--accent)" />
             </div>
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>BG Remover HD</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Remove image backgrounds with AI precision.</p>
+            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>AI BG Remover</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Adobe-grade neural engine to remove backgrounds instantly.</p>
+          </div>
+        </Link>
+
+        <Link href="/image-upscaler" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <ZoomIn size={24} color="#32d74b" />
+              <span className="tag-badge" style={{ color: '#32d74b', borderColor: '#32d74b', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW AI</span>
+            </div>
+            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Image Upscaler</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Increase resolution of low-quality images using AI.</p>
           </div>
         </Link>
 

@@ -6,9 +6,9 @@ import { Calendar, User, ChevronLeft, Share2, Clock } from 'lucide-react';
 import AdSensePlaceholder from '../../../components/AdSensePlaceholder';
 
 interface BlogPostProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -17,7 +17,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: BlogPostProps) {
+export async function generateMetadata(props: BlogPostProps) {
+  const params = await props.params;
   const post = blogPosts.find((p) => p.slug === params.slug);
   if (!post) return { title: 'Post Not Found' };
   
@@ -27,7 +28,8 @@ export async function generateMetadata({ params }: BlogPostProps) {
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostProps) {
+export default async function BlogPostPage(props: BlogPostProps) {
+  const params = await props.params;
   const post = blogPosts.find((p) => p.slug === params.slug);
 
   if (!post) {
@@ -62,7 +64,7 @@ export default function BlogPostPage({ params }: BlogPostProps) {
         </div>
       </div>
 
-      <div style={{ height: '450px', width: '100%', borderRadius: '24px', overflow: 'hidden', marginBottom: '48px' }}>
+      <div style={{ width: '100%', aspectRatio: '16/9', borderRadius: '24px', overflow: 'hidden', marginBottom: '48px', position: 'relative' }}>
         <img src={post.image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
 
