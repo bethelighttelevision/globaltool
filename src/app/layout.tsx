@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "../components/Navigation";
 import Link from 'next/link';
 import AdSensePlaceholder from "../components/AdSensePlaceholder";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -28,6 +29,18 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <head>
         <link rel="icon" href="/favicon.png" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-WHHDYWK3F5"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-WHHDYWK3F5');
+          `}
+        </Script>
       </head>
       <body className="font-sans antialiased bg-background text-foreground" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navigation />
