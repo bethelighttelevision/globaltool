@@ -36,7 +36,7 @@ export async function analyzeSEOAction(targetUrl: string) {
     const h2Matches = Array.from(html.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi)).slice(0, 5).map(m => m[1].trim().replace(/<[^>]*>/g, ''));
     
     const imgMatches = Array.from(html.matchAll(/<img[^>]*>/gi));
-    const imgsWithoutAlt = imgMatches.filter(img => !/alt=["']([^"']*)["']/i.test(img)).length;
+    const imgsWithoutAlt = imgMatches.filter(img => !/alt=["']([^"']*)["']/i.test(img[0])).length;
 
     const hasSsl = formattedUrl.startsWith('https');
     
