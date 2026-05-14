@@ -1,32 +1,50 @@
-import { MetadataRoute } from 'next';
-
+import { MetadataRoute } from 'next'
+ 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://globalutilitytoolbox.com'; // Replace with actual domain when ready
+  const baseUrl = 'https://toolsnappy.netlify.app'
   
-  const tools = [
-    '',
-    '/crypto',
-    '/ai-hook',
-    '/youtube-seo',
-    '/pdf-converter',
-    '/meta-tags',
-    '/password-gen',
-    '/json-formatter',
-    '/instagram-caption',
-    '/tiktok-hashtags',
-    '/word-counter',
-    '/base64-converter',
-    '/seo-analyzer',
-    '/bg-remover',
-    '/privacy-policy',
-    '/terms',
-    '/contact'
-  ];
-
-  return tools.map((tool) => ({
-    url: `${baseUrl}${tool}`,
-    lastModified: new Date(),
-    changeFrequency: 'daily',
-    priority: tool === '' ? 1 : 0.8,
-  }));
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/seo-analyzer`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/bg-remover`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/crypto`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/ai-hook`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/privacy-policy`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.3,
+    },
+  ]
 }
