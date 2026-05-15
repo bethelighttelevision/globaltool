@@ -9,6 +9,11 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: {
     default: "ToolSnappy | #1 Free SEO & Social Media Suite 2026",
@@ -17,7 +22,6 @@ export const metadata: Metadata = {
   description: "Access 12+ professional, high-performance utility tools for SEO, Social Media, Crypto, and Developer productivity. Engineered for speed and precision.",
   keywords: ["SEO Tools", "Social Media Tools", "Crypto Calculator", "AI Hook Generator", "ToolSnappy"],
   authors: [{ name: "ToolSnappy Team" }],
-  viewport: "width=device-width, initial-scale=1",
   verification: {
     google: "SLVPBBxmjf4OTG8ool0m5oHhotoFZiK5K_16cpautYs",
   },
