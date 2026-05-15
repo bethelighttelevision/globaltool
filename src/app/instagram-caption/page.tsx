@@ -6,6 +6,7 @@ import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import SEO from '../../components/SEO';
 import RelatedTools from '../../components/RelatedTools';
 import { Camera, Copy, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { generateAICentent } from '../actions/ai';
 
 export default function InstagramCaptionPage() {
   const [topic, setTopic] = useState('');
@@ -14,20 +15,26 @@ export default function InstagramCaptionPage() {
   const [captions, setCaptions] = useState<string[]>([]);
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
 
-  const generateCaptions = () => {
+  const generateCaptions = async () => {
     if (!topic.trim()) return;
     setIsLoading(true);
     
-    setTimeout(() => {
-      const results = [
-        `✨ Level up your ${topic} game in 2026! Success isn't just about hard work, it's about strategy. #Success #Motivation #${topic.replace(/\s+/g, '')}`,
-        `They told me I couldn't, so I did twice. Mastering ${topic} one day at a time. 🚀 #${topic.replace(/\s+/g, '')} #Mindset`,
-        `The secret to ${topic}? Consistency. Don't stop when you're tired, stop when you're done. 💎 #Consistency #Results #${topic.replace(/\s+/g, '')}`,
-        `${topic} vibez only. 🌈 Living life on my own terms. #${topic.replace(/\s+/g, '')} #Lifestyle #Growth`
-      ];
+    try {
+      const prompt = `Generate 4 viral Instagram captions for the topic: "${topic}". 
+      The tone should be ${tone}. 
+      Include relevant emojis and hashtags. 
+      Format each caption clearly, separated by a unique delimiter like "---". 
+      Don't include any extra text, just the 4 captions.`;
+      
+      const response = await generateAICentent(prompt);
+      const results = response.split('---').map(c => c.trim()).filter(c => c.length > 0).slice(0, 4);
       setCaptions(results);
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message || "Failed to generate captions.");
+    } finally {
       setIsLoading(false);
-    }, 1200);
+    }
   };
 
   const handleCopy = (text: string, idx: number) => {

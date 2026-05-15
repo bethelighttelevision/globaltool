@@ -6,6 +6,7 @@ import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import SEO from '../../components/SEO';
 import RelatedTools from '../../components/RelatedTools';
 import { Play, Copy, CheckCircle2, ArrowLeft, Search, Sparkles } from 'lucide-react';
+import { generateAICentent } from '../actions/ai';
 
 export default function YoutubeSEOPage() {
   const [topic, setTopic] = useState('');
@@ -22,37 +23,34 @@ export default function YoutubeSEOPage() {
     return score;
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     if (!topic.trim()) return;
     setIsLoading(true);
     
-    setTimeout(() => {
-      const data = {
-        titles: [
-          `How to Master ${topic} in 2026 (Full Guide)`,
-          `I tried ${topic} for 7 days: HERE IS THE RESULT!`,
-          `${topic} SECRETS: 5 Tips You Didn't Know`,
-          `Stop wasting time on ${topic}! Do this instead.`
-        ],
-        description: `Are you looking to master ${topic}? In this video, we dive deep into everything you need to know about ${topic} in 2026. From basic concepts to advanced strategies, we cover it all to help you succeed faster.\n\n🔥 Resources Mentioned:\n- Link to Tool: https://yourtoolbox.com\n- Free Guide: https://yourguide.com\n\nDon't forget to LIKE and SUBSCRIBE for more content on ${topic}!`,
-        tags: [
-          topic, 
-          `${topic} 2026`, 
-          `${topic} tutorial`, 
-          `${topic} guide`, 
-          `how to ${topic}`, 
-          `best ${topic} tips`,
-          `viral ${topic}`,
-          `${topic} for beginners`
-        ]
-      };
+    try {
+      const prompt = `Generate YouTube SEO optimization data for a video about "${topic}". 
+      I need:
+      1. 4 viral title options.
+      2. A high-retention video description.
+      3. 8-12 high-density keywords/tags.
+      
+      Format the output as a JSON object with keys "titles" (array), "description" (string), and "tags" (array).
+      Only return the JSON.`;
+      
+      const response = await generateAICentent(prompt);
+      const cleanJson = response.replace(/```json|```/g, '').trim();
+      const data = JSON.parse(cleanJson);
       
       setResults({
         ...data,
         score: calculateSEOScore(data)
       });
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message || "Failed to generate SEO data.");
+    } finally {
       setIsLoading(false);
-    }, 1200);
+    }
   };
 
   const handleCopy = (text: string, type: string) => {

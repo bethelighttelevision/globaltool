@@ -6,6 +6,7 @@ import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import SEO from '../../components/SEO';
 import RelatedTools from '../../components/RelatedTools';
 import { Play, Copy, CheckCircle2, ArrowLeft, TrendingUp } from 'lucide-react';
+import { generateAICentent } from '../actions/ai';
 
 export default function TikTokHashtagsPage() {
   const [topic, setTopic] = useState('');
@@ -13,20 +14,29 @@ export default function TikTokHashtagsPage() {
   const [hashtags, setHashtags] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
 
-  const generateHashtags = () => {
+  const generateHashtags = async () => {
     if (!topic.trim()) return;
     setIsLoading(true);
     
-    setTimeout(() => {
-      const base = topic.replace(/\s+/g, '').toLowerCase();
-      const results = [
-        `#${base}`, `#${base}tips`, `#${base}hacks`, `#fyp`, `#foryou`, 
-        `#viral`, `#trending`, `#tiktok2026`, `#learnontiktok`, 
-        `#${base}challenge`, `#storytime`, `#productivity`
-      ];
+    try {
+      const prompt = `Generate 15 trending and viral TikTok hashtags for the topic: "${topic}". 
+      Include a mix of:
+      1. Mega tags (broad reach)
+      2. Niche-specific tags
+      3. Community tags
+      
+      Return the hashtags as a comma-separated list, starting with #. 
+      Only return the hashtags.`;
+      
+      const response = await generateAICentent(prompt);
+      const results = response.split(',').map(tag => tag.trim()).filter(tag => tag.startsWith('#'));
       setHashtags(results);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to generate hashtags. Please check your API key.");
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleCopyAll = () => {

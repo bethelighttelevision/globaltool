@@ -5,7 +5,7 @@ import Link from 'next/link';
 import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import SEO from '../../components/SEO';
 import RelatedTools from '../../components/RelatedTools';
-import { ArrowLeft, Globe, ShieldAlert, Check, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Globe, ShieldAlert, Check, AlertCircle, Sparkles } from 'lucide-react';
 import { analyzeSEOAction } from './actions';
 
 export default function SEOAnalyzerPage() {
@@ -96,6 +96,15 @@ export default function SEOAnalyzerPage() {
               <div style={{ fontSize: '56px', fontWeight: 'bold', color: audit.score > 80 ? 'var(--success)' : '#ffcc00' }}>{audit.score}</div>
               <div style={{ fontSize: '12px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Professional Grade</div>
             </div>
+          </div>
+
+          <div className="glass-panel" style={{ padding: '32px', marginBottom: '32px', borderLeft: '4px solid var(--accent)' }}>
+            <h3 style={{ fontSize: '20px', marginBottom: '16px', color: 'var(--accent)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Sparkles size={20} /> AI Expert Recommendation
+            </h3>
+            <p style={{ fontSize: '16px', lineHeight: 1.6, color: 'var(--foreground)', fontStyle: 'italic' }}>
+              &quot;{audit.expertAdvice}&quot;
+            </p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px', marginBottom: '40px' }}>

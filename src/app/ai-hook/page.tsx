@@ -6,36 +6,7 @@ import { Bot, ArrowLeft } from 'lucide-react';
 import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import SEO from '../../components/SEO';
 import RelatedTools from '../../components/RelatedTools';
-
-// Metadata needs to be moved if we use "use client", but since it's an app router page,
-// we'll keep the client logic and just ignore SEO for a moment, or we can separate components.
-// For Next.js App Router, metadata MUST be in a Server Component.
-// Let's create a functional client component inline for simplicity since this is a demo,
-// but ideally we should split it. Since the user wants it to work now, I'll just build it.
-
-const simulateAIGeneration = (topic: string) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        psychological: [
-          `The dark truth about ${topic} that nobody tells you.`,
-          `Stop doing ${topic} like this, or you'll regret it in 2026.`,
-          `Why 99% of people fail at ${topic} (and how to be the 1%).`
-        ],
-        curiosity: [
-          `I tried the ultimate ${topic} hack for 30 days. Here’s what happened.`,
-          `The secret ${topic} strategy the elites are hiding from you.`,
-          `What happens if you combine ${topic} with artificial intelligence?`
-        ],
-        data: [
-          `3 Proven steps to master ${topic} in under 24 hours.`,
-          `How this simple ${topic} trick increased ROI by 412%.`,
-          `The only 5 tools you need for ${topic} this year.`
-        ]
-      });
-    }, 1500); // 1.5s simulation
-  });
-};
+import { generateAICentent } from '../actions/ai';
 
 export default function AIHookPage() {
   const [topic, setTopic] = useState('');
@@ -45,9 +16,28 @@ export default function AIHookPage() {
   const handleGenerate = async () => {
     if (!topic.trim()) return;
     setIsLoading(true);
-    const data = await simulateAIGeneration(topic);
-    setResults(data);
-    setIsLoading(false);
+    
+    try {
+      const prompt = `Generate 9 viral hooks for a video about "${topic}". 
+      Divide them into 3 categories:
+      1. Psychological Hooks (Emotional/FOMO)
+      2. Curiosity Hooks (Mystery/Secret)
+      3. Data-Driven Hooks (Numbers/Proof)
+      
+      Format the output as a JSON object with keys "psychological", "curiosity", and "data", each being an array of 3 strings. 
+      Only return the JSON.`;
+      
+      const response = await generateAICentent(prompt);
+      // Clean the response in case AI adds markdown
+      const cleanJson = response.replace(/```json|```/g, '').trim();
+      const data = JSON.parse(cleanJson);
+      setResults(data);
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message || "Failed to generate hooks.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
