@@ -15,24 +15,27 @@ export default function PasswordGenPage() {
   const [useSymbols, setUseSymbols] = useState(true);
   const [copied, setCopied] = useState(false);
 
-  const generatePassword = () => {
+  const generatePassword = React.useCallback((currentLength: number, upper: boolean, nums: boolean, syms: boolean) => {
     let charset = 'abcdefghijklmnopqrstuvwxyz';
-    if (useUppercase) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    if (useNumbers) charset += '0123456789';
-    if (useSymbols) charset += '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+    if (upper) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (nums) charset += '0123456789';
+    if (syms) charset += '!@#$%^&*()_+~`|}{[]:;?><,./-=';
     
     let newPassword = '';
-    const array = new Uint32Array(length);
+    const array = new Uint32Array(currentLength);
     window.crypto.getRandomValues(array);
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < currentLength; i++) {
       newPassword += charset[array[i] % charset.length];
     }
     setPassword(newPassword);
-  };
+  }, []);
 
   useEffect(() => {
-    generatePassword();
-  }, [length, useUppercase, useNumbers, useSymbols]);
+    const timer = setTimeout(() => {
+      generatePassword(length, useUppercase, useNumbers, useSymbols);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [generatePassword, length, useUppercase, useNumbers, useSymbols]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(password);
@@ -87,7 +90,7 @@ export default function PasswordGenPage() {
               readOnly 
               style={{ flex: 1, padding: '16px 20px', fontSize: '20px', fontFamily: 'monospace', background: '#000', border: '1px solid var(--card-border)', borderRadius: '12px', color: '#fff', letterSpacing: '0.05em' }} 
             />
-            <button onClick={generatePassword} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', padding: '0 20px', borderRadius: '12px', cursor: 'pointer', color: 'var(--foreground)' }}>
+            <button onClick={() => generatePassword(length, useUppercase, useNumbers, useSymbols)} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', padding: '0 20px', borderRadius: '12px', cursor: 'pointer', color: 'var(--foreground)' }}>
               <RefreshCw size={20} />
             </button>
             <button onClick={handleCopy} style={{ background: 'var(--accent)', border: 'none', padding: '0 24px', borderRadius: '12px', cursor: 'pointer', color: '#fff', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '600' }}>
@@ -108,20 +111,36 @@ export default function PasswordGenPage() {
           <div style={{ marginBottom: '24px' }}>
             <label style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--foreground)', marginBottom: '16px' }}>
               <span>Password Length ({length})</span>
-              <input type="range" min="8" max="64" value={length} onChange={(e) => setLength(parseInt(e.target.value))} style={{ width: '60%' }} />
+              <input type="range" min="8" max="64" value={length} onChange={(e) => {
+                const newLen = parseInt(e.target.value);
+                setLength(newLen);
+                generatePassword(newLen, useUppercase, useNumbers, useSymbols);
+              }} style={{ width: '60%' }} />
             </label>
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--foreground)', cursor: 'pointer' }}>
-                <input type="checkbox" checked={useUppercase} onChange={(e) => setUseUppercase(e.target.checked)} style={{ width: '18px', height: '18px' }} />
+                <input type="checkbox" checked={useUppercase} onChange={(e) => {
+                  const val = e.target.checked;
+                  setUseUppercase(val);
+                  generatePassword(length, val, useNumbers, useSymbols);
+                }} style={{ width: '18px', height: '18px' }} />
                 Uppercase (A-Z)
               </label>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--foreground)', cursor: 'pointer' }}>
-                <input type="checkbox" checked={useNumbers} onChange={(e) => setUseNumbers(e.target.checked)} style={{ width: '18px', height: '18px' }} />
+                <input type="checkbox" checked={useNumbers} onChange={(e) => {
+                  const val = e.target.checked;
+                  setUseNumbers(val);
+                  generatePassword(length, useUppercase, val, useSymbols);
+                }} style={{ width: '18px', height: '18px' }} />
                 Numbers (0-9)
               </label>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--foreground)', cursor: 'pointer' }}>
-                <input type="checkbox" checked={useSymbols} onChange={(e) => setUseSymbols(e.target.checked)} style={{ width: '18px', height: '18px' }} />
+                <input type="checkbox" checked={useSymbols} onChange={(e) => {
+                  const val = e.target.checked;
+                  setUseSymbols(val);
+                  generatePassword(length, useUppercase, useNumbers, val);
+                }} style={{ width: '18px', height: '18px' }} />
                 Symbols (!@#$)
               </label>
             </div>
@@ -129,8 +148,36 @@ export default function PasswordGenPage() {
 
         </div>
       </div>
-      
-      <AdSensePlaceholder type="mid-content" />
+
+      <div style={{ marginTop: '80px', maxWidth: '900px', margin: '80px auto 0' }}>
+        <article className="prose prose-invert lg:prose-xl">
+          <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>Why Secure Password Generation is Critical in 2026</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            In an era of advanced cyber threats and automated brute-force attacks, using a simple password is a massive security risk. Our <strong>Professional Password Generator</strong> uses cryptographically secure randomization algorithms to create keys that are virtually impossible to crack. Whether you are protecting your crypto wallet, personal email, or business accounts, a strong password is your first line of defense.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>The Anatomy of a Strong Password</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            A truly secure password should be a mix of uppercase letters, lowercase letters, numbers, and special symbols. More importantly, length is the biggest factor in security. Experts recommend a minimum of 16 characters for critical accounts. Our tool allows you to customize the length and complexity to meet the specific requirements of any platform.
+          </p>
+
+          <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #ffcc00' }}>
+            <h4 style={{ marginTop: 0, color: '#ffcc00' }}>Security Tip: Never Reuse Passwords</h4>
+            <p style={{ marginBottom: 0, fontSize: '15px' }}>
+              If one of your accounts is compromised, hackers will try that same password on every other service (Credential Stuffing). Always generate a unique, random password for every single website you use.
+            </p>
+          </div>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>How to Manage Your Secure Passwords</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Since humans are not good at remembering 20-character random strings, we highly recommend using a reputable password manager (like Bitwarden, 1Password, or LastPass). Use our generator to create the passwords, and then save them securely in your vault. This ensures you have maximum security without the frustration of forgetting your login details.
+          </p>
+        </article>
+      </div>
+
+      <div style={{ marginTop: '60px' }}>
+        <AdSensePlaceholder type="mid-content" />
+      </div>
       <RelatedTools currentPath="/password-gen" />
     </div>
   );

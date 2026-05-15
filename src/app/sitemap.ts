@@ -23,17 +23,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/base64-converter',
     '/pdf-converter',
     '/meta-tags',
+    '/car-loan-calculator',
+    '/mortgage-calculator',
+    '/image-upscaler',
   ].map(route => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === '' ? 'daily' : 'weekly' as any,
+    changeFrequency: (route === '' ? 'daily' : 'weekly') as 'daily' | 'weekly',
     priority: route === '' ? 1 : 0.8,
   }));
 
   const blogPages = blogPosts.map(post => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as any,
+    changeFrequency: 'monthly' as const,
     priority: 0.6,
   }));
 

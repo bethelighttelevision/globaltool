@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://globalutilitytoolbox.com/sitemap.xml',
+    sitemap: 'https://toolsnappy.com/sitemap.xml',
   };
 }

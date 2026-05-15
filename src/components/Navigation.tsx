@@ -34,11 +34,13 @@ export default function Navigation() {
         
         {/* Desktop Menu */}
         <div className="desktop-menu" style={{ display: 'flex', gap: '32px', fontSize: '15px', fontWeight: '500' }}>
+          <Link href="/car-loan-calculator" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Car Loan</Link>
+          <Link href="/mortgage-calculator" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Mortgage</Link>
           <Link href="/seo-analyzer" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>SEO Audit</Link>
           <Link href="/bg-remover" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>BG Remover</Link>
           <Link href="/image-upscaler" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Upscaler</Link>
-          <Link href="/blog" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Blog</Link>
           <Link href="/crypto" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Crypto</Link>
+          <Link href="/blog" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Blog</Link>
         </div>
 
         {/* Mobile Hamburger Icon */}

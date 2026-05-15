@@ -31,7 +31,7 @@ export default function ContactUs() {
           </div>
           
           <p style={{ color: 'var(--muted)', fontSize: '18px', marginBottom: '40px', lineHeight: 1.6 }}>
-            Have a suggestion for a new tool? Found a bug? Or just want to say hi? Reach out to us and we'll get back to you within 24 hours.
+            Have a suggestion for a new tool? Found a bug? Or just want to say hi? Reach out to us and we&apos;ll get back to you within 24 hours.
           </p>
 
           {submitted ? (

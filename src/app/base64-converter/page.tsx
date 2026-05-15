@@ -19,6 +19,10 @@ export default function Base64ConverterPage() {
       alert('Please upload an image file.');
       return;
     }
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File is too large. Please upload an image smaller than 5MB.');
+      return;
+    }
     setFileName(file.name);
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -28,6 +32,7 @@ export default function Base64ConverterPage() {
   };
 
   const handleCopy = () => {
+    if (!base64) return;
     navigator.clipboard.writeText(base64);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -119,10 +124,37 @@ export default function Base64ConverterPage() {
           </div>
         )}
       </div>
-      
-      <AdSensePlaceholder type="mid-content" />
+
+      <div style={{ marginTop: '80px', maxWidth: '900px', margin: '80px auto 0' }}>
+        <article className="prose prose-invert lg:prose-xl">
+          <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>Deep Dive into Base64 Encoding and Data Integrity</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Base64 encoding is an essential technique used by developers to represent binary data in an ASCII string format. Our <strong>Professional Base64 Converter</strong> ensures fast, accurate, and secure encoding without your data ever leaving your browser.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>How Base64 Improves Web Performance</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            By converting small icons or background patterns into Base64 strings, you can reduce the number of HTTP requests a browser has to make. This inline approach can slightly improve site speed and Core Web Vitals for mobile users.
+          </p>
+
+          <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #32d74b' }}>
+            <h4 style={{ marginTop: 0, color: '#32d74b' }}>Developer Tip: Data URIs</h4>
+            <p style={{ marginBottom: 0, fontSize: '15px' }}>
+              A Data URI allows you to embed a Base64 string directly into an image tag. This is a common practice in modern frontend development when building highly portable UI components.
+            </p>
+          </div>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Is Base64 Encoding the Same as Encryption?</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            A common misconception is that Base64 is a form of encryption. It is not. Base64 is purely a representation format and can be decoded by anyone with access to the string.
+          </p>
+        </article>
+      </div>
+
+      <div style={{ marginTop: '60px' }}>
+        <AdSensePlaceholder type="mid-content" />
+      </div>
       <RelatedTools currentPath="/base64-converter" />
     </div>
   );
 }
-

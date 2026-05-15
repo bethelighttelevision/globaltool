@@ -167,6 +167,24 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 600; let
   letter-spacing: 0.05em;
 }
 
+.premium-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--card-border);
+  color: var(--foreground);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.premium-input:focus {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 4px rgba(41, 151, 255, 0.1);
+}
+
 .content-container {
   max-width: 1200px;
   margin: 0 auto;

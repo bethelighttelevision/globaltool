@@ -27,7 +27,7 @@ export default function TermsOfService() {
           <p>Permission is granted to temporarily use the tools on ToolSnappy for personal, non-commercial transitory viewing only. You may not modify, copy, or redistribute the underlying code of these tools without explicit permission.</p>
 
           <h2>3. Disclaimer</h2>
-          <p>The materials on ToolSnappy are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+          <p>The materials on ToolSnappy are provided on an &apos;as is&apos; basis. We make no warranties, expressed or implied, and hereby disclaim all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
 
           <h2>4. Limitations</h2>
           <p>In no event shall ToolSnappy or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the tools on our website.</p>

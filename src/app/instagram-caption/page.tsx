@@ -5,7 +5,7 @@ import Link from 'next/link';
 import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import SEO from '../../components/SEO';
 import RelatedTools from '../../components/RelatedTools';
-import { Camera, Copy, CheckCircle2, ArrowLeft, Sparkles, Smile } from 'lucide-react';
+import { Camera, Copy, CheckCircle2, ArrowLeft } from 'lucide-react';
 
 export default function InstagramCaptionPage() {
   const [topic, setTopic] = useState('');
@@ -128,7 +128,43 @@ export default function InstagramCaptionPage() {
         </div>
       )}
       
-      <AdSensePlaceholder type="mid-content" />
+      {/* SEO CONTENT SECTION */}
+      <div style={{ marginTop: '80px', maxWidth: '900px', margin: '80px auto 0' }}>
+        <article>
+          <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>The Complete Guide to Writing Viral Instagram Captions in 2026</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            A stunning photo or video will stop the scroll, but a great caption is what drives engagement, builds community, and converts followers into customers. Our <strong>AI Instagram Caption Generator</strong> uses proven copywriting frameworks to produce captions that resonate with your specific audience, whether you are a lifestyle blogger, e-commerce brand, or corporate account.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Why Your Caption Strategy Directly Impacts Reach</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            The Instagram algorithm rewards posts that generate immediate engagement — saves, shares, and comments in the first 30 minutes of posting. A well-crafted caption with a clear Call-to-Action (CTA) like &quot;Save this post for later&quot; or &quot;Tag a friend who needs this&quot; can dramatically boost your initial engagement rate and signal to the algorithm that your content deserves a wider distribution.
+          </p>
+
+          <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #cc2366' }}>
+            <h4 style={{ marginTop: 0, color: '#cc2366' }}>The 3-Part Caption Formula</h4>
+            <p style={{ marginBottom: 0, fontSize: '15px', color: 'var(--muted)' }}>
+              <strong>Hook (Line 1):</strong> Stop the scroll with a bold statement or question. <br />
+              <strong>Body:</strong> Deliver value, tell a story, or explain the context of your post. <br />
+              <strong>CTA:</strong> Direct your audience to comment, save, or click the link in bio.
+            </p>
+          </div>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Optimizing Caption Length and Hashtag Usage</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            For feed posts, aim for 150-300 words in your caption. For Reels, shorter captions (under 100 characters) that quickly convey the video&apos;s value tend to perform better. Regarding hashtags, using a mix of niche-specific (e.g., #CryptoInvestor) and broad tags (e.g., #Finance) provides both discoverability and community access. Our generator automatically adds relevant hashtags to each caption.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Tone Matters: Matching Your Voice to Your Audience</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Our tool provides four tone options: Professional, Funny, Minimalist, and Inspirational. Each caters to a different audience segment. A B2B SaaS company should use a professional and informative tone, while a personal fitness creator thrives with an inspirational and motivational voice. Choosing the right tone dramatically increases your audience connection rate.
+          </p>
+        </article>
+      </div>
+
+      <div style={{ marginTop: '60px' }}>
+        <AdSensePlaceholder type="mid-content" />
+      </div>
       <RelatedTools currentPath="/instagram-caption" />
     </div>
   );

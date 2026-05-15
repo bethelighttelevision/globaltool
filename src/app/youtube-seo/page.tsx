@@ -5,7 +5,7 @@ import Link from 'next/link';
 import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import SEO from '../../components/SEO';
 import RelatedTools from '../../components/RelatedTools';
-import { Play, Copy, CheckCircle2, ArrowLeft, Search, Sparkles, AlertCircle } from 'lucide-react';
+import { Play, Copy, CheckCircle2, ArrowLeft, Search, Sparkles } from 'lucide-react';
 
 export default function YoutubeSEOPage() {
   const [topic, setTopic] = useState('');
@@ -185,7 +185,34 @@ export default function YoutubeSEOPage() {
         </div>
       )}
       
-      <div style={{ marginTop: '40px' }}>
+      {/* SEO CONTENT SECTION */}
+      <div style={{ marginTop: '80px', maxWidth: '900px', margin: '80px auto 0' }}>
+        <article className="prose prose-invert lg:prose-xl">
+          <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>Mastering YouTube SEO in 2026</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            YouTube is the second largest search engine in the world. To get your videos noticed among millions of uploads, you need more than just great content—you need a data-driven SEO strategy. Our <strong>YouTube SEO Optimizer</strong> helps you craft viral-ready titles, high-retention descriptions, and strategic tags that align with the latest algorithm updates.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>The Core Pillars of Video Ranking</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            The YouTube algorithm prioritizes two main factors: Click-Through Rate (CTR) and Watch Time. By using keywords that people are actually searching for, you increase your chances of appearing in the &quot;Suggested&quot; and &quot;Search&quot; results. Our tool analyzes your main topic to provide keywords that balance search volume with competition levels.
+          </p>
+
+          <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #32d74b' }}>
+            <h4 style={{ marginTop: 0, color: '#32d74b' }}>Pro Tip: The First 24 Hours</h4>
+            <p style={{ marginBottom: 0, fontSize: '15px' }}>
+              The first 24 hours of your video release are critical. Proper SEO setup ensures that the algorithm can instantly categorize your video and show it to the right audience, giving you that initial boost needed to go viral.
+            </p>
+          </div>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Optimizing Titles and Descriptions</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Your title should be a mix of &quot;Click Magnet&quot; phrases and searchable keywords. For descriptions, ensure the first 2-3 lines contain your primary keyword, as this is what shows up in Google search results. Our optimizer generates these elements in a way that feels natural to humans but is highly readable for AI bots.
+          </p>
+        </article>
+      </div>
+
+      <div style={{ marginTop: '60px' }}>
         <AdSensePlaceholder type="mid-content" />
       </div>
       <RelatedTools currentPath="/youtube-seo" />

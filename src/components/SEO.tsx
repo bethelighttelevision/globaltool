@@ -4,7 +4,7 @@ import Script from 'next/script';
 interface SEOProps {
   toolName: string;
   description: string;
-  url: string;
+  url?: string;
 }
 
 export default function SEO({ toolName, description, url }: SEOProps) {
@@ -13,6 +13,7 @@ export default function SEO({ toolName, description, url }: SEOProps) {
     "@type": "SoftwareApplication",
     "name": toolName,
     "description": description,
+    "url": url,
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Web",
     "offers": {

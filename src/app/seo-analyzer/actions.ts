@@ -97,10 +97,7 @@ export async function analyzeSEOAction(targetUrl: string) {
       }
     };
 
-  } catch (error: any) {
-    return {
-      success: false,
-      error: error.message || 'An unexpected error occurred during the audit.'
-    };
+  } catch (_error: unknown) {
+    return { success: false, error: 'Failed to analyze URL' };
   }
 }

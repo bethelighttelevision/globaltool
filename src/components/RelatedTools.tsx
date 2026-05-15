@@ -8,6 +8,11 @@ const tools = [
   { name: 'Crypto Calc', path: '/crypto' },
   { name: 'AI Viral Hooks', path: '/ai-hook' },
   { name: 'Word Counter', path: '/word-counter' },
+  { name: 'Car Loan Calculator', path: '/car-loan-calculator' },
+  { name: 'Mortgage Calculator', path: '/mortgage-calculator' },
+  { name: 'Image Upscaler', path: '/image-upscaler' },
+  { name: 'Background Remover', path: '/bg-remover' },
+  { name: 'JSON Formatter', path: '/json-formatter' },
 ];
 
 export default function RelatedTools({ currentPath }: { currentPath: string }) {

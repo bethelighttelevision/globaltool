@@ -56,7 +56,7 @@ export default function RootLayout({
                   <img src="/logo.png" alt="ToolSnappy" style={{ height: '32px', borderRadius: '50%' }} />
                   <h3 style={{ fontSize: '18px', margin: 0, color: '#fff' }}>ToolSnappy</h3>
                 </div>
-                <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.6 }}>The world's most advanced 100% free tool suite. Engineered for speed, privacy, and digital dominance in 2026.</p>
+                <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.6 }}>The world&apos;s most advanced 100% free tool suite. Engineered for speed, privacy, and digital dominance in 2026.</p>
               </div>
               <div>
                 <h4 style={{ fontSize: '14px', marginBottom: '16px', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Popular Tools</h4>

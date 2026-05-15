@@ -39,36 +39,6 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
           </div>
         </div>
 
-        {/* Tax Estimator Card */}
-        <div className="glow-card" style={{ opacity: 0.6, cursor: 'not-allowed' }}>
-          <div style={{ 
-            width: '48px', height: '48px', background: 'rgba(255,255,255,0.05)', 
-            borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            marginBottom: '24px', fontSize: '24px'
-          }}>
-            ⚖️
-          </div>
-          <h3 style={{ fontSize: '24px', marginBottom: '12px' }}>Tax Estimator</h3>
-          <p style={{ color: 'var(--muted)', marginBottom: '24px', lineHeight: 1.6 }}>
-            Coming Soon: Real-time global tax estimation for digital assets and capital gains.
-          </p>
-        </div>
-
-        {/* Unit Converter Card */}
-        <div className="glow-card" style={{ opacity: 0.6, cursor: 'not-allowed' }}>
-          <div style={{ 
-            width: '48px', height: '48px', background: 'rgba(255,255,255,0.05)', 
-            borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            marginBottom: '24px', fontSize: '24px'
-          }}>
-            ⚡
-          </div>
-          <h3 style={{ fontSize: '24px', marginBottom: '12px' }}>Unit Converter</h3>
-          <p style={{ color: 'var(--muted)', marginBottom: '24px', lineHeight: 1.6 }}>
-            Coming Soon: Lightning fast converter for complex engineering and financial units.
-          </p>
-        </div>
-
       </div>
     </div>
   );

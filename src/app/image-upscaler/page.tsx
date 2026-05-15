@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import { UploadCloud, ArrowLeft, Download, RefreshCw, ZoomIn, Zap } from 'lucide-react';
+import { UploadCloud, ArrowLeft, Download, RefreshCw, Zap } from 'lucide-react';
 import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import SEO from '../../components/SEO';
 import RelatedTools from '../../components/RelatedTools';
@@ -45,9 +45,9 @@ export default function ImageUpscaler() {
 
       setResultImage(data.output_url);
       setIsComplete(true);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error upscaling image:", error);
-      alert("Error: " + error.message);
+      alert("Error: " + (error instanceof Error ? error.message : String(error)));
     } finally {
       setIsProcessing(false);
     }
@@ -157,6 +157,44 @@ export default function ImageUpscaler() {
             )}
           </div>
         )}
+      </div>
+
+      {/* SEO CONTENT SECTION */}
+      <div style={{ marginTop: '80px', maxWidth: '900px', margin: '80px auto 0' }}>
+        <article className="prose prose-invert lg:prose-xl">
+          <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>The Science of AI Image Upscaling and Enhancement</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Traditional image resizing methods often result in blurry, pixelated results because they simply &quot;stretch&quot; existing pixels. Our <strong>Cloud-Powered AI Image Upscaler</strong> uses a process called Super-Resolution. By leveraging deep learning neural networks (ESRGAN), our tool predicts and generates new pixels to fill in the gaps, resulting in stunning HD clarity that was previously impossible.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Why Low-Resolution Images are a Problem</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Whether it is an old family photo, a low-quality social media download, or a small product shot, low resolution can ruin the professional look of your brand. In 2026, high-definition visuals are the standard. Users are more likely to trust a website or a profile that features crisp, sharp images. Our tool acts as a professional restoration studio in your pocket.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', margin: '40px 0' }}>
+            <div className="glass-panel" style={{ padding: '24px', borderTop: '4px solid #32d74b' }}>
+              <h4 style={{ marginTop: 0, color: '#32d74b' }}>4K Ready Output</h4>
+              <p style={{ fontSize: '14px', color: 'var(--muted)' }}>Turn 720p or 1080p images into print-ready 4K masterpieces. Perfect for large-format posters or high-end web design.</p>
+            </div>
+            <div className="glass-panel" style={{ padding: '24px', borderTop: '4px solid #32d74b' }}>
+              <h4 style={{ marginTop: 0, color: '#32d74b' }}>Noise Reduction</h4>
+              <p style={{ fontSize: '14px', color: 'var(--muted)' }}>Automatically identifies and removes digital noise and JPEG artifacts that occur in low-light photography.</p>
+            </div>
+          </div>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>How to Achieve the Best Upscaling Results</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            To get the most out of our AI tool, ensure your original image is not overly blurred or compressed. While our AI can hallucinate significant detail, starting with a clean, identifiable subject allows the neural network to produce more realistic textures in skin, hair, and fabric. 
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Perfect for Social Media & Marketing</h3>
+          <ul style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '40px', paddingLeft: '20px' }}>
+            <li style={{ marginBottom: '12px' }}><strong>Instagram & TikTok:</strong> Ensure your profile pictures and thumbnails are razor-sharp.</li>
+            <li style={{ marginBottom: '12px' }}><strong>Web Development:</strong> Optimize site speed by using small images and upscaling them only when needed.</li>
+            <li style={{ marginBottom: '12px' }}><strong>Printing:</strong> Prepare low-res assets for high-quality printing on business cards or brochures.</li>
+          </ul>
+        </article>
       </div>
 
       <div style={{ marginTop: '60px' }}>

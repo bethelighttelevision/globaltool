@@ -10,7 +10,6 @@ import {
   Braces,
   Play,
   Camera,
-  Eraser,
   Type,
   Image as ImageIcon,
   TrendingUp,
@@ -170,6 +169,34 @@ export default function Home() {
             <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Validate and beautify JSON strings.</p>
           </div>
         </Link>
+
+        {/* Finance Arsenal Section (HIGH CPC) */}
+        <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <TrendingUp size={22} color="#32d74b" /> Finance & Loan Arsenal
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '80px' }}>
+          <Link href="/car-loan-calculator" style={{ textDecoration: 'none' }}>
+            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <TrendingUp size={28} color="#32d74b" />
+                <span className="tag-badge" style={{ color: '#32d74b', borderColor: '#32d74b', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>HIGH CPC</span>
+              </div>
+              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Car Loan Calculator</h3>
+              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Calculate monthly EMI and total interest for your vehicle finance.</p>
+            </div>
+          </Link>
+
+          <Link href="/mortgage-calculator" style={{ textDecoration: 'none' }}>
+            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #0071e3' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <Globe size={28} color="#0071e3" />
+                <span className="tag-badge" style={{ color: '#0071e3', borderColor: '#0071e3', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>PREMIUM</span>
+              </div>
+              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Mortgage Calculator</h3>
+              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Advanced home loan planner with amortization and interest breakdown.</p>
+            </div>
+          </Link>
+        </div>
 
       </div>
 
