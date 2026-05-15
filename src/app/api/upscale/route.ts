@@ -22,9 +22,12 @@ export async function POST(request: Request) {
     form.append('image', buffer, { filename: 'image.png' });
 
     const apiKey = process.env.STABILITY_API_KEY;
-    if (!apiKey) {
-      return NextResponse.json({ error: 'API Key not configured on server' }, { status: 500 });
+    if (!apiKey || apiKey.trim() === "") {
+      console.error("STABILITY_API_KEY is missing or empty in environment variables.");
+      return NextResponse.json({ error: 'API Key not found on server. Please check Vercel Environment Variables.' }, { status: 500 });
     }
+
+    console.log("Attempting Stability AI request with key starting with:", apiKey.substring(0, 5));
 
     // Call Stability AI's NEWEST and most reliable Upscale API (V2 Fast)
     const stabilityRes = await axios.post('https://api.stability.ai/v2beta/stable-image/upscale/fast', form, {
