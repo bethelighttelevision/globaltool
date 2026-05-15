@@ -15,13 +15,14 @@ import {
   TrendingUp,
   Search,
   Globe,
-  ZoomIn
+  ZoomIn,
+  Star
 } from 'lucide-react';
 
 export const metadata = {
   title: 'ToolSnappy | #1 Free SEO & Social Media Suite 2026',
-  description: 'Access 12+ professional tools: Page SEO Analyzer, AI Background Remover, Crypto ROI Calculator, AI Hook Generator, and TikTok SEO tools. 100% Free for creators.',
-  keywords: 'ToolSnappy, Free SEO Tools 2026, Best AI Hook Generator, AI Background Remover, Crypto Profit Calculator USA, YouTube SEO Tool, Instagram Caption Generator, TikTok Hashtag Generator',
+  description: 'Access 15+ professional tools: AI Lucky Number Finder, Page SEO Analyzer, AI Background Remover, Crypto ROI Calculator, and TikTok tools. 100% Free.',
+  keywords: 'ToolSnappy, AI Lucky Number Finder, Free SEO Tools 2026, Best AI Hook Generator, AI Background Remover, Crypto Profit Calculator USA, YouTube SEO Tool, Instagram Caption Generator, TikTok Hashtag Generator',
 };
 
 export default function Home() {
@@ -96,6 +97,17 @@ export default function Home() {
             <TrendingUp size={24} color="#00f2ea" style={{ marginBottom: '20px' }} />
             <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>TikTok Hashtags</h3>
             <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>High-velocity trending tag generator.</p>
+          </div>
+        </Link>
+
+        <Link href="/lucky-number" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', border: '1px solid rgba(168, 199, 250, 0.2)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Star size={24} color="#a8c7fa" />
+              <span className="tag-badge" style={{ color: '#a8c7fa', borderColor: '#a8c7fa', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>VIRAL AI</span>
+            </div>
+            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>AI Lucky Number</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Find your destiny number & 2026 predictions.</p>
           </div>
         </Link>
 
