@@ -76,8 +76,8 @@ export default function MetaTagsPage() {
             <input type="text" className="input-field" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="John Doe" />
           </div>
 
-          <div style={{ background: '#0d0d0d', padding: '24px', borderRadius: '16px', border: '1px solid var(--card-border)', position: 'relative' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <div style={{ background: '#0d0d0d', padding: '24px', borderRadius: '16px', border: '1px solid var(--card-border)', position: 'relative', minWidth: 0, maxWidth: '100%' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
               <h3 style={{ fontSize: '18px', color: 'var(--foreground)' }}>Generated Code</h3>
               <button 
                 onClick={handleCopy}
@@ -88,7 +88,7 @@ export default function MetaTagsPage() {
               </button>
             </div>
             
-            <pre style={{ background: '#000', padding: '16px', borderRadius: '8px', overflowX: 'auto', fontSize: '13px', color: '#a8c7fa', lineHeight: 1.6 }}>
+            <pre style={{ background: '#000', padding: '16px', borderRadius: '8px', overflowX: 'auto', fontSize: '13px', color: '#a8c7fa', lineHeight: 1.6, maxWidth: '100%' }}>
               <code>{generatedTags}</code>
             </pre>
           </div>

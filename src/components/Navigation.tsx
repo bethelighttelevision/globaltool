@@ -40,6 +40,7 @@ export default function Navigation() {
           <Link href="/bg-remover" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>BG Remover</Link>
           <Link href="/image-upscaler" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Upscaler</Link>
           <Link href="/crypto" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Crypto</Link>
+          <Link href="/cv-maker" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>CV Maker</Link>
           <Link href="/blog" style={{ textDecoration: 'none', color: 'var(--foreground)' }}>Blog</Link>
         </div>
 
@@ -52,6 +53,7 @@ export default function Navigation() {
       {/* Mobile Menu Overlay */}
       {isOpen && (
         <div className="mobile-menu-overlay animate-fade-in" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px', background: 'var(--background)', borderBottom: '1px solid var(--card-border)' }}>
+          <Link href="/cv-maker" onClick={toggleMenu} style={{ textDecoration: 'none', color: 'var(--foreground)', fontSize: '18px', fontWeight: '500' }}>CV Maker</Link>
           <Link href="/seo-analyzer" onClick={toggleMenu} style={{ textDecoration: 'none', color: 'var(--foreground)', fontSize: '18px', fontWeight: '500' }}>SEO Audit</Link>
           <Link href="/bg-remover" onClick={toggleMenu} style={{ textDecoration: 'none', color: 'var(--foreground)', fontSize: '18px', fontWeight: '500' }}>BG Remover</Link>
           <Link href="/image-upscaler" onClick={toggleMenu} style={{ textDecoration: 'none', color: 'var(--foreground)', fontSize: '18px', fontWeight: '500' }}>AI Upscaler</Link>

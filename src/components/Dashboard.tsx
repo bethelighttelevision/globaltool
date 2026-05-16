@@ -39,6 +39,24 @@ export default function Dashboard({ onSelectTool }: DashboardProps) {
           </div>
         </div>
 
+        {/* CV Maker Card */}
+        <div className="glow-card" onClick={() => window.location.href = '/cv-maker'} style={{ cursor: 'pointer' }}>
+          <div style={{ 
+            width: '48px', height: '48px', background: 'var(--accent-glow)', 
+            borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            marginBottom: '24px', color: 'var(--accent)', fontSize: '24px'
+          }}>
+            📄
+          </div>
+          <h3 style={{ fontSize: '24px', marginBottom: '12px' }}>Professional CV Maker</h3>
+          <p style={{ color: 'var(--muted)', marginBottom: '24px', lineHeight: 1.6 }}>
+            Create recruiter-approved CVs in minutes with modern templates and real-time preview.
+          </p>
+          <div style={{ color: 'var(--accent)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            Open Tool →
+          </div>
+        </div>
+
       </div>
     </div>
   );
