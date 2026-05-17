@@ -585,44 +585,49 @@ export default function CVMaker() {
             align-items: center !important;
           }
           .cv-sidebar {
-            flex-direction: row !important;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 10px !important;
             width: 100% !important;
             flex: 0 0 auto !important;
             position: static !important;
-            padding: 10px !important;
-            overflow-x: auto !important;
-            justify-content: flex-start !important;
+            padding: 15px !important;
+            overflow: visible !important;
           }
           .cv-sidebar button {
+            width: 100% !important;
+            height: 45px !important;
             margin: 0 !important;
-            flex-shrink: 0 !important;
+            border-radius: 12px !important;
           }
           .cv-form {
             width: 100% !important;
             flex: 1 1 auto !important;
             padding: 20px !important;
           }
-          .cv-form > div[style*="display: grid"] {
-            grid-template-columns: 1fr !important;
-          }
-          .cv-form > div[style*="display: grid"] > div {
-            grid-column: span 1 !important;
-          }
           .preview-container {
             width: 100% !important;
             flex: 1 1 auto !important;
             position: static !important;
+            overflow: hidden !important;
+            padding-bottom: 20px !important;
+            display: flex !important;
+            justify-content: center !important;
           }
           .cv-print-container {
-            transform: scale(0.45) !important;
-            margin-bottom: -580px !important; /* Adjusted for 0.45 scale (1122 - 1122*0.45 = ~617) */
+            transform: scale(0.7) !important;
+            transform-origin: top center !important;
+            margin-bottom: -330px !important;
+            margin-left: 0 !important;
           }
         }
 
         @media (max-width: 600px) {
           .cv-print-container {
-            transform: scale(0.4) !important;
-            margin-bottom: -670px !important; /* Adjusted for 0.4 scale */
+            transform: scale(0.48) !important;
+            transform-origin: top center !important;
+            margin-bottom: -550px !important;
+            margin-left: 0 !important;
           }
         }
       `}</style>

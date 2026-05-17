@@ -54,7 +54,7 @@ export default async function BlogPostPage(props: BlogPostProps) {
             <Clock size={16} /> 5 min read
           </span>
         </div>
-        <h1 style={{ fontSize: '48px', lineHeight: 1.2, marginBottom: '24px', color: 'var(--foreground)' }}>{post.title}</h1>
+        <h1 className="gradient-text" style={{ fontSize: 'clamp(28px, 5vw, 48px)', lineHeight: 1.2, marginBottom: '24px', fontWeight: '700', letterSpacing: '-0.02em' }}>{post.title}</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{ height: '40px', width: '40px', borderRadius: '50%', background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 'bold' }}>T</div>
           <div>
@@ -74,28 +74,48 @@ export default async function BlogPostPage(props: BlogPostProps) {
           
           {post.content.split('\n').map((line, i) => {
             if (line.startsWith('## ')) {
-              return <h2 key={i} style={{ fontSize: '28px', marginTop: '40px', marginBottom: '20px', color: 'var(--foreground)' }}>{line.replace('## ', '')}</h2>;
+              return <h2 key={i} style={{ fontSize: 'clamp(22px, 4vw, 28px)', marginTop: '40px', marginBottom: '20px', color: 'var(--foreground)', fontWeight: '600' }}>{line.replace('## ', '')}</h2>;
             }
             if (line.startsWith('### ')) {
-              return <h3 key={i} style={{ fontSize: '22px', marginTop: '32px', marginBottom: '16px', color: 'var(--foreground)' }}>{line.replace('### ', '')}</h3>;
+              return <h3 key={i} style={{ fontSize: 'clamp(18px, 3vw, 22px)', marginTop: '32px', marginBottom: '16px', color: 'var(--foreground)', fontWeight: '600' }}>{line.replace('### ', '')}</h3>;
             }
             if (line.trim().startsWith('* ')) {
-              return <li key={i} style={{ marginLeft: '20px', marginBottom: '10px' }}>{line.replace('* ', '')}</li>;
+              return <li key={i} style={{ marginLeft: '20px', marginBottom: '8px' }}>{line.replace('* ', '')}</li>;
             }
             if (line.trim().startsWith('1. ')) {
-              return <li key={i} style={{ marginLeft: '20px', marginBottom: '10px' }}>{line.replace('1. ', '')}</li>;
+              return <li key={i} style={{ marginLeft: '20px', marginBottom: '8px' }}>{line.replace('1. ', '')}</li>;
             }
-            if (line.trim() === '') return <br key={i} />;
+            if (line.trim() === '') return null;
             
-            // Handle bold text
-            const parts = line.split(/(\*\*.*?\*\*)/g);
+            // Handle images
+            if (line.trim().startsWith('![')) {
+              const match = line.trim().match(/^!\[(.*?)\]\((.*?)\)$/);
+              if (match) {
+                return (
+                  <div key={i} style={{ margin: '32px 0', borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--card-border)', display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'rgba(255,255,255,0.02)' }}>
+                    <img src={match[2]} alt={match[1]} style={{ maxWidth: '100%', height: 'auto', display: 'block' }} />
+                    <p style={{ textAlign: 'center', fontSize: '14px', color: 'var(--muted)', marginTop: '12px', paddingBottom: '12px', paddingLeft: '12px', paddingRight: '12px' }}>{match[1]}</p>
+                  </div>
+                );
+              }
+            }
+
+            // Handle bold text and links
+            const parts = line.split(/(\*\*.*?\*\*|\[.*?\]\(.*?\))/g);
             return (
-              <p key={i} style={{ marginBottom: '20px' }}>
-                {parts.map((part, j) => (
-                  part.startsWith('**') && part.endsWith('**') 
-                    ? <strong key={j} style={{ color: 'var(--accent)' }}>{part.slice(2, -2)}</strong>
-                    : part
-                ))}
+              <p key={i} style={{ marginBottom: '16px', lineHeight: 1.7 }}>
+                {parts.map((part, j) => {
+                  if (part.startsWith('**') && part.endsWith('**')) {
+                    return <strong key={j} style={{ color: 'var(--accent)' }}>{part.slice(2, -2)}</strong>;
+                  }
+                  if (part.startsWith('[') && part.endsWith(')')) {
+                    const match = part.match(/^\[(.*?)\]\((.*?)\)$/);
+                    if (match) {
+                      return <a key={j} href={match[2]} style={{ color: 'var(--accent)', textDecoration: 'underline' }}>{match[1]}</a>;
+                    }
+                  }
+                  return part;
+                })}
               </p>
             );
           })}
