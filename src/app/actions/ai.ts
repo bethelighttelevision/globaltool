@@ -2,18 +2,30 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-
 // Helper for delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function generateAICentent(prompt: string) {
-  if (!process.env.GEMINI_API_KEY) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
     throw new Error("GEMINI_API_KEY is not set in environment variables. Please configure it in your Vercel Dashboard.");
   }
 
-  const models = ["gemini-2.5-flash", "gemini-1.5-flash"];
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const models = ["gemini-2.5-flash", "gemini-2.0-flash"];
   let lastError: any = null;
+
+  // Helper to parse and classify errors into human-friendly messages
+  const classifyError = (error: any): string | null => {
+    const errStr = String(error).toLowerCase();
+    if (errStr.includes("429") || errStr.includes("quota") || errStr.includes("rate-limits") || errStr.includes("limit exceeded")) {
+      return "Gemini API Quota Exceeded (429 Too Many Requests). You have used up your free tier limit for today. Please check your Google AI Studio plan, wait a minute, or upgrade your billing details.";
+    }
+    if (errStr.includes("api key") || errStr.includes("key not valid") || errStr.includes("invalid key") || errStr.includes("403") || errStr.includes("api_key")) {
+      return "Invalid Gemini API Key. Please verify that the GEMINI_API_KEY inside your .env.local (or Vercel environment variables) is correct and active.";
+    }
+    return null;
+  };
 
   // Try each model in sequence
   for (const modelName of models) {
@@ -33,6 +45,13 @@ export async function generateAICentent(prompt: string) {
         lastError = error;
         console.warn(`Attempt ${attempt} failed for model ${modelName}:`, error.message || error);
         
+        // If it's a quota exceeded or auth error, throw a clean message immediately
+        // because trying other models or retrying will fail with the exact same quota/auth limit.
+        const cleanMessage = classifyError(error);
+        if (cleanMessage) {
+          throw new Error(cleanMessage);
+        }
+
         // If it's a model not found or invalid model error, skip directly to the next model
         const errStr = String(error).toLowerCase();
         if (errStr.includes("modelnotfound") || errStr.includes("not found") || errStr.includes("404")) {
@@ -49,6 +68,13 @@ export async function generateAICentent(prompt: string) {
 
   // If all attempts and models failed
   console.error("Gemini AI failed all models and retry attempts. Last error:", lastError);
-  const errorMessage = lastError?.message || "Unknown AI Error";
-  throw new Error(`Gemini AI Error: ${errorMessage}. Please try again in a few seconds.`);
+  
+  // Return classified error or general fallback
+  const finalCleanMessage = classifyError(lastError);
+  if (finalCleanMessage) {
+    throw new Error(finalCleanMessage);
+  }
+  
+  const errorMessage = lastError?.message || String(lastError);
+  throw new Error(`Gemini AI Error: ${errorMessage}. Please check your API configuration or try again in a few seconds.`);
 }

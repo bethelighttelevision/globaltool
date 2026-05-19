@@ -57,16 +57,53 @@ export default function LuckyNumberPage() {
       Only return the JSON.`;
 
       const response = await generateAICentent(prompt);
-      const cleanJson = response.replace(/```json|```/g, '').trim();
-      const aiData = JSON.parse(cleanJson);
+      
+      let aiData;
+      try {
+        let cleanJson = response.trim();
+        const firstBrace = cleanJson.indexOf('{');
+        const lastBrace = cleanJson.lastIndexOf('}');
+        if (firstBrace !== -1 && lastBrace !== -1) {
+          cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+        }
+        aiData = JSON.parse(cleanJson);
+      } catch (e) {
+        console.warn("JSON parsing failed, attempting fallback manual parsing:", e);
+        const lines = response.split('\n').map(l => l.trim()).filter(Boolean);
+        let analysis = "";
+        let color = "Gold";
+        let day = "Sunday";
+        let prediction = "";
+        
+        for (const line of lines) {
+          const lower = line.toLowerCase();
+          const cleanLine = line.replace(/^[\d\.\-\*\s]+/, '').replace(/^["']|["']$/g, '').trim();
+          if (lower.includes('color')) {
+            color = cleanLine.replace(/.*color\s*:\s*/i, '').replace(/["',}]/g, '').trim();
+          } else if (lower.includes('day')) {
+            day = cleanLine.replace(/.*day\s*:\s*/i, '').replace(/["',}]/g, '').trim();
+          } else if (lower.includes('prediction') || lower.includes('tiktok')) {
+            prediction = cleanLine.replace(/.*prediction\s*:\s*/i, '').replace(/.*predict\s*:\s*/i, '').replace(/["',}]/g, '').trim();
+          } else if (cleanLine.length > 20 && !cleanLine.startsWith('{') && !cleanLine.startsWith('}')) {
+            analysis += (analysis ? " " : "") + cleanLine;
+          }
+        }
+        
+        aiData = {
+          analysis: analysis || `You possess a powerful destiny under number ${destinyNumber}, driving you towards massive success, strong relationships, and self-belief.`,
+          color: color || "Gold",
+          day: day || "Sunday",
+          prediction: prediction || "Your 2026 is scheduled to be a year of breakthroughs, viral potential, and finding your true alignment!"
+        };
+      }
       
       setResult({
         number: destinyNumber,
         ...aiData
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert("The stars are misaligned. Please check your API key or try again.");
+      alert(error.message || "The stars are misaligned. Please check your API key or try again.");
     } finally {
       setIsLoading(false);
     }
