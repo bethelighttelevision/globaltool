@@ -13,6 +13,9 @@ const tools = [
   { name: 'Image Upscaler', path: '/image-upscaler' },
   { name: 'Background Remover', path: '/bg-remover' },
   { name: 'JSON Formatter', path: '/json-formatter' },
+  { name: 'YouTube Monetization', path: '/youtube-monetization' },
+  { name: 'Facebook Monetization', path: '/facebook-monetization' },
+  { name: 'Instagram Monetization', path: '/instagram-monetization' },
 ];
 
 export default function RelatedTools({ currentPath }: { currentPath: string }) {

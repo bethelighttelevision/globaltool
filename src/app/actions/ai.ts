@@ -1,80 +1,150 @@
 "use server";
 
+import Groq from "groq-sdk";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Helper for delay
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-export async function generateAICentent(prompt: string) {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error("GEMINI_API_KEY is not set in environment variables. Please configure it in your Vercel Dashboard.");
+// ─── Error Classifier ────────────────────────────────────────────────────────
+const classifyError = (error: any): string | null => {
+  const errStr = String(error).toLowerCase();
+  if (
+    errStr.includes("429") ||
+    errStr.includes("quota") ||
+    errStr.includes("rate_limit") ||
+    errStr.includes("rate limit") ||
+    errStr.includes("limit exceeded") ||
+    errStr.includes("too many requests")
+  ) {
+    return "API Quota Exceeded (429 Too Many Requests). The daily free limit has been reached. Please wait a few minutes and try again.";
   }
+  if (
+    errStr.includes("api key") ||
+    errStr.includes("key not valid") ||
+    errStr.includes("invalid key") ||
+    errStr.includes("unauthorized") ||
+    errStr.includes("403") ||
+    errStr.includes("api_key") ||
+    errStr.includes("authentication")
+  ) {
+    return "Invalid API Key. Please verify that the API key inside your environment variables is correct and active.";
+  }
+  return null;
+};
 
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const models = ["gemini-2.5-flash", "gemini-2.0-flash"];
+// ─── Groq Primary Handler ─────────────────────────────────────────────────────
+async function generateWithGroq(prompt: string): Promise<string> {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) throw new Error("GROQ_API_KEY is not set.");
+
+  const groq = new Groq({ apiKey });
+
+  // Models in priority order (both are free on Groq)
+  const models = ["llama-3.3-70b-versatile", "llama3-8b-8192"];
+
   let lastError: any = null;
 
-  // Helper to parse and classify errors into human-friendly messages
-  const classifyError = (error: any): string | null => {
-    const errStr = String(error).toLowerCase();
-    if (errStr.includes("429") || errStr.includes("quota") || errStr.includes("rate-limits") || errStr.includes("limit exceeded")) {
-      return "Gemini API Quota Exceeded (429 Too Many Requests). You have used up your free tier limit for today. Please check your Google AI Studio plan, wait a minute, or upgrade your billing details.";
-    }
-    if (errStr.includes("api key") || errStr.includes("key not valid") || errStr.includes("invalid key") || errStr.includes("403") || errStr.includes("api_key")) {
-      return "Invalid Gemini API Key. Please verify that the GEMINI_API_KEY inside your .env.local (or Vercel environment variables) is correct and active.";
-    }
-    return null;
-  };
-
-  // Try each model in sequence
-  for (const modelName of models) {
-    const model = genAI.getGenerativeModel({ model: modelName });
-    
-    // Try up to 3 times per model with exponential backoff
+  for (const model of models) {
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
+        const completion = await groq.chat.completions.create({
+          messages: [{ role: "user", content: prompt }],
+          model,
+          temperature: 0.7,
+          max_tokens: 2048,
+        });
+
+        const text = completion.choices[0]?.message?.content;
         if (text && text.trim().length > 0) {
           return text;
         }
-        throw new Error("AI returned an empty response.");
+        throw new Error("Groq returned an empty response.");
       } catch (error: any) {
         lastError = error;
-        console.warn(`Attempt ${attempt} failed for model ${modelName}:`, error.message || error);
-        
-        // If it's a quota exceeded or auth error, throw a clean message immediately
-        // because trying other models or retrying will fail with the exact same quota/auth limit.
+        console.warn(`[Groq] Attempt ${attempt} failed on model ${model}:`, error.message || error);
+
         const cleanMessage = classifyError(error);
-        if (cleanMessage) {
-          throw new Error(cleanMessage);
-        }
+        if (cleanMessage) throw new Error(cleanMessage);
 
-        // If it's a model not found or invalid model error, skip directly to the next model
         const errStr = String(error).toLowerCase();
-        if (errStr.includes("modelnotfound") || errStr.includes("not found") || errStr.includes("404")) {
-          break; // Break the attempt loop to try the next model
+        // Model not found — skip to next model immediately
+        if (errStr.includes("model") && (errStr.includes("not found") || errStr.includes("does not exist"))) {
+          break;
         }
 
-        // Wait before retrying (backoff: 1s, 2s, 4s)
-        if (attempt < 3) {
-          await delay(attempt * 1000);
-        }
+        if (attempt < 3) await delay(attempt * 800);
       }
     }
   }
 
-  // If all attempts and models failed
-  console.error("Gemini AI failed all models and retry attempts. Last error:", lastError);
-  
-  // Return classified error or general fallback
-  const finalCleanMessage = classifyError(lastError);
-  if (finalCleanMessage) {
-    throw new Error(finalCleanMessage);
+  throw lastError || new Error("Groq failed all retries.");
+}
+
+// ─── Gemini Fallback Handler ──────────────────────────────────────────────────
+async function generateWithGemini(prompt: string): Promise<string> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error("GEMINI_API_KEY is not set.");
+
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const models = ["gemini-2.0-flash", "gemini-2.5-flash"];
+  let lastError: any = null;
+
+  for (const modelName of models) {
+    const model = genAI.getGenerativeModel({ model: modelName });
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        if (text && text.trim().length > 0) return text;
+        throw new Error("Gemini returned an empty response.");
+      } catch (error: any) {
+        lastError = error;
+        console.warn(`[Gemini] Attempt ${attempt} on ${modelName}:`, error.message || error);
+
+        const cleanMessage = classifyError(error);
+        if (cleanMessage) throw new Error(cleanMessage);
+
+        const errStr = String(error).toLowerCase();
+        if (errStr.includes("not found") || errStr.includes("404")) break;
+
+        if (attempt < 2) await delay(1000);
+      }
+    }
   }
-  
-  const errorMessage = lastError?.message || String(lastError);
-  throw new Error(`Gemini AI Error: ${errorMessage}. Please check your API configuration or try again in a few seconds.`);
+
+  throw lastError || new Error("Gemini failed all retries.");
+}
+
+// ─── Main Export: Groq First, Gemini as Safety Net ───────────────────────────
+export async function generateAICentent(prompt: string): Promise<string> {
+  // 1. Try Groq first (generous free quota: 14,400 req/day)
+  try {
+    const result = await generateWithGroq(prompt);
+    console.log("[AI] Response from: Groq");
+    return result;
+  } catch (groqError: any) {
+    console.warn("[AI] Groq failed, attempting Gemini fallback:", groqError.message);
+
+    // If it was a quota/auth error from Groq, still try Gemini before giving up
+    // But if Gemini is also not configured, return groq's error directly
+    if (!process.env.GEMINI_API_KEY) {
+      throw groqError;
+    }
+  }
+
+  // 2. Gemini fallback
+  try {
+    const result = await generateWithGemini(prompt);
+    console.log("[AI] Response from: Gemini (fallback)");
+    return result;
+  } catch (geminiError: any) {
+    console.error("[AI] Both Groq and Gemini failed.");
+    const cleanMessage = classifyError(geminiError);
+    if (cleanMessage) throw new Error(cleanMessage);
+
+    throw new Error(
+      `AI Error: Both Groq and Gemini APIs failed. Please check your API keys or try again shortly. Details: ${geminiError.message}`
+    );
+  }
 }

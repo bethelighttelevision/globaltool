@@ -16,7 +16,8 @@ import {
   Search,
   Globe,
   ZoomIn,
-  Star
+  Star,
+  Video
 } from 'lucide-react';
 
 export const metadata = {
@@ -181,6 +182,47 @@ export default function Home() {
             <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Validate and beautify JSON strings.</p>
           </div>
         </Link>
+
+        {/* Social Monetization & Earnings Checkers Section (VIRAL) */}
+        <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <Star size={22} color="var(--accent)" /> Creator Monetization & Earnings
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
+          
+          <Link href="/youtube-monetization" style={{ textDecoration: 'none' }}>
+            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ff0000' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <Play size={28} color="#ff0000" />
+                <span className="tag-badge" style={{ color: '#ff0000', borderColor: '#ff0000', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>HIGH CPC</span>
+              </div>
+              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Checker</h3>
+              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Scan YPP status, estimate CPM/RPM, and generate AI channel roadmaps.</p>
+            </div>
+          </Link>
+
+          <Link href="/facebook-monetization" style={{ textDecoration: 'none' }}>
+            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #1877f2' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <Video size={28} color="#1877f2" />
+                <span className="tag-badge" style={{ color: '#1877f2', borderColor: '#1877f2', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>VIRAL</span>
+              </div>
+              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Facebook Checker</h3>
+              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Calculate In-Stream Ads / Stars limits and generate AI viral tactics.</p>
+            </div>
+          </Link>
+
+          <Link href="/instagram-monetization" style={{ textDecoration: 'none' }}>
+            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #cc2366' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <Camera size={28} color="#cc2366" />
+                <span className="tag-badge" style={{ color: '#cc2366', borderColor: '#cc2366', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW AI</span>
+              </div>
+              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Instagram Checker</h3>
+              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Analyze engagement rates, sponsorship deal rates, and brand pitches.</p>
+            </div>
+          </Link>
+
+        </div>
 
         {/* Finance Arsenal Section (HIGH CPC) */}
         <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
