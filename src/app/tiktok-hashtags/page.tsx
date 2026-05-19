@@ -29,11 +29,26 @@ export default function TikTokHashtagsPage() {
       Only return the hashtags.`;
       
       const response = await generateAICentent(prompt);
-      const results = response.split(',').map(tag => tag.trim()).filter(tag => tag.startsWith('#'));
+      
+      // Grab all words starting with # from anywhere in the LLM response
+      const matches = response.match(/#[a-zA-Z0-9_]+/g);
+      let results = matches ? matches.map(tag => tag.trim()) : [];
+      
+      // If the AI somehow didn't return hashtags with # prefixed, format them manually
+      if (results.length === 0) {
+        results = response
+          .split(/[\s,]+/)
+          .map(tag => tag.trim().replace(/^#*/, '#'))
+          .filter(tag => tag.length > 2 && tag !== '#');
+      }
+      
+      // Keep unique items up to 15
+      results = Array.from(new Set(results)).slice(0, 15);
+      
       setHashtags(results);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert("Failed to generate hashtags. Please check your API key.");
+      alert(error.message || "Failed to generate hashtags. Please try again.");
     } finally {
       setIsLoading(false);
     }

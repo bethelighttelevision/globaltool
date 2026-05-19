@@ -27,8 +27,37 @@ export default function InstagramCaptionPage() {
       Don't include any extra text, just the 4 captions.`;
       
       const response = await generateAICentent(prompt);
-      const results = response.split('---').map(c => c.trim()).filter(c => c.length > 0).slice(0, 4);
-      setCaptions(results);
+      
+      let results: string[] = [];
+      if (response.includes('---')) {
+        results = response.split('---').map(c => c.trim()).filter(Boolean);
+      } else {
+        // Fallback: Split by double newlines or paragraph blocks
+        const blocks = response.split(/\n\s*\n/).map(c => c.trim()).filter(Boolean);
+        results = blocks.map(block => block.replace(/^[\d\.\-\*\s]+/, '').trim());
+      }
+      
+      // If still not properly split, try matching standard numbered items (e.g., "1. ...")
+      if (results.length < 2) {
+        const matches = response.match(/(?:^|\n)\d+[\.\)]\s*([\s\S]*?)(?=\n\d+[\.\)]|$)/g);
+        if (matches) {
+          results = matches.map(m => m.replace(/^\s*\d+[\.\)]\s*/, '').trim());
+        }
+      }
+      
+      // Filter out meta-text and keep only valid captions
+      results = results.filter(c => c.length > 10 && !c.toLowerCase().includes('here are') && !c.toLowerCase().includes('instagram caption'));
+      
+      // If parsing fails entirely, fallback to splitting by lines or the entire response
+      if (results.length === 0) {
+        results = response.split('\n').map(c => c.trim()).filter(c => c.length > 15);
+      }
+      
+      if (results.length === 0) {
+        results = [response];
+      }
+      
+      setCaptions(results.slice(0, 4));
     } catch (error: any) {
       console.error(error);
       alert(error.message || "Failed to generate captions.");

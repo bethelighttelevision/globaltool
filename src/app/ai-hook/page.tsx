@@ -28,9 +28,56 @@ export default function AIHookPage() {
       Only return the JSON.`;
       
       const response = await generateAICentent(prompt);
-      // Clean the response in case AI adds markdown
-      const cleanJson = response.replace(/```json|```/g, '').trim();
-      const data = JSON.parse(cleanJson);
+      
+      let data;
+      try {
+        let cleanJson = response.trim();
+        const firstBrace = cleanJson.indexOf('{');
+        const lastBrace = cleanJson.lastIndexOf('}');
+        if (firstBrace !== -1 && lastBrace !== -1) {
+          cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+        }
+        data = JSON.parse(cleanJson);
+        // Ensure structure exists
+        if (!data.psychological || !Array.isArray(data.psychological)) data.psychological = [];
+        if (!data.curiosity || !Array.isArray(data.curiosity)) data.curiosity = [];
+        if (!data.data || !Array.isArray(data.data)) data.data = [];
+      } catch (e) {
+        console.warn("JSON parsing failed, attempting fallback manual parsing:", e);
+        const lines = response.split('\n').map(l => l.trim()).filter(Boolean);
+        const psychological: string[] = [];
+        const curiosity: string[] = [];
+        const dataDriven: string[] = [];
+        
+        let currentCategory: 'psychological' | 'curiosity' | 'data' = 'psychological';
+        for (const line of lines) {
+          const lower = line.toLowerCase();
+          if (lower.includes('psychological')) {
+            currentCategory = 'psychological';
+            continue;
+          } else if (lower.includes('curiosity')) {
+            currentCategory = 'curiosity';
+            continue;
+          } else if (lower.includes('data-driven') || lower.includes('data driven') || (lower.includes('data') && !lower.includes('json'))) {
+            currentCategory = 'data';
+            continue;
+          }
+          
+          const cleanLine = line.replace(/^[\d\.\-\*\s]+/, '').replace(/^["']|["']$/g, '').trim();
+          if (cleanLine.length > 8 && !cleanLine.startsWith('{') && !cleanLine.startsWith('}')) {
+            if (currentCategory === 'psychological') psychological.push(cleanLine);
+            else if (currentCategory === 'curiosity') curiosity.push(cleanLine);
+            else dataDriven.push(cleanLine);
+          }
+        }
+        
+        data = {
+          psychological: psychological.length >= 3 ? psychological.slice(0, 3) : [...psychological, "Create a sense of urgency around " + topic, "Reveal a hidden truth about " + topic, "Provide a stat about " + topic].slice(0, 3),
+          curiosity: curiosity.length >= 3 ? curiosity.slice(0, 3) : [...curiosity, "What they won't tell you about " + topic, "The secret to mastering " + topic, "Stop doing this if you want " + topic].slice(0, 3),
+          data: dataDriven.length >= 3 ? dataDriven.slice(0, 3) : [...dataDriven, "Why 99% of people fail at " + topic, "The 3-step formula for " + topic, "Proof that " + topic + " actually works"].slice(0, 3)
+        };
+      }
+      
       setResults(data);
     } catch (error: any) {
       console.error(error);
