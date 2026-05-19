@@ -57,12 +57,12 @@ export default function InstagramCaptionPage() {
 
       <AdSensePlaceholder type="header" />
       
-      <div className="glass-panel" style={{ padding: '48px 32px', textAlign: 'center', marginBottom: '40px' }}>
+      <div className="glass-panel" style={{ padding: '48px 24px', textAlign: 'center', marginBottom: '40px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)', borderRadius: '20px', marginBottom: '24px' }}>
           <Camera size={48} color="#fff" strokeWidth={1.5} />
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px', letterSpacing: '-0.02em' }}>Instagram Caption Generator</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px', letterSpacing: '-0.02em' }}>Instagram Caption Generator</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
           Stop staring at a blank screen. Generate viral, high-engagement captions for your Reels and Posts in seconds.
         </p>
 
@@ -76,21 +76,22 @@ export default function InstagramCaptionPage() {
             style={{ marginBottom: '16px', fontSize: '17px' }} 
            />
            
-           <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
+           <div className="responsive-tone-grid" style={{ display: 'grid', gap: '12px', marginBottom: '24px' }}>
              {['Professional', 'Funny', 'Minimalist', 'Inspirational'].map((t) => (
                <button 
                 key={t}
                 onClick={() => setTone(t)}
                 style={{ 
-                  flex: 1, 
-                  padding: '10px', 
-                  fontSize: '13px', 
+                  padding: '12px 10px', 
+                  fontSize: '14px', 
+                  fontWeight: '500',
                   borderRadius: '12px', 
                   border: '1px solid var(--card-border)',
                   background: tone === t ? 'var(--foreground)' : 'rgba(255,255,255,0.05)',
                   color: tone === t ? 'var(--background)' : 'var(--foreground)',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  width: '100%'
                 }}
                >
                  {t}
@@ -110,7 +111,7 @@ export default function InstagramCaptionPage() {
       </div>
 
       {captions.length > 0 && (
-        <div className="animate-slide-up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+        <div className="animate-slide-up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '40px' }}>
           {captions.map((cap, idx) => (
             <div key={idx} className="glass-panel" style={{ padding: '24px', position: 'relative' }}>
               <p style={{ fontSize: '15px', lineHeight: 1.6, color: 'var(--foreground)', marginBottom: '40px' }}>{cap}</p>

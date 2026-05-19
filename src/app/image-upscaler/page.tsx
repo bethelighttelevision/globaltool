@@ -75,12 +75,12 @@ export default function ImageUpscaler() {
         <ArrowLeft size={16} /> Back to Tools
       </Link>
 
-      <div className="glass-panel animate-slide-up" style={{ padding: '60px 48px', textAlign: 'center' }}>
+      <div className="glass-panel animate-slide-up" style={{ padding: '40px 24px', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'rgba(50, 215, 75, 0.1)', borderRadius: '20px', marginBottom: '24px' }}>
           <Zap size={40} color="#32d74b" />
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px', letterSpacing: '-0.02em' }}>Cloud AI Image Upscaler</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px', letterSpacing: '-0.02em' }}>Cloud AI Image Upscaler</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
           Instant High-Definition Upscaling powered by Cloud GPUs. Experience Adobe-level detail recovery without freezing your computer.
         </p>
 
@@ -172,7 +172,7 @@ export default function ImageUpscaler() {
             Whether it is an old family photo, a low-quality social media download, or a small product shot, low resolution can ruin the professional look of your brand. In 2026, high-definition visuals are the standard. Users are more likely to trust a website or a profile that features crisp, sharp images. Our tool acts as a professional restoration studio in your pocket.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', margin: '40px 0' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', margin: '40px 0' }}>
             <div className="glass-panel" style={{ padding: '24px', borderTop: '4px solid #32d74b' }}>
               <h4 style={{ marginTop: 0, color: '#32d74b' }}>4K Ready Output</h4>
               <p style={{ fontSize: '14px', color: 'var(--muted)' }}>Turn 720p or 1080p images into print-ready 4K masterpieces. Perfect for large-format posters or high-end web design.</p>

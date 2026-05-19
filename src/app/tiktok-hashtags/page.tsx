@@ -59,12 +59,12 @@ export default function TikTokHashtagsPage() {
 
       <AdSensePlaceholder type="header" />
       
-      <div className="glass-panel" style={{ padding: '48px 32px', textAlign: 'center', marginBottom: '40px' }}>
+      <div className="glass-panel" style={{ padding: '48px 24px', textAlign: 'center', marginBottom: '40px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'rgba(0, 0, 0, 0.8)', borderRadius: '20px', marginBottom: '24px', border: '2px solid var(--accent)' }}>
           <Play size={40} color="var(--accent)" strokeWidth={2} />
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px', letterSpacing: '-0.02em' }}>TikTok Hashtag Generator</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px', letterSpacing: '-0.02em' }}>TikTok Hashtag Generator</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
           Get your videos on the #FYP. Generate high-velocity hashtags tailored to your niche using 2026 trending data.
         </p>
 

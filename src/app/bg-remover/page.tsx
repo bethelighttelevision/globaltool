@@ -74,12 +74,12 @@ export default function BackgroundRemover() {
         <ArrowLeft size={16} /> Back to Tools
       </Link>
 
-      <div className="glass-panel animate-slide-up" style={{ padding: '60px 48px', textAlign: 'center' }}>
+      <div className="glass-panel animate-slide-up" style={{ padding: '40px 24px', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'rgba(41, 151, 255, 0.1)', borderRadius: '20px', marginBottom: '24px' }}>
           <Sparkles size={40} color="var(--accent)" />
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px', letterSpacing: '-0.02em' }}>Professional AI BG Remover</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px', letterSpacing: '-0.02em' }}>Professional AI BG Remover</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
           High-Speed Neural Engine. Studio-quality background removal perfectly matched to Adobe and remove.bg. 100% privacy and no server lag.
         </p>
 

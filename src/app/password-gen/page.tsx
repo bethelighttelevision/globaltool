@@ -72,12 +72,12 @@ export default function PasswordGenPage() {
 
       <AdSensePlaceholder type="header" />
       
-      <div className="glass-panel" style={{ padding: '48px 32px', textAlign: 'center', marginBottom: '40px' }}>
+      <div className="glass-panel" style={{ padding: '48px 24px', textAlign: 'center', marginBottom: '40px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '20px', marginBottom: '24px' }}>
           <ShieldCheck size={48} color="#fff" strokeWidth={1.5} />
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px', letterSpacing: '-0.02em' }}>Secure Password Generator</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px', letterSpacing: '-0.02em' }}>Secure Password Generator</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
           Generate military-grade, cryptographically secure passwords locally in your browser. No data is ever sent to a server.
         </p>
 

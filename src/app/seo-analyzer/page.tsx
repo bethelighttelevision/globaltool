@@ -45,12 +45,12 @@ export default function SEOAnalyzerPage() {
 
       <AdSensePlaceholder type="header" />
       
-      <div className="glass-panel" style={{ padding: '48px 32px', textAlign: 'center', marginBottom: '40px' }}>
+      <div className="glass-panel" style={{ padding: '48px 24px', textAlign: 'center', marginBottom: '40px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'rgba(0, 113, 227, 0.1)', borderRadius: '20px', marginBottom: '24px' }}>
           <Globe size={40} color="#0071e3" strokeWidth={2} />
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px', letterSpacing: '-0.02em' }}>Page SEO Analyzer</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px', letterSpacing: '-0.02em' }}>Page SEO Analyzer</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
           Enter a URL to perform a live SEO audit. We crawl the page and extract critical ranking factors instantly.
         </p>
 
@@ -87,18 +87,18 @@ export default function SEOAnalyzerPage() {
       {audit && (
         <div className="animate-slide-up">
           {/* Audit Summary Section */}
-          <div className="glass-panel" style={{ padding: '32px', marginBottom: '32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px' }}>
-            <div style={{ flex: 1 }}>
+          <div className="glass-panel" style={{ padding: '24px', marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div style={{ textAlign: 'center' }}>
               <h2 style={{ fontSize: '24px', marginBottom: '8px' }}>SEO Health Score</h2>
               <p style={{ color: 'var(--muted)', fontSize: '14px' }}>Based on 50+ critical SEO signals identified for 2026 ranking factors.</p>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '56px', fontWeight: 'bold', color: audit.score > 80 ? 'var(--success)' : '#ffcc00' }}>{audit.score}</div>
-              <div style={{ fontSize: '12px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Professional Grade</div>
+              <div style={{ fontSize: '56px', fontWeight: 'bold', color: audit.score > 80 ? 'var(--success)' : '#ffcc00', lineHeight: 1 }}>{audit.score}</div>
+              <div style={{ fontSize: '12px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '8px' }}>Professional Grade</div>
             </div>
           </div>
 
-          <div className="glass-panel" style={{ padding: '32px', marginBottom: '32px', borderLeft: '4px solid var(--accent)' }}>
+          <div className="glass-panel" style={{ padding: '24px', marginBottom: '32px', borderLeft: '4px solid var(--accent)' }}>
             <h3 style={{ fontSize: '20px', marginBottom: '16px', color: 'var(--accent)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Sparkles size={20} /> AI Expert Recommendation
             </h3>
@@ -107,7 +107,7 @@ export default function SEOAnalyzerPage() {
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px', marginBottom: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '40px' }}>
             {/* Audit Checklist */}
             <div className="glass-panel" style={{ padding: '32px' }}>
               <h3 style={{ fontSize: '20px', marginBottom: '24px', borderBottom: '1px solid var(--card-border)', paddingBottom: '16px' }}>Audit Checklist</h3>

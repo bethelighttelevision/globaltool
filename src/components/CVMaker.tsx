@@ -246,8 +246,8 @@ export default function CVMaker() {
 
           {activeStep === 'personal' && (
             <div className="animate-fade-in">
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '25px' }}>
-                <div style={{ gridColumn: 'span 2', display: 'flex', alignItems: 'center', gap: '30px', background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '16px', border: '1px solid var(--card-border)' }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="col-span-1 md:col-span-2 flex items-center gap-6 p-5 rounded-2xl border border-[var(--card-border)] bg-[rgba(255,255,255,0.02)]">
                   <div style={{ position: 'relative' }}>
                     <div style={{ width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '2px dashed var(--card-border)' }}>
                       {data.personalInfo.photo ? <img src={data.personalInfo.photo} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={40} color="var(--muted)" />}
@@ -278,7 +278,7 @@ export default function CVMaker() {
                   <label className="label-text">Phone Number</label>
                   <input className="premium-input" name="phone" value={data.personalInfo.phone} onChange={handlePersonalInfoChange} placeholder="+971 50 123 4567" />
                 </div>
-                <div style={{ gridColumn: 'span 2' }}>
+                <div className="col-span-1 md:col-span-2">
                   <label className="label-text">Full Address</label>
                   <input className="premium-input" name="address" value={data.personalInfo.address} onChange={handlePersonalInfoChange} placeholder="Dubai, United Arab Emirates" />
                 </div>
@@ -293,8 +293,8 @@ export default function CVMaker() {
                   <button onClick={() => removeExperience(index)} style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(255, 68, 68, 0.1)', border: 'none', color: '#ff4444', padding: '8px', borderRadius: '10px', cursor: 'pointer' }}>
                     <Trash2 size={18} />
                   </button>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                    <div style={{ gridColumn: 'span 2' }}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="col-span-1 md:col-span-2">
                       <label className="label-text">Company Name</label>
                       <input className="premium-input" name="company" value={exp.company} onChange={(e) => handleExperienceChange(index, e)} placeholder="e.g. Google" />
                     </div>
@@ -312,7 +312,7 @@ export default function CVMaker() {
                         <input className="premium-input" name="endDate" value={exp.endDate} onChange={(e) => handleExperienceChange(index, e)} placeholder="Present" />
                       </div>
                     </div>
-                    <div style={{ gridColumn: 'span 2' }}>
+                    <div className="col-span-1 md:col-span-2">
                       <label className="label-text">Main Duties</label>
                       <textarea
                         className="premium-input"
@@ -339,8 +339,8 @@ export default function CVMaker() {
                   <button onClick={() => removeEducation(index)} style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(255, 68, 68, 0.1)', border: 'none', color: '#ff4444', padding: '8px', borderRadius: '10px', cursor: 'pointer' }}>
                     <Trash2 size={18} />
                   </button>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                    <div style={{ gridColumn: 'span 2' }}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="col-span-1 md:col-span-2">
                       <label className="label-text">School / University</label>
                       <input className="premium-input" name="school" value={edu.school} onChange={(e) => handleEducationChange(index, e)} placeholder="Harvard University" />
                     </div>
@@ -477,7 +477,7 @@ export default function CVMaker() {
       </div>
 
       {/* RIGHT: PREVIEW SIDE */}
-      <div className="preview-container" style={{ flex: '0 0 500px', position: 'sticky', top: '20px', height: 'fit-content', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div className="preview-container">
         <div className="print-hidden" style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <span style={{ 
             fontSize: '13px', 
@@ -493,20 +493,7 @@ export default function CVMaker() {
             Live Preview
           </span>
         </div>
-        <div 
-          className="glass-panel cv-print-container" 
-          style={{ 
-            padding: '0', 
-            overflow: 'hidden', 
-            transform: 'scale(0.6)', 
-            transformOrigin: 'top center',
-            boxShadow: '0 30px 60px rgba(0,0,0,0.5)',
-            marginBottom: '-450px', // Adjusted for 0.6 scale (1122 - 1122*0.6 = 448)
-            width: '210mm',
-            height: '297mm',
-            background: '#fff'
-          }}
-        >
+        <div className="glass-panel cv-print-container">
           <div id="cv-preview-root" ref={previewRef} style={{ width: '100%', height: '100%' }}>
             <SelectedTemplateComponent data={data} />
           </div>
@@ -514,6 +501,29 @@ export default function CVMaker() {
       </div>
 
       <style jsx global>{`
+        .preview-container {
+          flex: 0 0 500px;
+          position: sticky;
+          top: 20px;
+          height: fit-content;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cv-print-container {
+          padding: 0;
+          overflow: hidden;
+          transform: scale(0.6);
+          transform-origin: top center;
+          box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+          margin-bottom: -450px;
+          width: 794px;
+          height: 1123px;
+          background: #fff;
+          transition: all 0.3s ease;
+        }
+
         @media print {
           /* Hide all explicitly marked elements */
           .print-hidden, header, nav, footer, .ad-container, iframe {
@@ -544,14 +554,14 @@ export default function CVMaker() {
             padding: 0 !important;
             box-shadow: none !important;
             border: none !important;
-            width: 210mm !important;
+            width: 794px !important;
             height: auto !important;
             background: white !important;
             position: static !important;
           }
 
           #cv-preview-root {
-            width: 210mm !important;
+            width: 794px !important;
             height: auto !important;
             display: block !important;
             background: white !important;
@@ -559,8 +569,8 @@ export default function CVMaker() {
           }
 
           .cv-preview {
-            width: 210mm !important;
-            min-height: 297mm !important;
+            width: 794px !important;
+            min-height: 1123px !important;
             padding: 0 !important;
             margin: 0 !important;
             box-shadow: none !important;
@@ -578,10 +588,10 @@ export default function CVMaker() {
           }
         }
 
-        /* Mobile Responsiveness */
         @media (max-width: 1024px) {
           .cv-maker-wrapper {
             flex-direction: column !important;
+            flex-wrap: nowrap !important;
             align-items: center !important;
           }
           .cv-sidebar {
@@ -607,28 +617,45 @@ export default function CVMaker() {
           }
           .preview-container {
             width: 100% !important;
+            max-width: 100% !important;
             flex: 1 1 auto !important;
-            position: static !important;
+            position: relative !important;
             overflow: hidden !important;
-            padding-bottom: 20px !important;
-            display: flex !important;
-            justify-content: center !important;
+            display: block !important;
           }
           .cv-print-container {
-            transform: scale(0.7) !important;
+            position: absolute !important;
+            left: 50% !important;
+            top: 60px !important;
             transform-origin: top center !important;
-            margin-bottom: -330px !important;
-            margin-left: 0 !important;
+            margin: 0 !important;
           }
         }
 
+        /* Responsive scales based on screen width */
+        @media (max-width: 1024px) {
+          .preview-container { height: 1100px !important; }
+          .cv-print-container { transform: translate(-50%, 0) scale(0.85) !important; }
+        }
+        @media (max-width: 768px) {
+          .preview-container { height: 960px !important; }
+          .cv-print-container { transform: translate(-50%, 0) scale(0.75) !important; }
+        }
         @media (max-width: 600px) {
-          .cv-print-container {
-            transform: scale(0.48) !important;
-            transform-origin: top center !important;
-            margin-bottom: -550px !important;
-            margin-left: 0 !important;
-          }
+          .preview-container { height: 780px !important; }
+          .cv-print-container { transform: translate(-50%, 0) scale(0.6) !important; }
+        }
+        @media (max-width: 480px) {
+          .preview-container { height: 660px !important; }
+          .cv-print-container { transform: translate(-50%, 0) scale(0.5) !important; }
+        }
+        @media (max-width: 400px) {
+          .preview-container { height: 600px !important; }
+          .cv-print-container { transform: translate(-50%, 0) scale(0.45) !important; }
+        }
+        @media (max-width: 360px) {
+          .preview-container { height: 550px !important; }
+          .cv-print-container { transform: translate(-50%, 0) scale(0.4) !important; }
         }
       `}</style>
     </div>

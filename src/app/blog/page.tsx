@@ -18,8 +18,8 @@ export default function BlogPage() {
           <BookOpen size={16} color="var(--accent)" />
           <span style={{ fontSize: '13px', fontWeight: '500', color: 'var(--muted)' }}>Expert Insights & Guides</span>
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px' }}>The ToolSnappy Blog</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '600px', margin: '0 auto' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px' }}>The ToolSnappy Blog</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto' }}>
           Master the tools of the trade with our deep-dive guides on SEO, AI, and digital growth.
         </p>
       </div>
@@ -29,7 +29,7 @@ export default function BlogPage() {
       {/* Featured Post */}
       <div style={{ marginTop: '40px', marginBottom: '60px' }}>
         <Link href={`/blog/${blogPosts[0].slug}`} style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '0', padding: '0', overflow: 'hidden' }}>
+          <div className="glass-panel" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0', padding: '0', overflow: 'hidden' }}>
             <div style={{ height: '350px' }}>
               <img src={blogPosts[0].image} alt={blogPosts[0].title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
@@ -45,7 +45,7 @@ export default function BlogPage() {
         </Link>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
         {blogPosts.map((post) => (
           <Link href={`/blog/${post.slug}`} key={post.id} style={{ textDecoration: 'none' }}>
             <div className="glass-panel" style={{ height: '100%', display: 'flex', flexDirection: 'column', transition: 'transform 0.3s ease' }}>

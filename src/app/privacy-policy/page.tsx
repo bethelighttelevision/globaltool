@@ -11,10 +11,10 @@ export default function PrivacyPolicy() {
         <ArrowLeft size={16} /> Back to Home
       </Link>
 
-      <div className="glass-panel animate-slide-up" style={{ padding: '60px 48px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
+      <div className="glass-panel animate-slide-up" style={{ padding: '40px 24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px', flexWrap: 'wrap' }}>
           <Shield size={32} color="var(--accent)" />
-          <h1 style={{ fontSize: '42px', margin: 0 }}>Privacy Policy</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold" style={{ margin: 0 }}>Privacy Policy</h1>
         </div>
         
         <div className="article-content">

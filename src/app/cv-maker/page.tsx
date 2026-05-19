@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function CVMakerPage() {
   return (
-    <div className="content-container" style={{ padding: '40px 24px' }}>
+    <div className="content-container px-4 md:px-6 py-10">
       <SEO 
         toolName="Professional CV Maker" 
         description="Create a professional CV in minutes with our free online CV maker. Choose from multiple templates, customize your layout, and download a high-quality PDF resume." 
@@ -25,9 +25,9 @@ export default function CVMakerPage() {
           <ArrowLeft size={16} /> Back to Tools
         </Link>
         
-        <div style={{ marginBottom: '60px' }}>
-          <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px' }}>Professional CV Maker</h1>
-          <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '800px' }}>
+        <div style={{ marginBottom: '40px' }}>
+          <h1 className="gradient-text text-3xl md:text-5xl font-bold mb-4">Professional CV Maker</h1>
+          <p className="text-base md:text-lg text-[var(--muted)] max-w-[800px] leading-relaxed">
             Stand out from the crowd with a premium, recruiter-approved CV. Our 2026 AI-ready templates are designed to pass ATS filters and impress hiring managers.
           </p>
         </div>
@@ -36,15 +36,15 @@ export default function CVMakerPage() {
       <CVMaker />
       
       <div className="print-hidden">
-        <div style={{ marginTop: '60px' }}>
+        <div className="mt-10">
           <AdSensePlaceholder type="mid-content" />
         </div>
 
         <RelatedTools currentPath="/cv-maker" />
 
         {/* SEO CONTENT SECTION */}
-        <article className="article-content" style={{ marginTop: '100px', padding: '40px', background: 'var(--card)', borderRadius: '18px', border: '1px solid var(--card-border)' }}>
-          <h2 style={{ fontSize: '32px', borderBottom: '1px solid var(--card-border)', paddingBottom: '16px', marginBottom: '32px' }}>
+        <article className="article-content mt-16 md:mt-24 p-6 md:p-10 bg-[var(--card)] rounded-2xl border border-[var(--card-border)]">
+          <h2 className="text-2xl md:text-3xl font-bold border-b border-[var(--card-border)] pb-4 mb-8">
             How to Create a Winning CV in 2026
           </h2>
           

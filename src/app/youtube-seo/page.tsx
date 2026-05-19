@@ -73,12 +73,12 @@ export default function YoutubeSEOPage() {
 
       <AdSensePlaceholder type="header" />
       
-      <div className="glass-panel" style={{ padding: '48px 32px', textAlign: 'center', marginBottom: '40px' }}>
+      <div className="glass-panel" style={{ padding: '48px 24px', textAlign: 'center', marginBottom: '40px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'rgba(255, 0, 0, 0.1)', borderRadius: '20px', marginBottom: '24px' }}>
           <Play size={48} color="#ff0000" strokeWidth={1.5} />
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '48px', marginBottom: '16px', letterSpacing: '-0.02em' }}>YouTube SEO Optimizer</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '18px', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px', letterSpacing: '-0.02em' }}>YouTube SEO Optimizer</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
           Generate viral titles, descriptions, and high-density tags. Beat the algorithm with our 2026 SEO Searchability Score.
         </p>
 
@@ -109,9 +109,9 @@ export default function YoutubeSEOPage() {
       {results && (
         <div className="animate-slide-up">
           {/* SEO Score Section */}
-          <div className="glass-panel" style={{ padding: '32px', marginBottom: '32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '32px' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+          <div className="glass-panel" style={{ padding: '24px', marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                 <Sparkles size={20} color="#ffcc00" />
                 <span style={{ fontSize: '18px', fontWeight: '600' }}>Overall Searchability Score</span>
               </div>
@@ -120,12 +120,12 @@ export default function YoutubeSEOPage() {
               </p>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '48px', fontWeight: 'bold', color: results.score > 70 ? 'var(--success)' : '#ffcc00' }}>{results.score}/100</div>
-              <div style={{ fontSize: '12px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '4px' }}>Rank Potential</div>
+              <div style={{ fontSize: '48px', fontWeight: 'bold', color: results.score > 70 ? 'var(--success)' : '#ffcc00', lineHeight: 1 }}>{results.score}/100</div>
+              <div style={{ fontSize: '12px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginTop: '8px' }}>Rank Potential</div>
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {/* Titles Panel */}
             <div className="glass-panel" style={{ padding: '32px' }}>
               <h3 style={{ fontSize: '20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>

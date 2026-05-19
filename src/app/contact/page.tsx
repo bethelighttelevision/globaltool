@@ -24,13 +24,13 @@ export default function ContactUs() {
       </Link>
 
       <div className="animate-slide-up" style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <div className="glass-panel" style={{ padding: '60px 48px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
+        <div className="glass-panel" style={{ padding: '40px 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px', flexWrap: 'wrap' }}>
             <Mail size={32} color="var(--accent)" />
-            <h1 style={{ fontSize: '42px', margin: 0 }}>Contact Us</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold" style={{ margin: 0 }}>Contact Us</h1>
           </div>
           
-          <p style={{ color: 'var(--muted)', fontSize: '18px', marginBottom: '40px', lineHeight: 1.6 }}>
+          <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', marginBottom: '40px', lineHeight: 1.6 }}>
             Have a suggestion for a new tool? Found a bug? Or just want to say hi? Reach out to us and we&apos;ll get back to you within 24 hours.
           </p>
 
@@ -43,7 +43,7 @@ export default function ContactUs() {
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', marginBottom: '24px' }}>
                 <div>
                   <label className="label-text">Your Name</label>
                   <input type="text" className="input-field" placeholder="John Doe" required />

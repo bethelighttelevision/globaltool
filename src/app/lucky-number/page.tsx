@@ -86,12 +86,12 @@ export default function LuckyNumberPage() {
 
       <AdSensePlaceholder type="header" />
       
-      <div className="glass-panel" style={{ padding: '60px 32px', textAlign: 'center', marginBottom: '40px', background: 'radial-gradient(circle at top right, rgba(168, 199, 250, 0.05), transparent), radial-gradient(circle at bottom left, rgba(210, 168, 250, 0.05), transparent)' }}>
+      <div className="glass-panel" style={{ padding: '48px 24px', textAlign: 'center', marginBottom: '40px', background: 'radial-gradient(circle at top right, rgba(168, 199, 250, 0.05), transparent), radial-gradient(circle at bottom left, rgba(210, 168, 250, 0.05), transparent)' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '80px', height: '80px', background: 'rgba(168, 199, 250, 0.1)', borderRadius: '50%', marginBottom: '24px', boxShadow: '0 0 30px rgba(168, 199, 250, 0.2)' }}>
           <Star size={40} color="#a8c7fa" strokeWidth={1.5} className="animate-pulse" />
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '56px', marginBottom: '16px', letterSpacing: '-0.03em' }}>AI Lucky Number Finder</h1>
-        <p style={{ color: 'var(--muted)', fontSize: '20px', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
+        <h1 className="gradient-text text-3xl sm:text-4xl md:text-5xl font-bold" style={{ marginBottom: '16px', letterSpacing: '-0.03em' }}>AI Lucky Number Finder</h1>
+        <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', maxWidth: '600px', margin: '0 auto', marginBottom: '40px' }}>
           Discover the hidden power of your name. Our AI uses ancient Pythagorean numerology to reveal your destiny.
         </p>
 
@@ -120,7 +120,7 @@ export default function LuckyNumberPage() {
 
       {result && (
         <div className="animate-slide-up" style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {/* Main Result */}
             <div className="glass-panel" style={{ padding: '40px', textAlign: 'center', border: '1px solid rgba(168, 199, 250, 0.3)', background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)' }}>
               <div style={{ fontSize: '14px', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '16px' }}>Your Lucky Destiny Number</div>
@@ -168,7 +168,7 @@ export default function LuckyNumberPage() {
       {/* SEO ARTICLE SECTION */}
       <div style={{ marginTop: '100px', maxWidth: '900px', margin: '100px auto 0' }}>
         <article className="prose prose-invert lg:prose-xl" style={{ borderTop: '1px solid var(--card-border)', paddingTop: '60px' }}>
-          <h2 style={{ fontSize: '40px', marginBottom: '32px', textAlign: 'center' }}>How Your Name Influences Your Destiny: The Science of Numerology</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ marginBottom: '32px', textAlign: 'center' }}>How Your Name Influences Your Destiny: The Science of Numerology</h2>
           
           <p style={{ color: 'var(--muted)', lineHeight: '1.9', fontSize: '18px', marginBottom: '32px' }}>
             Have you ever wondered why certain people seem naturally lucky, or why your name feels like it carries a specific weight? In the world of <strong>ancient numerology</strong>, every letter in your name corresponds to a vibration and a number. These numbers are not just mathematical symbols; they are energetic signatures that define your personality traits, strengths, and even your potential for success in 2026.

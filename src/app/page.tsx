@@ -35,10 +35,10 @@ export default function Home() {
           <TrendingUp size={16} color="var(--accent)" />
           <span style={{ fontSize: '13px', fontWeight: '500', color: 'var(--muted)' }}>New: Page SEO Analyzer Audit Tool</span>
         </div>
-        <h1 className="gradient-text" style={{ fontSize: '64px', lineHeight: 1.1, marginBottom: '24px', letterSpacing: '-0.02em' }}>
+        <h1 className="gradient-text text-4xl sm:text-5xl md:text-6xl font-bold" style={{ lineHeight: 1.1, marginBottom: '24px', letterSpacing: '-0.02em' }}>
           Your Ultimate Digital<br />Arsenal for 2026
         </h1>
-        <p style={{ color: 'var(--muted)', fontSize: '20px', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
+        <p className="text-base sm:text-lg md:text-xl" style={{ color: 'var(--muted)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
           Dominate search engines and social algorithms. Access a premium suite of AI-powered SEO, Content, and Financial tools engineered for the USA market.
         </p>
       </section>
@@ -186,7 +186,7 @@ export default function Home() {
         <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <TrendingUp size={22} color="#32d74b" /> Finance & Loan Arsenal
         </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: '80px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '80px' }}>
           <Link href="/car-loan-calculator" style={{ textDecoration: 'none' }}>
             <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
