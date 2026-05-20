@@ -183,75 +183,75 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* Social Monetization & Earnings Checkers Section (VIRAL) */}
-        <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <Star size={22} color="var(--accent)" /> Creator Monetization & Earnings
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
-          
-          <Link href="/youtube-monetization" style={{ textDecoration: 'none' }}>
-            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ff0000' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <Play size={28} color="#ff0000" />
-                <span className="tag-badge" style={{ color: '#ff0000', borderColor: '#ff0000', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>HIGH CPC</span>
-              </div>
-              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Checker</h3>
-              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Scan YPP status, estimate CPM/RPM, and generate AI channel roadmaps.</p>
+      </div>
+
+      {/* Social Monetization & Earnings Checkers Section (VIRAL) */}
+      <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <Star size={22} color="var(--accent)" /> Creator Monetization & Earnings
+      </h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
+        
+        <Link href="/youtube-monetization" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ff0000' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Play size={28} color="#ff0000" />
+              <span className="tag-badge" style={{ color: '#ff0000', borderColor: '#ff0000', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>HIGH CPC</span>
             </div>
-          </Link>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Monetization Checker</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Scan YPP status, estimate CPM/RPM, and get AI channel roadmaps.</p>
+          </div>
+        </Link>
 
-          <Link href="/facebook-monetization" style={{ textDecoration: 'none' }}>
-            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #1877f2' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <Video size={28} color="#1877f2" />
-                <span className="tag-badge" style={{ color: '#1877f2', borderColor: '#1877f2', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>VIRAL</span>
-              </div>
-              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Facebook Checker</h3>
-              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Calculate In-Stream Ads / Stars limits and generate AI viral tactics.</p>
+        <Link href="/facebook-monetization" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #1877f2' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Video size={28} color="#1877f2" />
+              <span className="tag-badge" style={{ color: '#1877f2', borderColor: '#1877f2', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>VIRAL</span>
             </div>
-          </Link>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Facebook Monetization Checker</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Check In-Stream Ads / Stars eligibility and get AI viral growth tactics.</p>
+          </div>
+        </Link>
 
-          <Link href="/instagram-monetization" style={{ textDecoration: 'none' }}>
-            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #cc2366' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <Camera size={28} color="#cc2366" />
-                <span className="tag-badge" style={{ color: '#cc2366', borderColor: '#cc2366', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW AI</span>
-              </div>
-              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Instagram Checker</h3>
-              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Analyze engagement rates, sponsorship deal rates, and brand pitches.</p>
+        <Link href="/instagram-monetization" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #cc2366' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Camera size={28} color="#cc2366" />
+              <span className="tag-badge" style={{ color: '#cc2366', borderColor: '#cc2366', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW AI</span>
             </div>
-          </Link>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Instagram Monetization Checker</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Calculate engagement rate, brand sponsorship rates, and get AI pitch kits.</p>
+          </div>
+        </Link>
 
-        </div>
+      </div>
 
-        {/* Finance Arsenal Section (HIGH CPC) */}
-        <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <TrendingUp size={22} color="#32d74b" /> Finance & Loan Arsenal
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '80px' }}>
-          <Link href="/car-loan-calculator" style={{ textDecoration: 'none' }}>
-            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <TrendingUp size={28} color="#32d74b" />
-                <span className="tag-badge" style={{ color: '#32d74b', borderColor: '#32d74b', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>HIGH CPC</span>
-              </div>
-              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Car Loan Calculator</h3>
-              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Calculate monthly EMI and total interest for your vehicle finance.</p>
+      {/* Finance Arsenal Section (HIGH CPC) */}
+      <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <TrendingUp size={22} color="#32d74b" /> Finance & Loan Arsenal
+      </h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '80px' }}>
+        <Link href="/car-loan-calculator" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <TrendingUp size={28} color="#32d74b" />
+              <span className="tag-badge" style={{ color: '#32d74b', borderColor: '#32d74b', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>HIGH CPC</span>
             </div>
-          </Link>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Car Loan Calculator</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Calculate monthly EMI and total interest for your vehicle finance.</p>
+          </div>
+        </Link>
 
-          <Link href="/mortgage-calculator" style={{ textDecoration: 'none' }}>
-            <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #0071e3' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <Globe size={28} color="#0071e3" />
-                <span className="tag-badge" style={{ color: '#0071e3', borderColor: '#0071e3', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>PREMIUM</span>
-              </div>
-              <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Mortgage Calculator</h3>
-              <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Advanced home loan planner with amortization and interest breakdown.</p>
+        <Link href="/mortgage-calculator" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #0071e3' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Globe size={28} color="#0071e3" />
+              <span className="tag-badge" style={{ color: '#0071e3', borderColor: '#0071e3', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>PREMIUM</span>
             </div>
-          </Link>
-        </div>
-
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Mortgage Calculator</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Advanced home loan planner with amortization and interest breakdown.</p>
+          </div>
+        </Link>
       </div>
 
       <AdSensePlaceholder type="mid-content" />
