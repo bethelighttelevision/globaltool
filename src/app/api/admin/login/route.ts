@@ -1,13 +1,7 @@
 import { NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
 
 // Using the provided email as the admin email
 const ADMIN_EMAIL = 'bethelighttelevision@gmail.com';
-// In a real app, you'd store a hashed password in env vars or DB.
-// For this quick secure setup, we'll use a strong default password that the user should change,
-// or we can hardcode a hash if they want. Let's use a hashed version of 'Admin@2026' for now.
-// The hash was generated for 'Admin@2026'
-const ADMIN_PASSWORD_HASH = '$2a$10$7/O8V7C48Wn/H2wN4mXwE.yX9bB/ZcI9aZ/8QyV8QzY8xV8wX8yV8'; // Placeholder, will replace with proper env var checking
 
 export async function POST(request: Request) {
   try {
