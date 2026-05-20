@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 
 // Using the provided email as the admin email
-const ADMIN_EMAIL = 'aureliorenatoks0@gmail.com';
+const ADMIN_EMAIL = 'bethelighttelevision@gmail.com';
 // In a real app, you'd store a hashed password in env vars or DB.
 // For this quick secure setup, we'll use a strong default password that the user should change,
 // or we can hardcode a hash if they want. Let's use a hashed version of 'Admin@2026' for now.
