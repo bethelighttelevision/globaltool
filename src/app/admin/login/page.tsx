@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
         const data = await res.json();
         setError(data.error || 'Invalid credentials');
       }
-    } catch (err) {
+    } catch {
       setError('Something went wrong. Please try again.');
     } finally {
       setLoading(false);

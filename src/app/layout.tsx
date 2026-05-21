@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navigation from "../components/Navigation";
+import Image from "next/image";
 import Link from 'next/link';
 import AdSensePlaceholder from "../components/AdSensePlaceholder";
 import Script from "next/script";
@@ -15,6 +16,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://toolsnappy.com'),
   title: {
     default: "ToolSnappy | #1 Free SEO & Social Media Suite 2026",
     template: "%s | ToolSnappy"
@@ -24,6 +26,21 @@ export const metadata: Metadata = {
   authors: [{ name: "ToolSnappy Team" }],
   verification: {
     google: "SLVPBBxmjf4OTG8ool0m5oHhotoFZiK5K_16cpautYs",
+  },
+  openGraph: {
+    title: "ToolSnappy | #1 Free SEO & Social Media Suite 2026",
+    description: "Access 12+ professional, high-performance utility tools for SEO, Social Media, Crypto, and Developer productivity. Engineered for speed and precision.",
+    url: "https://toolsnappy.com",
+    siteName: "ToolSnappy",
+    images: [{ url: "https://toolsnappy.com/logo.svg", width: 256, height: 256 }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ToolSnappy | #1 Free SEO & Social Media Suite 2026",
+    description: "Access 12+ professional, high-performance utility tools for SEO, Social Media, Crypto, and Developer productivity. Engineered for speed and precision.",
+    images: ["https://toolsnappy.com/logo.svg"],
   },
   other: {
     "p:domain_verify": "5e08b56cf09560f4433892fbd07ddf1e",
@@ -38,7 +55,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <head>
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.svg" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-WHHDYWK3F5"
           strategy="afterInteractive"
@@ -60,7 +78,7 @@ export default function RootLayout({
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '40px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <img src="/logo.png" alt="ToolSnappy" style={{ height: '32px', borderRadius: '50%' }} />
+                  <Image src="/logo-icon.svg" alt="ToolSnappy" width={40} height={40} style={{ objectFit: 'contain' }} />
                   <h3 style={{ fontSize: '18px', margin: 0, color: '#fff' }}>ToolSnappy</h3>
                 </div>
                 <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.6 }}>The world&apos;s most advanced 100% free tool suite. Engineered for speed, privacy, and digital dominance in 2026.</p>

@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Calendar, User, Search, ArrowRight, BookOpen, Clock, Tag, X, ListFilter, CalendarDays } from 'lucide-react';
+import Image from 'next/image';
+import { Calendar, Search, ArrowRight, BookOpen, Clock, X, ListFilter, CalendarDays } from 'lucide-react';
 
 interface Post {
   id: string;
@@ -284,12 +285,12 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                 position: 'relative',
                 overflow: 'hidden'
               }}>
-                <img 
+                <Image 
                   src={featuredPost.image} 
                   alt={featuredPost.title} 
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ 
-                    width: '100%', 
-                    height: '100%', 
                     objectFit: 'cover',
                     transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
                   }} 
@@ -461,12 +462,12 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
                     overflow: 'hidden',
                     position: 'relative'
                   }}>
-                    <img 
+                    <Image 
                       src={post.image} 
                       alt={post.title} 
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       style={{ 
-                        width: '100%', 
-                        height: '100%', 
                         objectFit: 'cover',
                         transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
                       }} 
@@ -615,7 +616,7 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
           <BookOpen size={48} color="var(--muted)" style={{ margin: '0 auto 20px', opacity: 0.5 }} />
           <h3 style={{ fontSize: '22px', color: '#fff', marginBottom: '8px' }}>No Guides Found</h3>
           <p style={{ color: 'var(--muted)', maxWidth: '400px', margin: '0 auto 24px', fontSize: '15px' }}>
-            We couldn't find any articles matching "{searchQuery}" in the category "{selectedCategory}".
+            We couldn&rsquo;t find any articles matching &ldquo;{searchQuery}&rdquo; in the category &ldquo;{selectedCategory}&rdquo;.
           </p>
           <button 
             className="premium-button"

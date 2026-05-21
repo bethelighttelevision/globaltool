@@ -13,6 +13,21 @@ export interface BlogInput {
   category: string;
 }
 
+interface BlogRecord {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  date: string;
+  category: string;
+}
+
+function getErrorMessage(err: unknown): string {
+  return err instanceof Error ? err.message : String(err);
+}
+
 // Fetch all articles for the admin dashboard
 export async function getAdminBlogs() {
   try {
@@ -23,9 +38,10 @@ export async function getAdminBlogs() {
 
     if (error) throw error;
     return { success: true, data: data || [] };
-  } catch (err: any) {
-    console.error("Error getting admin blogs:", err.message);
-    return { success: false, error: err.message, data: [] };
+  } catch (err) {
+    const message = getErrorMessage(err);
+    console.error("Error getting admin blogs:", message);
+    return { success: false, error: message, data: [] };
   }
 }
 
@@ -40,17 +56,16 @@ export async function getAdminBlogById(id: string) {
 
     if (error) throw error;
     return { success: true, data };
-  } catch (err: any) {
-    console.error("Error getting admin blog by id:", err.message);
-    return { success: false, error: err.message };
+  } catch (err) {
+    const message = getErrorMessage(err);
+    console.error("Error getting admin blog by id:", message);
+    return { success: false, error: message };
   }
 }
 
 // Create a new blog post
 export async function createAdminBlog(input: BlogInput) {
   try {
-    // Generate an ID if it's serial/incremental, but typically Supabase generates ID.
-    // Let's insert the columns we have:
     const { data, error } = await supabase
       .from('blogs')
       .insert([
@@ -58,7 +73,7 @@ export async function createAdminBlog(input: BlogInput) {
           title: input.title,
           slug: input.slug,
           excerpt: input.excerpt,
-          content: input.content, // HTML content from editor
+          content: input.content,
           image: input.image || '/blog-banner.png',
           date: input.date,
           category: input.category
@@ -68,14 +83,14 @@ export async function createAdminBlog(input: BlogInput) {
 
     if (error) throw error;
     
-    // Clear Next.js cache so the new blog shows up on the frontend immediately
     revalidatePath('/blog');
     revalidatePath(`/blog/${input.slug}`);
 
-    return { success: true, data: data?.[0] };
-  } catch (err: any) {
-    console.error("Error creating blog:", err.message);
-    return { success: false, error: err.message };
+    return { success: true, data: data?.[0] as BlogRecord | undefined };
+  } catch (err) {
+    const message = getErrorMessage(err);
+    console.error("Error creating blog:", message);
+    return { success: false, error: message };
   }
 }
 
@@ -101,10 +116,11 @@ export async function updateAdminBlog(id: string, input: BlogInput) {
     revalidatePath('/blog');
     revalidatePath(`/blog/${input.slug}`);
 
-    return { success: true, data: data?.[0] };
-  } catch (err: any) {
-    console.error("Error updating blog:", err.message);
-    return { success: false, error: err.message };
+    return { success: true, data: data?.[0] as BlogRecord | undefined };
+  } catch (err) {
+    const message = getErrorMessage(err);
+    console.error("Error updating blog:", message);
+    return { success: false, error: message };
   }
 }
 
@@ -124,8 +140,9 @@ export async function deleteAdminBlog(id: string, slug?: string) {
     }
 
     return { success: true };
-  } catch (err: any) {
-    console.error("Error deleting blog:", err.message);
-    return { success: false, error: err.message };
+  } catch (err) {
+    const message = getErrorMessage(err);
+    console.error("Error deleting blog:", message);
+    return { success: false, error: message };
   }
 }

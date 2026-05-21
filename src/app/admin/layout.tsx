@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LayoutDashboard, FileEdit, ExternalLink, ArrowLeft } from 'lucide-react';
@@ -12,26 +12,21 @@ export default function AdminLayout({
 }) {
   const pathname = usePathname();
 
-  const navigationItems = [
-    {
-      name: 'Overview Dashboard',
-      href: '/admin',
-      icon: LayoutDashboard,
-      active: pathname === '/admin',
-    },
-    {
-      name: 'Write New Post',
-      href: '/admin/new',
-      icon: FileEdit,
-      active: pathname === '/admin/new',
-    },
-  ];
+  useEffect(() => {
+    document.title = 'Admin Dashboard | ToolSnappy';
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.setAttribute('name', 'robots');
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute('content', 'noindex, nofollow');
+  }, []);
 
   return (
     <div style={{ minHeight: 'calc(100vh - 70px)', background: 'var(--background)', color: 'var(--foreground)' }}>
-      {/* Background Glow Accents */}
       <div style={{
-        position: 'absolute',
+        position: 'fixed',
         top: '10%',
         left: '5%',
         width: '350px',
@@ -41,7 +36,7 @@ export default function AdminLayout({
         pointerEvents: 'none'
       }} />
       <div style={{
-        position: 'absolute',
+        position: 'fixed',
         bottom: '10%',
         right: '5%',
         width: '400px',
@@ -51,125 +46,124 @@ export default function AdminLayout({
         pointerEvents: 'none'
       }} />
 
-      <div className="content-container animate-fade-in" style={{ position: 'relative', zIndex: 1, padding: '40px 24px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: '32px' }} className="mobile-admin-grid">
-          
-          {/* Dashboard Sidebar */}
-          <aside>
-            <div className="glass-panel" style={{ 
-              padding: '24px', 
-              position: 'sticky', 
-              top: '94px', 
-              display: 'flex', 
-              flexDirection: 'column', 
-              gap: '24px',
-              height: 'fit-content'
-            }}>
+      <div className="animate-fade-in" style={{ position: 'relative', zIndex: 1, padding: '40px 48px', maxWidth: '100%', margin: 0 }}>
+        <div className="admin-grid">
+          <aside className="admin-sidebar">
+            <div className="glass-panel p-6 sticky top-24 flex flex-col gap-5 h-fit">
               <div>
-                <h2 style={{ fontSize: '18px', fontWeight: '700', margin: '0 0 4px 0', letterSpacing: '-0.02em', color: '#fff' }}>
-                  Creator Hub
-                </h2>
-                <p style={{ fontSize: '12px', color: 'var(--muted)', margin: 0 }}>
-                  Manage site insights & articles
-                </p>
+                <h2 className="text-lg font-bold m-0 tracking-tight text-white">Creator Hub</h2>
+                <p className="text-xs text-muted m-0 mt-0.5">Manage site insights & articles</p>
               </div>
 
-              <div style={{ width: '100%', height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+              <div className="w-full h-px bg-white/8" />
 
-              {/* Sub-Navigation Links */}
-              <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {navigationItems.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        padding: '12px 16px',
-                        borderRadius: '12px',
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        textDecoration: 'none',
-                        transition: 'all 0.2s ease',
-                        background: item.active ? 'rgba(41, 151, 255, 0.12)' : 'transparent',
-                        color: item.active ? 'var(--accent)' : 'var(--muted)',
-                        border: item.active ? '1px solid rgba(41, 151, 255, 0.2)' : '1px solid transparent',
-                      }}
-                      className="admin-sidebar-link"
-                    >
-                      <Icon size={16} color={item.active ? 'var(--accent)' : 'var(--muted)'} />
-                      {item.name}
-                    </Link>
-                  );
-                })}
+              <nav className="flex flex-col gap-1.5">
+                <Link
+                  href="/admin"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold no-underline transition-all duration-200"
+                  style={{
+                    background: pathname === '/admin' ? 'rgba(41, 151, 255, 0.12)' : 'transparent',
+                    color: pathname === '/admin' ? 'var(--accent)' : 'var(--muted)',
+                    border: pathname === '/admin' ? '1px solid rgba(41, 151, 255, 0.2)' : '1px solid transparent',
+                  }}
+                >
+                  <LayoutDashboard size={16} />
+                  Overview
+                </Link>
 
-                <div style={{ width: '100%', height: '1px', background: 'rgba(255,255,255,0.08)', margin: '12px 0' }} />
+                <Link
+                  href="/admin/new"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold no-underline transition-all duration-200"
+                  style={{
+                    background: pathname === '/admin/new' ? 'rgba(41, 151, 255, 0.12)' : 'transparent',
+                    color: pathname === '/admin/new' ? 'var(--accent)' : 'var(--muted)',
+                    border: pathname === '/admin/new' ? '1px solid rgba(41, 151, 255, 0.2)' : '1px solid transparent',
+                  }}
+                >
+                  <FileEdit size={16} />
+                  New Article
+                </Link>
 
-                {/* External Utility Links */}
+                {(pathname.startsWith('/admin/edit/')) && (
+                  <Link
+                    href="/admin"
+                    className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold no-underline transition-all duration-200"
+                    style={{
+                      background: 'rgba(41, 151, 255, 0.12)',
+                      color: 'var(--accent)',
+                      border: '1px solid rgba(41, 151, 255, 0.2)',
+                    }}
+                  >
+                    <FileEdit size={16} />
+                    Editing Mode
+                  </Link>
+                )}
+              </nav>
+
+              <div className="w-full h-px bg-white/8" />
+
+              <nav className="flex flex-col gap-1">
                 <Link
                   href="/blog"
                   target="_blank"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '12px 16px',
-                    borderRadius: '12px',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    color: 'var(--foreground)',
-                    textDecoration: 'none',
-                    transition: 'all 0.2s ease',
-                  }}
-                  className="hover:text-[#2997ff]"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-foreground no-underline hover:text-accent transition-colors"
                 >
-                  <ExternalLink size={16} style={{ opacity: 0.6 }} />
+                  <ExternalLink size={15} className="opacity-60" />
                   View Live Blog
                 </Link>
 
                 <Link
                   href="/"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '12px 16px',
-                    borderRadius: '12px',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                    color: 'var(--foreground)',
-                    textDecoration: 'none',
-                    transition: 'all 0.2s ease',
-                  }}
-                  className="hover:text-red-400"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-foreground no-underline hover:text-red-400 transition-colors"
                 >
-                  <ArrowLeft size={16} style={{ opacity: 0.6 }} />
+                  <ArrowLeft size={15} className="opacity-60" />
                   Back to Tools
                 </Link>
               </nav>
             </div>
           </aside>
 
-          {/* Core Content Area */}
-          <main style={{ minWidth: 0 }}>
+          <main className="admin-main">
             {children}
           </main>
         </div>
       </div>
 
-      {/* Local Responsive Style Injection */}
       <style jsx global>{`
+        .admin-grid {
+          display: grid;
+          grid-template-columns: 240px 1fr;
+          gap: 32px;
+        }
+
+        .admin-sidebar {
+          position: sticky;
+          top: 24px;
+          height: fit-content;
+        }
+
         @media (max-width: 900px) {
-          .mobile-admin-grid {
+          .admin-grid {
             grid-template-columns: 1fr !important;
             gap: 24px !important;
           }
-          
-          .admin-sidebar-link {
-            justify-content: center;
+          .admin-sidebar {
+            position: static !important;
+          }
+          .admin-sidebar > .glass-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+          }
+          .admin-sidebar > .glass-panel > :first-child,
+          .admin-sidebar > .glass-panel > .w-full {
+            grid-column: 1 / -1;
+          }
+        }
+
+        @media (max-width: 500px) {
+          .admin-sidebar > .glass-panel {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

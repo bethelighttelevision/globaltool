@@ -2,16 +2,16 @@ import React from 'react';
 import { getAdminBlogs } from '../actions/blog';
 import AdminBlogList from '../../components/AdminBlogList';
 import { blogPosts } from '../../data/posts';
-import { BookOpen, Tag, Calendar, ShieldCheck } from 'lucide-react';
+import { BookOpen, Tag, Calendar, ShieldCheck, TrendingUp, Clock, PenLine } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboardPage() {
   const result = await getAdminBlogs();
   
-  // Format posts correctly with safe defaults and mapping categories from static fallback if missing
   const slugToCategory = new Map(blogPosts.map(p => [p.slug, p.category]));
-  const blogs = (result.data || []).map((d: any) => ({
+  type DbRow = { id: string | number; title: string; slug: string; excerpt: string; image: string; date: string; category?: string };
+  const blogs = (result.data || []).map((d: DbRow) => ({
     id: String(d.id),
     title: d.title || '',
     slug: d.slug || '',
@@ -21,134 +21,111 @@ export default async function AdminDashboardPage() {
     category: d.category || slugToCategory.get(d.slug) || 'SEO',
   }));
 
-  // Aggregated analytics metrics
   const totalArticles = blogs.length;
-  
-  const uniqueCategories = Array.from(
-    new Set(blogs.map(b => b.category || 'SEO'))
-  );
-  const totalCategories = uniqueCategories.length;
+  const totalCategories = Array.from(new Set(blogs.map(b => b.category || 'SEO'))).length;
 
-  const latestPostDate = blogs.length > 0 
+  const latestPost = blogs.length > 0
     ? blogs.reduce((latest, current) => {
         const latestTime = new Date(latest.date).getTime() || 0;
         const currentTime = new Date(current.date).getTime() || 0;
         return currentTime > latestTime ? current : latest;
-      }, blogs[0]).date
-    : 'No Posts';
+      }, blogs[0])
+    : null;
+
+  const recentPosts = blogs
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 5);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-      
-      {/* Title & Security Badge */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+    <div className="space-y-8">
+      <div className="flex justify-between items-start flex-wrap gap-4">
         <div>
-          <h1 className="gradient-text text-3xl font-bold" style={{ margin: '0 0 8px 0', letterSpacing: '-0.02em' }}>
-            System Dashboard
-          </h1>
-          <p style={{ color: 'var(--muted)', margin: 0, fontSize: '15px' }}>
-            Monitor public guides, tutorials, and digital analytics.
-          </p>
+          <h1 className="gradient-text text-3xl font-bold m-0 tracking-tight">System Dashboard</h1>
+          <p className="text-muted m-0 text-sm">Monitor public guides, tutorials, and digital analytics.</p>
         </div>
-
-        <div style={{ 
-          display: 'inline-flex', 
-          alignItems: 'center', 
-          gap: '8px', 
-          background: 'rgba(50, 215, 75, 0.08)', 
-          padding: '8px 16px', 
-          borderRadius: '100px', 
-          border: '1px solid rgba(50, 215, 75, 0.15)',
-          boxShadow: '0 4px 12px rgba(50, 215, 75, 0.05)'
-        }}>
-          <ShieldCheck size={16} color="var(--success)" />
-          <span style={{ fontSize: '13px', fontWeight: '600', color: 'var(--success)' }}>Supabase Secure Session</span>
+        <div className="inline-flex items-center gap-2 bg-green-500/8 px-4 py-2 rounded-full border border-green-500/15 shadow-sm shadow-green-500/5">
+          <ShieldCheck size={16} className="text-green-400" />
+          <span className="text-xs font-semibold text-green-400">Supabase Secure Session</span>
         </div>
       </div>
 
-      {/* Analytics Counter Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
-        
-        {/* Metric 1: Total Articles */}
-        <div className="glass-panel" style={{ padding: '24px', display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            background: 'rgba(41, 151, 255, 0.08)',
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--accent)',
-            border: '1px solid rgba(41, 151, 255, 0.15)'
-          }}>
-            <BookOpen size={20} />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="glass-panel p-5 flex gap-4 items-center">
+          <div className="w-11 h-11 bg-blue-500/8 rounded-xl flex items-center justify-center text-accent border border-blue-500/15 flex-shrink-0">
+            <BookOpen size={18} />
           </div>
-          <div>
-            <span style={{ display: 'block', fontSize: '13px', color: 'var(--muted)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Total Articles
-            </span>
-            <span style={{ fontSize: '28px', fontWeight: '700', color: '#fff', fontFamily: 'var(--font-heading)' }}>
-              {totalArticles}
-            </span>
+          <div className="min-w-0">
+            <span className="block text-xs text-muted font-medium uppercase tracking-wider">Total Articles</span>
+            <span className="text-2xl font-bold text-white font-heading">{totalArticles}</span>
           </div>
         </div>
 
-        {/* Metric 2: Categories */}
-        <div className="glass-panel" style={{ padding: '24px', display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            background: 'rgba(255, 214, 10, 0.08)',
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#ffd60a',
-            border: '1px solid rgba(255, 214, 10, 0.15)'
-          }}>
-            <Tag size={20} />
+        <div className="glass-panel p-5 flex gap-4 items-center">
+          <div className="w-11 h-11 bg-yellow-500/8 rounded-xl flex items-center justify-center text-yellow-400 border border-yellow-500/15 flex-shrink-0">
+            <Tag size={18} />
           </div>
-          <div>
-            <span style={{ display: 'block', fontSize: '13px', color: 'var(--muted)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Categories
-            </span>
-            <span style={{ fontSize: '28px', fontWeight: '700', color: '#fff', fontFamily: 'var(--font-heading)' }}>
-              {totalCategories}
-            </span>
+          <div className="min-w-0">
+            <span className="block text-xs text-muted font-medium uppercase tracking-wider">Categories</span>
+            <span className="text-2xl font-bold text-white font-heading">{totalCategories}</span>
           </div>
         </div>
 
-        {/* Metric 3: Latest Published */}
-        <div className="glass-panel" style={{ padding: '24px', display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            background: 'rgba(50, 215, 75, 0.08)',
-            borderRadius: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--success)',
-            border: '1px solid rgba(50, 215, 75, 0.15)'
-          }}>
-            <Calendar size={20} />
+        <div className="glass-panel p-5 flex gap-4 items-center">
+          <div className="w-11 h-11 bg-green-500/8 rounded-xl flex items-center justify-center text-green-400 border border-green-500/15 flex-shrink-0">
+            <TrendingUp size={18} />
           </div>
-          <div>
-            <span style={{ display: 'block', fontSize: '13px', color: 'var(--muted)', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Latest Publish
-            </span>
-            <span style={{ fontSize: '18px', fontWeight: '700', color: '#fff', fontFamily: 'var(--font-heading)', display: 'block', marginTop: '4px' }}>
-              {latestPostDate}
-            </span>
+          <div className="min-w-0">
+            <span className="block text-xs text-muted font-medium uppercase tracking-wider">Latest Publish</span>
+            <span className="text-sm font-bold text-white font-heading block truncate mt-0.5">{latestPost?.date || 'No Posts'}</span>
           </div>
         </div>
 
+        <div className="glass-panel p-5 flex gap-4 items-center">
+          <div className="w-11 h-11 bg-purple-500/8 rounded-xl flex items-center justify-center text-purple-400 border border-purple-500/15 flex-shrink-0">
+            <PenLine size={18} />
+          </div>
+          <div className="min-w-0">
+            <span className="block text-xs text-muted font-medium uppercase tracking-wider">Quick Action</span>
+            <a href="/admin/new" className="text-sm font-semibold text-accent no-underline hover:underline">Write Article</a>
+          </div>
+        </div>
       </div>
 
-      {/* Blogs Listing Section */}
+      {/* Recent Activity */}
+      {recentPosts.length > 0 && (
+        <div className="glass-panel p-6 space-y-4">
+          <div className="flex items-center gap-2">
+            <Clock size={16} className="text-muted" />
+            <h2 className="text-base font-semibold text-white m-0">Recently Published</h2>
+          </div>
+          <div className="divide-y divide-white/5">
+            {recentPosts.map((post, i) => (
+              <div key={post.id} className="flex items-center gap-4 py-3">
+                <span className="text-xs text-muted w-5 text-right font-mono">{i + 1}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-white truncate m-0">{post.title}</p>
+                  <p className="text-xs text-muted truncate m-0">{post.excerpt}</p>
+                </div>
+                <span className="text-xs text-muted whitespace-nowrap flex items-center gap-1.5">
+                  <Calendar size={11} />
+                  {post.date}
+                </span>
+                <span className="text-xs px-2.5 py-1 rounded-full font-medium"
+                  style={{
+                    background: 'rgba(41, 151, 255, 0.1)',
+                    color: '#2997ff',
+                    border: '1px solid rgba(41, 151, 255, 0.2)'
+                  }}
+                >
+                  {post.category || 'SEO'}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <AdminBlogList initialBlogs={blogs} />
-      
     </div>
   );
 }

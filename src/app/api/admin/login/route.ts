@@ -12,8 +12,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    // In a production environment, you should use an environment variable for the admin password
-    const adminPassword = process.env.ADMIN_PASSWORD || 'ToolSnappy2026!';
+    const adminPassword = process.env.ADMIN_PASSWORD;
     
     if (password !== adminPassword) {
        return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });

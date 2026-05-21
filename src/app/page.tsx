@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import Script from 'next/script';
 import AdSensePlaceholder from '../components/AdSensePlaceholder';
-import { 
-  LineChart, 
-  Bot, 
-  FileCode2, 
-  Tags, 
-  ShieldCheck, 
+import {
+  LineChart,
+  Bot,
+  FileCode2,
+  Tags,
+  ShieldCheck,
   Braces,
   Play,
   Camera,
@@ -17,7 +18,15 @@ import {
   Globe,
   ZoomIn,
   Star,
-  Video
+  Video,
+  Hash,
+  Download,
+  Eye,
+  List,
+  DollarSign,
+  Award,
+  FileText,
+  Music
 } from 'lucide-react';
 
 export const metadata = {
@@ -30,6 +39,9 @@ export default function Home() {
   return (
     <div className="content-container animate-fade-in" style={{ padding: '40px 24px' }}>
       <AdSensePlaceholder type="header" />
+      
+      {/* JSON-LD WebSite + Organization Schema */}
+      <Script id="website-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "WebSite", "name": "ToolSnappy", "url": "https://toolsnappy.com", "description": "Free SEO, social media, and developer tools suite.", "potentialAction": { "@type": "SearchAction", "target": "https://toolsnappy.com/search?q={search_term_string}", "query-input": "required name=search_term_string" } }, { "@type": "Organization", "name": "ToolSnappy", "url": "https://toolsnappy.com", "logo": "https://toolsnappy.com/logo.png" }] }) }} />
       
       <section className="animate-slide-up" style={{ textAlign: 'center', marginBottom: '80px', marginTop: '40px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.05)', padding: '8px 16px', borderRadius: '100px', marginBottom: '24px', border: '1px solid var(--card-border)' }}>
@@ -185,42 +197,105 @@ export default function Home() {
 
       </div>
 
-      {/* Social Monetization & Earnings Checkers Section (VIRAL) */}
+      {/* YouTube Creator Tools */}
       <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <Star size={22} color="var(--accent)" /> Creator Monetization & Earnings
+        <Play size={22} color="#ff0000" /> YouTube Creator Tools
       </h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
-        
-        <Link href="/youtube-monetization" style={{ textDecoration: 'none' }}>
+
+        <Link href="/youtube-tag-extractor" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #0071e3' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <List size={28} color="#0071e3" />
+              <span className="tag-badge" style={{ color: '#0071e3', borderColor: '#0071e3', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>FREE</span>
+            </div>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Tag Extractor</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Extract all tags, hashtags, and keywords from any YouTube video instantly.</p>
+          </div>
+        </Link>
+
+        <Link href="/youtube-thumbnail-analyzer" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <ImageIcon size={28} color="#32d74b" />
+              <span className="tag-badge" style={{ color: '#32d74b', borderColor: '#32d74b', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>AI</span>
+            </div>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Thumbnail Analyzer</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>AI-powered analysis of composition, colors, text, and CTR potential.</p>
+          </div>
+        </Link>
+
+        <Link href="/youtube-thumbnail-tester" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ffcc00' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Eye size={28} color="#ffcc00" />
+              <span className="tag-badge" style={{ color: '#ffcc00', borderColor: '#ffcc00', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>FREE</span>
+            </div>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Thumbnail Tester</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Preview your thumbnail in search, suggested, and home page mockups.</p>
+          </div>
+        </Link>
+
+        <Link href="/youtube-thumbnail-downloader" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ff3b30' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Download size={28} color="#ff3b30" />
+              <span className="tag-badge" style={{ color: '#ff3b30', borderColor: '#ff3b30', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>FREE</span>
+            </div>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Thumbnail Downloader</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download thumbnails in all resolutions from HD to default quality.</p>
+          </div>
+        </Link>
+
+      </div>
+
+      {/* Video Downloaders Section */}
+      <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <Download size={22} color="var(--accent)" /> Video Downloaders
+      </h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
+
+        <Link href="/youtube-video-downloader" style={{ textDecoration: 'none' }}>
           <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ff0000' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
               <Play size={28} color="#ff0000" />
-              <span className="tag-badge" style={{ color: '#ff0000', borderColor: '#ff0000', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>HIGH CPC</span>
+              <span className="tag-badge" style={{ color: '#ff0000', borderColor: '#ff0000', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW</span>
             </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Monetization Checker</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Scan YPP status, estimate CPM/RPM, and get AI channel roadmaps.</p>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Video Downloader</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download YouTube videos in HD quality. Paste URL and save directly.</p>
           </div>
         </Link>
 
-        <Link href="/facebook-monetization" style={{ textDecoration: 'none' }}>
+        <Link href="/facebook-video-downloader" style={{ textDecoration: 'none' }}>
           <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #1877f2' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
               <Video size={28} color="#1877f2" />
-              <span className="tag-badge" style={{ color: '#1877f2', borderColor: '#1877f2', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>VIRAL</span>
+              <span className="tag-badge" style={{ color: '#1877f2', borderColor: '#1877f2', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW</span>
             </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Facebook Monetization Checker</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Check In-Stream Ads / Stars eligibility and get AI viral growth tactics.</p>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Facebook Video Downloader</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download Facebook videos. Paste any video URL and save to your device.</p>
           </div>
         </Link>
 
-        <Link href="/instagram-monetization" style={{ textDecoration: 'none' }}>
+        <Link href="/instagram-video-downloader" style={{ textDecoration: 'none' }}>
           <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #cc2366' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
               <Camera size={28} color="#cc2366" />
-              <span className="tag-badge" style={{ color: '#cc2366', borderColor: '#cc2366', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW AI</span>
+              <span className="tag-badge" style={{ color: '#cc2366', borderColor: '#cc2366', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW</span>
             </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Instagram Monetization Checker</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Calculate engagement rate, brand sponsorship rates, and get AI pitch kits.</p>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Instagram Video Downloader</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download Instagram videos, reels, and stories. Paste URL and save.</p>
+          </div>
+        </Link>
+
+        <Link href="/tiktok-video-downloader" style={{ textDecoration: 'none' }}>
+          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #00f2ea' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <Music size={28} color="#00f2ea" />
+              <span className="tag-badge" style={{ color: '#00f2ea', borderColor: '#00f2ea', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW</span>
+            </div>
+            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>TikTok Video Downloader</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download TikTok videos. Paste any URL and save to your device.</p>
           </div>
         </Link>
 

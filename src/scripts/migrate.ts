@@ -1,7 +1,6 @@
 import { marked } from 'marked';
 import { createClient } from '@supabase/supabase-js';
 import { blogPosts } from '../data/posts';
-import fs from 'fs';
 import path from 'path';
 
 // Load environment variables manually since we are running via tsx outside Next.js
@@ -23,9 +22,9 @@ async function migrate() {
     
     const htmlContent = await marked.parse(post.content);
     
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('blogs')
-      .insert([
+      .upsert([
         {
           title: post.title,
           slug: post.slug,
@@ -34,7 +33,7 @@ async function migrate() {
           image: post.image,
           date: post.date,
         }
-      ]);
+      ], { onConflict: 'slug' });
       
     if (error) {
       console.error(`Failed to migrate ${post.title}:`, error.message);

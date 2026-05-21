@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { supabase } from '../../lib/supabase';
 import { blogPosts } from '../../data/posts';
 import BlogListClient from '../../components/BlogListClient';
@@ -26,7 +25,8 @@ export default async function BlogPage() {
       .order('date', { ascending: false });
 
     if (data && !error && data.length > 0) {
-      posts = data.map((d: any) => ({
+      type BlogRow = { id: string; title: string; slug: string; excerpt: string; content: string; image: string; date: string; category?: string };
+      posts = data.map((d: BlogRow) => ({
         id: String(d.id),
         title: d.title || '',
         slug: d.slug || '',
@@ -39,8 +39,8 @@ export default async function BlogPage() {
     } else if (error) {
       console.error("Supabase query failed, using static posts fallback:", error.message);
     }
-  } catch (err: any) {
-    console.error("Failed to fetch from Supabase database, using local fallback:", err?.message || err);
+  } catch {
+    console.error("Failed to fetch from Supabase database, using local fallback");
   }
 
   // Ensure dates are parsed correctly for sorting

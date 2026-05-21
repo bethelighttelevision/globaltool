@@ -2,6 +2,7 @@
 
 import React, { useState, useTransition } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, Edit3, Trash2, Calendar, FileText, FolderPlus, Tag } from 'lucide-react';
 import { deleteAdminBlog } from '../app/actions/blog';
 
@@ -23,7 +24,7 @@ export default function AdminBlogList({ initialBlogs }: AdminBlogListProps) {
   const [blogs, setBlogs] = useState<Blog[]>(initialBlogs);
   const [searchQuery, setSearchQuery] = useState('');
   const [deletingId, setDeletingId] = useState<string | number | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   // Search filter
   const filteredBlogs = blogs.filter(blog => 
@@ -122,12 +123,12 @@ export default function AdminBlogList({ initialBlogs }: AdminBlogListProps) {
                       {/* Cover Image & Metadata */}
                       <td style={{ padding: '16px 24px' }}>
                         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                          <img 
+                          <Image 
                             src={blog.image || '/blog-banner.png'} 
                             alt={blog.title} 
+                            width={56}
+                            height={42}
                             style={{ 
-                              width: '56px', 
-                              height: '42px', 
                               borderRadius: '8px', 
                               objectFit: 'cover',
                               border: '1px solid var(--card-border)'

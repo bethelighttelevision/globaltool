@@ -39,7 +39,7 @@ export default function CVMaker() {
   const [skillInput, setSkillInput] = useState('');
   const previewRef = useRef<HTMLDivElement>(null);
 
-  const steps: { id: Step; label: string; icon: any }[] = [
+  const steps: { id: Step; label: string; icon: React.ComponentType<{ size?: number }> }[] = [
     { id: 'template', label: 'Template', icon: Layout },
     { id: 'personal', label: 'Personal', icon: User },
     { id: 'experience', label: 'Experience', icon: Briefcase },
@@ -250,7 +250,8 @@ export default function CVMaker() {
                 <div className="col-span-1 md:col-span-2 flex items-center gap-6 p-5 rounded-2xl border border-[var(--card-border)] bg-[rgba(255,255,255,0.02)]">
                   <div style={{ position: 'relative' }}>
                     <div style={{ width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', border: '2px dashed var(--card-border)' }}>
-                      {data.personalInfo.photo ? <img src={data.personalInfo.photo} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={40} color="var(--muted)" />}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={40} color="var(--muted)" />}
                     </div>
                     <label style={{ position: 'absolute', bottom: '0', right: '0', background: 'var(--accent)', padding: '6px', borderRadius: '50%', cursor: 'pointer', display: 'flex' }}>
                       <Plus size={16} />

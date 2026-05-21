@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import { 
   Bold, Italic, Strikethrough, Code, Heading2, Heading3, 
-  List, ListOrdered, Quote, Link as LinkIcon, Image as ImageIcon, 
-  Undo, Redo, RemoveFormatting 
+  List, ListOrdered, Link as LinkIcon, Image as ImageIcon, 
+  Undo, Redo, RemoveFormatting, Code2, Minus, TextQuote
 } from 'lucide-react';
 
 interface RichTextEditorProps {
@@ -17,24 +17,49 @@ interface RichTextEditorProps {
   placeholder?: string;
 }
 
-export default function RichTextEditor({ content, onChange, placeholder = 'Write your amazing post content here...' }: RichTextEditorProps) {
+interface ToolbarBtnProps {
+  onClick: () => void;
+  active?: boolean;
+  title: string;
+  shortcut?: string;
+  disabled?: boolean;
+  children: React.ReactNode;
+}
+
+function ToolbarBtn({ onClick, active, title, shortcut, disabled, children }: ToolbarBtnProps) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      title={shortcut ? `${title} (${shortcut})` : title}
+      className={`p-2 rounded-lg transition-all duration-150 hover:bg-white/10 active:scale-95 ${
+        active ? 'bg-[#2997ff]/20 text-[#2997ff] shadow-sm shadow-[#2997ff]/10' : 'text-white/50 hover:text-white/80'
+      } disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function Separator() {
+  return <span className="w-px h-5 bg-white/8 mx-1 flex-shrink-0" />;
+}
+
+export default function RichTextEditor({ content, onChange }: RichTextEditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        heading: {
-          levels: [2, 3],
-        },
+        heading: { levels: [2, 3] },
+        codeBlock: { HTMLAttributes: { class: 'bg-black/30 rounded-lg p-4 text-sm font-mono border border-white/10 my-4 overflow-x-auto' } },
+        horizontalRule: { HTMLAttributes: { class: 'my-8 border-white/10' } },
       }),
       Link.configure({
         openOnClick: false,
-        HTMLAttributes: {
-          class: 'text-accent underline cursor-pointer',
-        },
+        HTMLAttributes: { class: 'text-accent underline cursor-pointer' },
       }),
       Image.configure({
-        HTMLAttributes: {
-          class: 'rounded-xl max-w-full my-6 border border-white/10 shadow-lg mx-auto block',
-        },
+        HTMLAttributes: { class: 'rounded-xl max-w-full my-6 border border-white/10 shadow-lg mx-auto block' },
       }),
     ],
     content: content,
@@ -49,12 +74,20 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Write
     },
   });
 
-  // Keep TipTap sync'd if external content resets (e.g. on page loads)
   useEffect(() => {
     if (editor && content !== editor.getHTML()) {
       editor.commands.setContent(content);
     }
   }, [content, editor]);
+
+  const stats = useMemo(() => {
+    if (!editor) return { words: 0, chars: 0 };
+    const text = editor.state.doc.textContent;
+    return {
+      words: text.trim() ? text.trim().split(/\s+/).length : 0,
+      chars: text.length,
+    };
+  }, [editor]);
 
   if (!editor) {
     return (
@@ -67,13 +100,11 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Write
   const addLink = () => {
     const previousUrl = editor.getAttributes('link').href;
     const url = window.prompt('Enter link URL:', previousUrl);
-    
     if (url === null) return;
     if (url === '') {
       editor.chain().focus().extendMarkRange('link').unsetLink().run();
       return;
     }
-    
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   };
 
@@ -85,154 +116,81 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Write
   };
 
   return (
-    <div className="w-full bg-white/3 border border-white/10 rounded-xl overflow-hidden focus-within:border-[#2997ff] focus-within:ring-2 focus-within:ring-[#2997ff]/15 transition-all">
-      {/* Visual Rich Text Editing Toolbar */}
-      <div className="flex flex-wrap gap-1 p-2 bg-white/5 border-b border-white/10 items-center select-none">
+    <div className="w-full bg-white/3 border border-white/10 rounded-xl overflow-hidden focus-within:border-[#2997ff] focus-within:ring-2 focus-within:ring-[#2997ff]/15 transition-all group">
+      <div className="flex flex-wrap gap-0.5 p-1.5 bg-white/[0.04] border-b border-white/10 items-center select-none">
         
-        {/* Formatting */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('bold') ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Bold"
-        >
-          <Bold size={16} />
-        </button>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleBold().run()} active={editor.isActive('bold')} title="Bold" shortcut="Ctrl+B">
+          <Bold size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleItalic().run()} active={editor.isActive('italic')} title="Italic" shortcut="Ctrl+I">
+          <Italic size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleStrike().run()} active={editor.isActive('strike')} title="Strikethrough">
+          <Strikethrough size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleCode().run()} active={editor.isActive('code')} title="Inline Code">
+          <Code size={15} />
+        </ToolbarBtn>
 
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('italic') ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Italic"
-        >
-          <Italic size={16} />
-        </button>
+        <Separator />
 
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleStrike().run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('strike') ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Strikethrough"
-        >
-          <Strikethrough size={16} />
-        </button>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} active={editor.isActive('heading', { level: 2 })} title="Heading 2">
+          <Heading2 size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} active={editor.isActive('heading', { level: 3 })} title="Heading 3">
+          <Heading3 size={15} />
+        </ToolbarBtn>
 
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleCode().run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('code') ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Inline Code"
-        >
-          <Code size={16} />
-        </button>
+        <Separator />
 
-        <span className="w-[1px] h-6 bg-white/10 mx-1" />
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleBulletList().run()} active={editor.isActive('bulletList')} title="Bullet List">
+          <List size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleOrderedList().run()} active={editor.isActive('orderedList')} title="Numbered List">
+          <ListOrdered size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleBlockquote().run()} active={editor.isActive('blockquote')} title="Blockquote">
+          <TextQuote size={15} />
+        </ToolbarBtn>
 
-        {/* Headings */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('heading', { level: 2 }) ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Heading 2"
-        >
-          <Heading2 size={16} />
-        </button>
+        <Separator />
 
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('heading', { level: 3 }) ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Heading 3"
-        >
-          <Heading3 size={16} />
-        </button>
+        <ToolbarBtn onClick={() => editor.chain().focus().toggleCodeBlock().run()} active={editor.isActive('codeBlock')} title="Code Block">
+          <Code2 size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={() => editor.chain().focus().setHorizontalRule().run()} active={false} title="Horizontal Rule">
+          <Minus size={15} />
+        </ToolbarBtn>
 
-        <span className="w-[1px] h-6 bg-white/10 mx-1" />
+        <Separator />
 
-        {/* Lists */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('bulletList') ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Bullet List"
-        >
-          <List size={16} />
-        </button>
+        <ToolbarBtn onClick={addLink} active={editor.isActive('link')} title="Insert Link" shortcut="Ctrl+K">
+          <LinkIcon size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={addImage} active={false} title="Insert Image">
+          <ImageIcon size={15} />
+        </ToolbarBtn>
+        <ToolbarBtn onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()} active={false} title="Clear Formatting">
+          <RemoveFormatting size={15} />
+        </ToolbarBtn>
 
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('orderedList') ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Numbered List"
-        >
-          <ListOrdered size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('blockquote') ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Blockquote"
-        >
-          <Quote size={16} />
-        </button>
-
-        <span className="w-[1px] h-6 bg-white/10 mx-1" />
-
-        {/* Interactive Additions */}
-        <button
-          type="button"
-          onClick={addLink}
-          className={`p-2 rounded-lg transition-colors hover:bg-white/10 ${editor.isActive('link') ? 'bg-[#2997ff]/20 text-[#2997ff]' : 'text-white/60'}`}
-          title="Insert Link"
-        >
-          <LinkIcon size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={addImage}
-          className="p-2 rounded-lg text-white/60 transition-colors hover:bg-white/10 hover:text-white"
-          title="Insert Image URL"
-        >
-          <ImageIcon size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}
-          className="p-2 rounded-lg text-white/60 transition-colors hover:bg-white/10 hover:text-white"
-          title="Clear Formatting"
-        >
-          <RemoveFormatting size={16} />
-        </button>
-
-        <span className="w-[1px] h-6 bg-white/10 mx-1 ml-auto" />
-
-        {/* Undo/Redo */}
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().undo()}
-          className="p-2 rounded-lg text-white/60 transition-colors hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent"
-          title="Undo"
-        >
-          <Undo size={16} />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().redo()}
-          className="p-2 rounded-lg text-white/60 transition-colors hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent"
-          title="Redo"
-        >
-          <Redo size={16} />
-        </button>
+        <div className="ml-auto flex items-center gap-0.5">
+          <Separator />
+          <ToolbarBtn onClick={() => editor.chain().focus().undo().run()} disabled={!editor.can().undo()} title="Undo" shortcut="Ctrl+Z">
+            <Undo size={15} />
+          </ToolbarBtn>
+          <ToolbarBtn onClick={() => editor.chain().focus().redo().run()} disabled={!editor.can().redo()} title="Redo" shortcut="Ctrl+Shift+Z">
+            <Redo size={15} />
+          </ToolbarBtn>
+        </div>
       </div>
 
-      {/* Editor Content Area */}
       <EditorContent editor={editor} className="bg-transparent" />
+
+      <div className="flex items-center justify-end gap-4 px-5 py-2 bg-white/[0.02] border-t border-white/5 text-xs text-white/30">
+        <span>{stats.words} words</span>
+        <span>{stats.chars} characters</span>
+      </div>
     </div>
   );
 }

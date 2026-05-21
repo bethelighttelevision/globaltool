@@ -3,8 +3,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, FileText } from 'lucide-react';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function TermsOfService() {
+  usePageMeta("Terms of Service | ToolSnappy", "ToolSnappy terms of service. By using our free tools and services, you agree to these terms and conditions.");
   return (
     <div className="content-container" style={{ padding: '80px 24px' }}>
       <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--muted)', textDecoration: 'none', marginBottom: '40px', fontSize: '14px' }}>

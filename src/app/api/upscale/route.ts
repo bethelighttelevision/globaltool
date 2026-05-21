@@ -53,8 +53,9 @@ export async function POST(request: Request) {
     const base64Image = `data:image/png;base64,${stabilityRes.data.image}`;
     return NextResponse.json({ output_url: base64Image });
 
-  } catch (error: any) {
-    const errorMsg = error.response?.data?.errors?.[0] || error.response?.data?.message || error.message;
+  } catch (error: unknown) {
+    const err = error as { response?: { data?: { errors?: string[]; message?: string }; message?: string }; message?: string };
+    const errorMsg = err.response?.data?.errors?.[0] || err.response?.data?.message || err.message || '';
     console.error("Upscale API Error:", errorMsg);
     
     // Check if the error is about image dimensions

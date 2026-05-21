@@ -70,7 +70,7 @@ export async function analyzeSEOAction(targetUrl: string) {
       }
     };
 
-  } catch (_error: unknown) {
-    return { success: false, error: 'Failed to analyze URL' };
+    } catch {
+      return { success: false, error: 'Failed to analyze URL' };
   }
 }

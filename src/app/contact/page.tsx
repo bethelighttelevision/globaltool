@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Mail, Send, CheckCircle2 } from 'lucide-react';
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 export default function ContactUs() {
+  usePageMeta("Contact Us | ToolSnappy", "Have a suggestion, bug report, or question? Reach out to the ToolSnappy team. We respond within 24 hours.");
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
 
@@ -68,6 +70,10 @@ export default function ContactUs() {
                   </>
                 )}
               </button>
+              <p style={{ color: 'var(--muted)', fontSize: '12px', marginTop: '16px', textAlign: 'center' }}>
+                By submitting, you agree to our{' '}
+                <Link href="/privacy-policy" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>Privacy Policy</Link>.
+              </p>
             </form>
           )}
         </div>

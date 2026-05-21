@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0000"/>
+      <stop offset="50%" style="stop-color:#3e1a1a"/>
+      <stop offset="100%" style="stop-color:#2b0d0d"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff3333"/>
+      <stop offset="100%" style="stop-color:#cc0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="250" cy="180" r="280" fill="url(#accent)" opacity="0.08"/>
+  <circle cx="950" cy="520" r="220" fill="url(#accent)" opacity="0.05"/>
+  <rect x="100" y="180" width="70" height="70" rx="35" fill="url(#accent)" opacity="0.2"/>
+  <polygon points="122,205 122,225 142,215" fill="white" opacity="0.8"/>
+  <rect x="100" y="270" width="70" height="70" rx="35" fill="url(#accent)" opacity="0.1"/>
+  <polygon points="122,295 122,315 142,305" fill="white" opacity="0.4"/>
+  <rect x="100" y="360" width="70" height="70" rx="35" fill="url(#accent)" opacity="0.15"/>
+  <polygon points="122,385 122,405 142,395" fill="white" opacity="0.6"/>
+  <text x="250" y="300" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff" opacity="0.9">YouTube SEO</text>
+  <text x="250" y="350" font-family="Arial, sans-serif" font-size="24" fill="#bb8888" opacity="0.8">Ranking Guide 2026</text>
+  <text x="250" y="400" font-family="Arial, sans-serif" font-size="16" fill="#886666">Grow Your Channel Fast</text>
+</svg>

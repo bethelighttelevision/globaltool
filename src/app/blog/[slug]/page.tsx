@@ -1,8 +1,10 @@
 import React from 'react';
 import { blogPosts } from '../../../data/posts';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, User, ChevronLeft, Share2, Clock, CalendarDays } from 'lucide-react';
+import Script from 'next/script';
+import { CalendarDays, ChevronLeft, Clock } from 'lucide-react';
 import AdSensePlaceholder from '../../../components/AdSensePlaceholder';
 import { supabase } from '../../../lib/supabase';
 import { marked } from 'marked';
@@ -12,6 +14,17 @@ interface BlogPostProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+interface PostData {
+  id?: string | number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  date: string;
+  category?: string;
 }
 
 export async function generateStaticParams() {
@@ -24,12 +37,12 @@ export async function generateStaticParams() {
       .from('blogs')
       .select('slug');
     if (data && data.length > 0) {
-      slugs = data.map((d: any) => ({
+      slugs = data.map((d: { slug: string }) => ({
         slug: d.slug,
       }));
     }
-  } catch (e) {
-    console.error("Static params generation fallback:", e);
+  } catch {
+    // static params fallback
   }
 
   return slugs;
@@ -37,30 +50,46 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: BlogPostProps) {
   const params = await props.params;
-  let post: any = blogPosts.find((p) => p.slug === params.slug);
+  let post: PostData | null = blogPosts.find((p) => p.slug === params.slug) || null;
 
   try {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('blogs')
       .select('*')
       .eq('slug', params.slug)
       .single();
-    if (data && !error) {
-      post = data;
+    if (data) {
+      post = data as PostData;
     }
-  } catch (e) {}
+  } catch {
+    // metadata fallback
+  }
 
   if (!post) return { title: 'Post Not Found | ToolSnappy' };
   
   return {
     title: `${post.title} | ToolSnappy Blog`,
     description: post.excerpt,
+    openGraph: {
+      title: `${post.title} | ToolSnappy Blog`,
+      description: post.excerpt,
+      type: 'article',
+      url: `https://toolsnappy.com/blog/${post.slug}`,
+      siteName: 'ToolSnappy',
+      images: [{ url: post.image || 'https://toolsnappy.com/logo.png', width: 1200, height: 675 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${post.title} | ToolSnappy Blog`,
+      description: post.excerpt,
+      images: [post.image || 'https://toolsnappy.com/logo.png'],
+    },
   };
 }
 
 export default async function BlogPostPage(props: BlogPostProps) {
   const params = await props.params;
-  let post: any = null;
+  let post: PostData | null = null;
   let isFromDb = false;
 
   // 1. Try fetching from Supabase
@@ -72,16 +101,16 @@ export default async function BlogPostPage(props: BlogPostProps) {
       .single();
     
     if (data && !error) {
-      post = data;
+      post = data as PostData;
       isFromDb = true;
     }
-  } catch (err) {
-    console.error("Supabase fetch failed for slug:", params.slug, err);
+  } catch {
+    console.error("Supabase fetch failed for slug:", params.slug);
   }
 
   // 2. Fall back to static post data
   if (!post) {
-    post = blogPosts.find((p) => p.slug === params.slug);
+    post = blogPosts.find((p) => p.slug === params.slug) || null;
   }
 
   if (!post) {
@@ -116,7 +145,8 @@ export default async function BlogPostPage(props: BlogPostProps) {
       .limit(3);
     
     if (data && data.length > 0) {
-      relatedArticles = data.map((d: any) => ({
+      type RelatedRow = { slug: string; title: string; excerpt: string; image: string; date: string; content: string };
+      relatedArticles = data.map((d: RelatedRow) => ({
         id: d.slug,
         title: d.title || '',
         slug: d.slug || '',
@@ -127,7 +157,7 @@ export default async function BlogPostPage(props: BlogPostProps) {
         category: slugToCategory.get(d.slug) || 'SEO'
       }));
     }
-  } catch (e) {}
+  } catch {}
 
   // Safe fallback if related articles is empty
   if (relatedArticles.length === 0 || relatedArticles[0].slug === params.slug) {
@@ -230,8 +260,33 @@ export default async function BlogPostPage(props: BlogPostProps) {
         border: '1px solid var(--card-border)',
         boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)'
       }}>
-        <img src={post.image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <Image src={post.image} alt={post.title} width={1200} height={675} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
+
+      {/* JSON-LD Article Schema */}
+      <Script
+        id="article-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": post.title,
+            "description": post.excerpt,
+            "image": post.image,
+            "datePublished": post.date,
+            "author": {
+              "@type": "Organization",
+              "name": "ToolSnappy Editorial Team"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "ToolSnappy",
+              "logo": { "@type": "ImageObject", "url": "https://toolsnappy.com/logo.png" }
+            }
+          })
+        }}
+      />
 
       {/* Main Body Layout */}
       <div style={{ display: 'flex', gap: '40px' }}>
@@ -261,20 +316,133 @@ export default async function BlogPostPage(props: BlogPostProps) {
               <ShareButton />
             </div>
           </div>
+
+          {/* Author Bio Card */}
+          <div className="glass-panel" style={{ 
+            marginTop: '40px', 
+            padding: '32px', 
+            display: 'flex', 
+            gap: '24px', 
+            alignItems: 'flex-start',
+            flexWrap: 'wrap',
+            border: '1px solid var(--card-border)',
+            borderRadius: '24px'
+          }}>
+            <div style={{ 
+              width: '80px', 
+              height: '80px', 
+              borderRadius: '50%', 
+              background: 'linear-gradient(135deg, var(--accent) 0%, #1a5ab5 100%)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              color: '#fff', 
+              fontWeight: 'bold',
+              fontSize: '28px',
+              flexShrink: 0,
+              boxShadow: '0 8px 24px rgba(41, 151, 255, 0.3)'
+            }}>
+              TS
+            </div>
+            <div style={{ flex: 1, minWidth: '200px' }}>
+              <h4 style={{ fontSize: '18px', marginBottom: '4px', color: '#fff', fontWeight: '700' }}>ToolSnappy Editorial Team</h4>
+              <p style={{ fontSize: '13px', color: 'var(--accent)', marginBottom: '12px', fontWeight: '500' }}>SEO & Content Strategy</p>
+              <p style={{ fontSize: '14px', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '16px' }}>
+                Our team has 8+ years of experience in SEO, content marketing, and digital growth strategies. We help creators and businesses rank higher and grow faster.
+              </p>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <Link href="/blog" style={{ color: 'var(--accent)', fontSize: '13px', fontWeight: '600', textDecoration: 'none' }}>View All Articles &rarr;</Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Newsletter CTA */}
+          <div className="glass-panel" style={{ 
+            marginTop: '40px', 
+            padding: '40px', 
+            textAlign: 'center',
+            background: 'linear-gradient(135deg, rgba(41,151,255,0.05), rgba(191,90,242,0.05))',
+            border: '1px solid rgba(41,151,255,0.15)',
+            borderRadius: '24px'
+          }}>
+            <h3 style={{ fontSize: '22px', marginBottom: '12px', color: '#fff', fontWeight: '700' }}>Get More Expert Guides</h3>
+            <p style={{ color: 'var(--muted)', fontSize: '15px', marginBottom: '24px', lineHeight: 1.6, maxWidth: '500px', margin: '0 auto 24px' }}>
+              Join our newsletter for weekly SEO tips, content strategies, and exclusive tools updates.
+            </p>
+            <form style={{ display: 'flex', gap: '12px', maxWidth: '450px', margin: '0 auto', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <input 
+                type="email" 
+                placeholder="your@email.com" 
+                className="input-field" 
+                style={{ flex: 1, minWidth: '200px', padding: '14px 20px' }}
+              />
+              <button type="submit" className="premium-button" style={{ padding: '14px 28px', whiteSpace: 'nowrap' }}>
+                Subscribe Free
+              </button>
+            </form>
+            <p style={{ fontSize: '11px', color: 'var(--muted)', marginTop: '12px' }}>No spam. Unsubscribe anytime.</p>
+          </div>
         </article>
 
-        {/* Sidebar (Optional - hidden via Next/CSS responsive styling on mobile) */}
-        <aside style={{ width: '300px', display: 'none' /* Hidden by default, can configure later */ }}>
-          <div className="glass-panel" style={{ padding: '24px', position: 'sticky', top: '100px' }}>
-            <h4 style={{ fontSize: '18px', marginBottom: '16px' }}>Popular Tools</h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <Link href="/seo-analyzer" className="sidebar-link">SEO Analyzer</Link>
-              <Link href="/bg-remover" className="sidebar-link">BG Remover</Link>
-              <Link href="/crypto" className="sidebar-link">Crypto Calc</Link>
+        {/* Sidebar - Desktop Only */}
+        <aside className="blog-sidebar-desktop" style={{ 
+          width: '300px', 
+          flexShrink: 0,
+          display: 'none', 
+        }}>
+          <div className="glass-panel" style={{ padding: '24px', position: 'sticky', top: '100px', marginBottom: '20px' }}>
+            <h4 style={{ fontSize: '16px', marginBottom: '16px', color: '#fff' }}>Popular Free Tools</h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <Link href="/seo-analyzer" className="sidebar-link" style={{
+                display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 14px',
+                borderRadius: '12px', background: 'rgba(255,255,255,0.03)', fontSize: '14px',
+                color: 'var(--foreground)', textDecoration: 'none', transition: 'all 0.2s'
+              }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent)' }}></span>
+                SEO Analyzer
+              </Link>
+              <Link href="/bg-remover" className="sidebar-link" style={{
+                display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 14px',
+                borderRadius: '12px', background: 'rgba(255,255,255,0.03)', fontSize: '14px',
+                color: 'var(--foreground)', textDecoration: 'none', transition: 'all 0.2s'
+              }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#bf5af2' }}></span>
+                BG Remover
+              </Link>
+              <Link href="/crypto" className="sidebar-link" style={{
+                display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 14px',
+                borderRadius: '12px', background: 'rgba(255,255,255,0.03)', fontSize: '14px',
+                color: 'var(--foreground)', textDecoration: 'none', transition: 'all 0.2s'
+              }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#30d158' }}></span>
+                Crypto Calc
+              </Link>
+              <Link href="/ai-hook" className="sidebar-link" style={{
+                display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 14px',
+                borderRadius: '12px', background: 'rgba(255,255,255,0.03)', fontSize: '14px',
+                color: 'var(--foreground)', textDecoration: 'none', transition: 'all 0.2s'
+              }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff9f0a' }}></span>
+                AI Hook Gen
+              </Link>
+              <Link href="/youtube-seo" className="sidebar-link" style={{
+                display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 14px',
+                borderRadius: '12px', background: 'rgba(255,255,255,0.03)', fontSize: '14px',
+                color: 'var(--foreground)', textDecoration: 'none', transition: 'all 0.2s'
+              }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ff453a' }}></span>
+                YouTube SEO
+              </Link>
             </div>
-            <div style={{ marginTop: '32px' }}>
-              <AdSensePlaceholder type="sidebar" />
-            </div>
+          </div>
+          <div className="glass-panel" style={{ padding: '24px', border: '1px solid rgba(41,151,255,0.1)' }}>
+            <h4 style={{ fontSize: '15px', marginBottom: '8px', color: '#fff' }}>All Tools Free</h4>
+            <p style={{ fontSize: '13px', color: 'var(--muted)', lineHeight: 1.5 }}>
+              No sign-up required. No credit card. Just professional tools.
+            </p>
+            <Link href="/" style={{ color: 'var(--accent)', fontSize: '13px', fontWeight: '600', textDecoration: 'none', display: 'inline-block', marginTop: '12px' }}>
+              Browse All &rarr;
+            </Link>
           </div>
         </aside>
       </div>
@@ -285,7 +453,7 @@ export default async function BlogPostPage(props: BlogPostProps) {
           Related Expert Articles
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '24px' }}>
-          {relatedArticles.slice(0, 3).map((related: any) => (
+          {relatedArticles.slice(0, 3).map((related: PostData) => (
             <Link key={related.slug} href={`/blog/${related.slug}`} style={{ textDecoration: 'none', display: 'flex' }}>
               <div className="glass-panel" style={{ 
                 padding: '0', 
@@ -298,7 +466,7 @@ export default async function BlogPostPage(props: BlogPostProps) {
                 background: 'rgba(28, 28, 30, 0.3)'
               }}>
                 <div style={{ height: '160px', width: '100%', overflow: 'hidden' }}>
-                  <img src={related.image} alt={related.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s' }} className="hover:scale-105" />
+                  <Image src={related.image} alt={related.title} width={260} height={160} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s' }} className="hover:scale-105" />
                 </div>
                 <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <span style={{ 
@@ -347,6 +515,18 @@ export default async function BlogPostPage(props: BlogPostProps) {
       <div style={{ marginTop: '80px' }}>
         <AdSensePlaceholder type="footer" />
       </div>
+
+      {/* Responsive CSS for sidebar */}
+      <style>{`
+        .blog-sidebar-desktop {
+          display: none !important;
+        }
+        @media (min-width: 1200px) {
+          .blog-sidebar-desktop {
+            display: block !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

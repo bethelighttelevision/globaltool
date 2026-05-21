@@ -217,7 +217,8 @@ const EuropeanTemplate: React.FC<TemplateProps> = ({ data }) => {
     <div className="cv-preview european-template" style={{ padding: '40px', backgroundColor: '#fff', color: '#1a1a1a', minHeight: '1122px', fontFamily: '"Open Sans", sans-serif' }}>
       <div style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: '30px', borderBottom: '1px solid #004a99', paddingBottom: '30px', marginBottom: '30px' }}>
         <div style={{ width: '150px', height: '180px', backgroundColor: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-          {data.personalInfo.photo ? <img src={data.personalInfo.photo} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={50} color="#ccc" />}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={50} color="#ccc" />}
         </div>
         <div>
           <h1 style={{ margin: '0 0 5px', fontSize: '28px', color: '#004a99' }}>{data.personalInfo.fullName || 'Name'}</h1>
@@ -282,7 +283,8 @@ const MiddleEastTemplate: React.FC<TemplateProps> = ({ data }) => {
           <p style={{ margin: 0, fontSize: '18px', color: '#d4af37' }}>{data.personalInfo.jobTitle || 'Job Title'}</p>
         </div>
         <div style={{ width: '120px', height: '120px', border: '3px solid #d4af37', borderRadius: '50%', overflow: 'hidden', backgroundColor: '#333', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          {data.personalInfo.photo ? <img src={data.personalInfo.photo} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={40} color="#666" />}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={40} color="#666" />}
         </div>
       </header>
 
@@ -455,7 +457,8 @@ const TechTemplate: React.FC<TemplateProps> = ({ data }) => {
     <div className="cv-preview tech-template" style={{ display: 'flex', backgroundColor: '#0f172a', color: '#f1f5f9', minHeight: '1122px', border: '1px solid #1e293b' }}>
       <aside style={{ width: '35%', backgroundColor: '#1e293b', padding: '40px' }}>
         <div style={{ width: '100%', aspectRatio: '1', backgroundColor: '#334155', borderRadius: '16px', marginBottom: '30px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          {data.personalInfo.photo ? <img src={data.personalInfo.photo} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={60} color="#475569" />}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={60} color="#475569" />}
         </div>
         
         <section style={{ marginBottom: '40px' }}>
