@@ -3,6 +3,20 @@
 import { getSupabase } from '../../lib/supabase';
 import { revalidatePath } from 'next/cache';
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://toolsnappy.com';
+
+async function notifyIndexNow(url: string) {
+  try {
+    await fetch(`${BASE_URL}/api/indexnow`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url }),
+    });
+  } catch {
+    // IndexNow failure is non-critical
+  }
+}
+
 export interface BlogInput {
   title: string;
   slug: string;
@@ -85,9 +99,12 @@ export async function createAdminBlog(input: BlogInput) {
       .select();
 
     if (error) throw error;
-    
+
     revalidatePath('/blog');
     revalidatePath(`/blog/${input.slug}`);
+
+    notifyIndexNow(`${BASE_URL}/blog/${input.slug}`);
+    notifyIndexNow(`${BASE_URL}/blog`);
 
     return { success: true, data: data?.[0] as BlogRecord | undefined };
   } catch (err) {
@@ -120,6 +137,9 @@ export async function updateAdminBlog(id: string, input: BlogInput) {
     revalidatePath('/blog');
     revalidatePath(`/blog/${input.slug}`);
 
+    notifyIndexNow(`${BASE_URL}/blog/${input.slug}`);
+    notifyIndexNow(`${BASE_URL}/blog`);
+
     return { success: true, data: data?.[0] as BlogRecord | undefined };
   } catch (err) {
     const message = getErrorMessage(err);
@@ -142,7 +162,9 @@ export async function deleteAdminBlog(id: string, slug?: string) {
     revalidatePath('/blog');
     if (slug) {
       revalidatePath(`/blog/${slug}`);
+      notifyIndexNow(`${BASE_URL}/blog/${slug}`);
     }
+    notifyIndexNow(`${BASE_URL}/blog`);
 
     return { success: true };
   } catch (err) {
