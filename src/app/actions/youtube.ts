@@ -265,10 +265,14 @@ export async function getChannelData(input: string) {
   }
 
   interface ApiItem { statistics?: Record<string, string>; snippet?: Record<string, unknown>; id?: string; }
-  let channelStats: Record<string, string> | null = null;
-  let channelSnippet: Record<string, unknown> | null = null;
-  let videoStats: Record<string, string> | null = null;
-  let videoSnippet: Record<string, unknown> | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let channelStats: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let channelSnippet: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let videoStats: any = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let videoSnippet: any = null;
 
   const oembedUrl = videoId
     ? `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`
