@@ -292,7 +292,7 @@ export async function getChannelData(input: string) {
       const item = apiData.items[0] as ApiItem;
       channelStats = item.statistics;
       channelSnippet = item.snippet;
-      channelId = item.id;
+      channelId = item.id || null;
     }
   }
 

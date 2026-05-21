@@ -33,7 +33,7 @@ export default function BackgroundRemover() {
       const res = await fetch(image);
       const blob = await res.blob();
       const imgly = await import("@imgly/background-removal");
-      const removeBg = (imgly.default || imgly.removeBackground) as (blob: Blob) => Promise<Blob>;
+      const removeBg = (imgly.default || imgly.removeBackground) as unknown as (blob: Blob) => Promise<Blob>;
       const imageBlob = await removeBg(blob);
       const url = URL.createObjectURL(imageBlob);
       setResultImage(url);
