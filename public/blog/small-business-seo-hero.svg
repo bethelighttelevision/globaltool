@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1a0a1a"/><stop offset="50%" style="stop-color:#2a1a2e"/><stop offset="100%" style="stop-color:#1e0d20"/></linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#bb8fce"/><stop offset="100%" style="stop-color:#8e44ad"/></linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="250" cy="190" r="290" fill="url(#accent)" opacity="0.06"/>
+  <circle cx="950" cy="510" r="210" fill="url(#accent)" opacity="0.04"/>
+  <text x="90" y="180" font-family="Arial, sans-serif" font-size="14" fill="#bb8fce" opacity="0.6">SMALL BUSINESS SEO</text>
+  <text x="90" y="250" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#ffffff" opacity="0.95">Small Business SEO</text>
+  <text x="90" y="310" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#bb8fce">Local Rank Guide</text>
+  <text x="90" y="370" font-family="Arial, sans-serif" font-size="20" fill="#bb88bb">Dominate Search Results</text>
+  <rect x="90" y="410" width="100" height="4" rx="2" fill="url(#accent)" opacity="0.8"/>
+  <text x="90" y="450" font-family="Arial, sans-serif" font-size="14" fill="#886688">GBP, citations, reviews &amp; local links</text>
+  <rect x="910" y="230" width="150" height="70" rx="10" fill="none" stroke="url(#accent)" stroke-width="1.5" opacity="0.2"/>
+  <rect x="930" y="250" width="110" height="30" rx="6" fill="url(#accent)" opacity="0.08"/>
+  <text x="945" y="270" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" opacity="0.5">#1 on Google</text>
+  <rect x="930" y="290" width="80" height="4" rx="2" fill="#ffffff" opacity="0.08"/>
+</svg>

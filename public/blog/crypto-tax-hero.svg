@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0a1428"/><stop offset="50%" style="stop-color:#14284a"/><stop offset="100%" style="stop-color:#0e1e36"/></linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00b4d8"/><stop offset="100%" style="stop-color:#0077b6"/></linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="200" cy="180" r="320" fill="url(#accent)" opacity="0.06"/>
+  <circle cx="1000" cy="520" r="250" fill="url(#accent)" opacity="0.04"/>
+  <text x="90" y="180" font-family="Arial, sans-serif" font-size="14" fill="#00b4d8" opacity="0.6">US CRYPTO TAX 2026</text>
+  <text x="90" y="250" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#ffffff" opacity="0.95">Crypto Tax USA 2026</text>
+  <text x="90" y="310" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#00b4d8">IRS Compliance Guide</text>
+  <text x="90" y="370" font-family="Arial, sans-serif" font-size="20" fill="#88aabb">Reporting, Forms &amp; Strategies</text>
+  <rect x="90" y="410" width="100" height="4" rx="2" fill="url(#accent)" opacity="0.8"/>
+  <text x="90" y="450" font-family="Arial, sans-serif" font-size="14" fill="#6688aa">Wash sales, cost basis &amp; DeFi income</text>
+  <path d="M960 220 L1020 220 L1040 260 L1000 300 L960 260 Z" fill="none" stroke="url(#accent)" stroke-width="2" opacity="0.2"/>
+  <circle cx="1000" cy="260" r="40" fill="url(#accent)" opacity="0.08"/>
+  <text x="985" y="268" font-family="Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.5">₿</text>
+</svg>

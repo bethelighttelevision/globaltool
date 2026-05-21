@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0a0e20"/><stop offset="50%" style="stop-color:#1a1e3a"/><stop offset="100%" style="stop-color:#0e122e"/></linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#5dade2"/><stop offset="100%" style="stop-color:#2e86c1"/></linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="220" cy="170" r="310" fill="url(#accent)" opacity="0.05"/>
+  <circle cx="980" cy="530" r="240" fill="url(#accent)" opacity="0.03"/>
+  <text x="90" y="180" font-family="Arial, sans-serif" font-size="14" fill="#5dade2" opacity="0.6">RETIREMENT PLANNING</text>
+  <text x="90" y="250" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#ffffff" opacity="0.95">Roth IRA Guide</text>
+  <text x="90" y="310" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#5dade2">Tax-Free Retirement</text>
+  <text x="90" y="370" font-family="Arial, sans-serif" font-size="20" fill="#8899bb">Maximize Your Savings</text>
+  <rect x="90" y="410" width="100" height="4" rx="2" fill="url(#accent)" opacity="0.8"/>
+  <text x="90" y="450" font-family="Arial, sans-serif" font-size="14" fill="#667799">Contribution limits, backdoor &amp; growth</text>
+  <circle cx="1000" cy="270" r="70" fill="none" stroke="url(#accent)" stroke-width="2" opacity="0.15"/>
+  <circle cx="1000" cy="270" r="45" fill="url(#accent)" opacity="0.06"/>
+  <circle cx="1000" cy="270" r="20" fill="url(#accent)" opacity="0.1"/>
+  <text x="975" y="276" font-family="Arial, sans-serif" font-size="20" fill="#ffffff" opacity="0.5">$7K</text>
+</svg>

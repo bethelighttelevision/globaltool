@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0a0a14"/><stop offset="50%" style="stop-color:#1a1a28"/><stop offset="100%" style="stop-color:#0e0e1c"/></linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700"/><stop offset="100%" style="stop-color:#b8860b"/></linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="250" cy="190" r="290" fill="url(#accent)" opacity="0.06"/>
+  <circle cx="950" cy="510" r="240" fill="url(#accent)" opacity="0.04"/>
+  <text x="90" y="180" font-family="Arial, sans-serif" font-size="14" fill="#ffd700" opacity="0.6">DATA PRIVACY</text>
+  <text x="90" y="250" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#ffffff" opacity="0.95">GDPR Compliance</text>
+  <text x="90" y="310" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#ffd700">European Websites</text>
+  <text x="90" y="370" font-family="Arial, sans-serif" font-size="20" fill="#9999bb">Protect User Data</text>
+  <rect x="90" y="410" width="100" height="4" rx="2" fill="url(#accent)" opacity="0.8"/>
+  <text x="90" y="450" font-family="Arial, sans-serif" font-size="14" fill="#777799">Consent, DPO &amp; data subject requests</text>
+  <rect x="910" y="240" width="140" height="80" rx="10" fill="none" stroke="url(#accent)" stroke-width="1.5" opacity="0.15"/>
+  <circle cx="980" cy="260" r="20" fill="url(#accent)" opacity="0.12"/>
+  <text x="970" y="268" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" opacity="0.5">&#10003;</text>
+  <rect x="930" y="290" width="100" height="4" rx="2" fill="#ffffff" opacity="0.08"/>
+  <rect x="930" y="300" width="70" height="4" rx="2" fill="#ffffff" opacity="0.05"/>
+</svg>

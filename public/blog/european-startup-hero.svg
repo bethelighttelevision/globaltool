@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0a0e1a"/><stop offset="50%" style="stop-color:#1a1e30"/><stop offset="100%" style="stop-color:#0e1222"/></linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700"/><stop offset="100%" style="stop-color:#b8860b"/></linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="250" cy="180" r="290" fill="url(#accent)" opacity="0.06"/>
+  <circle cx="950" cy="530" r="240" fill="url(#accent)" opacity="0.04"/>
+  <text x="90" y="180" font-family="Arial, sans-serif" font-size="14" fill="#ffd700" opacity="0.6">EUROPEAN STARTUPS</text>
+  <text x="90" y="250" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="#ffffff" opacity="0.95">European Startups</text>
+  <text x="90" y="310" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#ffd700">Scaling Borders</text>
+  <text x="90" y="370" font-family="Arial, sans-serif" font-size="20" fill="#9999bb">Cross-Border Growth</text>
+  <rect x="90" y="410" width="100" height="4" rx="2" fill="url(#accent)" opacity="0.8"/>
+  <text x="90" y="450" font-family="Arial, sans-serif" font-size="14" fill="#777799">Funding, expansion &amp; EU compliance</text>
+  <polygon points="930,250 1010,250 990,290 950,290" fill="url(#accent)" opacity="0.1"/>
+  <polygon points="960,220 1000,220 980,250" fill="url(#accent)" opacity="0.08"/>
+  <rect x="930" y="350" width="120" height="6" rx="3" fill="url(#accent)" opacity="0.08"/>
+  <rect x="950" y="365" width="80" height="6" rx="3" fill="#ffffff" opacity="0.04"/>
+</svg>
