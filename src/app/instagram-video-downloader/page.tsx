@@ -1,11 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Sparkles, Loader2, Download, ExternalLink, Camera } from 'lucide-react';
 import { getVideoDownloadInfo } from '../actions/video';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 interface VideoUrlItem {
   url: string;
 }
@@ -17,7 +15,7 @@ interface VideoDownloadResult {
 }
 
 export default function InstagramVideoDownloaderPage() {
-  usePageMeta("Free Instagram Video Downloader | ToolSnappy", "Download Instagram videos and reels. Paste any Instagram URL and save videos directly.");
+
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<VideoDownloadResult | null>(null);
@@ -114,3 +112,4 @@ export default function InstagramVideoDownloaderPage() {
     </ToolLayout>
   );
 }
+

@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { ShieldCheck, Copy, RefreshCw, CheckCircle2 } from 'lucide-react';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function PasswordGenPage() {
-  usePageMeta("Free Secure Password Generator | ToolSnappy", "Generate strong, secure random passwords online. Free password maker with customizable options.");
+
   const [password, setPassword] = useState('');
   const [length, setLength] = useState(16);
   const [useUppercase, setUseUppercase] = useState(true);
@@ -19,7 +17,7 @@ export default function PasswordGenPage() {
     if (upper) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (nums) charset += '0123456789';
     if (syms) charset += '!@#$%^&*()_+~`|}{[]:;?><,./-=';
-    
+
     let newPassword = '';
     const array = new Uint32Array(currentLength);
     window.crypto.getRandomValues(array);
@@ -105,7 +103,7 @@ export default function PasswordGenPage() {
       }
     >
       <div style={{ maxWidth: '600px', margin: '0 auto', background: 'rgba(255,255,255,0.02)', padding: '32px', borderRadius: '16px', border: '1px solid var(--card-border)', textAlign: 'left' }}>
-        
+
         <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
           <input 
             type="text" 
@@ -140,7 +138,7 @@ export default function PasswordGenPage() {
               generatePassword(newLen, useUppercase, useNumbers, useSymbols);
             }} style={{ width: '60%' }} />
           </label>
-          
+
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--foreground)', cursor: 'pointer' }}>
               <input type="checkbox" checked={useUppercase} onChange={(e) => {
@@ -173,3 +171,4 @@ export default function PasswordGenPage() {
     </ToolLayout>
   );
 }
+

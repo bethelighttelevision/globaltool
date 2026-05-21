@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef } from 'react';
 import { UploadCloud, Download, RefreshCw, Image } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function ImageUpscaler() {
-  usePageMeta("Free AI Image Upscaler | ToolSnappy", "Enhance and upscale low-resolution images using AI. Free online image quality booster.");
+
   const [image, setImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
@@ -28,7 +26,7 @@ export default function ImageUpscaler() {
   const processUpscale = async () => {
     if (!image) return;
     setIsProcessing(true);
-    
+
     try {
       const response = await fetch('/api/upscale', {
         method: 'POST',
@@ -137,7 +135,7 @@ export default function ImageUpscaler() {
         </div>
       ) : (
         <div className="animate-fade-in" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          
+
           {!isComplete && (
             <div className="glass-panel" style={{ padding: '24px', marginBottom: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px' }}>
               <button 
@@ -156,7 +154,7 @@ export default function ImageUpscaler() {
               <div style={{ position: 'absolute', top: '16px', left: '16px', background: 'rgba(0,0,0,0.6)', padding: '4px 12px', borderRadius: '980px', fontSize: '12px', zIndex: 10 }}>ORIGINAL LOW-RES</div>
 {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={image} alt="original" style={{ width: '100%', borderRadius: '12px', display: 'block' }} />
-              
+
               {isProcessing && (
                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(10px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                   <div className="animate-spin" style={{ width: '48px', height: '48px', border: '4px solid #32d74b', borderTopColor: 'transparent', borderRadius: '50%', marginBottom: '20px' }}></div>
@@ -190,3 +188,4 @@ export default function ImageUpscaler() {
     </ToolLayout>
   );
 }
+

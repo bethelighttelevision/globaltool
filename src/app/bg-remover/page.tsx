@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef } from 'react';
 import { UploadCloud, Download, RefreshCw, Camera } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function BackgroundRemover() {
-  usePageMeta("Free AI Background Remover | ToolSnappy", "Remove image backgrounds instantly with AI. Free online background removal tool with HD-quality output.");
+
   const [image, setImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
@@ -28,7 +26,7 @@ export default function BackgroundRemover() {
   const removeBackground = async () => {
     if (!image) return;
     setIsProcessing(true);
-    
+
     try {
       const res = await fetch(image);
       const blob = await res.blob();
@@ -125,7 +123,7 @@ export default function BackgroundRemover() {
         </div>
       ) : (
         <div className="animate-fade-in" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          
+
           {/* Control Panel */}
           {!isComplete && (
             <div className="glass-panel" style={{ padding: '24px', marginBottom: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px' }}>
@@ -180,3 +178,4 @@ export default function BackgroundRemover() {
     </ToolLayout>
   );
 }
+

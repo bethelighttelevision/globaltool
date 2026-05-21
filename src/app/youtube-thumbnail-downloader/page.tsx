@@ -1,11 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Download, Sparkles, Loader2, Play } from 'lucide-react';
 import { getThumbnailUrls } from '../actions/youtube';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 interface ThumbnailItem {
   url: string;
   label: string;
@@ -22,7 +20,7 @@ interface ThumbnailResult {
 }
 
 export default function YoutubeThumbnailDownloaderPage() {
-  usePageMeta("Free YouTube Thumbnail Downloader | ToolSnappy", "Download YouTube thumbnails in all resolutions from HD to default.");
+
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ThumbnailResult | null>(null);
@@ -64,7 +62,7 @@ export default function YoutubeThumbnailDownloaderPage() {
     <ToolLayout
       icon={<Download size={44} />}
       title="YouTube Thumbnail Downloader"
-      description="Download YouTube video thumbnails in all resolutions — from default to full HD."
+      description="Download YouTube video thumbnails in all resolutions â€” from default to full HD."
       seo={{
         toolName: "YouTube Thumbnail Downloader",
         description: "Free YouTube thumbnail downloader. Download video thumbnails in all resolutions: HD, SD, HQ, MQ, and default.",
@@ -117,3 +115,4 @@ export default function YoutubeThumbnailDownloaderPage() {
     </ToolLayout>
   );
 }
+

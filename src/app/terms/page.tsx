@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, FileText } from 'lucide-react';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function TermsOfService() {
-  usePageMeta("Terms of Service | ToolSnappy", "ToolSnappy terms of service. By using our free tools and services, you agree to these terms and conditions.");
+
   return (
     <div className="content-container" style={{ padding: '80px 24px' }}>
       <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--muted)', textDecoration: 'none', marginBottom: '40px', fontSize: '14px' }}>
@@ -18,10 +16,10 @@ export default function TermsOfService() {
           <FileText size={32} color="var(--accent)" />
           <h1 className="text-3xl sm:text-4xl font-bold" style={{ margin: 0 }}>Terms of Service</h1>
         </div>
-        
+
         <div className="article-content">
           <p>Last Updated: May 14, 2026</p>
-          
+
           <h2>1. Acceptance of Terms</h2>
           <p>By accessing and using ToolSnappy, you agree to be bound by these Terms of Service and all applicable laws and regulations.</p>
 
@@ -44,3 +42,4 @@ export default function TermsOfService() {
     </div>
   );
 }
+

@@ -1,11 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Play, Sparkles, Loader2, Download, ExternalLink } from 'lucide-react';
 import { getVideoDownloadInfo } from '../actions/video';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 interface VideoUrlItem {
   url: string;
   quality: string;
@@ -21,7 +19,7 @@ interface VideoDownloadResult {
 }
 
 export default function YoutubeVideoDownloaderPage() {
-  usePageMeta("Free YouTube Video Downloader | ToolSnappy", "Download YouTube videos in HD quality. Paste any YouTube URL and save videos directly.");
+
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<VideoDownloadResult | null>(null);
@@ -140,3 +138,4 @@ export default function YoutubeVideoDownloaderPage() {
     </ToolLayout>
   );
 }
+

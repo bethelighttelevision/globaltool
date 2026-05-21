@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { Home, Calculator as CalcIcon } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function MortgageCalculator() {
-  usePageMeta("Free Mortgage Calculator | ToolSnappy", "Calculate monthly mortgage payments, amortization, and interest. Free home loan calculator.");
+
   const [homePrice, setHomePrice] = useState<number>(300000);
   const [downPayment, setDownPayment] = useState<number>(60000);
   const [interestRate, setInterestRate] = useState<number>(6.5);
@@ -158,3 +156,4 @@ export default function MortgageCalculator() {
     </ToolLayout>
   );
 }
+

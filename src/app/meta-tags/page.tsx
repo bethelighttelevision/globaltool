@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Search, Copy, CheckCircle2 } from 'lucide-react';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function MetaTagsPage() {
-  usePageMeta("Free Meta Tags Generator | ToolSnappy", "Generate perfect HTML meta tags and Open Graph tags for SEO. Free meta tag builder tool.");
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [keywords, setKeywords] = useState('');
@@ -55,7 +53,7 @@ export default function MetaTagsPage() {
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Why Meta Descriptions Still Matter for Traffic</h3>
           <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-            Although meta descriptions are not a direct ranking factor for Google, they are the &quot;Ad Copy&quot; that appears in search results. A compelling meta description can increase your click-through rate (CTR) by 5-10%, which indirectly signals to Google that your page is valuable. Use our generator to craft descriptions under 160 characters that include your primary keyword and a clear call to action. Think of the meta description as the headline of a newspaper article—it needs to grab attention, convey value, and compel the user to click through to your site rather than your competitor&apos;s. Descriptions that include numbers, emotional triggers, and direct answers to search queries consistently outperform generic descriptions in click-through rate testing.
+            Although meta descriptions are not a direct ranking factor for Google, they are the &quot;Ad Copy&quot; that appears in search results. A compelling meta description can increase your click-through rate (CTR) by 5-10%, which indirectly signals to Google that your page is valuable. Use our generator to craft descriptions under 160 characters that include your primary keyword and a clear call to action. Think of the meta description as the headline of a newspaper articleâ€”it needs to grab attention, convey value, and compel the user to click through to your site rather than your competitor&apos;s. Descriptions that include numbers, emotional triggers, and direct answers to search queries consistently outperform generic descriptions in click-through rate testing.
           </p>
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Essential Meta Tags for Modern SEO</h3>
@@ -77,7 +75,7 @@ export default function MetaTagsPage() {
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Best Practices for 2026</h3>
           <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-            In 2026, Google places increasing emphasis on structured data alongside meta tags. Use our generator to create a solid meta foundation, then add JSON-LD schema markup for enhanced search result features like rich snippets and knowledge panels. Always keep your title tags under 60 characters and meta descriptions under 160 characters for optimal display on both desktop and mobile search results. Beyond character counts, focus on creating unique meta tags for every page on your site—duplicate title tags and descriptions are one of the most common SEO mistakes and can lead to significant ranking penalties. Use actionable language in your title tags, include your primary keyword near the beginning, and ensure that every meta description provides a clear value proposition that distinguishes your page from the competition in the search results.
+            In 2026, Google places increasing emphasis on structured data alongside meta tags. Use our generator to create a solid meta foundation, then add JSON-LD schema markup for enhanced search result features like rich snippets and knowledge panels. Always keep your title tags under 60 characters and meta descriptions under 160 characters for optimal display on both desktop and mobile search results. Beyond character counts, focus on creating unique meta tags for every page on your siteâ€”duplicate title tags and descriptions are one of the most common SEO mistakes and can lead to significant ranking penalties. Use actionable language in your title tags, include your primary keyword near the beginning, and ensure that every meta description provides a clear value proposition that distinguishes your page from the competition in the search results.
           </p>
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Common Meta Tag Mistakes to Avoid</h3>
@@ -87,7 +85,7 @@ export default function MetaTagsPage() {
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Integrating Meta Tags with Your Broader SEO Strategy</h3>
           <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-            Meta tags are just one component of a comprehensive SEO strategy, but they are foundational to everything else. Before you invest time in content marketing, backlink building, or technical SEO audits, ensure that every page on your site has properly optimized meta tags. Think of meta tags as the storefront of your website—they are the first thing potential visitors see when your page appears in search results or social media feeds. Without compelling, well-structured meta tags, even the most valuable content may struggle to attract the traffic it deserves. Use our generator as part of your regular SEO workflow, generating and testing different meta tag variations to optimize your click-through rates and improve your search visibility over time.
+            Meta tags are just one component of a comprehensive SEO strategy, but they are foundational to everything else. Before you invest time in content marketing, backlink building, or technical SEO audits, ensure that every page on your site has properly optimized meta tags. Think of meta tags as the storefront of your websiteâ€”they are the first thing potential visitors see when your page appears in search results or social media feeds. Without compelling, well-structured meta tags, even the most valuable content may struggle to attract the traffic it deserves. Use our generator as part of your regular SEO workflow, generating and testing different meta tag variations to optimize your click-through rates and improve your search visibility over time.
           </p>
         </article>
       }
@@ -129,3 +127,4 @@ export default function MetaTagsPage() {
     </ToolLayout>
   );
 }
+

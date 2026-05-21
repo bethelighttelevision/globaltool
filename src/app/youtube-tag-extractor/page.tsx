@@ -1,11 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Hash, Sparkles, Copy, Check, Loader2, Tag, User, FileText, List } from 'lucide-react';
 import { extractTags } from '../actions/youtube';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 interface TagExtractResult {
   title: string;
   author: string;
@@ -16,7 +14,7 @@ interface TagExtractResult {
 }
 
 export default function YoutubeTagExtractorPage() {
-  usePageMeta("Free YouTube Tag Extractor | ToolSnappy", "Extract video tags, hashtags, and keywords from any YouTube video.");
+
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<TagExtractResult | null>(null);
@@ -58,7 +56,7 @@ export default function YoutubeTagExtractorPage() {
       results={result && (
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div className="glass-panel" style={{ padding: '20px 24px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <img src={result.thumbnail} alt="" style={{ width: '80px', height: '45px', borderRadius: '8px', objectFit: 'cover' }}
+            <img src={result.thumbnail} alt="Video thumbnail preview" style={{ width: '80px', height: '45px', borderRadius: '8px', objectFit: 'cover' }}
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
             <div>
               <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#fff', margin: 0 }}>{result.title}</h3>
@@ -131,3 +129,4 @@ export default function YoutubeTagExtractorPage() {
     </ToolLayout>
   );
 }
+

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
 import AdSensePlaceholder from '../components/AdSensePlaceholder';
@@ -33,23 +33,26 @@ export const metadata = {
   title: 'ToolSnappy | #1 Free SEO & Social Media Suite 2026',
   description: 'Access 15+ professional tools: AI Lucky Number Finder, Page SEO Analyzer, AI Background Remover, Crypto ROI Calculator, and TikTok tools. 100% Free.',
   keywords: 'ToolSnappy, AI Lucky Number Finder, Free SEO Tools 2026, Best AI Hook Generator, AI Background Remover, Crypto Profit Calculator USA, YouTube SEO Tool, Instagram Caption Generator, TikTok Hashtag Generator',
+  alternates: {
+    canonical: 'https://toolsnappy.com',
+  },
 };
 
 export default function Home() {
   return (
     <div className="content-container animate-fade-in" style={{ padding: '40px 24px' }}>
       <AdSensePlaceholder type="header" />
-      
+
       {/* JSON-LD WebSite + Organization Schema */}
       <Script id="website-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "WebSite", "name": "ToolSnappy", "url": "https://toolsnappy.com", "description": "Free SEO, social media, and developer tools suite.", "potentialAction": { "@type": "SearchAction", "target": "https://toolsnappy.com/search?q={search_term_string}", "query-input": "required name=search_term_string" } }, { "@type": "Organization", "name": "ToolSnappy", "url": "https://toolsnappy.com", "logo": "https://toolsnappy.com/logo.png" }] }) }} />
-      
+
       <section className="animate-slide-up" style={{ textAlign: 'center', marginBottom: '80px', marginTop: '40px' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.05)', padding: '8px 16px', borderRadius: '100px', marginBottom: '24px', border: '1px solid var(--card-border)' }}>
           <TrendingUp size={16} color="var(--accent)" />
           <span style={{ fontSize: '13px', fontWeight: '500', color: 'var(--muted)' }}>New: Page SEO Analyzer Audit Tool</span>
         </div>
         <h1 className="gradient-text text-4xl sm:text-5xl md:text-6xl font-bold" style={{ lineHeight: 1.1, marginBottom: '24px', letterSpacing: '-0.02em' }}>
-          Your Ultimate Digital<br />Arsenal for 2026
+          ToolSnappy — Your Ultimate Digital<br />Arsenal for 2026
         </h1>
         <p className="text-base sm:text-lg md:text-xl" style={{ color: 'var(--muted)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
           Dominate search engines and social algorithms. Access a premium suite of AI-powered SEO, Content, and Financial tools engineered for the USA market.
@@ -60,9 +63,9 @@ export default function Home() {
       <h2 style={{ fontSize: '24px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
         <Search size={22} color="var(--accent)" /> Explorer All Tools
       </h2>
-      
+
       <div className="animate-slide-up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '80px' }}>
-        
+
         {/* Row 1: Master SEO Tools */}
         <Link href="/seo-analyzer" style={{ textDecoration: 'none' }}>
           <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', borderTop: '4px solid var(--accent)' }}>
@@ -169,7 +172,6 @@ export default function Home() {
             <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Increase resolution of low-quality images using AI.</p>
           </div>
         </Link>
-
 
         <Link href="/meta-tags" style={{ textDecoration: 'none' }}>
           <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
@@ -334,7 +336,7 @@ export default function Home() {
       {/* Free SEO & Dev Tools Section */}
       <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '24px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)' }}>Free SEO & Developer Tools</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px', marginBottom: '80px' }}>
-        
+
         <Link href="/meta-tags" style={{ textDecoration: 'none' }}>
           <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', display: 'flex', gap: '16px', alignItems: 'center' }}>
             <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '10px' }}>
@@ -372,7 +374,8 @@ export default function Home() {
         </Link>
 
       </div>
-      
+
     </div>
   );
 }
+

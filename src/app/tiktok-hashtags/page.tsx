@@ -1,13 +1,11 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { Hash, Copy, CheckCircle2, TrendingUp } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
 import { generateAICentent } from '../actions/ai';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function TikTokHashtagsPage() {
-  usePageMeta("Free TikTok Hashtag Generator | ToolSnappy", "Generate high-velocity trending hashtags for TikTok virality. Free TikTok hashtag tool.");
+
   const [topic, setTopic] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [hashtags, setHashtags] = useState<string[]>([]);
@@ -16,23 +14,23 @@ export default function TikTokHashtagsPage() {
   const generateHashtags = async () => {
     if (!topic.trim()) return;
     setIsLoading(true);
-    
+
     try {
       const prompt = `Generate 15 trending and viral TikTok hashtags for the topic: "${topic}". 
       Include a mix of:
       1. Mega tags (broad reach)
       2. Niche-specific tags
       3. Community tags
-      
+
       Return the hashtags as a comma-separated list, starting with #. 
       Only return the hashtags.`;
-      
+
       const response = await generateAICentent(prompt);
-      
+
       // Grab all words starting with # from anywhere in the LLM response
       const matches = response.match(/#[a-zA-Z0-9_]+/g);
       let results = matches ? matches.map(tag => tag.trim()) : [];
-      
+
       // If the AI somehow didn't return hashtags with # prefixed, format them manually
       if (results.length === 0) {
         results = response
@@ -40,10 +38,10 @@ export default function TikTokHashtagsPage() {
           .map(tag => tag.trim().replace(/^#*/, '#'))
           .filter(tag => tag.length > 2 && tag !== '#');
       }
-      
+
       // Keep unique items up to 15
       results = Array.from(new Set(results)).slice(0, 15);
-      
+
       setHashtags(results);
     } catch (error) {
       console.error(error);
@@ -84,7 +82,7 @@ export default function TikTokHashtagsPage() {
               {copied ? 'Copied All' : 'Copy All'}
             </button>
           </div>
-          
+
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
             {hashtags.map((tag, idx) => (
               <div key={idx} style={{ background: 'rgba(255,255,255,0.05)', padding: '10px 20px', borderRadius: '14px', border: '1px solid var(--card-border)', fontSize: '15px', color: 'var(--foreground)' }}>
@@ -110,9 +108,9 @@ export default function TikTokHashtagsPage() {
             <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #00f2ea' }}>
               <h4 style={{ marginTop: 0, color: '#00f2ea' }}>The 3-Tier Hashtag Strategy That Works Every Time</h4>
               <ul style={{ color: 'var(--muted)', fontSize: '14px', paddingLeft: '20px', marginBottom: 0 }}>
-                <li style={{ marginBottom: '10px' }}><strong>Tier 1 — Mega Tags (500M+ views):</strong> Tags like #fyp, #foryou, #viral, and #trending that have massive reach but extremely high competition, making it difficult to rank highly in their feeds.</li>
-                <li style={{ marginBottom: '10px' }}><strong>Tier 2 — Niche Tags (10M to 100M views):</strong> Broad industry-specific tags that are highly relevant to your content, such as #CryptoTips, #SkincareTok, #FitnessJourney, or #CookingHacks, offering a strong balance of reach and relevance.</li>
-                <li style={{ marginBottom: '10px' }}><strong>Tier 3 — Micro Tags (under 1M views):</strong> Extremely specific, long-tail tags like #CryptoBeginners2026 or #DrySkinRoutine that have the highest chance of ranking in the number one position for their search results, giving you concentrated exposure to a highly targeted audience.</li>
+                <li style={{ marginBottom: '10px' }}><strong>Tier 1 â€” Mega Tags (500M+ views):</strong> Tags like #fyp, #foryou, #viral, and #trending that have massive reach but extremely high competition, making it difficult to rank highly in their feeds.</li>
+                <li style={{ marginBottom: '10px' }}><strong>Tier 2 â€” Niche Tags (10M to 100M views):</strong> Broad industry-specific tags that are highly relevant to your content, such as #CryptoTips, #SkincareTok, #FitnessJourney, or #CookingHacks, offering a strong balance of reach and relevance.</li>
+                <li style={{ marginBottom: '10px' }}><strong>Tier 3 â€” Micro Tags (under 1M views):</strong> Extremely specific, long-tail tags like #CryptoBeginners2026 or #DrySkinRoutine that have the highest chance of ranking in the number one position for their search results, giving you concentrated exposure to a highly targeted audience.</li>
               </ul>
             </div>
 
@@ -160,3 +158,4 @@ export default function TikTokHashtagsPage() {
     </ToolLayout>
   );
 }
+

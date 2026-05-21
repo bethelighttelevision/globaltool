@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Shield } from 'lucide-react';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function PrivacyPolicy() {
-  usePageMeta("Privacy Policy | ToolSnappy", "ToolSnappy privacy policy. Learn how we collect, use, and protect your personal data. We respect your privacy and comply with Google AdSense policies.");
+
   return (
     <div className="content-container" style={{ padding: '80px 24px' }}>
       <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--muted)', textDecoration: 'none', marginBottom: '40px', fontSize: '14px' }}>
@@ -18,10 +16,10 @@ export default function PrivacyPolicy() {
           <Shield size={32} color="var(--accent)" />
           <h1 className="text-3xl sm:text-4xl font-bold" style={{ margin: 0 }}>Privacy Policy</h1>
         </div>
-        
+
         <div className="article-content">
           <p>Last Updated: May 14, 2026</p>
-          
+
           <h2>1. Introduction</h2>
           <p>Welcome to ToolSnappy. We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us.</p>
 
@@ -44,3 +42,4 @@ export default function PrivacyPolicy() {
     </div>
   );
 }
+

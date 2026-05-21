@@ -1,11 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Sparkles, Loader2, Download, ExternalLink, Music } from 'lucide-react';
 import { getVideoDownloadInfo } from '../actions/video';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 interface VideoUrlItem {
   url: string;
 }
@@ -17,7 +15,7 @@ interface VideoDownloadResult {
 }
 
 export default function TiktokVideoDownloaderPage() {
-  usePageMeta("Free TikTok Video Downloader | ToolSnappy", "Download TikTok videos without watermark. Paste any TikTok URL and save videos directly.");
+
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<VideoDownloadResult | null>(null);
@@ -114,3 +112,4 @@ export default function TiktokVideoDownloaderPage() {
     </ToolLayout>
   );
 }
+

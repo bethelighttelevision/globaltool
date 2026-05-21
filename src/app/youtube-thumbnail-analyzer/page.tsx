@@ -1,11 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Image, Sparkles, Loader2, BarChart3, TrendingUp, Lightbulb, CheckCircle2 } from 'lucide-react';
 import { analyzeThumbnail } from '../actions/youtube';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 interface ScoreDetail {
   score: number;
 }
@@ -48,7 +46,7 @@ function ScoreBar({ label, score }: { label: string; score: number }) {
 }
 
 export default function YoutubeThumbnailAnalyzerPage() {
-  usePageMeta("Free YouTube Thumbnail Analyzer | ToolSnappy", "AI-powered thumbnail analysis with scores for composition, colors, text, and CTR.");
+
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ThumbnailAnalysisResult | null>(null);
@@ -85,7 +83,7 @@ export default function YoutubeThumbnailAnalyzerPage() {
       results={result && (
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div className="glass-panel" style={{ padding: '24px', textAlign: 'center', marginBottom: '20px' }}>
-            <img src={result.thumbnailUrl} alt="" style={{ width: '100%', maxWidth: '480px', borderRadius: '12px' }}
+            <img src={result.thumbnailUrl} alt="Thumbnail analysis preview" style={{ width: '100%', maxWidth: '480px', borderRadius: '12px' }}
               onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${result.videoId}/hqdefault.jpg`; }} />
           </div>
 
@@ -149,3 +147,4 @@ export default function YoutubeThumbnailAnalyzerPage() {
     </ToolLayout>
   );
 }
+

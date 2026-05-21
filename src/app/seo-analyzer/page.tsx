@@ -1,13 +1,11 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Globe, ShieldAlert, Check, AlertCircle, Sparkles } from 'lucide-react';
 import { analyzeSEOAction } from './actions';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function SEOAnalyzerPage() {
-  usePageMeta("Free SEO Analyzer & Website Audit Tool | ToolSnappy", "Audit any website instantly for SEO issues: missing meta tags, headings, image alt text, and more. Free real-time SEO analysis tool.");
+
   const [url, setUrl] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [audit, setAudit] = useState<{
@@ -25,15 +23,15 @@ export default function SEOAnalyzerPage() {
     setIsAnalyzing(true);
     setError(null);
     setAudit(null);
-    
+
     const result = await analyzeSEOAction(url);
-    
+
     if (result.success) {
       setAudit(result as typeof audit);
     } else {
       setError(result.error || 'Could not analyze this site. Please check the URL and try again.');
     }
-    
+
     setIsAnalyzing(false);
   };
 
@@ -145,3 +143,4 @@ export default function SEOAnalyzerPage() {
     </ToolLayout>
   );
 }
+

@@ -218,7 +218,7 @@ const EuropeanTemplate: React.FC<TemplateProps> = ({ data }) => {
       <div style={{ display: 'grid', gridTemplateColumns: '150px 1fr', gap: '30px', borderBottom: '1px solid #004a99', paddingBottom: '30px', marginBottom: '30px' }}>
         <div style={{ width: '150px', height: '180px', backgroundColor: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={50} color="#ccc" />}
+          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt={data.personalInfo.fullName + " profile photo"} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={50} color="#ccc" />}
         </div>
         <div>
           <h1 style={{ margin: '0 0 5px', fontSize: '28px', color: '#004a99' }}>{data.personalInfo.fullName || 'Name'}</h1>
@@ -284,7 +284,7 @@ const MiddleEastTemplate: React.FC<TemplateProps> = ({ data }) => {
         </div>
         <div style={{ width: '120px', height: '120px', border: '3px solid #d4af37', borderRadius: '50%', overflow: 'hidden', backgroundColor: '#333', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={40} color="#666" />}
+          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt={data.personalInfo.fullName + " profile photo"} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={40} color="#666" />}
         </div>
       </header>
 
@@ -458,7 +458,7 @@ const TechTemplate: React.FC<TemplateProps> = ({ data }) => {
       <aside style={{ width: '35%', backgroundColor: '#1e293b', padding: '40px' }}>
         <div style={{ width: '100%', aspectRatio: '1', backgroundColor: '#334155', borderRadius: '16px', marginBottom: '30px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={60} color="#475569" />}
+          {data.personalInfo.photo ? <img src={data.personalInfo.photo} alt={data.personalInfo.fullName + " profile photo"} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <User size={60} color="#475569" />}
         </div>
         
         <section style={{ marginBottom: '40px' }}>

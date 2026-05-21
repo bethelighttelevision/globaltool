@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef } from 'react';
 import { FileText } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function PDFConverterPage() {
-  usePageMeta("Free PDF to SVG Converter | ToolSnappy", "Convert PDF files to SVG format instantly. Free online PDF conversion tool.");
+
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -125,7 +123,7 @@ export default function PDFConverterPage() {
             onChange={handleFileChange} 
             style={{ display: 'none' }} 
           />
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>📁</div>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>ðŸ“</div>
           <h3 style={{ fontSize: '24px', marginBottom: '8px', color: 'var(--foreground)' }}>Drop your PDF here</h3>
           <p style={{ color: 'var(--muted)', fontSize: '16px' }}>or click to browse from your device</p>
           <div style={{ marginTop: '24px', fontSize: '14px', color: 'var(--muted)' }}>Maximum file size: 50MB</div>
@@ -133,7 +131,7 @@ export default function PDFConverterPage() {
       ) : (
         <div style={{ maxWidth: '600px', margin: '0 auto', background: 'rgba(255,255,255,0.03)', padding: '40px', borderRadius: '24px', border: '1px solid var(--card-border)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '24px' }}>
-            <div style={{ fontSize: '32px' }}>📑</div>
+            <div style={{ fontSize: '32px' }}>ðŸ“‘</div>
             <div style={{ textAlign: 'left' }}>
               <div style={{ fontWeight: '600', fontSize: '18px' }}>{file.name}</div>
               <div style={{ color: 'var(--muted)', fontSize: '14px' }}>{(file.size / 1024 / 1024).toFixed(2)} MB</div>
@@ -155,7 +153,7 @@ export default function PDFConverterPage() {
           {isComplete && (
             <div className="animate-slide-up">
               <div style={{ color: 'var(--success)', fontSize: '18px', fontWeight: '600', marginBottom: '24px' }}>
-                ✓ Conversion Complete
+                âœ“ Conversion Complete
               </div>
               <button className="premium-button" style={{ width: '100%', padding: '16px', fontSize: '18px', background: 'var(--success)' }}>
                 Download Extracted SVGs
@@ -173,3 +171,4 @@ export default function PDFConverterPage() {
     </ToolLayout>
   );
 }
+

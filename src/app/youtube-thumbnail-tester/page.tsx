@@ -1,11 +1,9 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Eye, Sparkles, Loader2, Search, Monitor, LayoutGrid, Image } from 'lucide-react';
 import { getVideoInfo } from '../actions/youtube';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 interface VideoInfoResult {
   title: string;
   author: string;
@@ -20,7 +18,7 @@ const VIEWS = [
 ];
 
 export default function YoutubeThumbnailTesterPage() {
-  usePageMeta("Free YouTube Thumbnail Tester | ToolSnappy", "Preview your thumbnail in search results, suggested videos, and home page mockups.");
+
   const [url, setUrl] = useState('');
   const [customThumbnail, setCustomThumbnail] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -84,14 +82,14 @@ export default function YoutubeThumbnailTesterPage() {
               <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                 <div style={{ flex: '0 0 246px' }}>
                   <div style={{ width: '246px', height: '138px', borderRadius: '8px', overflow: 'hidden', background: '#000', position: 'relative' }}>
-                    <img src={displayThumbnail} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    <img src={displayThumbnail} alt="Thumbnail preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${result.videoId}/hqdefault.jpg`; }} />
                     <div style={{ position: 'absolute', bottom: '4px', right: '4px', background: 'rgba(0,0,0,0.8)', color: '#fff', fontSize: '11px', padding: '1px 4px', borderRadius: '2px' }}>12:34</div>
                   </div>
                 </div>
                 <div style={{ flex: 1 }}>
                   <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#fff', margin: '0 0 4px', lineHeight: 1.3 }}>{result.title}</h3>
-                  <p style={{ fontSize: '12px', color: '#aaa', margin: '0 0 4px' }}>{result.author} · 123K views · 1 week ago</p>
+                  <p style={{ fontSize: '12px', color: '#aaa', margin: '0 0 4px' }}>{result.author} Â· 123K views Â· 1 week ago</p>
                   <p style={{ fontSize: '12px', color: '#888', margin: 0 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
                 </div>
               </div>
@@ -103,7 +101,7 @@ export default function YoutubeThumbnailTesterPage() {
               <div style={{ display: 'flex', gap: '8px' }}>
                 <div style={{ flex: '0 0 168px' }}>
                   <div style={{ width: '168px', height: '94px', borderRadius: '6px', overflow: 'hidden', background: '#000', position: 'relative' }}>
-                    <img src={displayThumbnail} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    <img src={displayThumbnail} alt="Thumbnail preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${result.videoId}/hqdefault.jpg`; }} />
                     <div style={{ position: 'absolute', bottom: '3px', right: '3px', background: 'rgba(0,0,0,0.8)', color: '#fff', fontSize: '10px', padding: '1px 3px', borderRadius: '2px' }}>8:45</div>
                   </div>
@@ -121,7 +119,7 @@ export default function YoutubeThumbnailTesterPage() {
             <div className="glass-panel" style={{ padding: '24px' }}>
               <div style={{ width: '320px' }}>
                 <div style={{ width: '320px', height: '180px', borderRadius: '10px', overflow: 'hidden', background: '#000', marginBottom: '10px', position: 'relative' }}>
-                  <img src={displayThumbnail} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  <img src={displayThumbnail} alt="Thumbnail preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     onError={(e) => { (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${result.videoId}/hqdefault.jpg`; }} />
                   <div style={{ position: 'absolute', bottom: '6px', right: '6px', background: 'rgba(0,0,0,0.8)', color: '#fff', fontSize: '12px', padding: '2px 5px', borderRadius: '3px' }}>15:22</div>
                 </div>
@@ -129,7 +127,7 @@ export default function YoutubeThumbnailTesterPage() {
                   <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#333', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', color: '#fff', fontWeight: 600 }}>{result.author[0]}</div>
                   <div>
                     <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#fff', margin: '0 0 2px', lineHeight: 1.3 }}>{result.title}</h4>
-                    <p style={{ fontSize: '12px', color: '#aaa', margin: 0 }}>{result.author} · 234K views · 3 days ago</p>
+                    <p style={{ fontSize: '12px', color: '#aaa', margin: 0 }}>{result.author} Â· 234K views Â· 3 days ago</p>
                   </div>
                 </div>
               </div>
@@ -167,3 +165,4 @@ export default function YoutubeThumbnailTesterPage() {
     </ToolLayout>
   );
 }
+

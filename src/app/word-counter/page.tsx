@@ -1,18 +1,17 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
-import { usePageMeta } from '../../hooks/usePageMeta';
 import { Type, BarChart3, Clock, AlignLeft, FileText } from 'lucide-react';
 
 export default function WordCounterPage() {
-  usePageMeta("Free Word Counter & Character Count | ToolSnappy", "Count words, characters, sentences, and paragraphs online. Free word counter with readability analysis.");
+
   const [text, setText] = useState('');
 
   const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
   const charCount = text.length;
   const readingTime = Math.ceil(wordCount / 200);
-  
+
   const calculateGrade = () => {
     if (wordCount < 10) return 'N/A';
     const avgWordLength = text.replace(/\s/g, '').length / wordCount;
@@ -36,7 +35,7 @@ export default function WordCounterPage() {
         <article className="prose prose-invert lg:prose-xl">
           <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>The Ultimate Guide to Word Counting and Content Readability</h2>
           <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-            In the highly competitive world of 2026 digital marketing, content depth and readability are primary ranking factors that directly influence search engine visibility and user engagement. Our <strong>Professional Word Counter</strong> is more than just a character tracker — it is a sophisticated readability analyzer designed for authors, editors, SEO managers, and content strategists who need data-driven insights to optimize their writing. Understanding the balance between comprehensive length and clear, accessible language is the key to winning and retaining a top position on the first page of Google search results across every major industry.
+            In the highly competitive world of 2026 digital marketing, content depth and readability are primary ranking factors that directly influence search engine visibility and user engagement. Our <strong>Professional Word Counter</strong> is more than just a character tracker â€” it is a sophisticated readability analyzer designed for authors, editors, SEO managers, and content strategists who need data-driven insights to optimize their writing. Understanding the balance between comprehensive length and clear, accessible language is the key to winning and retaining a top position on the first page of Google search results across every major industry.
           </p>
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Why Word Density Matters for Modern SEO</h3>
@@ -98,3 +97,4 @@ export default function WordCounterPage() {
     </ToolLayout>
   );
 }
+

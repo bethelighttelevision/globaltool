@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useRef } from 'react';
 import { Image as ImageIcon, Copy, CheckCircle2, UploadCloud, Code, FileCode } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function Base64ConverterPage() {
-  usePageMeta("Free Image to Base64 Converter | ToolSnappy", "Convert images to Base64 encoded strings instantly. Free online developer tool.");
+
   const [base64, setBase64] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const [fileName, setFileName] = useState('');
@@ -140,3 +138,4 @@ export default function Base64ConverterPage() {
     </ToolLayout>
   );
 }
+

@@ -1,13 +1,11 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { PlayCircle, Play, Copy, CheckCircle2, Search, Sparkles } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
 import { generateAICentent } from '../actions/ai';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function YoutubeSEOPage() {
-  usePageMeta("Free YouTube SEO Optimization Tool | ToolSnappy", "Optimize your YouTube titles, descriptions, and tags for higher rankings. Free YouTube SEO tool.");
+
   const [topic, setTopic] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<{ titles: string[]; description: string; tags: string[]; score: number } | null>(null);
@@ -147,7 +145,7 @@ export default function YoutubeSEOPage() {
           <article className="prose prose-invert lg:prose-xl">
             <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>Mastering YouTube SEO in 2026</h2>
             <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-              YouTube is the second largest search engine in the world, processing over three billion searches every single month. To get your videos noticed among the millions of uploads competing for attention daily, you need more than just great content — you need a data-driven SEO strategy that aligns with how the platform actually discovers and ranks videos. Our <strong>YouTube SEO Optimizer</strong> helps you craft viral-ready titles, high-retention descriptions, and strategic tags that align with the latest algorithm updates. Understanding the intricacies of YouTube SEO can feel overwhelming, especially as the platform continuously refines its ranking factors. However, by breaking down the core components into manageable strategies, any creator can improve their video visibility and grow their channel organically. The most successful YouTubers treat every video as an opportunity to be discovered through search, not just through recommendations. This fundamental shift in mindset is what separates channels that grow steadily from those that remain stagnant. By optimizing for search intent, you ensure that your content reaches viewers who are actively looking for information, entertainment, or solutions related to your niche, resulting in higher engagement and better retention rates.
+              YouTube is the second largest search engine in the world, processing over three billion searches every single month. To get your videos noticed among the millions of uploads competing for attention daily, you need more than just great content â€” you need a data-driven SEO strategy that aligns with how the platform actually discovers and ranks videos. Our <strong>YouTube SEO Optimizer</strong> helps you craft viral-ready titles, high-retention descriptions, and strategic tags that align with the latest algorithm updates. Understanding the intricacies of YouTube SEO can feel overwhelming, especially as the platform continuously refines its ranking factors. However, by breaking down the core components into manageable strategies, any creator can improve their video visibility and grow their channel organically. The most successful YouTubers treat every video as an opportunity to be discovered through search, not just through recommendations. This fundamental shift in mindset is what separates channels that grow steadily from those that remain stagnant. By optimizing for search intent, you ensure that your content reaches viewers who are actively looking for information, entertainment, or solutions related to your niche, resulting in higher engagement and better retention rates.
             </p>
 
             <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>The Core Pillars of Video Ranking</h3>
@@ -210,3 +208,4 @@ export default function YoutubeSEOPage() {
     </ToolLayout>
   );
 }
+

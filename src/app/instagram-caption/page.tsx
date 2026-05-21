@@ -1,13 +1,11 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { Image, Copy, CheckCircle2 } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
 import { generateAICentent } from '../actions/ai';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function InstagramCaptionPage() {
-  usePageMeta("Free Instagram Caption Generator | ToolSnappy", "Generate AI-powered captions for Instagram reels and posts. Free Instagram caption generator.");
+
   const [topic, setTopic] = useState('');
   const [tone, setTone] = useState('Professional');
   const [isLoading, setIsLoading] = useState(false);
@@ -17,16 +15,16 @@ export default function InstagramCaptionPage() {
   const generateCaptions = async () => {
     if (!topic.trim()) return;
     setIsLoading(true);
-    
+
     try {
       const prompt = `Generate 4 viral Instagram captions for the topic: "${topic}". 
       The tone should be ${tone}. 
       Include relevant emojis and hashtags. 
       Format each caption clearly, separated by a unique delimiter like "---". 
       Don't include any extra text, just the 4 captions.`;
-      
+
       const response = await generateAICentent(prompt);
-      
+
       let results: string[] = [];
       if (response.includes('---')) {
         results = response.split('---').map(c => c.trim()).filter(Boolean);
@@ -35,7 +33,7 @@ export default function InstagramCaptionPage() {
         const blocks = response.split(/\n\s*\n/).map(c => c.trim()).filter(Boolean);
         results = blocks.map(block => block.replace(/^[\d\.\-\*\s]+/, '').trim());
       }
-      
+
       // If still not properly split, try matching standard numbered items (e.g., "1. ...")
       if (results.length < 2) {
         const matches = response.match(/(?:^|\n)\d+[\.\)]\s*([\s\S]*?)(?=\n\d+[\.\)]|$)/g);
@@ -43,19 +41,19 @@ export default function InstagramCaptionPage() {
           results = matches.map(m => m.replace(/^\s*\d+[\.\)]\s*/, '').trim());
         }
       }
-      
+
       // Filter out meta-text and keep only valid captions
       results = results.filter(c => c.length > 10 && !c.toLowerCase().includes('here are') && !c.toLowerCase().includes('instagram caption'));
-      
+
       // If parsing fails entirely, fallback to splitting by lines or the entire response
       if (results.length === 0) {
         results = response.split('\n').map(c => c.trim()).filter(c => c.length > 15);
       }
-      
+
       if (results.length === 0) {
         results = [response];
       }
-      
+
       setCaptions(results.slice(0, 4));
     } catch (error) {
       console.error(error);
@@ -117,7 +115,7 @@ export default function InstagramCaptionPage() {
 
             <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Why Your Caption Strategy Directly Impacts Reach</h3>
             <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-              The Instagram algorithm rewards posts that generate immediate engagement — saves, shares, and comments in the first 30 minutes of posting. A well-crafted caption with a clear Call-to-Action (CTA) like &quot;Save this post for later&quot; or &quot;Tag a friend who needs this&quot; can dramatically boost your initial engagement rate and signal to the algorithm that your content deserves a wider distribution. This initial burst of activity is critical because Instagram interprets it as a sign of quality content that should be shown to more users, both on the Explore page and in the feeds of your existing followers. Beyond the algorithm, captions serve a deeper purpose in building your brand identity. They allow you to showcase your personality, share your values, and create meaningful connections with your audience. When followers feel connected to you on a personal level, they are far more likely to become loyal customers and brand advocates. This is why a thoughtful caption strategy is not just about getting likes but about cultivating a community around your brand. Additionally, well-written captions can drive traffic to your website, increase your newsletter sign-ups, and boost sales for your products or services. Every element of your caption, from the opening hook to the closing call to action, should be designed with a specific goal in mind.
+              The Instagram algorithm rewards posts that generate immediate engagement â€” saves, shares, and comments in the first 30 minutes of posting. A well-crafted caption with a clear Call-to-Action (CTA) like &quot;Save this post for later&quot; or &quot;Tag a friend who needs this&quot; can dramatically boost your initial engagement rate and signal to the algorithm that your content deserves a wider distribution. This initial burst of activity is critical because Instagram interprets it as a sign of quality content that should be shown to more users, both on the Explore page and in the feeds of your existing followers. Beyond the algorithm, captions serve a deeper purpose in building your brand identity. They allow you to showcase your personality, share your values, and create meaningful connections with your audience. When followers feel connected to you on a personal level, they are far more likely to become loyal customers and brand advocates. This is why a thoughtful caption strategy is not just about getting likes but about cultivating a community around your brand. Additionally, well-written captions can drive traffic to your website, increase your newsletter sign-ups, and boost sales for your products or services. Every element of your caption, from the opening hook to the closing call to action, should be designed with a specific goal in mind.
             </p>
 
             <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #cc2366' }}>
@@ -161,7 +159,7 @@ export default function InstagramCaptionPage() {
 
             <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Why Your Caption Strategy Directly Impacts Reach</h3>
             <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-              The Instagram algorithm rewards posts that generate immediate engagement — saves, shares, and comments in the first 30 minutes of posting. A well-crafted caption with a clear Call-to-Action (CTA) like &quot;Save this post for later&quot; or &quot;Tag a friend who needs this&quot; can dramatically boost your initial engagement rate and signal to the algorithm that your content deserves a wider distribution.
+              The Instagram algorithm rewards posts that generate immediate engagement â€” saves, shares, and comments in the first 30 minutes of posting. A well-crafted caption with a clear Call-to-Action (CTA) like &quot;Save this post for later&quot; or &quot;Tag a friend who needs this&quot; can dramatically boost your initial engagement rate and signal to the algorithm that your content deserves a wider distribution.
             </p>
 
             <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #cc2366' }}>
@@ -195,7 +193,7 @@ export default function InstagramCaptionPage() {
           onChange={(e) => setTopic(e.target.value)}
           style={{ marginBottom: '16px', fontSize: '17px' }} 
          />
-         
+
          <div className="responsive-tone-grid" style={{ display: 'grid', gap: '12px', marginBottom: '24px' }}>
            {['Professional', 'Funny', 'Minimalist', 'Inspirational'].map((t) => (
              <button 
@@ -231,3 +229,4 @@ export default function InstagramCaptionPage() {
     </ToolLayout>
   );
 }
+

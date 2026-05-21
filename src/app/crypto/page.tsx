@@ -1,12 +1,9 @@
-"use client";
+﻿"use client";
 
 import { DollarSign } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
 import Calculator from '../../components/Calculator';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function CryptoPage() {
-  usePageMeta("Crypto Profit Calculator USA | Stock ROI Tracker", "Advanced crypto and stock profit calculator with US tax bracket estimation. Track your ROI and estimate capital gains tax accurately.");
 
   return (
     <ToolLayout
@@ -59,7 +56,7 @@ export default function CryptoPage() {
 
               <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Maximizing Gains in 2026</h3>
               <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '40px' }}>
-                As the crypto market matures, institutional adoption is at an all-time high. Using professional tools to track your entry and exit points is no longer optional—it is a necessity. Our calculator is updated for the 2026 market cycle, ensuring you have the latest financial logic for Bitcoin, Ethereum, and emerging Altcoins.
+                As the crypto market matures, institutional adoption is at an all-time high. Using professional tools to track your entry and exit points is no longer optionalâ€”it is a necessity. Our calculator is updated for the 2026 market cycle, ensuring you have the latest financial logic for Bitcoin, Ethereum, and emerging Altcoins.
               </p>
             </article>
           </div>
@@ -69,14 +66,14 @@ export default function CryptoPage() {
             <h2 style={{ fontSize: '32px', borderBottom: '1px solid var(--card-border)', paddingBottom: '16px', marginBottom: '32px' }}>
               Understanding Crypto Profit Calculation and US Capital Gains Tax
             </h2>
-            
+
             <p>
               Navigating the volatile world of cryptocurrency and stock trading requires more than just predicting market trends; it demands a comprehensive understanding of your actual financial returns. A standard profit calculator might show you the difference between your buy and sell prices, but a truly advanced <strong>Crypto Profit Calculator USA</strong> must account for trading fees and, critically, your estimated tax liabilities under United States law.
             </p>
 
             <h3>The Mechanics of Trading Fees</h3>
             <p>
-              Every time you execute a trade on a centralized or decentralized exchange, a fee is incurred. Whether you are using platforms like Coinbase, Binance, or Kraken, these transaction costs—often called maker and taker fees—can significantly erode your net profit if left unchecked. A reliable <strong>Stock ROI Tracker</strong> takes these percentages into account. By factoring in fees on both the initial investment (the buy order) and the final liquidation (the sell order), traders gain a realistic picture of their gross profit margin before taxes. 
+              Every time you execute a trade on a centralized or decentralized exchange, a fee is incurred. Whether you are using platforms like Coinbase, Binance, or Kraken, these transaction costsâ€”often called maker and taker feesâ€”can significantly erode your net profit if left unchecked. A reliable <strong>Stock ROI Tracker</strong> takes these percentages into account. By factoring in fees on both the initial investment (the buy order) and the final liquidation (the sell order), traders gain a realistic picture of their gross profit margin before taxes. 
             </p>
             <p>
               For high-frequency day traders, understanding fee structures is the difference between a winning and losing strategy. Even a seemingly negligible 0.1% fee can compound into thousands of dollars over a fiscal year. Our integrated calculator allows you to dynamically adjust the fee percentage to match your specific brokerage or exchange, ensuring your calculations are pin-point accurate.
@@ -91,12 +88,12 @@ export default function CryptoPage() {
             </p>
             <ul>
               <li style={{ marginBottom: '10px' }}><strong>Short-Term Capital Gains:</strong> If you buy an asset and sell it within a year (365 days or fewer), the profit is considered short-term. In the US, short-term capital gains are taxed at your ordinary income tax rate. Depending on your total income, this rate can be as high as 37%, although many traders fall within the 22% to 24% tax brackets.</li>
-              <li><strong>Long-Term Capital Gains:</strong> If you hold an asset for more than one year before selling, you benefit from long-term capital gains rates. The US government incentivizes long-term investment by taxing these gains at significantly lower rates—typically 0%, 15%, or 20%, depending on your taxable income. For the vast majority of middle-class investors, the 15% rate applies.</li>
+              <li><strong>Long-Term Capital Gains:</strong> If you hold an asset for more than one year before selling, you benefit from long-term capital gains rates. The US government incentivizes long-term investment by taxing these gains at significantly lower ratesâ€”typically 0%, 15%, or 20%, depending on your taxable income. For the vast majority of middle-class investors, the 15% rate applies.</li>
             </ul>
 
             <h3>Why Estimating Your ROI is Crucial</h3>
             <p>
-              Return on Investment (ROI) is the ultimate metric of a trader&apos;s success. However, looking solely at gross ROI can be deceiving. When you calculate your net ROI—factoring in the initial principal, total exchange fees, and estimated US tax obligations—you empower yourself to make better financial decisions. 
+              Return on Investment (ROI) is the ultimate metric of a trader&apos;s success. However, looking solely at gross ROI can be deceiving. When you calculate your net ROIâ€”factoring in the initial principal, total exchange fees, and estimated US tax obligationsâ€”you empower yourself to make better financial decisions. 
             </p>
             <p>
               For example, you might be tempted to sell a cryptocurrency after 11 months because it has appreciated by 50%. However, by utilizing a <strong>Crypto Profit Calculator USA</strong>, you might realize that holding the asset for one more month could shift your tax liability from a 24% short-term rate to a 15% long-term rate. This 9% differential can amount to a substantial sum of money, completely altering the optimal exit strategy.
@@ -120,3 +117,4 @@ export default function CryptoPage() {
     </ToolLayout>
   );
 }
+

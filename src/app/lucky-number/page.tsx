@@ -1,13 +1,11 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { Sparkles, Moon, Sun, RefreshCw } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
 import { generateAICentent } from '../actions/ai';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function LuckyNumberPage() {
-  usePageMeta("Free AI Lucky Number Generator | ToolSnappy", "Generate personalized lucky numbers based on name analysis. Free AI number prediction tool.");
+
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<{ number: number; analysis: string; color: string; day: string; prediction: string } | null>(null);
@@ -15,7 +13,7 @@ export default function LuckyNumberPage() {
   const calculateLuckyNumber = async () => {
     if (!name.trim()) return;
     setIsLoading(true);
-    
+
     // Numerology Logic (Pythagorean)
     const letterValues: { [key: string]: number } = {
       a: 1, j: 1, s: 1,
@@ -50,12 +48,12 @@ export default function LuckyNumberPage() {
       2. Lucky Color.
       3. Lucky Day of the week.
       4. A "TikTok style" prediction for their 2026.
-      
+
       Format the output as a JSON object with keys "analysis", "color", "day", and "prediction".
       Only return the JSON.`;
 
       const response = await generateAICentent(prompt);
-      
+
       let aiData;
       try {
         let cleanJson = response.trim();
@@ -72,7 +70,7 @@ export default function LuckyNumberPage() {
         let color = "Gold";
         let day = "Sunday";
         let prediction = "";
-        
+
         for (const line of lines) {
           const lower = line.toLowerCase();
           const cleanLine = line.replace(/^[\d\.\-\*\s]+/, '').replace(/^["']|["']$/g, '').trim();
@@ -86,7 +84,7 @@ export default function LuckyNumberPage() {
             analysis += (analysis ? " " : "") + cleanLine;
           }
         }
-        
+
         aiData = {
           analysis: analysis || `You possess a powerful destiny under number ${destinyNumber}, driving you towards massive success, strong relationships, and self-belief.`,
           color: color || "Gold",
@@ -94,7 +92,7 @@ export default function LuckyNumberPage() {
           prediction: prediction || "Your 2026 is scheduled to be a year of breakthroughs, viral potential, and finding your true alignment!"
         };
       }
-      
+
       setResult({
         number: destinyNumber,
         ...aiData
@@ -168,7 +166,7 @@ export default function LuckyNumberPage() {
         <div style={{ maxWidth: '900px', margin: '100px auto 0' }}>
           <article className="prose prose-invert lg:prose-xl" style={{ borderTop: '1px solid var(--card-border)', paddingTop: '60px' }}>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ marginBottom: '32px', textAlign: 'center' }}>How Name-to-Number Mapping Works: A Fun Look at Numerology</h2>
-            
+
             <p style={{ color: 'var(--muted)', lineHeight: '1.9', fontSize: '18px', marginBottom: '32px' }}>
               Have you ever wondered if your name holds hidden patterns? In numerology, each letter of the alphabet is assigned a number value. This system creates interesting patterns that many people enjoy exploring as a fun personality insight tool. Our AI-powered generator applies these classic letter-to-number mappings to produce your unique number. While numerology has ancient roots dating back to the Greek mathematician Pythagoras, modern versions of this practice are used primarily as a form of entertainment and personal reflection rather than as a predictive science. The appeal lies in the way patterns emerge from mathematical calculations applied to something as personal as your name, creating a unique result that feels tailored specifically to you.
             </p>
@@ -252,3 +250,4 @@ export default function LuckyNumberPage() {
     </ToolLayout>
   );
 }
+

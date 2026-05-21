@@ -13,6 +13,15 @@ const nextConfig: NextConfig = {
   experimental: {
     webpackMemoryOptimizations: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path+/",
+        destination: "/:path+",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

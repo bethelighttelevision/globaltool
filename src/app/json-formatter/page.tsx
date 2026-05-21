@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { Copy, CheckCircle2, AlertTriangle, FileJson } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function JsonFormatterPage() {
-  usePageMeta("Free JSON Formatter & Validator | ToolSnappy", "Format, validate, and beautify JSON strings online. Free JSON formatter tool for developers.");
+
   const [inputJson, setInputJson] = useState('');
   const [outputJson, setOutputJson] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +16,7 @@ export default function JsonFormatterPage() {
       setError(null);
       return;
     }
-    
+
     try {
       const parsed = JSON.parse(inputJson);
       const formatted = JSON.stringify(parsed, null, 2);
@@ -101,7 +99,7 @@ export default function JsonFormatterPage() {
       }
     >
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', textAlign: 'left' }}>
-        
+
         {/* Input Panel */}
         <div style={{ background: 'rgba(255,255,255,0.02)', padding: '24px', borderRadius: '16px', border: '1px solid var(--card-border)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -111,7 +109,7 @@ export default function JsonFormatterPage() {
               <button onClick={formatJson} className="premium-button" style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '8px' }}>Format</button>
             </div>
           </div>
-          
+
           <textarea 
             className="input-field" 
             value={inputJson} 
@@ -134,7 +132,7 @@ export default function JsonFormatterPage() {
               {copied ? 'Copied!' : 'Copy Code'}
             </button>
           </div>
-          
+
           {error ? (
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--error)', background: 'rgba(255, 59, 48, 0.05)', borderRadius: '12px', border: '1px dashed rgba(255, 59, 48, 0.3)' }}>
               <AlertTriangle size={32} style={{ marginBottom: '16px' }} />
@@ -155,3 +153,4 @@ export default function JsonFormatterPage() {
     </ToolLayout>
   );
 }
+

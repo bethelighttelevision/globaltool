@@ -267,27 +267,39 @@ export default async function BlogPostPage(props: BlogPostProps) {
         <Image src={post.image} alt={post.title} width={1200} height={675} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
 
-      {/* JSON-LD Article Schema */}
+      {/* JSON-LD Article + BreadcrumbList Schema */}
       <Script
         id="article-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": post.title,
-            "description": post.excerpt,
-            "image": post.image,
-            "datePublished": post.date,
-            "author": {
-              "@type": "Organization",
-              "name": "ToolSnappy Editorial Team"
-            },
-            "publisher": {
-              "@type": "Organization",
-              "name": "ToolSnappy",
-              "logo": { "@type": "ImageObject", "url": "https://toolsnappy.com/logo.png" }
-            }
+            "@graph": [
+              {
+                "@type": "Article",
+                "headline": post.title,
+                "description": post.excerpt,
+                "image": post.image,
+                "datePublished": post.date,
+                "author": {
+                  "@type": "Organization",
+                  "name": "ToolSnappy Editorial Team"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "ToolSnappy",
+                  "logo": { "@type": "ImageObject", "url": "https://toolsnappy.com/logo.png" }
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolsnappy.com" },
+                  { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://toolsnappy.com/blog" },
+                  { "@type": "ListItem", "position": 3, "name": post.title, "item": "https://toolsnappy.com/blog/" + post.slug }
+                ]
+              }
+            ]
           })
         }}
       />

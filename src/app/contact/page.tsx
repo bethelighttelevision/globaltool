@@ -1,12 +1,10 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, Mail, Send, CheckCircle2 } from 'lucide-react';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function ContactUs() {
-  usePageMeta("Contact Us | ToolSnappy", "Have a suggestion, bug report, or question? Reach out to the ToolSnappy team. We respond within 24 hours.");
+
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
 
@@ -31,7 +29,7 @@ export default function ContactUs() {
             <Mail size={32} color="var(--accent)" />
             <h1 className="text-3xl sm:text-4xl font-bold" style={{ margin: 0 }}>Contact Us</h1>
           </div>
-          
+
           <p className="text-base sm:text-lg" style={{ color: 'var(--muted)', marginBottom: '40px', lineHeight: 1.6 }}>
             Have a suggestion for a new tool? Found a bug? Or just want to say hi? Reach out to us and we&apos;ll get back to you within 24 hours.
           </p>
@@ -55,7 +53,7 @@ export default function ContactUs() {
                   <input type="email" className="input-field" placeholder="john@example.com" required />
                 </div>
               </div>
-              
+
               <div style={{ marginBottom: '32px' }}>
                 <label className="label-text">Message</label>
                 <textarea className="input-field" placeholder="How can we help you?" style={{ height: '150px', resize: 'none' }} required></textarea>
@@ -81,3 +79,4 @@ export default function ContactUs() {
     </div>
   );
 }
+

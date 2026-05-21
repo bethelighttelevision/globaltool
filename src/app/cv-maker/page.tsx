@@ -1,13 +1,10 @@
-"use client";
+﻿"use client";
 
 import React from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import CVMaker from '../../components/CVMaker';
 import { FileText } from 'lucide-react';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function CVMakerPage() {
-  usePageMeta("Free Online CV Maker | Professional Resume Builder 2026", "Create a professional CV in minutes with our free online CV maker.");
 
   return (
     <ToolLayout
@@ -27,7 +24,7 @@ export default function CVMakerPage() {
           </h2>
 
           <p>
-            In today&apos;s competitive job market, your CV is more than just a list of your work history—it&apos;s your personal marketing document. With the rise of AI-driven recruitment and Applicant Tracking Systems (ATS), the way you structure and present your professional experience has never been more critical. Our <strong>Professional CV Maker</strong> is designed to help you navigate these challenges effortlessly. Whether you are a recent graduate entering the workforce for the first time or a seasoned executive looking to make a career change, having a polished, well-structured CV is the single most important tool in your job search arsenal. Recruiters spend an average of just six to eight seconds scanning a resume before deciding whether to move forward, which means every word, bullet point, and formatting choice must work in your favor.
+            In today&apos;s competitive job market, your CV is more than just a list of your work historyâ€”it&apos;s your personal marketing document. With the rise of AI-driven recruitment and Applicant Tracking Systems (ATS), the way you structure and present your professional experience has never been more critical. Our <strong>Professional CV Maker</strong> is designed to help you navigate these challenges effortlessly. Whether you are a recent graduate entering the workforce for the first time or a seasoned executive looking to make a career change, having a polished, well-structured CV is the single most important tool in your job search arsenal. Recruiters spend an average of just six to eight seconds scanning a resume before deciding whether to move forward, which means every word, bullet point, and formatting choice must work in your favor.
           </p>
 
           <h3>1. Choosing the Right Template</h3>
@@ -67,7 +64,7 @@ export default function CVMakerPage() {
 
           <h3>7. Formatting and Length Best Practices</h3>
           <p>
-            In most industries, the ideal CV length is one to two pages. Early-career professionals should aim for a single page, while those with more than ten years of experience can justify a two-page format. Regardless of length, every line on your CV should earn its place by either demonstrating a relevant skill or quantifying an achievement. Use consistent formatting throughout—same font, same bullet style, same date format—to create a polished, professional appearance. White space is your friend; cramming too much information onto the page makes your CV difficult to scan and may cause recruiters to miss your most important accomplishments. Our CV Maker automatically handles formatting consistency so you can focus on content.
+            In most industries, the ideal CV length is one to two pages. Early-career professionals should aim for a single page, while those with more than ten years of experience can justify a two-page format. Regardless of length, every line on your CV should earn its place by either demonstrating a relevant skill or quantifying an achievement. Use consistent formatting throughoutâ€”same font, same bullet style, same date formatâ€”to create a polished, professional appearance. White space is your friend; cramming too much information onto the page makes your CV difficult to scan and may cause recruiters to miss your most important accomplishments. Our CV Maker automatically handles formatting consistency so you can focus on content.
           </p>
 
           <div className="glass-panel" style={{ padding: '30px', margin: '40px 0', borderLeft: '4px solid var(--accent)' }}>
@@ -96,3 +93,4 @@ export default function CVMakerPage() {
     </ToolLayout>
   );
 }
+

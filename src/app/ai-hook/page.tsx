@@ -1,13 +1,11 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from 'react';
 import { Zap } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
 import { generateAICentent } from '../actions/ai';
-import { usePageMeta } from '../../hooks/usePageMeta';
-
 export default function AIHookPage() {
-  usePageMeta("Free AI Viral Hook Generator | ToolSnappy", "Generate viral content hooks for social media using AI. Free hook generator for TikTok, Instagram, YouTube.");
+
   const [topic, setTopic] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<{ psychological: string[]; curiosity: string[]; data: string[] } | null>(null);
@@ -15,19 +13,19 @@ export default function AIHookPage() {
   const handleGenerate = async () => {
     if (!topic.trim()) return;
     setIsLoading(true);
-    
+
     try {
       const prompt = `Generate 9 viral hooks for a video about "${topic}". 
       Divide them into 3 categories:
       1. Psychological Hooks (Emotional/FOMO)
       2. Curiosity Hooks (Mystery/Secret)
       3. Data-Driven Hooks (Numbers/Proof)
-      
+
       Format the output as a JSON object with keys "psychological", "curiosity", and "data", each being an array of 3 strings. 
       Only return the JSON.`;
-      
+
       const response = await generateAICentent(prompt);
-      
+
       let data;
       try {
         let cleanJson = response.trim();
@@ -46,7 +44,7 @@ export default function AIHookPage() {
         const psychological: string[] = [];
         const curiosity: string[] = [];
         const dataDriven: string[] = [];
-        
+
         let currentCategory: 'psychological' | 'curiosity' | 'data' = 'psychological';
         for (const line of lines) {
           const lower = line.toLowerCase();
@@ -60,7 +58,7 @@ export default function AIHookPage() {
             currentCategory = 'data';
             continue;
           }
-          
+
           const cleanLine = line.replace(/^[\d\.\-\*\s]+/, '').replace(/^["']|["']$/g, '').trim();
           if (cleanLine.length > 8 && !cleanLine.startsWith('{') && !cleanLine.startsWith('}')) {
             if (currentCategory === 'psychological') psychological.push(cleanLine);
@@ -68,14 +66,14 @@ export default function AIHookPage() {
             else dataDriven.push(cleanLine);
           }
         }
-        
+
         data = {
           psychological: psychological.length >= 3 ? psychological.slice(0, 3) : [...psychological, "Create a sense of urgency around " + topic, "Reveal a hidden truth about " + topic, "Provide a stat about " + topic].slice(0, 3),
           curiosity: curiosity.length >= 3 ? curiosity.slice(0, 3) : [...curiosity, "What they won't tell you about " + topic, "The secret to mastering " + topic, "Stop doing this if you want " + topic].slice(0, 3),
           data: dataDriven.length >= 3 ? dataDriven.slice(0, 3) : [...dataDriven, "Why 99% of people fail at " + topic, "The 3-step formula for " + topic, "Proof that " + topic + " actually works"].slice(0, 3)
         };
       }
-      
+
       setResults(data);
     } catch (error) {
       console.error(error);
@@ -137,7 +135,7 @@ export default function AIHookPage() {
           <article className="prose prose-invert lg:prose-xl">
             <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>The Science Behind Viral Video Hooks in 2026</h2>
             <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-              In the age of short-form content where attention spans are shrinking and competition for views is fiercer than ever, you have exactly 1.7 seconds to stop someone from scrolling past your video. Our <strong>Viral AI Hook Generator</strong> is built on the same proven psychological principles used by the world&rsquo;s top creators to dominate TikTok, Instagram Reels, and YouTube Shorts. By mastering the critical first few seconds of your video content, you can dramatically improve audience retention rates and signal to the algorithm that your content is worth showing to a much wider audience. A compelling hook is no longer optional for creators who want to grow — it is the single most important element of any video strategy.
+              In the age of short-form content where attention spans are shrinking and competition for views is fiercer than ever, you have exactly 1.7 seconds to stop someone from scrolling past your video. Our <strong>Viral AI Hook Generator</strong> is built on the same proven psychological principles used by the world&rsquo;s top creators to dominate TikTok, Instagram Reels, and YouTube Shorts. By mastering the critical first few seconds of your video content, you can dramatically improve audience retention rates and signal to the algorithm that your content is worth showing to a much wider audience. A compelling hook is no longer optional for creators who want to grow â€” it is the single most important element of any video strategy.
             </p>
 
             <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Three Types of Hooks for Guaranteed Engagement</h3>
@@ -153,7 +151,7 @@ export default function AIHookPage() {
             <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #34c759' }}>
               <h4 style={{ marginTop: 0, color: '#34c759' }}>The &ldquo;Rule of One&rdquo; for Maximum Impact</h4>
               <p style={{ marginBottom: 0, fontSize: '15px' }}>
-                Every hook you write should focus on one single idea, one single problem, or one single benefit for the viewer. Trying to explain too many concepts in the first three seconds is the fastest way to confuse your audience and lose their attention permanently. Keep your hook focused, keep it sharp, and make sure every word serves the singular purpose of making the viewer curious enough to watch the next second of your content. This principle applies whether you are creating a fifteen-second TikTok or a ten-minute YouTube documentary — the opening must be ruthlessly focused.
+                Every hook you write should focus on one single idea, one single problem, or one single benefit for the viewer. Trying to explain too many concepts in the first three seconds is the fastest way to confuse your audience and lose their attention permanently. Keep your hook focused, keep it sharp, and make sure every word serves the singular purpose of making the viewer curious enough to watch the next second of your content. This principle applies whether you are creating a fifteen-second TikTok or a ten-minute YouTube documentary â€” the opening must be ruthlessly focused.
               </p>
             </div>
 
@@ -169,7 +167,7 @@ export default function AIHookPage() {
 
             <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>How to Test and Refine Your Video Hooks</h3>
             <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-              Creating the perfect hook is an iterative process that benefits from testing and data analysis. The most successful creators generate multiple hook variations for each video and test them against each other using A/B thumbnail and title testing tools available on platforms like YouTube Studio. Pay close attention to your audience retention graphs — the first five seconds of the curve tell you everything you need to know about whether your hook is working. If you see a sharp drop-off in the first few seconds, your hook needs to be more compelling, more specific, or more directly relevant to the promise made in your thumbnail and title. Over time, you will develop an intuition for which types of hooks resonate best with your specific audience, allowing you to consistently open with high-retention content that grows your channel.
+              Creating the perfect hook is an iterative process that benefits from testing and data analysis. The most successful creators generate multiple hook variations for each video and test them against each other using A/B thumbnail and title testing tools available on platforms like YouTube Studio. Pay close attention to your audience retention graphs â€” the first five seconds of the curve tell you everything you need to know about whether your hook is working. If you see a sharp drop-off in the first few seconds, your hook needs to be more compelling, more specific, or more directly relevant to the promise made in your thumbnail and title. Over time, you will develop an intuition for which types of hooks resonate best with your specific audience, allowing you to consistently open with high-retention content that grows your channel.
             </p>
           </article>
         </div>
@@ -197,3 +195,4 @@ export default function AIHookPage() {
     </ToolLayout>
   );
 }
+
