@@ -256,7 +256,7 @@ export async function getChannelData(input: string) {
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) throw new Error("YouTube API key not configured");
 
-  const channelId = extractChannelId(input);
+  let channelId = extractChannelId(input);
   const handle = extractChannelHandle(input);
   const videoId = extractVideoId(input);
 

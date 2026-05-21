@@ -28,7 +28,7 @@ export async function getVideoDownloadInfo(videoUrl: string, platform: string) {
     const html = await pageRes.text();
 
     interface FormatItem { mimeType?: string; qualityLabel?: string; quality?: string; url?: string; contentLength?: string; }
-    const formats: FormatItem[] = [];
+    let formats: FormatItem[] = [];
     const ytMatch = html.match(/ytInitialPlayerResponse\s*=\s*({.*?});/);
     if (ytMatch) {
       try {
