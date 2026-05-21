@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { CalendarDays, ChevronLeft, Clock } from 'lucide-react';
 import AdSensePlaceholder from '../../../components/AdSensePlaceholder';
-import { supabase } from '../../../lib/supabase';
+import { getSupabase } from '../../../lib/supabase';
 import { marked } from 'marked';
 import ShareButton from '../../../components/ShareButton';
 
@@ -33,6 +33,7 @@ export async function generateStaticParams() {
   }));
 
   try {
+    const supabase = getSupabase();
     const { data } = await supabase
       .from('blogs')
       .select('slug');
@@ -53,6 +54,7 @@ export async function generateMetadata(props: BlogPostProps) {
   let post: PostData | null = blogPosts.find((p) => p.slug === params.slug) || null;
 
   try {
+    const supabase = getSupabase();
     const { data } = await supabase
       .from('blogs')
       .select('*')
@@ -94,6 +96,7 @@ export default async function BlogPostPage(props: BlogPostProps) {
 
   // 1. Try fetching from Supabase
   try {
+    const supabase = getSupabase();
     const { data, error } = await supabase
       .from('blogs')
       .select('*')
@@ -138,6 +141,7 @@ export default async function BlogPostPage(props: BlogPostProps) {
   // Get related articles
   let relatedArticles = [...blogPosts];
   try {
+    const supabase = getSupabase();
     const { data } = await supabase
       .from('blogs')
       .select('title, slug, excerpt, image, date, content')

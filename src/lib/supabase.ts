@@ -1,8 +1,17 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+let supabaseInstance: SupabaseClient | null = null;
 
-// We use the service role key if available (on the server) to bypass RLS, 
-// otherwise we fall back to the anon key (on the client).
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export function getSupabase(): SupabaseClient {
+  if (supabaseInstance) return supabaseInstance;
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Supabase environment variables are not configured');
+  }
+
+  supabaseInstance = createClient(supabaseUrl, supabaseKey);
+  return supabaseInstance;
+}

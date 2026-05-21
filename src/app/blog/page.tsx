@@ -1,5 +1,5 @@
 import React from 'react';
-import { supabase } from '../../lib/supabase';
+import { getSupabase } from '../../lib/supabase';
 import { blogPosts } from '../../data/posts';
 import BlogListClient from '../../components/BlogListClient';
 import AdSensePlaceholder from '../../components/AdSensePlaceholder';
@@ -19,6 +19,7 @@ export default async function BlogPage() {
   const slugToCategory = new Map(blogPosts.map(p => [p.slug, p.category]));
 
   try {
+    const supabase = getSupabase();
     const { data, error } = await supabase
       .from('blogs')
       .select('*')

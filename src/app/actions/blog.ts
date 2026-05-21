@@ -1,6 +1,6 @@
 'use server';
 
-import { supabase } from '../../lib/supabase';
+import { getSupabase } from '../../lib/supabase';
 import { revalidatePath } from 'next/cache';
 
 export interface BlogInput {
@@ -31,6 +31,7 @@ function getErrorMessage(err: unknown): string {
 // Fetch all articles for the admin dashboard
 export async function getAdminBlogs() {
   try {
+    const supabase = getSupabase();
     const { data, error } = await supabase
       .from('blogs')
       .select('*')
@@ -48,6 +49,7 @@ export async function getAdminBlogs() {
 // Get a single article by ID
 export async function getAdminBlogById(id: string) {
   try {
+    const supabase = getSupabase();
     const { data, error } = await supabase
       .from('blogs')
       .select('*')
@@ -66,6 +68,7 @@ export async function getAdminBlogById(id: string) {
 // Create a new blog post
 export async function createAdminBlog(input: BlogInput) {
   try {
+    const supabase = getSupabase();
     const { data, error } = await supabase
       .from('blogs')
       .insert([
@@ -97,6 +100,7 @@ export async function createAdminBlog(input: BlogInput) {
 // Update an existing blog post
 export async function updateAdminBlog(id: string, input: BlogInput) {
   try {
+    const supabase = getSupabase();
     const { data, error } = await supabase
       .from('blogs')
       .update({
@@ -127,6 +131,7 @@ export async function updateAdminBlog(id: string, input: BlogInput) {
 // Delete a blog post
 export async function deleteAdminBlog(id: string, slug?: string) {
   try {
+    const supabase = getSupabase();
     const { error } = await supabase
       .from('blogs')
       .delete()
