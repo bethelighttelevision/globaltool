@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,20 +11,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.ionos.com',
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: '"ToolSnappy Contact" <contact@toolsnappy.com>',
+    await resend.emails.send({
+      from: 'ToolSnappy Contact <contact@toolsnappy.com>',
       replyTo: email,
-      to: process.env.CONTACT_EMAIL || 'aureliorenatoksa@gmail.com',
+      to: [process.env.CONTACT_EMAIL || 'aureliorenatoksa@gmail.com'],
       subject: `New Contact Form Message from ${name}`,
       html: `
         <h2>New Contact Form Submission</h2>
