@@ -1,1 +1,2 @@
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+# AdSense approval pending. Add your publisher ID once approved.
+# Format: google.com, pub-YOUR_ID, DIRECT, f08c47fec0942fa0
