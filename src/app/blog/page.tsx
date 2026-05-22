@@ -1,6 +1,6 @@
 import React from 'react';
 import { getSupabase } from '../../lib/supabase';
-import { blogPosts } from '../../data/posts';
+import { blogPosts, BlogPost } from '../../data/posts';
 import BlogListClient from '../../components/BlogListClient';
 import AdSensePlaceholder from '../../components/AdSensePlaceholder';
 import { BookOpen } from 'lucide-react';
@@ -14,9 +14,8 @@ export const metadata = {
 
 export default async function BlogPage() {
   let posts = [...blogPosts];
-
-  // Map slugs to categories for database posts that don't have it explicitly stored
   const slugToCategory = new Map(blogPosts.map(p => [p.slug, p.category]));
+  const coveredSlugs = new Set<string>();
 
   try {
     const supabase = getSupabase();
@@ -27,16 +26,24 @@ export default async function BlogPage() {
 
     if (data && !error && data.length > 0) {
       type BlogRow = { id: string; title: string; slug: string; excerpt: string; content: string; image: string; date: string; category?: string };
-      posts = data.map((d: BlogRow) => ({
-        id: String(d.id),
-        title: d.title || '',
-        slug: d.slug || '',
-        excerpt: d.excerpt || '',
-        content: d.content || '',
-        image: d.image || '/blog-banner.png',
-        date: d.date || '',
-        category: d.category || slugToCategory.get(d.slug) || 'SEO',
-      }));
+
+      const fromDb: BlogPost[] = data.map((d: BlogRow) => {
+        coveredSlugs.add(d.slug);
+        return {
+          id: String(d.id),
+          title: d.title || '',
+          slug: d.slug || '',
+          excerpt: d.excerpt || '',
+          content: d.content || '',
+          image: d.image || '/blog-banner.png',
+          date: d.date || '',
+          category: d.category || slugToCategory.get(d.slug) || 'SEO',
+        };
+      });
+
+      // Merge: DB posts first, then any static posts not yet in DB
+      const staticOnly = posts.filter(p => !coveredSlugs.has(p.slug));
+      posts = [...fromDb, ...staticOnly];
     } else if (error) {
       console.error("Supabase query failed, using static posts fallback:", error.message);
     }
