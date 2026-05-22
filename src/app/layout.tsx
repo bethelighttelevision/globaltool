@@ -95,6 +95,7 @@ export default function RootLayout({
               <div>
                 <h4 style={{ fontSize: '14px', marginBottom: '16px', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Company</h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <Link href="/about" style={{ color: 'var(--muted)', fontSize: '14px', textDecoration: 'none' }}>About Us</Link>
                   <Link href="/privacy-policy" style={{ color: 'var(--muted)', fontSize: '14px', textDecoration: 'none' }}>Privacy Policy</Link>
                   <Link href="/terms" style={{ color: 'var(--muted)', fontSize: '14px', textDecoration: 'none' }}>Terms of Service</Link>
                   <Link href="/contact" style={{ color: 'var(--muted)', fontSize: '14px', textDecoration: 'none' }}>Contact Us</Link>

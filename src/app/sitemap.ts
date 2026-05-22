@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/crypto',
     '/ai-hook',
     '/blog',
+    '/about',
     '/contact',
     '/privacy-policy',
     '/terms',

@@ -2,19 +2,43 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Mail, Send, CheckCircle2 } from 'lucide-react';
-export default function ContactUs() {
+import { ArrowLeft, Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
+export default function ContactUs() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setSending(false);
-    setSubmitted(true);
+    setError('');
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Failed to send');
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -38,34 +62,39 @@ export default function ContactUs() {
             <div className="glass-panel" style={{ padding: '40px', textAlign: 'center', background: 'rgba(50, 215, 75, 0.05)', borderColor: 'var(--success)' }}>
               <CheckCircle2 size={48} color="var(--success)" style={{ marginBottom: '16px' }} />
               <h2 style={{ marginBottom: '8px' }}>Message Received!</h2>
-              <p style={{ color: 'var(--muted)' }}>Thank you for reaching out. Our team has been notified.</p>
-              <button className="premium-button" onClick={() => setSubmitted(false)} style={{ marginTop: '24px' }}>Send Another Message</button>
+              <p style={{ color: 'var(--muted)' }}>Thank you for reaching out. We will get back to you within 24 hours.</p>
+              <button className="premium-button" onClick={() => { setSubmitted(false); setError(''); }} style={{ marginTop: '24px' }}>Send Another Message</button>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', marginBottom: '24px' }}>
                 <div>
                   <label className="label-text">Your Name</label>
-                  <input type="text" className="input-field" placeholder="John Doe" required />
+                  <input type="text" name="name" className="input-field" placeholder="John Doe" required />
                 </div>
                 <div>
                   <label className="label-text">Email Address</label>
-                  <input type="email" className="input-field" placeholder="john@example.com" required />
+                  <input type="email" name="email" className="input-field" placeholder="john@example.com" required />
                 </div>
               </div>
 
-              <div style={{ marginBottom: '32px' }}>
+              <div style={{ marginBottom: '24px' }}>
                 <label className="label-text">Message</label>
-                <textarea className="input-field" placeholder="How can we help you?" style={{ height: '150px', resize: 'none' }} required></textarea>
+                <textarea name="message" className="input-field" placeholder="How can we help you?" style={{ height: '150px', resize: 'none' }} required />
               </div>
+
+              {error && (
+                <div className="glass-panel" style={{ padding: '12px 16px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255, 50, 50, 0.05)', borderColor: 'rgba(255, 50, 50, 0.3)' }}>
+                  <AlertCircle size={18} color="var(--destructive)" />
+                  <span style={{ fontSize: '14px', color: 'var(--destructive)' }}>{error}</span>
+                </div>
+              )}
 
               <button type="submit" className="premium-button" style={{ width: '100%', fontSize: '18px' }} disabled={sending}>
                 {sending ? (
                   <>Processing...</>
                 ) : (
-                  <>
-                    <Send size={20} /> Send Message
-                  </>
+                  <><Send size={20} /> Send Message</>
                 )}
               </button>
               <p style={{ color: 'var(--muted)', fontSize: '12px', marginTop: '16px', textAlign: 'center' }}>
@@ -75,8 +104,13 @@ export default function ContactUs() {
             </form>
           )}
         </div>
+
+        <div className="glass-panel animate-fade-in" style={{ padding: '24px', marginTop: '24px', textAlign: 'center' }}>
+          <p style={{ color: 'var(--muted)', fontSize: '14px' }}>
+            Prefer emailing us directly? <Link href="mailto:contact@toolsnappy.com" style={{ color: 'var(--accent)', textDecoration: 'underline' }}>contact@toolsnappy.com</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
 }
-
