@@ -1,0 +1,37 @@
+# ToolSnappy
+> Free SEO, social media, crypto & developer tools. 100% free, no sign-up required.
+
+## Tools
+- SEO Analyzer: https://toolsnappy.com/seo-analyzer
+- Background Remover: https://toolsnappy.com/bg-remover
+- Crypto Calculator: https://toolsnappy.com/crypto
+- AI Hook Generator: https://toolsnappy.com/ai-hook
+- YouTube SEO: https://toolsnappy.com/youtube-seo
+- Instagram Caption Generator: https://toolsnappy.com/instagram-caption
+- TikTok Hashtag Generator: https://toolsnappy.com/tiktok-hashtags
+- Word Counter: https://toolsnappy.com/word-counter
+- Password Generator: https://toolsnappy.com/password-gen
+- JSON Formatter: https://toolsnappy.com/json-formatter
+- Base64 Converter: https://toolsnappy.com/base64-converter
+- PDF Converter: https://toolsnappy.com/pdf-converter
+- Meta Tags Generator: https://toolsnappy.com/meta-tags
+- Car Loan Calculator: https://toolsnappy.com/car-loan-calculator
+- Mortgage Calculator: https://toolsnappy.com/mortgage-calculator
+- Image Upscaler: https://toolsnappy.com/image-upscaler
+- Lucky Number Generator: https://toolsnappy.com/lucky-number
+- CV Maker: https://toolsnappy.com/cv-maker
+- YouTube Tag Extractor: https://toolsnappy.com/youtube-tag-extractor
+- YouTube Thumbnail Analyzer: https://toolsnappy.com/youtube-thumbnail-analyzer
+- YouTube Thumbnail Tester: https://toolsnappy.com/youtube-thumbnail-tester
+- YouTube Thumbnail Downloader: https://toolsnappy.com/youtube-thumbnail-downloader
+- YouTube Video Downloader: https://toolsnappy.com/youtube-video-downloader
+- Facebook Video Downloader: https://toolsnappy.com/facebook-video-downloader
+- Instagram Video Downloader: https://toolsnappy.com/instagram-video-downloader
+- TikTok Video Downloader: https://toolsnappy.com/tiktok-video-downloader
+
+## Pages
+- Blog: https://toolsnappy.com/blog
+- About: https://toolsnappy.com/about
+- Privacy Policy: https://toolsnappy.com/privacy-policy
+- Terms of Service: https://toolsnappy.com/terms
+- Contact: https://toolsnappy.com/contact

@@ -58,6 +58,40 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="alternate icon" href="/favicon.svg" />
+        <link rel="alternate" href="https://toolsnappy.com" hrefLang="x-default" />
+        <link rel="alternate" href="https://toolsnappy.com" hrefLang="en" />
+        <link rel="alternate" href="https://toolsnappy.com" hrefLang="en-US" />
+        <link rel="alternate" href="https://toolsnappy.com" hrefLang="en-GB" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://toolsnappy.com/#website",
+              "url": "https://toolsnappy.com",
+              "name": "ToolSnappy",
+              "description": "Free SEO, social media, crypto & developer tools. 100% free, no sign-up required.",
+              "potentialAction": { "@type": "SearchAction", "target": { "@type": "EntryPoint", "urlTemplate": "https://toolsnappy.com/?s={search_term_string}" }, "query-input": "required name=search_term_string" }
+            },
+            {
+              "@type": "Organization",
+              "@id": "https://toolsnappy.com/#organization",
+              "url": "https://toolsnappy.com",
+              "name": "ToolSnappy",
+              "logo": "https://toolsnappy.com/logo.svg",
+              "description": "Engineered for speed, privacy, and digital dominance."
+            },
+            {
+              "@type": "WebApplication",
+              "@id": "https://toolsnappy.com/#webapp",
+              "url": "https://toolsnappy.com",
+              "name": "ToolSnappy",
+              "applicationCategory": "UtilityApplication",
+              "operatingSystem": "All",
+              "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+            }
+          ]
+        }) }} />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-WHHDYWK3F5"
           strategy="afterInteractive"
