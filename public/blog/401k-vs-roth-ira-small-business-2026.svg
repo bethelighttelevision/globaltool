@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a2f4f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#007aff" />
+      <stop offset="100%" style="stop-color:#0055b3" />
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5ac8fa" />
+      <stop offset="100%" style="stop-color:#3a9ad9" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)" />
+  <text x="400" y="100" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="#fff">Roth IRA vs 401(k)</text>
+  <text x="400" y="125" text-anchor="middle" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.4)">2026 Contribution Limits</text>
+  <rect x="140" y="200" width="180" height="120" rx="8" fill="url(#bar1)" opacity="0.85" />
+  <text x="230" y="240" text-anchor="middle" font-family="monospace" font-size="24" font-weight="bold" fill="#fff">$7,500</text>
+  <text x="230" y="260" text-anchor="middle" font-family="sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">Roth IRA</text>
+  <text x="230" y="280" text-anchor="middle" font-family="sans-serif" font-size="8" fill="rgba(255,255,255,0.3)">Tax-free growth</text>
+  <rect x="480" y="150" width="180" height="170" rx="8" fill="url(#bar2)" opacity="0.85" />
+  <text x="570" y="210" text-anchor="middle" font-family="monospace" font-size="24" font-weight="bold" fill="#fff">$24,500</text>
+  <text x="570" y="230" text-anchor="middle" font-family="sans-serif" font-size="10" fill="rgba(255,255,255,0.7)">401(k) Employee</text>
+  <text x="570" y="250" text-anchor="middle" font-family="sans-serif" font-size="8" fill="rgba(255,255,255,0.3)">Pre-tax deduction</text>
+  <text x="570" y="300" text-anchor="middle" font-family="monospace" font-size="16" fill="rgba(90,200,250,0.6)">+ $70k Solo</text>
+  <circle cx="100" cy="300" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+  <text x="100" y="305" text-anchor="middle" font-family="sans-serif" font-size="8" fill="rgba(255,255,255,0.2)">SEP</text>
+  <circle cx="700" cy="300" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+  <text x="700" y="305" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(255,255,255,0.2)">IRA</text>
+  <text x="400" y="450" text-anchor="middle" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.2)">401(k) vs Roth IRA Guide 2026</text>
+</svg>

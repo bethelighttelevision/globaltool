@@ -38,9 +38,9 @@ export async function generateStaticParams() {
       .from('blogs')
       .select('slug');
     if (data && data.length > 0) {
-      slugs = data.map((d: { slug: string }) => ({
-        slug: d.slug,
-      }));
+      const dbSlugs = new Set(data.map((d: { slug: string }) => d.slug));
+      const combinedSlugs = [...new Set([...blogPosts.map(p => p.slug), ...dbSlugs])];
+      slugs = combinedSlugs.map(slug => ({ slug }));
     }
   } catch {
     // static params fallback
