@@ -1,41 +1,33 @@
 import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const type = searchParams.get('type') || 'all';
-
+export async function GET() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  if (!supabaseUrl || !supabaseKey) {
-    return NextResponse.json({ success: false, error: 'Supabase not configured' }, { status: 500 });
-  }
+  const keyUsed = svcKey ? 'SERVICE_ROLE' : 'ANON';
 
   try {
-    if (type === 'count') {
-      const res = await fetch(`${supabaseUrl}/rest/v1/guest_requests?select=id&status=eq.pending`, {
-        headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
-      });
-      if (!res.ok) {
-        const errBody = await res.text();
-        return NextResponse.json({ success: false, error: errBody, count: 0 });
-      }
-      const data = await res.json();
-      return NextResponse.json({ success: true, count: data?.length || 0 });
-    }
-
-    const res = await fetch(`${supabaseUrl}/rest/v1/guest_requests?order=created_at.desc`, {
-      headers: { apikey: supabaseKey, Authorization: `Bearer ${supabaseKey}` },
+    const key = svcKey || anonKey;
+    const res = await fetch(`${supabaseUrl}/rest/v1/guest_requests?order=created_at.desc&select=*`, {
+      headers: { apikey: key, Authorization: `Bearer ${key}` },
     });
 
-    if (!res.ok) {
-      const errBody = await res.text();
-      return NextResponse.json({ success: false, error: errBody, data: [] });
-    }
+    const body = await res.text();
 
-    const data = await res.json();
-    return NextResponse.json({ success: true, data });
+    return NextResponse.json({
+      keyUsed,
+      svcKeyPresent: !!svcKey,
+      anonKeyPresent: !!anonKey,
+      status: res.status,
+      body: body.slice(0, 500),
+    });
   } catch (err) {
-    return NextResponse.json({ success: false, error: String(err), data: [] }, { status: 500 });
+    return NextResponse.json({
+      keyUsed,
+      svcKeyPresent: !!svcKey,
+      anonKeyPresent: !!anonKey,
+      error: String(err),
+    });
   }
 }
