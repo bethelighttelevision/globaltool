@@ -23,6 +23,20 @@ const nextConfig = {
       },
     ];
   },
+  experimental: {
+    optimizePackageImports: [
+      'lucide-react',
+      '@tiptap/react',
+      '@tiptap/core',
+      '@tiptap/starter-kit',
+      '@supabase/supabase-js',
+    ],
+  },
+  poweredByHeader: false,
+  reactStrictMode: true,
+  compiler: {
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
+  },
 };
 
 module.exports = nextConfig;

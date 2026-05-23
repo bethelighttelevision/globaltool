@@ -61,6 +61,8 @@ export default function RootLayout({
         <link rel="alternate" href="https://toolsnappy.com" hrefLang="en" />
         <link rel="alternate" href="https://toolsnappy.com" hrefLang="en-US" />
         <link rel="alternate" href="https://toolsnappy.com" hrefLang="en-GB" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@graph": [
@@ -91,11 +93,16 @@ export default function RootLayout({
             }
           ]
         }) }} />
+      </head>
+      <body className="font-sans antialiased bg-background text-foreground" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Navigation />
+        <main style={{ flex: 1 }}>{children}</main>
+        <Footer />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-WHHDYWK3F5"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -103,11 +110,6 @@ export default function RootLayout({
             gtag('config', 'G-WHHDYWK3F5');
           `}
         </Script>
-      </head>
-      <body className="font-sans antialiased bg-background text-foreground" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <Navigation />
-        <main style={{ flex: 1 }}>{children}</main>
-        <Footer />
       </body>
     </html>
   );
