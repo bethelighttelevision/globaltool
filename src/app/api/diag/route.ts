@@ -12,9 +12,13 @@ export async function GET() {
 
   const result = { keyUsed, svcKeyPresent: !!svcKey, anonKeyPresent: !!anonKey, svcKeyPreview, anonKeyPreview, url: supabaseUrl };
 
+  if (!supabaseUrl) {
+    return NextResponse.json({ ...result, apiError: 'SUPABASE_URL not set' });
+  }
+
   try {
-    const key = svcKey || anonKey;
-    const res = await fetch(`${supabaseUrl}/rest/v1/guest_requests?order=created_at.desc&select=*`, {
+    const key = svcKey || anonKey || '';
+    const res = await fetch(supabaseUrl + '/rest/v1/guest_requests?order=created_at.desc&select=*', {
       headers: { apikey: key, Authorization: `Bearer ${key}` },
     });
     const status = res.status;
