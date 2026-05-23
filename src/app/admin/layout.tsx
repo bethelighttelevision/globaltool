@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileEdit, ExternalLink, ArrowLeft, Menu, X } from 'lucide-react';
+import { LayoutDashboard, FileEdit, ExternalLink, ArrowLeft, Menu, X, MessageSquare } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -25,6 +25,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navLinks = [
     { href: '/admin', label: 'Overview', icon: <LayoutDashboard size={16} />, exact: true },
     { href: '/admin/new', label: 'New Article', icon: <FileEdit size={16} />, exact: true },
+    { href: '/admin/guest-requests', label: 'Guest Requests', icon: <MessageSquare size={16} />, exact: true },
   ];
 
   const bottomLinks = [

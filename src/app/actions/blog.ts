@@ -156,6 +156,57 @@ export async function updateAdminBlog(id: string, input: BlogInput) {
   }
 }
 
+// Fetch guest requests
+export async function getGuestRequests() {
+  try {
+    const supabase = getSupabase();
+    const { data, error } = await supabase
+      .from('guest_requests')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return { success: true, data: data || [] };
+  } catch (err) {
+    const message = getErrorMessage(err);
+    console.error("Error getting guest requests:", message);
+    return { success: false, error: message, data: [] };
+  }
+}
+
+// Get pending guest requests count
+export async function getPendingGuestRequestsCount() {
+  try {
+    const supabase = getSupabase();
+    const { count, error } = await supabase
+      .from('guest_requests')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'pending');
+
+    if (error) throw error;
+    return { success: true, count: count || 0 };
+  } catch (err) {
+    return { success: false, count: 0 };
+  }
+}
+
+// Update guest request status
+export async function updateGuestRequestStatus(id: number, status: string) {
+  try {
+    const supabase = getSupabase();
+    const { error } = await supabase
+      .from('guest_requests')
+      .update({ status })
+      .eq('id', id);
+
+    if (error) throw error;
+    return { success: true };
+  } catch (err) {
+    const message = getErrorMessage(err);
+    return { success: false, error: message };
+  }
+}
+
 // Delete a blog post
 export async function deleteAdminBlog(id: string, slug?: string) {
   try {

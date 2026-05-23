@@ -1,13 +1,14 @@
 import React from 'react';
-import { getAdminBlogs } from '../actions/blog';
+import { getAdminBlogs, getPendingGuestRequestsCount } from '../actions/blog';
 import AdminBlogList from '../../components/AdminBlogList';
 import { blogPosts } from '../../data/posts';
-import { BookOpen, Tag, Calendar, ShieldCheck, TrendingUp, Clock, PenLine } from 'lucide-react';
+import { BookOpen, Tag, Calendar, ShieldCheck, TrendingUp, Clock, PenLine, MessageSquare } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminDashboardPage() {
   const result = await getAdminBlogs();
+  const pendingResult = await getPendingGuestRequestsCount();
   
   const slugToCategory = new Map(blogPosts.map(p => [p.slug, p.category]));
   type DbRow = { id: string | number; title: string; slug: string; excerpt: string; image: string; date: string; category?: string };
@@ -92,6 +93,16 @@ export default async function AdminDashboardPage() {
           <div className="min-w-0">
             <span className="admin-stat-label">Latest Publish</span>
             <span className="admin-stat-value-small">{latestPost?.date || 'No Posts'}</span>
+          </div>
+        </div>
+
+        <div className="glass-panel admin-stat-card">
+          <div className="admin-stat-icon" style={{ background: 'rgba(255, 204, 0, 0.1)', color: '#ffcc00', borderColor: 'rgba(255, 204, 0, 0.15)' }}>
+            <MessageSquare size={18} />
+          </div>
+          <div className="min-w-0">
+            <span className="admin-stat-label">Guest Requests</span>
+            <span className="admin-stat-value">{pendingResult.success ? pendingResult.count : 0}</span>
           </div>
         </div>
 
