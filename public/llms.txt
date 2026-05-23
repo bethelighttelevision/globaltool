@@ -2,9 +2,9 @@
 > Free SEO, social media, crypto & developer tools. 100% free, no sign-up required.
 
 ## Tools
-- SEO Analyzer: https://toolsnappy.com/seo-analyzer
+- SEO Analyzer: https://toolsnappy.com/site-audit
 - Background Remover: https://toolsnappy.com/bg-remover
-- Crypto Calculator: https://toolsnappy.com/crypto
+- Crypto Calculator: https://toolsnappy.com/crypto-profit
 - AI Hook Generator: https://toolsnappy.com/ai-hook
 - YouTube SEO: https://toolsnappy.com/youtube-seo
 - Instagram Caption Generator: https://toolsnappy.com/instagram-caption
@@ -28,6 +28,12 @@
 - Facebook Video Downloader: https://toolsnappy.com/facebook-video-downloader
 - Instagram Video Downloader: https://toolsnappy.com/instagram-video-downloader
 - TikTok Video Downloader: https://toolsnappy.com/tiktok-video-downloader
+- AI Content Humanizer: https://toolsnappy.com/ai-humanizer
+- Keyword Clustering Tool: https://toolsnappy.com/keyword-clustering
+- Blog to Social Repurposer: https://toolsnappy.com/blog-to-social
+- US Tax Calculator 2026: https://toolsnappy.com/tax-calculator
+- Salary Take-Home Calculator: https://toolsnappy.com/salary-calculator
+- Retirement Calculator: https://toolsnappy.com/retirement-calculator
 
 ## Pages
 - Blog: https://toolsnappy.com/blog

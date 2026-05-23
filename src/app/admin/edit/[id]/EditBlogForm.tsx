@@ -3,9 +3,9 @@
 import React, { useState, useTransition, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { updateAdminBlog } from '../../../actions/blog';
+import { updateAdminBlog, createAdminBlog } from '../../../actions/blog';
 import RichTextEditor from '../../../../components/RichTextEditor';
-import { ArrowLeft, Save, AlertCircle, Eye, EyeOff, Globe } from 'lucide-react';
+import { ArrowLeft, Save, AlertCircle, Eye, EyeOff, Globe, Database, FileText } from 'lucide-react';
 
 interface Blog {
   id: string | number;
@@ -21,9 +21,10 @@ interface Blog {
 interface EditBlogFormProps {
   initialBlog: Blog;
   id: string;
+  isStatic?: boolean;
 }
 
-export default function EditBlogForm({ initialBlog, id }: EditBlogFormProps) {
+export default function EditBlogForm({ initialBlog, id, isStatic = false }: EditBlogFormProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -32,6 +33,8 @@ export default function EditBlogForm({ initialBlog, id }: EditBlogFormProps) {
   const [category, setCategory] = useState(initialBlog.category || 'SEO');
   const [excerpt, setExcerpt] = useState(initialBlog.excerpt || '');
   const [image, setImage] = useState(initialBlog.image || '/blog-banner.png');
+  const [authorName, setAuthorName] = useState((initialBlog as any).author_name || '');
+  const [authorBio, setAuthorBio] = useState((initialBlog as any).author_bio || '');
   const [date, setDate] = useState(initialBlog.date || '');
   const [content, setContent] = useState(initialBlog.content || '');
   const [errorMsg, setErrorMsg] = useState('');
@@ -53,12 +56,22 @@ export default function EditBlogForm({ initialBlog, id }: EditBlogFormProps) {
     if (!content.trim() || content === '<p></p>') { setErrorMsg('Please write some content inside the editor.'); return; }
 
     startTransition(async () => {
-      const result = await updateAdminBlog(id, { title, slug, excerpt, content, image: image || '/blog-banner.png', date, category });
-      if (result.success) {
-        router.push('/admin');
-        router.refresh();
+      if (isStatic) {
+        const result = await createAdminBlog({ title, slug, excerpt, content, image: image || '/blog-banner.png', date, category, authorName: authorName || undefined, authorBio: authorBio || undefined });
+        if (result.success) {
+          router.push('/admin');
+          router.refresh();
+        } else {
+          setErrorMsg(result.error || 'Failed to save article to database.');
+        }
       } else {
-        setErrorMsg(result.error || 'An unexpected error occurred while updating the post.');
+        const result = await updateAdminBlog(id, { title, slug, excerpt, content, image: image || '/blog-banner.png', date, category, authorName: authorName || undefined, authorBio: authorBio || undefined });
+        if (result.success) {
+          router.push('/admin');
+          router.refresh();
+        } else {
+          setErrorMsg(result.error || 'An unexpected error occurred while updating the post.');
+        }
       }
     });
   };
@@ -98,10 +111,16 @@ export default function EditBlogForm({ initialBlog, id }: EditBlogFormProps) {
           <p className="text-base text-accent font-semibold truncate">{title || 'Article Title'}</p>
           <p className="text-sm text-muted line-clamp-2">{excerpt || 'SEO summary...'}</p>
         </div>
+        {isStatic && (
+          <span className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full font-medium whitespace-nowrap" style={{ background: 'rgba(255, 204, 0, 0.1)', color: '#ffcc00', border: '1px solid rgba(255, 204, 0, 0.2)' }}>
+            <FileText size={12} />
+            Static
+          </span>
+        )}
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        <div className="glass-panel p-8 space-y-6">
+        <div className="glass-panel admin-form-panel space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="label-text">Article Title</label>
@@ -118,7 +137,7 @@ export default function EditBlogForm({ initialBlog, id }: EditBlogFormProps) {
               <label className="label-text">Category</label>
               <select value={category} onChange={(e) => setCategory(e.target.value)} className="premium-input" style={{ appearance: 'none', background: 'rgba(255,255,255,0.03)', color: 'var(--foreground)' }}>
                 {['SEO', 'Marketing', 'AI Content', 'Crypto', 'Tech', 'Design'].map(c => (
-                  <option key={c} value={c} style={{ background: '#1c1c1e' }}>{c}</option>
+                  <option key={c} value={c} style={{ background: '#1c1c1e', color: '#f5f5f7' }}>{c}</option>
                 ))}
               </select>
             </div>
@@ -138,6 +157,17 @@ export default function EditBlogForm({ initialBlog, id }: EditBlogFormProps) {
               <span className={`text-xs ${excerptCount > 160 ? 'text-amber-400' : 'text-muted'}`}>{excerptCount}/160</span>
             </label>
             <textarea placeholder="Provide a compelling 2-3 sentence overview that appears on the blog list cards..." value={excerpt} onChange={(e) => setExcerpt(e.target.value)} className="premium-input" rows={3} style={{ resize: 'vertical' }} required />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="label-text">Author Name <span className="text-muted text-xs">(optional - for guest posts)</span></label>
+              <input type="text" placeholder="e.g. John Doe" value={authorName} onChange={(e) => setAuthorName(e.target.value)} className="premium-input" />
+            </div>
+            <div>
+              <label className="label-text">Author Bio <span className="text-muted text-xs">(optional - for guest posts)</span></label>
+              <input type="text" placeholder="e.g. SEO specialist with 5+ years experience" value={authorBio} onChange={(e) => setAuthorBio(e.target.value)} className="premium-input" />
+            </div>
           </div>
         </div>
 
@@ -159,11 +189,9 @@ export default function EditBlogForm({ initialBlog, id }: EditBlogFormProps) {
           )}
         </div>
 
-        <div className="flex gap-4 justify-end items-center">
-          <Link href="/admin" className="px-7 py-3.5 rounded-full font-semibold no-underline text-muted border border-white/10 bg-transparent text-sm hover:text-white transition-colors">
-            Cancel
-          </Link>
-          <button type="submit" disabled={isPending} className="premium-button px-8 py-3.5 min-w-[160px] flex items-center gap-2 justify-center" style={{ opacity: isPending ? 0.7 : 1 }}>
+        <div className="admin-form-actions">
+          <Link href="/admin" className="admin-form-cancel">Cancel</Link>
+          <button type="submit" disabled={isPending} className="premium-button admin-form-submit" style={{ opacity: isPending ? 0.7 : 1 }}>
             <Save size={16} />
             {isPending ? 'Saving...' : 'Save Changes'}
           </button>

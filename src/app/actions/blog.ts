@@ -25,6 +25,8 @@ export interface BlogInput {
   image: string;
   date: string;
   category: string;
+  authorName?: string;
+  authorBio?: string;
 }
 
 interface BlogRecord {
@@ -36,6 +38,8 @@ interface BlogRecord {
   image: string;
   date: string;
   category: string;
+  author_name?: string;
+  author_bio?: string;
 }
 
 function getErrorMessage(err: unknown): string {
@@ -93,7 +97,9 @@ export async function createAdminBlog(input: BlogInput) {
           content: input.content,
           image: input.image || '/blog-banner.png',
           date: input.date,
-          category: input.category
+          category: input.category,
+          author_name: input.authorName || null,
+          author_bio: input.authorBio || null,
         }
       ])
       .select();
@@ -127,7 +133,9 @@ export async function updateAdminBlog(id: string, input: BlogInput) {
         content: input.content,
         image: input.image,
         date: input.date,
-        category: input.category
+        category: input.category,
+        author_name: input.authorName || null,
+        author_bio: input.authorBio || null,
       })
       .eq('id', id)
       .select();

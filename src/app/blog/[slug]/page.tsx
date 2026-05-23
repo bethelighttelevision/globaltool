@@ -25,6 +25,8 @@ interface PostData {
   image: string;
   date: string;
   category?: string;
+  author_name?: string;
+  author_bio?: string;
 }
 
 export async function generateStaticParams() {
@@ -244,11 +246,11 @@ export default async function BlogPostPage(props: BlogPostProps) {
             fontWeight: 'bold',
             boxShadow: '0 4px 12px rgba(41, 151, 255, 0.3)'
           }}>
-            TS
+            {post.author_name ? post.author_name.charAt(0).toUpperCase() : 'TS'}
           </div>
           <div>
-            <p style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: 'var(--foreground)' }}>ToolSnappy Editorial Team</p>
-            <p style={{ margin: 0, fontSize: '12px', color: 'var(--muted)' }}>Verified Expert Account</p>
+            <p style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: 'var(--foreground)' }}>{post.author_name || 'ToolSnappy Editorial Team'}</p>
+            <p style={{ margin: 0, fontSize: '12px', color: 'var(--muted)' }}>{post.author_name ? 'Guest Contributor' : 'Verified Expert Account'}</p>
           </div>
         </div>
       </div>
@@ -282,8 +284,8 @@ export default async function BlogPostPage(props: BlogPostProps) {
                 "image": post.image,
                 "datePublished": post.date,
                 "author": {
-                  "@type": "Organization",
-                  "name": "ToolSnappy Editorial Team"
+                  "@type": post.author_name ? "Person" : "Organization",
+                  "name": post.author_name || "ToolSnappy Editorial Team"
                 },
                 "publisher": {
                   "@type": "Organization",
@@ -358,13 +360,13 @@ export default async function BlogPostPage(props: BlogPostProps) {
               flexShrink: 0,
               boxShadow: '0 8px 24px rgba(41, 151, 255, 0.3)'
             }}>
-              TS
+              {post.author_name ? post.author_name.charAt(0).toUpperCase() : 'TS'}
             </div>
             <div style={{ flex: 1, minWidth: '200px' }}>
-              <h4 style={{ fontSize: '18px', marginBottom: '4px', color: '#fff', fontWeight: '700' }}>ToolSnappy Editorial Team</h4>
-              <p style={{ fontSize: '13px', color: 'var(--accent)', marginBottom: '12px', fontWeight: '500' }}>SEO & Content Strategy</p>
+              <h4 style={{ fontSize: '18px', marginBottom: '4px', color: '#fff', fontWeight: '700' }}>{post.author_name || 'ToolSnappy Editorial Team'}</h4>
+              <p style={{ fontSize: '13px', color: 'var(--accent)', marginBottom: '12px', fontWeight: '500' }}>{post.author_name ? 'Guest Contributor' : 'SEO & Content Strategy'}</p>
               <p style={{ fontSize: '14px', color: 'var(--muted)', lineHeight: 1.6, marginBottom: '16px' }}>
-                Our team has 8+ years of experience in SEO, content marketing, and digital growth strategies. We help creators and businesses rank higher and grow faster.
+                {post.author_bio || (post.author_name ? `${post.author_name} is a guest contributor at ToolSnappy.` : 'Our team has 8+ years of experience in SEO, content marketing, and digital growth strategies. We help creators and businesses rank higher and grow faster.')}
               </p>
               <div style={{ display: 'flex', gap: '12px' }}>
                 <Link href="/blog" style={{ color: 'var(--accent)', fontSize: '13px', fontWeight: '600', textDecoration: 'none' }}>View All Articles &rarr;</Link>
@@ -409,7 +411,7 @@ export default async function BlogPostPage(props: BlogPostProps) {
           <div className="glass-panel" style={{ padding: '24px', position: 'sticky', top: '100px', marginBottom: '20px' }}>
             <h4 style={{ fontSize: '16px', marginBottom: '16px', color: '#fff' }}>Popular Free Tools</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <Link href="/seo-analyzer" className="sidebar-link" style={{
+              <Link href="/site-audit" className="sidebar-link" style={{
                 display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 14px',
                 borderRadius: '12px', background: 'rgba(255,255,255,0.03)', fontSize: '14px',
                 color: 'var(--foreground)', textDecoration: 'none', transition: 'all 0.2s'
@@ -425,7 +427,7 @@ export default async function BlogPostPage(props: BlogPostProps) {
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#bf5af2' }}></span>
                 BG Remover
               </Link>
-              <Link href="/crypto" className="sidebar-link" style={{
+              <Link href="/crypto-profit" className="sidebar-link" style={{
                 display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 14px',
                 borderRadius: '12px', background: 'rgba(255,255,255,0.03)', fontSize: '14px',
                 color: 'var(--foreground)', textDecoration: 'none', transition: 'all 0.2s'

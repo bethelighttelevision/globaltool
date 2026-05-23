@@ -208,8 +208,8 @@ export default function BlogListClient({ posts }: BlogListClientProps) {
               onFocus={(e) => e.target.style.borderColor = 'var(--accent)'}
               onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
             >
-              <option value="latest" style={{ background: '#0d0d0f' }}>Newest First</option>
-              <option value="oldest" style={{ background: '#0d0d0f' }}>Oldest First</option>
+              <option value="latest" style={{ background: '#0d0d0f', color: '#f5f5f7' }}>Newest First</option>
+              <option value="oldest" style={{ background: '#0d0d0f', color: '#f5f5f7' }}>Oldest First</option>
             </select>
           </div>
         </div>

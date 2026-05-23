@@ -68,7 +68,7 @@ export default function ImageUpscaler() {
       seo={{
         toolName: "Cloud AI Image Upscaler",
         description: "Upscale and enhance images instantly using DeepAI Cloud Neural Networks. True Adobe-grade quality without server lag.",
-        url: "https://globalutilitytoolbox.com/image-upscaler"
+        url: "https://toolsnappy.com/image-upscaler"
       }}
       currentPath="/image-upscaler"
       contentSection={

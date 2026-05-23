@@ -29,7 +29,7 @@ export default function CarLoanCalculator() {
       seo={{
         toolName: "Professional Car Loan EMI Calculator",
         description: "Calculate your monthly car loan payments (EMI), total interest, and total cost with our free car finance tool. Plan your auto loan smarter.",
-        url: "https://globalutilitytoolbox.com/car-loan-calculator"
+        url: "https://toolsnappy.com/car-loan-calculator"
       }}
       currentPath="/car-loan-calculator"
       contentSection={

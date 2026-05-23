@@ -64,7 +64,7 @@ export default function YoutubeSEOPage() {
       seo={{
         toolName: "YouTube SEO Optimizer",
         description: "Generate viral titles, descriptions, and high-density tags. Beat the algorithm with our 2026 SEO Searchability Score.",
-        url: "https://globalutilitytoolbox.com/youtube-seo"
+        url: "https://toolsnappy.com/youtube-seo"
       }}
       currentPath="/youtube-seo"
       results={results && (

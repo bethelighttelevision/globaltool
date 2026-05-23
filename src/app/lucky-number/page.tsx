@@ -113,7 +113,7 @@ export default function LuckyNumberPage() {
       seo={{
         toolName: "AI Lucky Number Finder - Numerology Calculator",
         description: "Find your lucky number by name using AI and ancient numerology. Get personality insights, lucky colors, and 2026 predictions instantly.",
-        url: "https://globalutilitytoolbox.com/lucky-number"
+        url: "https://toolsnappy.com/lucky-number"
       }}
       currentPath="/lucky-number"
       results={result && (

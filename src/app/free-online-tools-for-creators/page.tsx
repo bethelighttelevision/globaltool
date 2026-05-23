@@ -12,7 +12,7 @@ const categories = [
     title: 'SEO & Website Tools',
     desc: 'Optimize your site, audit pages, and rank higher in search results.',
     tools: [
-      { name: 'ToolSnappy SEO Analyzer', url: '/seo-analyzer', own: true },
+      { name: 'ToolSnappy SEO Analyzer', url: '/site-audit', own: true },
       { name: 'ToolSnappy Meta Tag Builder', url: '/meta-tags', own: true },
       { name: 'ToolSnappy JSON Formatter', url: '/json-formatter', own: true },
       { name: 'ToolSnappy Base64 Converter', url: '/base64-converter', own: true },
@@ -21,6 +21,7 @@ const categories = [
       { name: 'Ahrefs Webmaster Tools', url: 'https://ahrefs.com/webmaster-tools', ext: true },
       { name: 'PageSpeed Insights', url: 'https://pagespeed.web.dev', ext: true },
       { name: 'Schema.org Validator', url: 'https://validator.schema.org', ext: true },
+      { name: 'ToolSnappy Keyword Clustering Tool', url: '/keyword-clustering', own: true },
     ],
   },
   {
@@ -40,6 +41,8 @@ const categories = [
       { name: 'Buffer', url: 'https://buffer.com', ext: true },
       { name: 'Unsplash', url: 'https://unsplash.com', ext: true },
       { name: 'Pexels', url: 'https://pexels.com', ext: true },
+      { name: 'ToolSnappy AI Content Humanizer', url: '/ai-humanizer', own: true },
+      { name: 'ToolSnappy Blog to Social Repurposer', url: '/blog-to-social', own: true },
     ],
   },
   {
@@ -84,13 +87,16 @@ const categories = [
     title: 'Finance & Monetization Tools',
     desc: 'Calculate crypto profits, mortgages, loans, and more.',
     tools: [
-      { name: 'ToolSnappy Crypto Profit Calculator', url: '/crypto', own: true },
+      { name: 'ToolSnappy Crypto Profit Calculator', url: '/crypto-profit', own: true },
       { name: 'ToolSnappy Mortgage Calculator', url: '/mortgage-calculator', own: true },
       { name: 'ToolSnappy Car Loan Calculator', url: '/car-loan-calculator', own: true },
       { name: 'ToolSnappy Lucky Number Generator', url: '/lucky-number', own: true },
       { name: 'Mint', url: 'https://mint.intuit.com', ext: true },
       { name: 'PayPal Fee Calculator', url: 'https://thefeecalculator.com', ext: true },
       { name: 'Wave Accounting', url: 'https://waveapps.com', ext: true },
+      { name: 'ToolSnappy US Tax Calculator 2026', url: '/tax-calculator', own: true },
+      { name: 'ToolSnappy Salary Take-Home Calculator', url: '/salary-calculator', own: true },
+      { name: 'ToolSnappy Retirement Calculator', url: '/retirement-calculator', own: true },
     ],
   },
   {

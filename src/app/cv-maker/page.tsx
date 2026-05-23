@@ -14,7 +14,7 @@ export default function CVMakerPage() {
       seo={{
         toolName: "Professional CV Maker",
         description: "Create a professional CV in minutes with our free online CV maker. Choose from multiple templates, customize your layout, and download a high-quality PDF resume.",
-        url: "https://globalutilitytoolbox.com/cv-maker"
+        url: "https://toolsnappy.com/cv-maker"
       }}
       currentPath="/cv-maker"
       contentSection={

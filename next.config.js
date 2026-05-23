@@ -9,6 +9,20 @@ const nextConfig = {
     ],
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    return [
+      {
+        source: '/crypto',
+        destination: '/crypto-profit',
+        permanent: true,
+      },
+      {
+        source: '/seo-analyzer',
+        destination: '/site-audit',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

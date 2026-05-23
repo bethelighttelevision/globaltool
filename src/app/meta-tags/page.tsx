@@ -41,7 +41,7 @@ export default function MetaTagsPage() {
       seo={{
         toolName: "SEO Meta Tag Generator",
         description: "Generate professional meta tags, OpenGraph tags, and Twitter cards to improve your website&apos;s search engine ranking.",
-        url: "https://globalutilitytoolbox.com/meta-tags"
+        url: "https://toolsnappy.com/meta-tags"
       }}
       currentPath="/meta-tags"
       contentSection={

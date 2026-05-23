@@ -642,6 +642,117 @@ const ElegantTemplate: React.FC<TemplateProps> = ({ data }) => {
   );
 };
 
+const AtsOptimizedTemplate: React.FC<TemplateProps> = ({ data }) => {
+  return (
+    <div className="cv-preview ats-template" style={{ padding: '40px', backgroundColor: '#fff', color: '#000', minHeight: '1122px', fontFamily: '"Arial", "Helvetica", sans-serif', fontSize: '12px', lineHeight: '1.4' }}>
+      <header style={{ borderBottom: '1px solid #000', paddingBottom: '10px', marginBottom: '20px' }}>
+        <h1 style={{ margin: '0 0 4px', fontSize: '26px', fontWeight: 700, letterSpacing: '0.5px' }}>{data.personalInfo.fullName || 'Your Name'}</h1>
+        <p style={{ margin: '0 0 8px', fontSize: '16px', fontWeight: 500 }}>{data.personalInfo.jobTitle || 'Job Title'}</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', fontSize: '11px', color: '#333' }}>
+          {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
+          {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+          {data.personalInfo.address && <span>{data.personalInfo.address}</span>}
+          {data.personalInfo.website && <span>{data.personalInfo.website}</span>}
+        </div>
+      </header>
+
+      <section style={{ marginBottom: '20px' }}>
+        <h2 style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', borderBottom: '1px solid #999', paddingBottom: '3px', marginBottom: '10px' }}>Professional Summary</h2>
+        <p style={{ fontSize: '12px', lineHeight: '1.5', margin: 0 }}>{data.summary || 'A brief summary of your professional background.'}</p>
+      </section>
+
+      <section style={{ marginBottom: '20px' }}>
+        <h2 style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', borderBottom: '1px solid #999', paddingBottom: '3px', marginBottom: '10px' }}>Experience</h2>
+        {data.experience.length > 0 ? data.experience.map((exp, i) => (
+          <div key={i} style={{ marginBottom: '14px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '13px' }}>
+              <span>{exp.company}</span>
+              <span>{exp.startDate} – {exp.endDate}</span>
+            </div>
+            <div style={{ fontStyle: 'italic', marginBottom: '4px', fontSize: '12px' }}>{exp.position}</div>
+            <p style={{ margin: 0, fontSize: '12px', lineHeight: '1.5' }}>{exp.description}</p>
+          </div>
+        )) : <p style={{ fontSize: '12px', fontStyle: 'italic', color: '#666' }}>No experience listed yet.</p>}
+      </section>
+
+      <section style={{ marginBottom: '20px' }}>
+        <h2 style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', borderBottom: '1px solid #999', paddingBottom: '3px', marginBottom: '10px' }}>Education</h2>
+        {data.education.length > 0 ? data.education.map((edu, i) => (
+          <div key={i} style={{ marginBottom: '10px' }}>
+            <div style={{ fontWeight: 700, fontSize: '13px' }}>{edu.school}</div>
+            <div style={{ fontSize: '12px' }}>{edu.degree} • {edu.year}</div>
+          </div>
+        )) : <p style={{ fontSize: '12px', fontStyle: 'italic', color: '#666' }}>No education listed yet.</p>}
+      </section>
+
+      <section>
+        <h2 style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', borderBottom: '1px solid #999', paddingBottom: '3px', marginBottom: '10px' }}>Skills</h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+          {data.skills.length > 0 ? data.skills.map((skill, i) => (
+            <span key={i} style={{ fontSize: '11px', padding: '2px 8px', border: '1px solid #ccc', borderRadius: '2px' }}>{skill}</span>
+          )) : <p style={{ fontSize: '12px', fontStyle: 'italic', color: '#666' }}>No skills listed yet.</p>}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+const ModernDarkTemplate: React.FC<TemplateProps> = ({ data }) => {
+  return (
+    <div className="cv-preview dark-template" style={{ padding: '45px', backgroundColor: '#111827', color: '#e5e7eb', minHeight: '1122px' }}>
+      <header style={{ marginBottom: '35px' }}>
+        <h1 style={{ margin: '0 0 6px', fontSize: '34px', fontWeight: 800, background: 'linear-gradient(135deg, #818cf8, #6366f1)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{data.personalInfo.fullName || 'Your Name'}</h1>
+        <p style={{ margin: '0 0 14px', fontSize: '16px', color: '#a5b4fc', fontWeight: 500 }}>{data.personalInfo.jobTitle || 'Job Title'}</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', fontSize: '13px', color: '#9ca3af' }}>
+          {data.personalInfo.email && <span style={{ background: 'rgba(99,102,241,0.1)', padding: '4px 10px', borderRadius: '6px' }}>{data.personalInfo.email}</span>}
+          {data.personalInfo.phone && <span style={{ background: 'rgba(99,102,241,0.1)', padding: '4px 10px', borderRadius: '6px' }}>{data.personalInfo.phone}</span>}
+          {data.personalInfo.address && <span style={{ background: 'rgba(99,102,241,0.1)', padding: '4px 10px', borderRadius: '6px' }}>{data.personalInfo.address}</span>}
+        </div>
+      </header>
+
+      <section style={{ marginBottom: '30px' }}>
+        <h2 style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', color: '#818cf8', marginBottom: '14px', borderBottom: '1px solid #1f2937', paddingBottom: '8px' }}>About</h2>
+        <p style={{ fontSize: '14px', lineHeight: '1.7', color: '#d1d5db', margin: 0 }}>{data.summary || 'A brief summary of your professional background.'}</p>
+      </section>
+
+      <section style={{ marginBottom: '30px' }}>
+        <h2 style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', color: '#818cf8', marginBottom: '14px', borderBottom: '1px solid #1f2937', paddingBottom: '8px' }}>Experience</h2>
+        {data.experience.length > 0 ? data.experience.map((exp, i) => (
+          <div key={i} style={{ marginBottom: '20px', padding: '16px', background: 'rgba(31,41,55,0.5)', borderRadius: '10px', border: '1px solid #1f2937' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#f9fafb' }}>{exp.position}</h3>
+              <span style={{ fontSize: '12px', color: '#818cf8' }}>{exp.startDate} - {exp.endDate}</span>
+            </div>
+            <div style={{ fontSize: '13px', color: '#a5b4fc', marginBottom: '8px' }}>{exp.company}</div>
+            <p style={{ fontSize: '13px', lineHeight: '1.6', color: '#9ca3af', margin: 0 }}>{exp.description}</p>
+          </div>
+        )) : <p style={{ fontSize: '12px', fontStyle: 'italic', color: '#666' }}>No experience listed yet.</p>}
+      </section>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+        <section>
+          <h2 style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', color: '#818cf8', marginBottom: '14px', borderBottom: '1px solid #1f2937', paddingBottom: '8px' }}>Education</h2>
+          {data.education.length > 0 ? data.education.map((edu, i) => (
+            <div key={i} style={{ marginBottom: '12px', padding: '12px', background: 'rgba(31,41,55,0.3)', borderRadius: '8px' }}>
+              <div style={{ fontWeight: 700, fontSize: '14px', color: '#f9fafb' }}>{edu.school}</div>
+              <div style={{ fontSize: '13px', color: '#d1d5db' }}>{edu.degree}</div>
+              <div style={{ fontSize: '12px', color: '#818cf8' }}>{edu.year}</div>
+            </div>
+          )) : <p style={{ fontSize: '12px', fontStyle: 'italic', color: '#666' }}>No education listed yet.</p>}
+        </section>
+        <section>
+          <h2 style={{ fontSize: '14px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '2px', color: '#818cf8', marginBottom: '14px', borderBottom: '1px solid #1f2937', paddingBottom: '8px' }}>Skills</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            {data.skills.length > 0 ? data.skills.map((skill, i) => (
+              <span key={i} style={{ background: 'rgba(99,102,241,0.15)', color: '#a5b4fc', padding: '6px 12px', borderRadius: '8px', fontSize: '12px', fontWeight: 500, border: '1px solid rgba(99,102,241,0.2)' }}>{skill}</span>
+            )) : <p style={{ fontSize: '12px', fontStyle: 'italic', color: '#666' }}>No skills listed yet.</p>}
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+};
+
 export const Templates = {
   modern: ModernTemplate,
   professional: ProfessionalTemplate,
@@ -653,4 +764,6 @@ export const Templates = {
   tech: TechTemplate,
   academic: AcademicTemplate,
   elegant: ElegantTemplate,
+  atsOptimized: AtsOptimizedTemplate,
+  modernDark: ModernDarkTemplate,
 };

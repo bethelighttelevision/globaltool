@@ -30,7 +30,7 @@ export default function MortgageCalculator() {
       seo={{
         toolName: "Professional Mortgage & Home Loan Calculator",
         description: "Plan your dream home with our advanced Mortgage Calculator. Calculate monthly payments, interest rates, and total loan costs instantly.",
-        url: "https://globalutilitytoolbox.com/mortgage-calculator"
+        url: "https://toolsnappy.com/mortgage-calculator"
       }}
       currentPath="/mortgage-calculator"
       contentSection={
@@ -126,10 +126,10 @@ export default function MortgageCalculator() {
                 className="premium-input"
                 style={{ width: '100%', background: '#000', color: '#fff', border: '1px solid var(--card-border)' }}
               >
-                <option value={30} style={{ background: '#000' }}>30 Years</option>
-                <option value={20} style={{ background: '#000' }}>20 Years</option>
-                <option value={15} style={{ background: '#000' }}>15 Years</option>
-                <option value={10} style={{ background: '#000' }}>10 Years</option>
+                <option value={30} style={{ background: '#1c1c1e', color: '#f5f5f7' }}>30 Years</option>
+                <option value={20} style={{ background: '#1c1c1e', color: '#f5f5f7' }}>20 Years</option>
+                <option value={15} style={{ background: '#1c1c1e', color: '#f5f5f7' }}>15 Years</option>
+                <option value={10} style={{ background: '#1c1c1e', color: '#f5f5f7' }}>10 Years</option>
               </select>
             </div>
           </div>

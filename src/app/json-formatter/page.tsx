@@ -49,7 +49,7 @@ export default function JsonFormatterPage() {
       seo={{
         toolName: "JSON Formatter & Validator",
         description: "Format, beautify, and validate your raw JSON strings instantly in the browser. 100% Free and Private.",
-        url: "https://globalutilitytoolbox.com/json-formatter"
+        url: "https://toolsnappy.com/json-formatter"
       }}
       currentPath="/json-formatter"
       contentSection={

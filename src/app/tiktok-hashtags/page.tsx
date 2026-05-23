@@ -65,7 +65,7 @@ export default function TikTokHashtagsPage() {
       seo={{
         toolName: "TikTok Hashtag Generator",
         description: "Get your videos on the #FYP. Generate high-velocity hashtags tailored to your niche using 2026 trending data.",
-        url: "https://globalutilitytoolbox.com/tiktok-hashtags"
+        url: "https://toolsnappy.com/tiktok-hashtags"
       }}
       currentPath="/tiktok-hashtags"
       results={hashtags.length > 0 && (

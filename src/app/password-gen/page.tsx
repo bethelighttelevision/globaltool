@@ -63,7 +63,7 @@ export default function PasswordGenPage() {
       seo={{
         toolName: "Secure Password Generator",
         description: "Generate strong, randomized, and secure passwords instantly to protect your online accounts.",
-        url: "https://globalutilitytoolbox.com/password-gen"
+        url: "https://toolsnappy.com/password-gen"
       }}
       currentPath="/password-gen"
       contentSection={

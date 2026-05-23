@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: 'Crypto Profit Calculator USA - Stock ROI Tracker',
   description: 'Advanced crypto and stock profit calculator with US tax bracket estimation. Track your ROI and estimate capital gains tax accurately.',
   alternates: {
-    canonical: 'https://toolsnappy.com/crypto',
+    canonical: 'https://toolsnappy.com/crypto-profit',
   },
   openGraph: {
     title: 'Crypto Profit Calculator USA - Stock ROI Tracker | ToolSnappy',
     description: 'Advanced crypto and stock profit calculator with US tax bracket estimation. Track your ROI and estimate capital gains tax accurately.',
-    url: 'https://toolsnappy.com/crypto',
+    url: 'https://toolsnappy.com/crypto-profit',
     siteName: 'ToolSnappy',
     images: [{ url: 'https://toolsnappy.com/logo.svg', width: 256, height: 256 }],
     locale: 'en_US',

@@ -65,22 +65,21 @@ export default function AdminBlogList({ initialBlogs }: AdminBlogListProps) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       
       {/* Search and Action Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-        <div style={{ position: 'relative', flex: 1, minWidth: '280px' }}>
-          <Search size={18} color="var(--muted)" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
+      <div className="admin-list-bar">
+        <div className="admin-search-wrap">
+          <Search size={18} color="var(--muted)" className="admin-search-icon" />
           <input
             type="text"
-            placeholder="Search articles by title, excerpt, or category..."
+            placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="input-field"
-            style={{ paddingLeft: '48px' }}
+            className="input-field admin-search-input"
           />
         </div>
         
-        <Link href="/admin/new" className="premium-button" style={{ textDecoration: 'none', padding: '12px 24px' }}>
+        <Link href="/admin/new" className="premium-button admin-write-btn">
           <FolderPlus size={16} />
-          Write Article
+          <span className="admin-write-text">Write Article</span>
         </Link>
       </div>
 

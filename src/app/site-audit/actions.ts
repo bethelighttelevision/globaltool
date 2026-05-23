@@ -4,7 +4,6 @@ import { generateAICentent } from '../actions/ai';
 
 export async function analyzeSEOAction(targetUrl: string) {
   try {
-    // ... existing logic ...
     let formattedUrl = targetUrl.trim();
     if (!formattedUrl.startsWith('http')) {
       formattedUrl = `https://${formattedUrl}`;

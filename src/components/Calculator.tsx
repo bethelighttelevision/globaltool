@@ -90,8 +90,8 @@ export default function Calculator() {
                   onChange={e => setTaxType(e.target.value)}
                   style={{ appearance: 'none' }}
                 >
-                  <option value="long">Long-Term (&gt; 1 year, ~15%)</option>
-                  <option value="short">Short-Term (&lt; 1 year, ~24%)</option>
+                  <option value="long" style={{ background: '#1c1c1e', color: '#f5f5f7' }}>Long-Term (&gt; 1 year, ~15%)</option>
+                  <option value="short" style={{ background: '#1c1c1e', color: '#f5f5f7' }}>Short-Term (&lt; 1 year, ~24%)</option>
                 </select>
               </div>
             )}

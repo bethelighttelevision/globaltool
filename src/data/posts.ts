@@ -331,7 +331,7 @@ Heading tags (H1, H2, H3) are not just for visual hierarchy. They help Google un
 
 Every page should have exactly one H1 tag that contains your primary keyword. This is the title of the page, and it should clearly communicate the topic. Subtopics should use H2 tags, and sub-subtopics should use H3 tags. The hierarchy should be logical and never skip levels.
 
-To audit your headings, use our free [SEO Analyzer](/seo-analyzer) or check manually by inspecting the page source. Look for pages with multiple H1 tags, missing H1 tags, or headings that do not match the content. These issues confuse search engines and dilute your ranking signals.
+To audit your headings, use our free [SEO Analyzer](/site-audit) or check manually by inspecting the page source. Look for pages with multiple H1 tags, missing H1 tags, or headings that do not match the content. These issues confuse search engines and dilute your ranking signals.
 
 ### Step 3: Analyze Page Speed and Core Web Vitals
 
@@ -424,7 +424,7 @@ Many site owners optimize their homepage and forget about everything else. But m
 
 An SEO audit is not a one-time task. It is an ongoing practice that keeps your site healthy and competitive. Google's algorithms change, your content grows, and new issues emerge over time. By running a structured audit every quarter, you can catch problems before they hurt your traffic.
 
-Start with the ten steps above. Use our [SEO Analyzer](/seo-analyzer) to speed up the process. And remember: SEO is a marathon, not a sprint. Every fix you make today compounds over time, and the results will show in your traffic numbers.
+Start with the ten steps above. Use our [SEO Analyzer](/site-audit) to speed up the process. And remember: SEO is a marathon, not a sprint. Every fix you make today compounds over time, and the results will show in your traffic numbers.
 
 If you found this guide helpful, check out our other articles on [YouTube SEO](/blog/youtube-seo-optimization-ultimate-guide) and [common SEO mistakes](/blog/sneaky-seo-mistakes-killing-rankings) for more insights.
 
@@ -679,7 +679,7 @@ Using a position sizing strategy ensures that no single trade can materially dam
 
 Calculating all these factors manually for every trade is tedious and error-prone. That is why I built the **ToolSnappy Crypto Profit Calculator**.
 
-Our [Crypto Profit Calculator](/crypto) lets you input:
+Our [Crypto Profit Calculator](/crypto-profit) lets you input:
 
 - Entry price
 - Exit price
@@ -727,7 +727,7 @@ As mentioned, crypto trading is taxable. Set aside a percentage of every profit 
 
 Crypto trading is not a game of luck. It is a game of math, discipline, and risk management. The traders who survive and thrive are the ones who calculate before they act. They know their entry, their target, and their stop-loss before they press the buy button. They account for fees, slippage, and taxes. They size their positions based on risk, not greed.
 
-Our [Crypto Profit Calculator](/crypto) is designed to make this easy. It does the math so you can focus on strategy. Use it before every trade, and you will be ahead of the vast majority of retail traders who trade on emotion.
+Our [Crypto Profit Calculator](/crypto-profit) is designed to make this easy. It does the math so you can focus on strategy. Use it before every trade, and you will be ahead of the vast majority of retail traders who trade on emotion.
 
 If you are interested in learning more about the psychological side of trading, read our article on [crypto trading psychology](/blog/crypto-trading-psychology-math-wins).
 
@@ -1024,7 +1024,7 @@ Structured data (schema markup) helps Google understand your content and can ena
 
 The biggest mistake is flying blind. Without data, you are guessing about what is wrong with your SEO. A proper analysis reveals exactly what needs to be fixed.
 
-**The Fix:** Use our [SEO Analyzer](/seo-analyzer) to check your site for common issues. It scans your headings, meta tags, SSL status, images, and more in seconds. It is free, requires no sign-up, and gives you a clear action plan.
+**The Fix:** Use our [SEO Analyzer](/site-audit) to check your site for common issues. It scans your headings, meta tags, SSL status, images, and more in seconds. It is free, requires no sign-up, and gives you a clear action plan.
 
 ## Conclusion
 
@@ -1100,7 +1100,7 @@ Before this tool, I would spend 30 to 45 minutes brainstorming and iterating on 
 
 Every time I publish a new page on my website, I need to make sure the SEO fundamentals are correct. Before tools, I would manually check the title tag, meta description, heading structure, image alt text, and SSL status. This process took about 15 minutes per page.
 
-Now I use the [SEO Analyzer](/seo-analyzer). I paste the URL, and within seconds, it checks every SEO signal and tells me exactly what needs to be fixed. No manual checking, no missed issues.
+Now I use the [SEO Analyzer](/site-audit). I paste the URL, and within seconds, it checks every SEO signal and tells me exactly what needs to be fixed. No manual checking, no missed issues.
 
 I run this on every page I publish and on my existing pages every quarter to catch any issues that may have crept in.
 
@@ -1391,7 +1391,7 @@ After a few winning trades, many traders develop overconfidence. They believe th
 
 Herd mentality is the tendency to follow the crowd. When everyone is buying, you buy. When everyone is selling, you sell. The problem is that the crowd is usually wrong at turning points.
 
-**How to beat it:** Use data instead of sentiment. Our [Crypto Profit Calculator](/crypto) helps you evaluate trades based on numbers, not popular opinion. When the crowd is euphoric, be cautious. When the crowd is despairing, look for opportunities.
+**How to beat it:** Use data instead of sentiment. Our [Crypto Profit Calculator](/crypto-profit) helps you evaluate trades based on numbers, not popular opinion. When the crowd is euphoric, be cautious. When the crowd is despairing, look for opportunities.
 
 ## The Math-Based Trading System
 
@@ -1405,7 +1405,7 @@ Example strategy: "Buy when the 50-day moving average crosses above the 200-day 
 
 ### Step 2: Pre-Calculate Your Trade Plan
 
-Before you enter any trade, use our [Crypto Profit Calculator](/crypto) to calculate:
+Before you enter any trade, use our [Crypto Profit Calculator](/crypto-profit) to calculate:
 
 - Your entry price
 - Your target price (take-profit)
@@ -1431,7 +1431,7 @@ After each trade, review your performance. Did you follow your plan? If not, why
 
 Tracking your portfolio performance is essential for staying rational. When you can see your actual returns (not your imagined returns), you can make better decisions.
 
-Our [Crypto Profit Calculator](/crypto) helps you track individual trade performance and overall portfolio ROI. Use it to keep your trading grounded in numbers.
+Our [Crypto Profit Calculator](/crypto-profit) helps you track individual trade performance and overall portfolio ROI. Use it to keep your trading grounded in numbers.
 
 ## Conclusion
 
@@ -1598,7 +1598,7 @@ Ranking is not a set-it-and-forget-it activity. Google's algorithms change, comp
 
 ## Using Tools to Accelerate Your SEO
 
-Manual SEO optimization is time-consuming. Our [SEO Analyzer](/seo-analyzer) helps you identify issues quickly so you can focus on what matters most: creating great content.
+Manual SEO optimization is time-consuming. Our [SEO Analyzer](/site-audit) helps you identify issues quickly so you can focus on what matters most: creating great content.
 
 Run the analyzer on every page you publish. It checks your title, meta description, headings, SSL, images, and more. Fix any issues it finds, and you will have a technically optimized page every time.
 
@@ -1656,7 +1656,7 @@ An SEO analyzer scans your page and checks every important ranking factor:
 - Robots.txt configuration
 - Page speed indicators
 
-Instead of manually checking each factor, use our [SEO Analyzer](/seo-analyzer). Paste your URL and get a comprehensive report in seconds. It tells you exactly what needs to be fixed and how to fix it.
+Instead of manually checking each factor, use our [SEO Analyzer](/site-audit). Paste your URL and get a comprehensive report in seconds. It tells you exactly what needs to be fixed and how to fix it.
 
 ## 3. Crypto Profit Calculator
 
@@ -1670,7 +1670,7 @@ A crypto profit calculator takes the guesswork out of trading:
 - Track portfolio performance
 - Plan exit strategies
 
-Our [Crypto Profit Calculator](/crypto) includes fee calculations, gas cost estimation, and scenario modeling. Use it before every trade to ensure you are making data-driven decisions.
+Our [Crypto Profit Calculator](/crypto-profit) includes fee calculations, gas cost estimation, and scenario modeling. Use it before every trade to ensure you are making data-driven decisions.
 
 ## 4. AI Hook Generator
 
@@ -1806,7 +1806,7 @@ Every crypto transaction in the US is a taxable event. When you sell crypto for 
 
 The key concept is cost basis. Your cost basis is what you paid for the crypto, including fees. When you dispose of the crypto, your gain or loss is the difference between the sale price and your cost basis. Short-term gains (holding less than one year) are taxed at ordinary income rates up to 37 percent. Long-term gains (holding more than one year) are taxed at preferential rates of 0, 15, or 20 percent depending on your income.
 
-Using a [Crypto Profit Calculator](/crypto) helps you track your cost basis and calculate your gains accurately before tax season arrives.
+Using a [Crypto Profit Calculator](/crypto-profit) helps you track your cost basis and calculate your gains accurately before tax season arrives.
 
 ---
 
@@ -1858,7 +1858,7 @@ If you can identify which specific coins you are selling — for example, by tra
 
 ### HIFO (Highest In, First Out)
 
-HIFO sells the highest-cost basis coins first, minimizing your gain. This is the most tax-efficient method but requires detailed tracking software to implement correctly. Our [Crypto Profit Calculator](/crypto) supports multiple cost basis methods so you can compare outcomes before filing.
+HIFO sells the highest-cost basis coins first, minimizing your gain. This is the most tax-efficient method but requires detailed tracking software to implement correctly. Our [Crypto Profit Calculator](/crypto-profit) supports multiple cost basis methods so you can compare outcomes before filing.
 
 ---
 
@@ -1896,7 +1896,7 @@ Your state tax obligations may differ from federal rules. Some states are more a
 
 ## Crypto Tax Tools and Calculators
 
-Using our [Crypto Profit Calculator](/crypto) throughout the year keeps your records organized and your tax liability predictable. Calculate your gains after every trade rather than scrambling at tax time.
+Using our [Crypto Profit Calculator](/crypto-profit) throughout the year keeps your records organized and your tax liability predictable. Calculate your gains after every trade rather than scrambling at tax time.
 
 ### Recommended Workflow
 
@@ -2554,7 +2554,7 @@ Voice search is growing rapidly, especially for local queries. People ask "where
 
 ## Tracking Your Results
 
-Use Google Search Console to track your local search impressions and clicks. Monitor your Google Business Profile insights for search queries, calls, and direction requests. Our [SEO Analyzer](/seo-analyzer) tool can help you identify technical issues that might be holding back your local rankings.
+Use Google Search Console to track your local search impressions and clicks. Monitor your Google Business Profile insights for search queries, calls, and direction requests. Our [SEO Analyzer](/site-audit) tool can help you identify technical issues that might be holding back your local rankings.
 
 ### Key Metrics to Monitor
 
@@ -2692,7 +2692,7 @@ Google Business Profile posts are an underutilized ranking tool. Share updates a
 
 ## Tracking Local SEO Performance
 
-Use our [SEO Analyzer](/seo-analyzer) to audit your local SEO health and identify opportunities for improvement.
+Use our [SEO Analyzer](/site-audit) to audit your local SEO health and identify opportunities for improvement.
 
 ### Key Metrics
 
@@ -2962,7 +2962,7 @@ Launch a digital PR campaign to earn mentions from news outlets and industry pub
 
 ## Adapting Your SEO Strategy
 
-Run an SEO audit using our [SEO Analyzer](/seo-analyzer) tool to identify specific issues. Update your content strategy to prioritize user experience and first-hand expertise. Build your brand alongside your content. Stay informed about future updates by monitoring Google's official channels.
+Run an SEO audit using our [SEO Analyzer](/site-audit) tool to identify specific issues. Update your content strategy to prioritize user experience and first-hand expertise. Build your brand alongside your content. Stay informed about future updates by monitoring Google's official channels.
 
 ### Action Plan for 2026
 
@@ -3667,7 +3667,7 @@ Staking rewards are generally treated as income when you receive them, taxed at 
 
 ## Record Keeping Requirements
 
-HMRC requires detailed records of every transaction: date of transaction, value in GBP at the time of transaction, purpose of the transaction (buy, sell, trade, gift), counterparty information, and evidence of cost basis. Using our [Crypto Profit Calculator](/crypto) throughout the year makes this much easier than reconstructing records at tax time.
+HMRC requires detailed records of every transaction: date of transaction, value in GBP at the time of transaction, purpose of the transaction (buy, sell, trade, gift), counterparty information, and evidence of cost basis. Using our [Crypto Profit Calculator](/crypto-profit) throughout the year makes this much easier than reconstructing records at tax time.
 
 ### What Records to Keep
 
@@ -3943,7 +3943,7 @@ Develop content specifically designed to attract local backlinks in each market.
 
 Ensure your site structure supports multiple languages without creating duplicate content issues. Use clear URL structures that indicate language and country. Implement proper redirects between language versions. Use canonical tags to prevent duplicate content. Ensure your XML sitemap includes all language versions. Monitor Google Search Console for each country separately.
 
-Use our [SEO Analyzer](/seo-analyzer) to audit your European pages for technical SEO issues and identify opportunities for improvement across markets.
+Use our [SEO Analyzer](/site-audit) to audit your European pages for technical SEO issues and identify opportunities for improvement across markets.
 
 ### Language Detection and User Experience
 
@@ -4289,7 +4289,7 @@ US citizens working abroad may continue paying US Social Security tax if they ar
 
 ## Tools for Nomads
 
-Track your days using dedicated travel tracking apps that provide auditable records. Use our [Crypto Profit Calculator](/crypto) and other calculators to estimate your tax liability in different scenarios. Maintain digital copies of all receipts, contracts, and travel records.
+Track your days using dedicated travel tracking apps that provide auditable records. Use our [Crypto Profit Calculator](/crypto-profit) and other calculators to estimate your tax liability in different scenarios. Maintain digital copies of all receipts, contracts, and travel records.
 
 ### Essential Tools
 

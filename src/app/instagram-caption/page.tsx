@@ -77,7 +77,7 @@ export default function InstagramCaptionPage() {
       seo={{
         toolName: "Instagram Caption Generator",
         description: "Generate viral, high-engagement captions for your Reels and Posts in seconds using AI.",
-        url: "https://globalutilitytoolbox.com/instagram-caption"
+        url: "https://toolsnappy.com/instagram-caption"
       }}
       currentPath="/instagram-caption"
       results={captions.length > 0 && (

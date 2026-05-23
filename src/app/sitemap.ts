@@ -6,9 +6,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   const staticPages = [
     '',
-    '/seo-analyzer',
+    '/site-audit',
     '/bg-remover',
-    '/crypto',
+    '/crypto-profit',
     '/ai-hook',
     '/blog',
     '/about',
@@ -38,6 +38,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/facebook-video-downloader',
     '/instagram-video-downloader',
     '/tiktok-video-downloader',
+    '/ai-humanizer',
+    '/keyword-clustering',
+    '/blog-to-social',
+    '/tax-calculator',
+    '/salary-calculator',
+    '/retirement-calculator',
+    '/write-for-us',
   ].map(route => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

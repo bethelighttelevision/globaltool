@@ -60,7 +60,7 @@ export default function BackgroundRemover() {
       seo={{
         toolName: "Professional AI Background Remover",
         description: "Adobe-grade AI background removal directly in your browser. Powered by neural networks for perfect edge detection and HD transparency.",
-        url: "https://globalutilitytoolbox.com/bg-remover"
+        url: "https://toolsnappy.com/bg-remover"
       }}
       currentPath="/bg-remover"
       contentSection={

@@ -1,169 +1,298 @@
 ﻿"use client";
 
-import React, { useState, useRef } from 'react';
-import { FileText } from 'lucide-react';
+import React, { useState, useRef, useCallback } from 'react';
+import { FileText, Download, Trash2, Check, Loader2 } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-export default function PDFConverterPage() {
+let pdfjsLib: any = null;
 
+async function getPdfJs() {
+  if (!pdfjsLib) {
+    pdfjsLib = await import('pdfjs-dist');
+    const version = (await import('pdfjs-dist/package.json')).version;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.mjs`;
+  }
+  return pdfjsLib;
+}
+
+interface PageImage {
+  id: number;
+  dataUrl: string;
+  width: number;
+  height: number;
+}
+
+export default function PDFConverterPage() {
   const [isDragging, setIsDragging] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const [pages, setPages] = useState<PageImage[]>([]);
+  const [selectedPages, setSelectedPages] = useState<Set<number>>(new Set());
+  const [totalPages, setTotalPages] = useState(0);
+  const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const renderPageToCanvas = async (pdf: any, pageNum: number) => {
+    const page = await pdf.getPage(pageNum);
+    const viewport = page.getViewport({ scale: 2.0 });
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext('2d')!;
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    const dataUrl = canvas.toDataURL('image/png');
+    return { id: pageNum, dataUrl, width: viewport.width, height: viewport.height };
+  };
+
+  const processFile = useCallback(async (selectedFile: File) => {
+    if (selectedFile.type !== 'application/pdf') {
+      setError('Please upload a valid PDF file.');
+      return;
+    }
+    setError('');
+    setFile(selectedFile);
+    setIsProcessing(true);
+    setProgress(0);
+    setPages([]);
+    setSelectedPages(new Set());
+
+    try {
+      const pdf = await (await getPdfJs()).getDocument({ data: await selectedFile.arrayBuffer() }).promise;
+      const total = pdf.numPages;
+      setTotalPages(total);
+
+      const renderedPages: PageImage[] = [];
+      for (let i = 1; i <= total; i++) {
+        const img = await renderPageToCanvas(pdf, i);
+        renderedPages.push(img);
+        setProgress(Math.round((i / total) * 100));
+      }
+
+      setPages(renderedPages);
+      setSelectedPages(new Set(renderedPages.map(p => p.id)));
+      setIsProcessing(false);
+    } catch (err) {
+      setError('Failed to process PDF. The file may be corrupted or password-protected.');
+      setIsProcessing(false);
+    }
+  }, []);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(true);
   };
 
-  const handleDragLeave = () => {
-    setIsDragging(false);
-  };
-
-  const processFile = (selectedFile: File) => {
-    if (selectedFile.type !== 'application/pdf') {
-      alert('Please upload a valid PDF file.');
-      return;
-    }
-    setFile(selectedFile);
-    setIsProcessing(true);
-    setProgress(0);
-    setIsComplete(false);
-
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsProcessing(false);
-          setIsComplete(true);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
-  };
+  const handleDragLeave = () => setIsDragging(false);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      processFile(e.dataTransfer.files[0]);
-    }
+    if (e.dataTransfer.files?.length) processFile(e.dataTransfer.files[0]);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      processFile(e.target.files[0]);
-    }
+    if (e.target.files?.length) processFile(e.target.files[0]);
+  };
+
+  const togglePage = (id: number) => {
+    setSelectedPages(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const canvasToSvgBlob = (img: PageImage): Blob => {
+    const svgContent = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${img.width}" height="${img.height}" viewBox="0 0 ${img.width} ${img.height}">
+  <image width="${img.width}" height="${img.height}" xlink:href="${img.dataUrl}"/>
+</svg>`;
+    return new Blob([svgContent], { type: 'image/svg+xml' });
+  };
+
+  const downloadSvg = (img: PageImage) => {
+    const blob = canvasToSvgBlob(img);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${file?.name.replace('.pdf', '') || 'export'}-page-${img.id}.svg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadAllSelected = () => {
+    const toDownload = pages.filter(p => selectedPages.has(p.id));
+    toDownload.forEach((img, index) => {
+      setTimeout(() => downloadSvg(img), index * 300);
+    });
+  };
+
+  const reset = () => {
+    setFile(null);
+    setPages([]);
+    setSelectedPages(new Set());
+    setProgress(0);
+    setError('');
   };
 
   return (
     <ToolLayout
       icon={<FileText size={40} />}
       title="PDF to SVG Converter"
-      description="Secure, lightning-fast client-side conversion. Your files never leave your device. 100% private."
+      description="Free, client-side PDF to SVG conversion. Your files never leave your device. 100% private."
       seo={{
         toolName: "PDF to SVG Converter",
-        description: "Convert PDF documents to high-quality SVG vectors instantly in your browser. 100% private and secure.",
-        url: "https://globalutilitytoolbox.com/pdf-converter"
+        description: "Convert PDF documents to SVG vectors instantly in your browser using PDF.js. 100% private and secure.",
+        url: "https://toolsnappy.com/pdf-converter"
       }}
       currentPath="/pdf-converter"
       contentSection={
         <article className="prose prose-invert lg:prose-xl">
           <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>Converting PDF to SVG: The Designer&apos;s Essential Guide</h2>
           <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-            Portable Document Format (PDF) is great for viewing, but Scalable Vector Graphics (SVG) are the gold standard for web design and publishing. Our <strong>Professional PDF to SVG Converter</strong> allows you to extract high-quality vector data from your PDF documents and turn them into lightweight, infinitely scalable web assets. PDF files are widely used for document sharing because they preserve formatting across different devices and operating systems, making them ideal for contracts, reports, brochures, and other fixed-layout documents. However, when you need to use individual graphical elements from a PDF in a website, mobile app, or design project, the PDF format becomes cumbersome to work with. You would typically need to open the file in Adobe Acrobat or Illustrator, manually select the elements you need, and export them one by one. This process is slow, requires expensive software, and often results in quality loss if you are exporting to raster formats like PNG or JPEG. SVG, on the other hand, is designed specifically for web and interface use. It is an XML-based vector image format that describes shapes, paths, and colors using plain text instructions that browsers can render natively. Because SVG files contain mathematical descriptions of graphics rather than fixed pixel grids, they can be scaled to any size without losing clarity or sharpness. This makes them ideal for responsive web design, where the same graphic needs to look perfect on devices ranging from smartwatches to large desktop monitors. SVG files are also significantly smaller than equivalent raster images in most cases, which helps improve page load times and reduce bandwidth usage. Our converter automates the extraction process, identifying vector elements within your PDF and converting them into clean, standards-compliant SVG code that you can use immediately in your projects. The entire process happens locally in your browser using JavaScript, which means your documents never leave your computer and your privacy is fully protected.
+            Portable Document Format (PDF) is great for viewing, but Scalable Vector Graphics (SVG) are the gold standard for web design and publishing. Our <strong>Professional PDF to SVG Converter</strong> allows you to extract high-quality vector data from your PDF documents and turn them into lightweight, scalable web assets. PDF files are widely used for document sharing because they preserve formatting across devices, making them ideal for contracts, reports, brochures, and other fixed-layout documents. However, when you need to use individual graphical elements from a PDF in a website, mobile app, or design project, the PDF format becomes cumbersome. You would typically need Adobe Acrobat or Illustrator to extract elements — expensive software that most people don't have. SVG, on the other hand, is designed specifically for web and interface use. It is an XML-based vector image format that describes shapes, paths, and colors using plain text instructions that browsers render natively. Because SVG files contain mathematical descriptions of graphics rather than fixed pixel grids, they scale to any size without losing clarity — making them perfect for responsive web design.
           </p>
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Why Use SVG Instead of Raster Formats?</h3>
           <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-            Unlike JPEG or PNG, SVG files are made of mathematical paths, not pixels. This means you can zoom in indefinitely without any loss of quality. For logos, icons, and diagrams, SVG ensures that your visuals look razor-sharp on everything from mobile phones to massive 4K monitors. Our tool preserves these paths perfectly during conversion. Raster images store information as a fixed grid of pixels, which means they have a native resolution and become blurry or pixelated when you scale them beyond their original dimensions. This fundamental limitation creates problems in modern web design, where content must adapt to screens of varying sizes and resolutions. An SVG logo that looks crisp on a standard laptop screen will look equally sharp on a Retina display, a 4K television, or a smartphone, because the browser simply redraws the vector paths at the appropriate resolution. This eliminates the need to create and serve multiple versions of the same image at different resolutions, simplifying your workflow and reducing the number of assets you need to manage. SVGs also offer superior compression for vector-based graphics. A complex logo that might be 100 kilobytes as a PNG could be only 5 kilobytes as an SVG, representing a 95 percent reduction in file size. This directly translates to faster page loads, lower bandwidth costs, and improved user experience, particularly on mobile networks. Additionally, because SVG is a text-based format, it can be indexed by search engines, styled with CSS, manipulated with JavaScript, and animated with SMIL or CSS animations. This opens up creative possibilities that are simply not possible with raster formats. For example, you can change the color of an SVG icon on hover using CSS, create interactive infographics that respond to user input, or animate complex illustrations for engaging storytelling. Our PDF to SVG converter makes all of these capabilities accessible by extracting vector content from your PDF documents and delivering clean, standards-compliant SVG files.
+            Unlike JPEG or PNG, SVG files are made of mathematical paths, not pixels. This means you can zoom infinitely without quality loss. For logos, icons, and diagrams, SVG ensures your visuals look razor-sharp on everything from mobile phones to 4K monitors. Raster images store data as a fixed pixel grid, which means they become blurry when scaled beyond their native resolution. An SVG logo that looks crisp on a laptop will look equally sharp on a Retina display or smartphone because the browser redraws the vector paths at the appropriate resolution. SVGs also offer superior compression — a complex logo that might be 100KB as PNG could be only 5KB as SVG, reducing bandwidth and improving page load times.
           </p>
 
           <div className="glass-panel" style={{ padding: '32px', margin: '40px 0', borderLeft: '4px solid #ff3b30' }}>
             <h4 style={{ marginTop: 0, color: '#ff3b30' }}>Privacy First: Client-Side Conversion</h4>
             <p style={{ marginBottom: 0, fontSize: '15px' }}>
-              Most online converters upload your sensitive PDFs to a remote server for processing, which creates a significant privacy and security risk, especially when dealing with confidential business documents, legal contracts, financial records, or personal information. Our tool performs the entire conversion locally within your browser using JavaScript. Your files never leave your computer, ensuring 100 percent privacy and security for your documents. This client-side architecture means there are no file size limits imposed by server storage constraints, no upload waiting times, and no risk of your data being intercepted during transmission or stored on third-party servers. The conversion happens instantly and privately, giving you complete control over your sensitive files at all times. For businesses that handle confidential information, this approach eliminates the need for legal review of third-party data processing agreements and ensures compliance with data protection regulations like GDPR and CCPA. You can convert sensitive PDFs with complete peace of mind, knowing that your proprietary information never leaves your local machine.
+              Most online converters upload your PDFs to a remote server — a security risk for confidential documents. Our tool uses PDF.js to perform the entire conversion locally in your browser. Your files never leave your computer, ensuring 100% privacy. No file size limits, no upload waiting, and no risk of data interception.
             </p>
           </div>
 
-          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Best Practices for SVG Web Integration</h3>
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Use Cases for PDF to SVG Conversion</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Web developers frequently need to extract vector graphics from PDF design mockups, wireframes, and brand guidelines prepared by design teams who work primarily in tools like Figma or Adobe Illustrator but deliver assets in PDF format. Marketing teams use our converter to pull infographics, charts, and data visualizations from PDF reports and turn them into web-ready SVG components that maintain crisp resolution across all screen sizes. Print designers converting multi-page PDF catalogues into individual SVG files can integrate each graphic directly into website product pages without losing the precise layout and typography specifications created during the print production process. For e-commerce businesses, converting PDF-based product technical drawings into SVG format enables interactive zoom features that let customers inspect details at any magnification level.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Understanding SVG Optimization for Web Performance</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            SVGs generated from PDF files sometimes contain redundant metadata, invisible layers, and unnecessary grouping structures that inflate file size. Running your converted SVGs through an optimization process can reduce file size by fifty to eighty percent without any visible quality loss. Tools like SVGO analyze and remove unnecessary code while preserving the visual integrity of your graphics. Optimized SVGs load faster, use less bandwidth, and improve your Core Web Vitals scores, which directly impacts SEO rankings. When embedding converted SVGs in web pages, always verify that the viewBox attribute matches your intended display dimensions and consider setting width and height attributes to prevent layout shifts during page rendering.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Best Practices for PDF to SVG Workflow</h3>
           <ul style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '40px', paddingLeft: '20px' }}>
-            <li style={{ marginBottom: '12px' }}><strong>Code Optimization:</strong> After conversion, use an SVG optimizer to remove unnecessary metadata, redundant paths, and invisible elements that can bloat file size. Clean SVG code loads faster and is easier to work with in development. Popular optimization tools can reduce SVG file sizes by 50 percent or more without any visible quality loss.</li>
-            <li style={{ marginBottom: '12px' }}><strong>Accessibility:</strong> Always add a `title` and `desc` tag inside your SVG code to help screen readers understand the graphic. This is essential for web accessibility compliance and ensures that visually impaired users can understand the content and purpose of your vector graphics. Search engines also use these tags to better index your visual content.</li>
-            <li style={{ marginBottom: '12px' }}><strong>CSS Styling:</strong> Since SVGs are code-based, you can use CSS to change colors, adjust stroke widths, or animate paths on hover and focus events. This eliminates the need to create multiple versions of the same icon in different colors and enables interactive visual experiences that engage users and enhance usability.</li>
-            <li style={{ marginBottom: '12px' }}><strong>Responsive Implementation:</strong> Set SVG dimensions using relative units like percentages or viewBox attributes instead of fixed pixel values to ensure your graphics scale properly across different screen sizes and devices. This guarantees that your vector content always fits perfectly within its container regardless of the viewing context.</li>
-            <li style={{ marginBottom: '12px' }}><strong>Inline Embedding:</strong> For icons and small graphics that appear frequently across your site, consider inlining SVG code directly in your HTML rather than using external file references. This eliminates additional HTTP requests and allows you to style and animate the SVGs using your site&apos;s existing CSS framework.</li>
+            <li style={{ marginBottom: '12px' }}><strong>Optimize:</strong> After conversion, use an SVG optimizer to remove metadata and redundant paths.</li>
+            <li style={{ marginBottom: '12px' }}><strong>Accessibility:</strong> Add `title` and `desc` tags inside SVG for screen readers.</li>
+            <li style={{ marginBottom: '12px' }}><strong>CSS Styling:</strong> SVGs can be styled with CSS — change colors, adjust strokes, animate on hover.</li>
+            <li style={{ marginBottom: '12px' }}><strong>Responsive:</strong> Use viewBox attributes instead of fixed pixel values for proper scaling.</li>
+            <li style={{ marginBottom: '12px' }}><strong>Inline:</strong> Embed small SVGs directly in HTML to eliminate HTTP requests.</li>
           </ul>
         </article>
       }
     >
+      {error && (
+        <div style={{ maxWidth: '600px', margin: '0 auto 20px', padding: '16px', background: 'rgba(255, 68, 68, 0.1)', border: '1px solid rgba(255, 68, 68, 0.3)', borderRadius: '12px', color: '#ff4444', textAlign: 'center' }}>
+          {error}
+        </div>
+      )}
+
       {!file ? (
-        <div 
+        <div
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
-          style={{ 
-            maxWidth: '600px', 
-            margin: '0 auto', 
-            background: isDragging ? 'rgba(41, 151, 255, 0.1)' : 'rgba(255,255,255,0.03)', 
-            padding: '60px 24px', 
-            borderRadius: '24px', 
-            border: `2px dashed ${isDragging ? 'var(--accent)' : 'var(--card-border)'}`, 
-            cursor: 'pointer',
-            transition: 'all 0.2s ease'
+          style={{
+            maxWidth: '600px', margin: '0 auto',
+            background: isDragging ? 'rgba(41, 151, 255, 0.1)' : 'rgba(255,255,255,0.03)',
+            padding: '60px 24px', borderRadius: '24px',
+            border: `2px dashed ${isDragging ? 'var(--accent)' : 'var(--card-border)'}`,
+            cursor: 'pointer', transition: 'all 0.2s ease', textAlign: 'center'
           }}
         >
-          <input 
-            type="file" 
-            accept=".pdf" 
-            ref={fileInputRef} 
-            onChange={handleFileChange} 
-            style={{ display: 'none' }} 
-          />
-          <div style={{ fontSize: '48px', marginBottom: '16px' }}>ðŸ“</div>
+          <input type="file" accept=".pdf" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>PDF</div>
           <h3 style={{ fontSize: '24px', marginBottom: '8px', color: 'var(--foreground)' }}>Drop your PDF here</h3>
-          <p style={{ color: 'var(--muted)', fontSize: '16px' }}>or click to browse from your device</p>
-          <div style={{ marginTop: '24px', fontSize: '14px', color: 'var(--muted)' }}>Maximum file size: 50MB</div>
+          <p style={{ color: 'var(--muted)', fontSize: '16px' }}>or click to browse</p>
         </div>
       ) : (
-        <div style={{ maxWidth: '600px', margin: '0 auto', background: 'rgba(255,255,255,0.03)', padding: '40px', borderRadius: '24px', border: '1px solid var(--card-border)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '24px' }}>
-            <div style={{ fontSize: '32px' }}>ðŸ“‘</div>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontWeight: '600', fontSize: '18px' }}>{file.name}</div>
-              <div style={{ color: 'var(--muted)', fontSize: '14px' }}>{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: '16px 24px', background: 'rgba(255,255,255,0.03)', borderRadius: '16px', border: '1px solid var(--card-border)', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <FileText size={24} color="var(--accent)" />
+              <div>
+                <div style={{ fontWeight: 600, fontSize: '15px' }}>{file.name}</div>
+                <div style={{ color: 'var(--muted)', fontSize: '13px' }}>{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages || '?'} pages</div>
+              </div>
             </div>
+            <button onClick={reset} style={{ background: 'rgba(255,68,68,0.1)', border: 'none', color: '#ff4444', padding: '8px 16px', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px' }}>
+              <Trash2 size={16} /> Remove
+            </button>
           </div>
 
           {isProcessing && (
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '14px', color: 'var(--muted)' }}>
-                <span>Processing client-side...</span>
-                <span>{progress}%</span>
+            <div style={{ padding: '24px', background: 'rgba(255,255,255,0.03)', borderRadius: '16px', border: '1px solid var(--card-border)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                <Loader2 size={20} className="animate-spin" color="var(--accent)" />
+                <span style={{ color: 'var(--muted)', fontSize: '15px' }}>Rendering pages with PDF.js...</span>
+                <span style={{ marginLeft: 'auto', fontWeight: 600, color: 'var(--accent)' }}>{progress}%</span>
               </div>
-              <div style={{ height: '8px', background: 'var(--card-border)', borderRadius: '4px', overflow: 'hidden' }}>
-                <div style={{ height: '100%', width: `${progress}%`, background: 'var(--accent)', transition: 'width 0.2s ease' }}></div>
+              <div style={{ height: '6px', background: 'var(--card-border)', borderRadius: '3px', overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: `${progress}%`, background: 'var(--accent)', transition: 'width 0.3s ease' }} />
               </div>
             </div>
           )}
 
-          {isComplete && (
-            <div className="animate-slide-up">
-              <div style={{ color: 'var(--success)', fontSize: '18px', fontWeight: '600', marginBottom: '24px' }}>
-                âœ“ Conversion Complete
+          {!isProcessing && pages.length > 0 && (
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                <span style={{ color: 'var(--muted)', fontSize: '14px' }}>
+                  {pages.length} pages — <strong>{selectedPages.size}</strong> selected
+                </span>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button onClick={() => setSelectedPages(new Set(pages.map(p => p.id)))} style={{ background: 'none', border: '1px solid var(--card-border)', color: 'var(--muted)', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontSize: '13px' }}>Select All</button>
+                  <button onClick={() => setSelectedPages(new Set())} style={{ background: 'none', border: '1px solid var(--card-border)', color: 'var(--muted)', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', fontSize: '13px' }}>Deselect All</button>
+                </div>
               </div>
-              <button className="premium-button" style={{ width: '100%', padding: '16px', fontSize: '18px', background: 'var(--success)' }}>
-                Download Extracted SVGs
-              </button>
-              <button 
-                onClick={() => { setFile(null); setIsComplete(false); }} 
-                style={{ background: 'none', border: 'none', color: 'var(--muted)', marginTop: '24px', cursor: 'pointer', textDecoration: 'underline' }}
-              >
-                Convert another file
-              </button>
+
+              {selectedPages.size > 0 && (
+                <button onClick={downloadAllSelected} className="premium-button" style={{ width: '100%', padding: '16px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                  <Download size={20} /> Download {selectedPages.size} Page{selectedPages.size > 1 ? 's' : ''} as SVG
+                </button>
+              )}
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '16px' }}>
+                {pages.map((img) => (
+                  <div
+                    key={img.id}
+                    onClick={() => togglePage(img.id)}
+                    style={{
+                      padding: '10px', borderRadius: '14px', background: selectedPages.has(img.id) ? 'rgba(41, 151, 255, 0.1)' : 'rgba(255,255,255,0.02)',
+                      border: `2px solid ${selectedPages.has(img.id) ? 'var(--accent)' : 'var(--card-border)'}`,
+                      cursor: 'pointer', transition: 'all 0.2s', position: 'relative'
+                    }}
+                  >
+                    <div style={{ position: 'relative', marginBottom: '8px' }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={img.dataUrl} alt={`Page ${img.id}`} style={{ width: '100%', borderRadius: '8px' }} />
+                      {selectedPages.has(img.id) && (
+                        <div style={{ position: 'absolute', top: '6px', right: '6px', width: '22px', height: '22px', background: 'var(--accent)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Check size={14} color="#fff" />
+                        </div>
+                      )}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 600 }}>Page {img.id}</span>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); downloadSvg(img); }}
+                        style={{ background: 'none', border: 'none', color: 'var(--accent)', cursor: 'pointer', padding: '4px' }}
+                        title="Download this page"
+                      >
+                        <Download size={14} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -171,4 +300,3 @@ export default function PDFConverterPage() {
     </ToolLayout>
   );
 }
-

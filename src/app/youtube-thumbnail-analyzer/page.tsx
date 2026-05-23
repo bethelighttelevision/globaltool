@@ -77,9 +77,32 @@ export default function YoutubeThumbnailAnalyzerPage() {
       seo={{
         toolName: "YouTube Thumbnail Analyzer",
         description: "Free AI-powered YouTube thumbnail analyzer. Get scores for composition, colors, text, and estimated CTR.",
-        url: "https://globalutilitytoolbox.com/youtube-thumbnail-analyzer"
+        url: "https://toolsnappy.com/youtube-thumbnail-analyzer"
       }}
       currentPath="/youtube-thumbnail-analyzer"
+      contentSection={
+        <article className="prose prose-invert lg:prose-xl">
+          <h2 style={{ fontSize: '32px', marginBottom: '24px' }}>The Science of High-Performing YouTube Thumbnails</h2>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Your video thumbnail is the single most important factor determining whether a potential viewer clicks or scrolls past your content. Our free <strong>YouTube Thumbnail Analyzer</strong> uses AI-powered computer vision techniques to evaluate composition, color contrast, text readability, emotional appeal, and facial expression quality, giving you a data-driven score for each critical element. In the competitive YouTube landscape of 2026, where the average user scrolls through hundreds of thumbnails daily, even a five percent improvement in click-through rate can translate into thousands of additional views over your video&rsquo;s lifetime. Understanding the visual psychology behind high-CTR thumbnails is essential knowledge for any serious content creator.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>What Makes a Thumbnail Clickable</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Research consistently shows that thumbnails featuring human faces with strong emotional expressions outperform text-only or object-only designs by a significant margin. Our analyzer specifically evaluates face detection and expression quality, rewarding thumbnails that show clear, high-contrast faces with recognizable emotions like surprise, curiosity, or excitement. Color contrast between the thumbnail subject and background is another critical factor, as high-contrast designs stand out in YouTube&rsquo;s predominantly dark interface. Text readability scoring ensures that any overlay text is large enough, positioned correctly, and contrasted sufficiently against the background to be readable at thumbnail size on both desktop and mobile screens.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Understanding Your Thumbnail Score Components</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Our analysis breaks down thumbnail quality into five distinct dimensions, each scored from one to ten. Composition scoring evaluates the rule of thirds, subject positioning, and visual balance. Color scoring measures contrast ratios, color harmony, and saturation levels that attract visual attention. Text readability checks font size, placement, and background contrast for any overlay text in your thumbnail. Emotional appeal assesses the strength and clarity of the feeling your thumbnail conveys. Face detection confirms the presence and quality of human faces. Together, these dimensions provide a complete picture of your thumbnail&rsquo;s potential performance and specific areas for improvement.
+          </p>
+
+          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Proven Thumbnail Optimization Strategies</h3>
+          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
+            Use high-resolution source images and avoid upscaling low-quality photos, which introduces visible artifacts. Position your subject slightly off-center following the rule of thirds for more dynamic compositions. Limit text to three to five words maximum and use bold, high-contrast fonts that remain readable at small sizes. Choose background colors that contrast strongly with your subject while complementing your brand palette. Test different thumbnail variations using YouTube&rsquo;s built-in A/B testing feature, and use our analyzer to predict which design will perform better before publishing. Apply these strategies systematically and track your channel&rsquo;s CTR trends to continuously refine your visual approach.
+          </p>
+        </article>
+      }
       results={result && (
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <div className="glass-panel" style={{ padding: '24px', textAlign: 'center', marginBottom: '20px' }}>

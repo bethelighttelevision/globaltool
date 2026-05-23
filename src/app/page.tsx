@@ -3,379 +3,377 @@ import Link from 'next/link';
 import Script from 'next/script';
 import AdSensePlaceholder from '../components/AdSensePlaceholder';
 import {
-  LineChart,
-  Bot,
-  FileCode2,
-  Tags,
-  ShieldCheck,
-  Braces,
-  Play,
-  Camera,
-  Type,
-  Image as ImageIcon,
-  TrendingUp,
-  Search,
-  Globe,
-  ZoomIn,
-  Star,
-  Video,
-  Hash,
-  Download,
-  Eye,
-  List,
-  DollarSign,
-  Award,
-  FileText,
-  Music
+  Search, Globe, Bot, FileCode2, Tags, ShieldCheck, Braces, Play, Camera,
+  Type, Image as ImageIcon, TrendingUp, Star, Video, Hash, Download, Eye, List,
+  DollarSign, FileText, Music, Sparkles, RefreshCw, Layers, Calculator, Zap,
+  ArrowRight, CheckCircle2, Quote, Code,
 } from 'lucide-react';
 
 export const metadata = {
   title: 'ToolSnappy | #1 Free SEO & Social Media Suite 2026',
-  description: 'Access 15+ professional tools: AI Lucky Number Finder, Page SEO Analyzer, AI Background Remover, Crypto ROI Calculator, and TikTok tools. 100% Free.',
-  keywords: 'ToolSnappy, AI Lucky Number Finder, Free SEO Tools 2026, Best AI Hook Generator, AI Background Remover, Crypto Profit Calculator USA, YouTube SEO Tool, Instagram Caption Generator, TikTok Hashtag Generator',
-  alternates: {
-    canonical: 'https://toolsnappy.com',
-  },
+  description: 'Access 32+ professional tools: SEO Analyzer, AI Humanizer, Crypto Calculator, Tax Calculator, YouTube tools, and more. 100% Free. No sign-up required.',
+  keywords: 'ToolSnappy, Free SEO Tools, AI Hook Generator, Crypto Calculator, YouTube SEO, TikTok Tools, US Tax Calculator, Salary Calculator',
+  alternates: { canonical: 'https://toolsnappy.com' },
 };
 
-export default function Home() {
+const sectionStyle: React.CSSProperties = {
+  marginBottom: '28px', paddingBottom: '16px',
+  borderBottom: '1px solid rgba(255,255,255,0.06)',
+  display: 'flex', alignItems: 'center', gap: '12px',
+};
+
+function SectionHeader({ icon, label, color }: { icon: React.ReactNode; label: string; color: string }) {
   return (
-    <div className="content-container animate-fade-in" style={{ padding: '40px 24px' }}>
-      <AdSensePlaceholder type="header" />
-
-      {/* JSON-LD WebSite + Organization Schema */}
-      <Script id="website-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "WebSite", "name": "ToolSnappy", "url": "https://toolsnappy.com", "description": "Free SEO, social media, and developer tools suite.", "potentialAction": { "@type": "SearchAction", "target": "https://toolsnappy.com/search?q={search_term_string}", "query-input": "required name=search_term_string" } }, { "@type": "Organization", "name": "ToolSnappy", "url": "https://toolsnappy.com", "logo": "https://toolsnappy.com/logo.png" }] }) }} />
-
-      <section className="animate-slide-up" style={{ textAlign: 'center', marginBottom: '80px', marginTop: '40px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.05)', padding: '8px 16px', borderRadius: '100px', marginBottom: '24px', border: '1px solid var(--card-border)' }}>
-          <TrendingUp size={16} color="var(--accent)" />
-          <span style={{ fontSize: '13px', fontWeight: '500', color: 'var(--muted)' }}>New: Page SEO Analyzer Audit Tool</span>
-        </div>
-        <h1 className="gradient-text text-4xl sm:text-5xl md:text-6xl font-bold" style={{ lineHeight: 1.1, marginBottom: '24px', letterSpacing: '-0.02em' }}>
-          ToolSnappy — Your Ultimate Digital<br />Arsenal for 2026
-        </h1>
-        <p className="text-base sm:text-lg md:text-xl" style={{ color: 'var(--muted)', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
-          Dominate search engines and social algorithms. Access a premium suite of AI-powered SEO, Content, and Financial tools engineered for the USA market.
-        </p>
-      </section>
-
-      {/* Grid: 12+ Tools */}
-      <h2 style={{ fontSize: '24px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <Search size={22} color="var(--accent)" /> Explorer All Tools
-      </h2>
-
-      <div className="animate-slide-up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '80px' }}>
-
-        {/* Row 1: Master SEO Tools */}
-        <Link href="/seo-analyzer" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', borderTop: '4px solid var(--accent)' }}>
-            <Globe size={24} color="var(--accent)" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Page SEO Analyzer</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Full website audit for titles, tags, and H1-H3 structure.</p>
-          </div>
-        </Link>
-
-        <Link href="/youtube-seo" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <Play size={24} color="#ff0000" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>YouTube SEO Opt</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Viral titles and real-time searchability scoring.</p>
-          </div>
-        </Link>
-
-        <Link href="/crypto" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <LineChart size={24} color="#0071e3" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Crypto Profit Calc</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Advanced ROI tracker with US Tax deduction logic.</p>
-          </div>
-        </Link>
-
-        {/* Row 2: Content Tools */}
-        <Link href="/ai-hook" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <Bot size={24} color="#34c759" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>AI Viral Hooks</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Psychological frameworks for retention.</p>
-          </div>
-        </Link>
-
-        <Link href="/instagram-caption" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <Camera size={24} color="#cc2366" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Insta Caption Gen</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>AI-driven captions for reels and posts.</p>
-          </div>
-        </Link>
-
-        <Link href="/tiktok-hashtags" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <TrendingUp size={24} color="#00f2ea" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>TikTok Hashtags</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>High-velocity trending tag generator.</p>
-          </div>
-        </Link>
-
-        <Link href="/lucky-number" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', border: '1px solid rgba(168, 199, 250, 0.2)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Star size={24} color="#a8c7fa" />
-              <span className="tag-badge" style={{ color: '#a8c7fa', borderColor: '#a8c7fa', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>VIRAL AI</span>
-            </div>
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>AI Lucky Number</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Find your destiny number & 2026 predictions.</p>
-          </div>
-        </Link>
-
-        {/* Row 3: Utilities */}
-        <Link href="/word-counter" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <Type size={24} color="#0071e3" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Word Counter</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Readability analysis and density stats.</p>
-          </div>
-        </Link>
-
-        <Link href="/pdf-converter" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <FileCode2 size={24} color="#ff3b30" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>PDF to SVG</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Private, client-side vector conversion.</p>
-          </div>
-        </Link>
-
-        <Link href="/base64-converter" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <ImageIcon size={24} color="#32d74b" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Image to Base64</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Instant encoding for developers.</p>
-          </div>
-        </Link>
-
-        <Link href="/bg-remover" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', borderTop: '4px solid var(--accent)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <ImageIcon size={24} color="var(--accent)" />
-            </div>
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>AI BG Remover</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Adobe-grade neural engine to remove backgrounds instantly.</p>
-          </div>
-        </Link>
-
-        <Link href="/image-upscaler" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <ZoomIn size={24} color="#32d74b" />
-              <span className="tag-badge" style={{ color: '#32d74b', borderColor: '#32d74b', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW AI</span>
-            </div>
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Image Upscaler</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Increase resolution of low-quality images using AI.</p>
-          </div>
-        </Link>
-
-        <Link href="/meta-tags" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <Tags size={24} color="#a8c7fa" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Meta Tag Builder</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>SEO and OG Tag generation suite.</p>
-          </div>
-        </Link>
-
-        <Link href="/password-gen" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <ShieldCheck size={24} color="#ffcc00" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>Password Maker</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Secure, randomized key generation.</p>
-          </div>
-        </Link>
-
-        <Link href="/json-formatter" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', height: '100%' }}>
-            <Braces size={24} color="#a8c7fa" style={{ marginBottom: '20px' }} />
-            <h3 style={{ fontSize: '18px', marginBottom: '8px', color: 'var(--foreground)' }}>JSON Formatter</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.5 }}>Validate and beautify JSON strings.</p>
-          </div>
-        </Link>
-
+    <div style={sectionStyle}>
+      <div style={{
+        width: '32px', height: '32px', borderRadius: '10px',
+        background: `${color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        color: color, fontSize: '18px',
+      }}>
+        {icon}
       </div>
-
-      {/* YouTube Creator Tools */}
-      <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <Play size={22} color="#ff0000" /> YouTube Creator Tools
-      </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
-
-        <Link href="/youtube-tag-extractor" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #0071e3' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <List size={28} color="#0071e3" />
-              <span className="tag-badge" style={{ color: '#0071e3', borderColor: '#0071e3', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>FREE</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Tag Extractor</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Extract all tags, hashtags, and keywords from any YouTube video instantly.</p>
-          </div>
-        </Link>
-
-        <Link href="/youtube-thumbnail-analyzer" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <ImageIcon size={28} color="#32d74b" />
-              <span className="tag-badge" style={{ color: '#32d74b', borderColor: '#32d74b', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>AI</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Thumbnail Analyzer</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>AI-powered analysis of composition, colors, text, and CTR potential.</p>
-          </div>
-        </Link>
-
-        <Link href="/youtube-thumbnail-tester" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ffcc00' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Eye size={28} color="#ffcc00" />
-              <span className="tag-badge" style={{ color: '#ffcc00', borderColor: '#ffcc00', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>FREE</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Thumbnail Tester</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Preview your thumbnail in search, suggested, and home page mockups.</p>
-          </div>
-        </Link>
-
-        <Link href="/youtube-thumbnail-downloader" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ff3b30' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Download size={28} color="#ff3b30" />
-              <span className="tag-badge" style={{ color: '#ff3b30', borderColor: '#ff3b30', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>FREE</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Thumbnail Downloader</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download thumbnails in all resolutions from HD to default quality.</p>
-          </div>
-        </Link>
-
-      </div>
-
-      {/* Video Downloaders Section */}
-      <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <Download size={22} color="var(--accent)" /> Video Downloaders
-      </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
-
-        <Link href="/youtube-video-downloader" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #ff0000' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Play size={28} color="#ff0000" />
-              <span className="tag-badge" style={{ color: '#ff0000', borderColor: '#ff0000', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>YouTube Video Downloader</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download YouTube videos in HD quality. Paste URL and save directly.</p>
-          </div>
-        </Link>
-
-        <Link href="/facebook-video-downloader" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #1877f2' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Video size={28} color="#1877f2" />
-              <span className="tag-badge" style={{ color: '#1877f2', borderColor: '#1877f2', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Facebook Video Downloader</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download Facebook videos. Paste any video URL and save to your device.</p>
-          </div>
-        </Link>
-
-        <Link href="/instagram-video-downloader" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #cc2366' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Camera size={28} color="#cc2366" />
-              <span className="tag-badge" style={{ color: '#cc2366', borderColor: '#cc2366', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Instagram Video Downloader</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download Instagram videos, reels, and stories. Paste URL and save.</p>
-          </div>
-        </Link>
-
-        <Link href="/tiktok-video-downloader" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #00f2ea' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Music size={28} color="#00f2ea" />
-              <span className="tag-badge" style={{ color: '#00f2ea', borderColor: '#00f2ea', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>NEW</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>TikTok Video Downloader</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Download TikTok videos. Paste any URL and save to your device.</p>
-          </div>
-        </Link>
-
-      </div>
-
-      {/* Finance Arsenal Section (HIGH CPC) */}
-      <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '32px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <TrendingUp size={22} color="#32d74b" /> Finance & Loan Arsenal
-      </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '80px' }}>
-        <Link href="/car-loan-calculator" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #32d74b' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <TrendingUp size={28} color="#32d74b" />
-              <span className="tag-badge" style={{ color: '#32d74b', borderColor: '#32d74b', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>HIGH CPC</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Car Loan Calculator</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Calculate monthly EMI and total interest for your vehicle finance.</p>
-          </div>
-        </Link>
-
-        <Link href="/mortgage-calculator" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '32px', cursor: 'pointer', height: '100%', borderTop: '4px solid #0071e3' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <Globe size={28} color="#0071e3" />
-              <span className="tag-badge" style={{ color: '#0071e3', borderColor: '#0071e3', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>PREMIUM</span>
-            </div>
-            <h3 style={{ fontSize: '20px', marginBottom: '12px', color: 'var(--foreground)' }}>Mortgage Calculator</h3>
-            <p style={{ color: 'var(--muted)', fontSize: '15px', lineHeight: 1.5 }}>Advanced home loan planner with amortization and interest breakdown.</p>
-          </div>
-        </Link>
-      </div>
-
-      <AdSensePlaceholder type="mid-content" />
-
-      {/* Free SEO & Dev Tools Section */}
-      <h2 style={{ fontSize: '24px', marginTop: '60px', marginBottom: '24px', paddingBottom: '12px', borderBottom: '1px solid var(--card-border)', color: 'var(--foreground)' }}>Free SEO & Developer Tools</h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px', marginBottom: '80px' }}>
-
-        <Link href="/meta-tags" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '10px' }}>
-              <Tags size={24} color="var(--foreground)" />
-            </div>
-            <div>
-              <h4 style={{ fontSize: '18px', color: 'var(--foreground)', marginBottom: '4px' }}>SEO Meta Generator</h4>
-              <p style={{ color: 'var(--muted)', fontSize: '13px', lineHeight: 1.4 }}>Create perfect HTML meta tags.</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/password-gen" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '10px' }}>
-              <ShieldCheck size={24} color="var(--foreground)" />
-            </div>
-            <div>
-              <h4 style={{ fontSize: '18px', color: 'var(--foreground)', marginBottom: '4px' }}>Secure Password Gen</h4>
-              <p style={{ color: 'var(--muted)', fontSize: '13px', lineHeight: 1.4 }}>Military-grade string generation.</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/json-formatter" style={{ textDecoration: 'none' }}>
-          <div className="glass-panel" style={{ padding: '24px', cursor: 'pointer', display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '10px' }}>
-              <Braces size={24} color="var(--foreground)" />
-            </div>
-            <div>
-              <h4 style={{ fontSize: '18px', color: 'var(--foreground)', marginBottom: '4px' }}>JSON Formatter</h4>
-              <p style={{ color: 'var(--muted)', fontSize: '13px', lineHeight: 1.4 }}>Validate and beautify raw JSON.</p>
-            </div>
-          </div>
-        </Link>
-
-      </div>
-
+      <h2 style={{ fontSize: '20px', fontWeight: 600, margin: 0, color: '#fff', letterSpacing: '-0.01em' }}>{label}</h2>
     </div>
   );
 }
 
+function ToolCard({
+  href, icon, label, desc, color, borderColor, badge,
+}: {
+  href: string; icon: React.ReactNode; label: string; desc: string;
+  color: string; borderColor?: string; badge?: { text: string; color: string };
+}) {
+  return (
+    <Link href={href} style={{ textDecoration: 'none', display: 'block' }}>
+      <div className="glass-panel" style={{
+        padding: '24px', cursor: 'pointer', height: '100%',
+        position: 'relative', overflow: 'hidden',
+        borderTop: borderColor ? `3px solid ${borderColor}` : undefined,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', marginBottom: '16px' }}>
+          <div style={{
+            width: '44px', height: '44px', borderRadius: '12px',
+            background: `${color}12`, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: color, flexShrink: 0, transition: 'all 0.3s', fontSize: '22px',
+          }}>
+            {icon}
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px', flexWrap: 'wrap' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 600, margin: 0, color: '#fff' }}>{label}</h3>
+              {badge && (
+                <span style={{
+                  fontSize: '10px', fontWeight: 700, textTransform: 'uppercase',
+                  letterSpacing: '0.05em', padding: '2px 8px', borderRadius: '100px',
+                  color: badge.color, background: `${badge.color}15`,
+                  border: `1px solid ${badge.color}25`,
+                }}>{badge.text}</span>
+              )}
+            </div>
+            <p style={{ color: 'var(--muted)', fontSize: '13px', lineHeight: 1.5, margin: 0 }}>{desc}</p>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ========= MAIN ========= */
+export default function Home() {
+  return (
+    <>
+      {/* JSON-LD Schema */}
+      <Script id="website-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org", "@graph": [
+          { "@type": "WebSite", "name": "ToolSnappy", "url": "https://toolsnappy.com", "description": "Free SEO, social media, and developer tools suite." },
+          { "@type": "Organization", "name": "ToolSnappy", "url": "https://toolsnappy.com", "logo": "https://toolsnappy.com/logo.png" },
+        ],
+      }) }} />
+
+      {/* ==================== HERO ==================== */}
+      <section style={{
+        position: 'relative', overflow: 'hidden',
+        padding: '80px 0 100px',
+      }}>
+        {/* Animated Background Orbs */}
+        <div style={{
+          position: 'absolute', top: '-20%', left: '-10%', width: '500px', height: '500px',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(41,151,255,0.08) 0%, transparent 70%)',
+          animation: 'driftSlow 20s ease-in-out infinite', pointerEvents: 'none', zIndex: 0,
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-30%', right: '-5%', width: '400px', height: '400px',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(129,140,248,0.06) 0%, transparent 70%)',
+          animation: 'drift 18s ease-in-out infinite', pointerEvents: 'none', zIndex: 0,
+        }} />
+        <div style={{
+          position: 'absolute', top: '30%', right: '25%', width: '250px', height: '250px',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(236,72,153,0.04) 0%, transparent 70%)',
+          animation: 'floatSlow 10s ease-in-out infinite', pointerEvents: 'none', zIndex: 0,
+        }} />
+
+        <div className="content-container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          {/* Badge */}
+          <div className="animate-fade-in" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '8px',
+            background: 'rgba(41,151,255,0.08)', border: '1px solid rgba(41,151,255,0.15)',
+            padding: '6px 16px 6px 8px', borderRadius: '100px', marginBottom: '28px',
+          }}>
+            <div style={{
+              width: '22px', height: '22px', borderRadius: '6px',
+              background: 'rgba(41,151,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <Zap size={13} color="var(--accent)" />
+            </div>
+            <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--accent)' }}>
+              32+ Free Tools — No Sign-up Required
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h1 className="animate-slide-up" style={{
+            fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 700,
+            lineHeight: 1.05, marginBottom: '20px', letterSpacing: '-0.03em',
+          }}>
+            Your Ultimate Digital<br />
+            <span className="gradient-text-accent">Tool Arsenal</span>
+          </h1>
+
+          <p className="animate-slide-up" style={{
+            fontSize: '18px', color: 'var(--muted-light)', maxWidth: '600px',
+            margin: '0 auto 40px', lineHeight: 1.65,
+          }}>
+            Dominate search, social, and finance with premium AI-powered tools.
+            Engineered for speed, privacy, and professionals.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="animate-slide-up" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            gap: '16px', flexWrap: 'wrap',
+          }}>
+            <Link href="/site-audit" style={{ textDecoration: 'none' }}>
+              <span className="premium-button" style={{ fontSize: '15px', padding: '16px 32px' }}>
+                Explore Tools <ArrowRight size={18} />
+              </span>
+            </Link>
+            <Link href="/free-online-tools-for-creators" style={{ textDecoration: 'none' }}>
+              <span className="secondary-button" style={{ fontSize: '15px', padding: '16px 32px' }}>
+                View All 32+ Tools
+              </span>
+            </Link>
+          </div>
+
+          {/* Trust Stats */}
+          <div className="animate-fade-in" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '48px',
+            marginTop: '64px', flexWrap: 'wrap',
+          }}>
+            {[
+              { value: '32+', label: 'Free Tools' },
+              { value: '100%', label: 'Free to Use' },
+              { value: '0', label: 'Sign-ups Required' },
+              { value: '2026', label: 'Latest Updates' },
+            ].map((stat) => (
+              <div key={stat.label} style={{ textAlign: 'center' }}>
+                <div style={{
+                  fontSize: '28px', fontWeight: 700, lineHeight: 1,
+                  background: 'linear-gradient(135deg, #fff 60%, rgba(255,255,255,0.5))',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text', marginBottom: '4px',
+                }}>{stat.value}</div>
+                <div style={{ fontSize: '12px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 500 }}>{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== TOOLS GRID ==================== */}
+      <div className="content-container" style={{ paddingBottom: '80px' }}>
+
+        <AdSensePlaceholder type="header" />
+
+        {/* ---- SEO & Marketing ---- */}
+        <div style={{ marginTop: '60px' }}>
+          <SectionHeader icon={<Search />} label="SEO & Marketing" color="#2997ff" />
+          <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px',
+          }}>
+            <ToolCard href="/site-audit" icon={<Globe />} label="Page SEO Analyzer" desc="Full website audit for titles, tags, and H1-H3 structure." color="#2997ff" borderColor="#2997ff" badge={{ text: 'Popular', color: '#2997ff' }} />
+            <ToolCard href="/youtube-seo" icon={<Play />} label="YouTube SEO Optimizer" desc="Viral titles and real-time searchability scoring." color="#ff0000" borderColor="#ff0000" />
+            <ToolCard href="/meta-tags" icon={<Tags />} label="Meta Tags Builder" desc="OG & SEO meta tag generation suite." color="#a8c7fa" borderColor="#a8c7fa" />
+            <ToolCard href="/keyword-clustering" icon={<Layers />} label="Keyword Clustering" desc="Group keywords by topic and intent." color="#34c759" borderColor="#34c759" badge={{ text: 'New', color: '#34c759' }} />
+          </div>
+        </div>
+
+        {/* ---- AI & Content ---- */}
+        <div style={{ marginTop: '48px' }}>
+          <SectionHeader icon={<Bot />} label="AI & Content Creation" color="#818cf8" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+            <ToolCard href="/ai-hook" icon={<Bot />} label="AI Hook Generator" desc="Psychological frameworks for viral content retention." color="#818cf8" borderColor="#818cf8" badge={{ text: 'Hot', color: '#818cf8' }} />
+            <ToolCard href="/ai-humanizer" icon={<Sparkles />} label="AI Content Humanizer" desc="Make AI text sound human. Bypass detectors." color="#818cf8" borderColor="#818cf8" />
+            <ToolCard href="/blog-to-social" icon={<RefreshCw />} label="Blog to Social Repurposer" desc="Convert blog posts into social media content." color="#1da1f2" borderColor="#1da1f2" />
+            <ToolCard href="/instagram-caption" icon={<Camera />} label="Instagram Caption Generator" desc="AI-driven captions for reels and posts." color="#cc2366" borderColor="#cc2366" />
+            <ToolCard href="/tiktok-hashtags" icon={<Hash />} label="TikTok Hashtag Generator" desc="High-velocity trending tag generation." color="#00f2ea" borderColor="#00f2ea" />
+          </div>
+        </div>
+
+        {/* ---- YouTube Creator Tools ---- */}
+        <div style={{ marginTop: '48px' }}>
+          <SectionHeader icon={<Play />} label="YouTube Creator Tools" color="#ff0000" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+            <ToolCard href="/youtube-thumbnail-analyzer" icon={<Eye />} label="Thumbnail Analyzer" desc="AI-powered composition, color, and CTR analysis." color="#32d74b" borderColor="#32d74b" badge={{ text: 'AI', color: '#32d74b' }} />
+            <ToolCard href="/youtube-thumbnail-tester" icon={<Eye />} label="Thumbnail Tester" desc="Preview in search, suggested, and home page mockups." color="#ffcc00" borderColor="#ffcc00" />
+            <ToolCard href="/youtube-thumbnail-downloader" icon={<Download />} label="Thumbnail Downloader" desc="Download in HD to default quality." color="#ff3b30" borderColor="#ff3b30" />
+            <ToolCard href="/youtube-tag-extractor" icon={<List />} label="Tag Extractor" desc="Extract tags, hashtags, and keywords from any video." color="#0071e3" borderColor="#0071e3" />
+            <ToolCard href="/youtube-video-downloader" icon={<Download />} label="Video Downloader" desc="Download YouTube videos in HD quality." color="#ff0000" borderColor="#ff0000" />
+          </div>
+        </div>
+
+        {/* ---- Finance & Calculators (HIGH CPC) ---- */}
+        <div style={{ marginTop: '48px' }}>
+          <SectionHeader icon={<Calculator />} label="Finance & Calculators" color="#32d74b" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+            <ToolCard href="/crypto-profit" icon={<TrendingUp />} label="Crypto Profit Calculator" desc="Advanced ROI tracker with US tax deduction logic." color="#0071e3" borderColor="#0071e3" badge={{ text: 'High CPC', color: '#ff9f0a' }} />
+            <ToolCard href="/tax-calculator" icon={<Calculator />} label="US Tax Calculator 2026" desc="Estimate federal income tax with current brackets." color="#ff9f0a" borderColor="#ff9f0a" badge={{ text: 'New', color: '#ff9f0a' }} />
+            <ToolCard href="/salary-calculator" icon={<DollarSign />} label="Salary Calculator" desc="Take-home pay after federal, state, and FICA taxes." color="#32d74b" borderColor="#32d74b" badge={{ text: 'New', color: '#32d74b' }} />
+            <ToolCard href="/retirement-calculator" icon={<TrendingUp />} label="Retirement Calculator" desc="Project savings growth and monthly income." color="#0071e3" borderColor="#0071e3" badge={{ text: 'New', color: '#0071e3' }} />
+            <ToolCard href="/mortgage-calculator" icon={<Calculator />} label="Mortgage Calculator" desc="Home loan planner with amortization schedule." color="#0071e3" borderColor="#0071e3" />
+            <ToolCard href="/car-loan-calculator" icon={<TrendingUp />} label="Car Loan Calculator" desc="Monthly EMI and total interest estimator." color="#32d74b" borderColor="#32d74b" />
+          </div>
+        </div>
+
+        <AdSensePlaceholder type="mid-content" />
+
+        {/* ---- Video Downloaders ---- */}
+        <div style={{ marginTop: '48px' }}>
+          <SectionHeader icon={<Download />} label="Video Downloaders" color="#0071e3" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+            <ToolCard href="/facebook-video-downloader" icon={<Video />} label="Facebook Video Downloader" desc="Download any Facebook video. Paste and save." color="#1877f2" borderColor="#1877f2" />
+            <ToolCard href="/instagram-video-downloader" icon={<Camera />} label="Instagram Video Downloader" desc="Download reels, videos, and stories." color="#cc2366" borderColor="#cc2366" />
+            <ToolCard href="/tiktok-video-downloader" icon={<Music />} label="TikTok Video Downloader" desc="Download TikTok videos without watermark." color="#00f2ea" borderColor="#00f2ea" />
+          </div>
+        </div>
+
+        {/* ---- Images & Media ---- */}
+        <div style={{ marginTop: '48px' }}>
+          <SectionHeader icon={<ImageIcon />} label="Images & Media Tools" color="#ff9f0a" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+            <ToolCard href="/bg-remover" icon={<ImageIcon />} label="AI Background Remover" desc="Adobe-grade neural engine. Remove backgrounds instantly." color="#ff9f0a" borderColor="#ff9f0a" badge={{ text: 'AI', color: '#ff9f0a' }} />
+            <ToolCard href="/image-upscaler" icon={<ImageIcon />} label="Image Upscaler" desc="Increase resolution of low-quality images using AI." color="#32d74b" borderColor="#32d74b" badge={{ text: 'New', color: '#32d74b' }} />
+            <ToolCard href="/pdf-converter" icon={<FileText />} label="PDF to SVG Converter" desc="Private, client-side vector conversion with page previews." color="#ff3b30" borderColor="#ff3b30" />
+            <ToolCard href="/base64-converter" icon={<FileCode2 />} label="Image to Base64" desc="Instant image encoding for developers." color="#32d74b" borderColor="#32d74b" />
+          </div>
+        </div>
+
+        {/* ---- Developer Tools ---- */}
+        <div style={{ marginTop: '48px' }}>
+          <SectionHeader icon={<Code />} label="Developer Tools" color="#a8c7fa" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+            <ToolCard href="/json-formatter" icon={<Braces />} label="JSON Formatter" desc="Validate and beautify JSON strings instantly." color="#a8c7fa" borderColor="#a8c7fa" />
+            <ToolCard href="/password-gen" icon={<ShieldCheck />} label="Password Generator" desc="Secure, military-grade random key generation." color="#ffcc00" borderColor="#ffcc00" />
+            <ToolCard href="/word-counter" icon={<Type />} label="Word Counter" desc="Readability analysis and density statistics." color="#0071e3" borderColor="#0071e3" />
+            <ToolCard href="/cv-maker" icon={<FileText />} label="CV / Resume Maker" desc="Professional resume builder with ATS scoring." color="#818cf8" borderColor="#818cf8" badge={{ text: 'Pro', color: '#818cf8' }} />
+            <ToolCard href="/lucky-number" icon={<Star />} label="AI Lucky Number Finder" desc="Find your destiny number and 2026 predictions." color="#a8c7fa" borderColor="#a8c7fa" badge={{ text: 'Fun', color: '#a8c7fa' }} />
+          </div>
+        </div>
+
+        {/* ==================== CTA BANNER ==================== */}
+        <div style={{
+          marginTop: '80px', padding: '48px 40px',
+          background: 'linear-gradient(135deg, rgba(41,151,255,0.06) 0%, rgba(129,140,248,0.04) 50%, rgba(236,72,153,0.02) 100%)',
+          border: '1px solid rgba(41,151,255,0.1)',
+          borderRadius: '24px', textAlign: 'center', position: 'relative', overflow: 'hidden',
+        }}>
+          <div style={{
+            position: 'absolute', top: '-50%', left: '50%', transform: 'translateX(-50%)',
+            width: '300px', height: '300px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(41,151,255,0.06) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }} />
+          <h2 style={{
+            fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 700, marginBottom: '12px',
+            color: '#fff', position: 'relative',
+          }}>
+            Ready to Supercharge Your Workflow?
+          </h2>
+          <p style={{
+            color: 'var(--muted-light)', fontSize: '16px', maxWidth: '500px',
+            margin: '0 auto 32px', lineHeight: 1.6, position: 'relative',
+          }}>
+            All tools are 100% free, no sign-up required, and engineered for speed.
+            Start using them right now — no strings attached.
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', position: 'relative' }}>
+            <Link href="/free-online-tools-for-creators" style={{ textDecoration: 'none' }}>
+              <span className="premium-button" style={{ fontSize: '15px' }}>
+                Browse All 32+ Tools <ArrowRight size={18} />
+              </span>
+            </Link>
+            <Link href="/contact" style={{ textDecoration: 'none' }}>
+              <span className="secondary-button" style={{ fontSize: '15px' }}>
+                Have a Suggestion?
+              </span>
+            </Link>
+          </div>
+        </div>
+
+        {/* ==================== FEATURES STRIP ==================== */}
+        <div style={{
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '20px', marginTop: '60px',
+        }}>
+          {[
+            { icon: <Zap />, title: 'Lightning Fast', desc: 'All tools run client-side or on edge. No waiting.' },
+            { icon: <ShieldCheck />, title: '100% Private', desc: 'Zero data storage. Your files stay on your device.' },
+            { icon: <CheckCircle2 />, title: 'Always Free', desc: 'No paywalls, no trials, no credit cards needed.' },
+            { icon: <Quote />, title: 'No Sign-up', desc: 'Start using any tool instantly. Zero friction.' },
+          ].map((feat) => (
+            <div key={feat.title} className="glass-panel" style={{
+              padding: '24px', textAlign: 'center',
+              borderTop: `2px solid rgba(41,151,255,0.15)`,
+            }}>
+              <div style={{
+                width: '40px', height: '40px', borderRadius: '12px',
+                background: 'rgba(41,151,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--accent)', margin: '0 auto 16px', fontSize: '20px',
+              }}>
+                {feat.icon}
+              </div>
+              <h4 style={{ fontSize: '15px', fontWeight: 600, marginBottom: '6px', color: '#fff' }}>{feat.title}</h4>
+              <p style={{ fontSize: '13px', color: 'var(--muted)', lineHeight: 1.5, margin: 0 }}>{feat.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ==================== FEATURED IN / TRUST BAR ==================== */}
+        <div style={{
+          marginTop: '60px', padding: '32px', textAlign: 'center',
+          border: '1px solid rgba(255,255,255,0.04)', borderRadius: '16px',
+          background: 'rgba(255,255,255,0.02)',
+        }}>
+          <p style={{
+            fontSize: '12px', color: 'var(--muted)', textTransform: 'uppercase',
+            letterSpacing: '0.12em', fontWeight: 600, marginBottom: '20px',
+          }}>Trusted by creators & professionals worldwide</p>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            gap: '32px', flexWrap: 'wrap',
+            fontSize: '13px', color: 'var(--muted-light)',
+          }}>
+            {['SEO Experts', 'Content Creators', 'Developers', 'Marketers', 'Freelancers', 'Small Business'].map((item) => (
+              <span key={item} style={{
+                fontWeight: 500, letterSpacing: '0.02em',
+                padding: '6px 14px', borderRadius: '8px',
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.04)',
+              }}>{item}</span>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </>
+  );
+}

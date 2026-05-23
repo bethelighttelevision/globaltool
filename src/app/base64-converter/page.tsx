@@ -43,7 +43,7 @@ export default function Base64ConverterPage() {
       seo={{
         toolName: "Image to Base64 Converter",
         description: "Convert images into Base64 strings instantly. Perfect for embedding images in HTML, CSS, or JSON files.",
-        url: "https://globalutilitytoolbox.com/base64-converter"
+        url: "https://toolsnappy.com/base64-converter"
       }}
       currentPath="/base64-converter"
       contentSection={

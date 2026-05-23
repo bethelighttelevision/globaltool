@@ -91,7 +91,7 @@ export default function AIHookPage() {
       seo={{
         toolName: "Viral AI Hook Generator",
         description: "Generate highly retaining TikTok and YouTube hooks using advanced psychological and curiosity-driven frameworks.",
-        url: "https://globalutilitytoolbox.com/ai-hook"
+        url: "https://toolsnappy.com/ai-hook"
       }}
       currentPath="/ai-hook"
       results={results && (

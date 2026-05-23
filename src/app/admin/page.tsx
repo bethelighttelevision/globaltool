@@ -11,7 +11,7 @@ export default async function AdminDashboardPage() {
   
   const slugToCategory = new Map(blogPosts.map(p => [p.slug, p.category]));
   type DbRow = { id: string | number; title: string; slug: string; excerpt: string; image: string; date: string; category?: string };
-  const blogs = (result.data || []).map((d: DbRow) => ({
+  const dbBlogs = (result.data || []).map((d: DbRow) => ({
     id: String(d.id),
     title: d.title || '',
     slug: d.slug || '',
@@ -20,6 +20,21 @@ export default async function AdminDashboardPage() {
     date: d.date || '',
     category: d.category || slugToCategory.get(d.slug) || 'SEO',
   }));
+
+  const dbSlugs = new Set(dbBlogs.map(b => b.slug));
+  const staticBlogs = blogPosts
+    .filter(p => !dbSlugs.has(p.slug))
+    .map(p => ({
+      id: p.id,
+      title: p.title,
+      slug: p.slug,
+      excerpt: p.excerpt,
+      image: p.image || '/blog-banner.png',
+      date: p.date,
+      category: p.category || slugToCategory.get(p.slug) || 'SEO',
+    }));
+
+  const blogs = [...dbBlogs, ...staticBlogs];
 
   const totalArticles = blogs.length;
   const totalCategories = Array.from(new Set(blogs.map(b => b.category || 'SEO'))).length;
@@ -37,55 +52,55 @@ export default async function AdminDashboardPage() {
     .slice(0, 5);
 
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-start flex-wrap gap-4">
+    <div className="admin-dashboard">
+      <div className="admin-dashboard-header">
         <div>
-          <h1 className="gradient-text text-3xl font-bold m-0 tracking-tight">System Dashboard</h1>
+          <h1 className="admin-title gradient-text">System Dashboard</h1>
           <p className="text-muted m-0 text-sm">Monitor public guides, tutorials, and digital analytics.</p>
         </div>
-        <div className="inline-flex items-center gap-2 bg-green-500/8 px-4 py-2 rounded-full border border-green-500/15 shadow-sm shadow-green-500/5">
+        <div className="admin-badge">
           <ShieldCheck size={16} className="text-green-400" />
-          <span className="text-xs font-semibold text-green-400">Supabase Secure Session</span>
+          <span className="text-xs font-semibold text-green-400">Supabase Connected</span>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-panel p-5 flex gap-4 items-center">
-          <div className="w-11 h-11 bg-blue-500/8 rounded-xl flex items-center justify-center text-accent border border-blue-500/15 flex-shrink-0">
+      <div className="admin-stats-grid">
+        <div className="glass-panel admin-stat-card">
+          <div className="admin-stat-icon" style={{ background: 'rgba(41, 151, 255, 0.1)', color: 'var(--accent)', borderColor: 'rgba(41, 151, 255, 0.15)' }}>
             <BookOpen size={18} />
           </div>
           <div className="min-w-0">
-            <span className="block text-xs text-muted font-medium uppercase tracking-wider">Total Articles</span>
-            <span className="text-2xl font-bold text-white font-heading">{totalArticles}</span>
+            <span className="admin-stat-label">Total Articles</span>
+            <span className="admin-stat-value">{totalArticles}</span>
           </div>
         </div>
 
-        <div className="glass-panel p-5 flex gap-4 items-center">
-          <div className="w-11 h-11 bg-yellow-500/8 rounded-xl flex items-center justify-center text-yellow-400 border border-yellow-500/15 flex-shrink-0">
+        <div className="glass-panel admin-stat-card">
+          <div className="admin-stat-icon" style={{ background: 'rgba(255, 204, 0, 0.1)', color: '#ffcc00', borderColor: 'rgba(255, 204, 0, 0.15)' }}>
             <Tag size={18} />
           </div>
           <div className="min-w-0">
-            <span className="block text-xs text-muted font-medium uppercase tracking-wider">Categories</span>
-            <span className="text-2xl font-bold text-white font-heading">{totalCategories}</span>
+            <span className="admin-stat-label">Categories</span>
+            <span className="admin-stat-value">{totalCategories}</span>
           </div>
         </div>
 
-        <div className="glass-panel p-5 flex gap-4 items-center">
-          <div className="w-11 h-11 bg-green-500/8 rounded-xl flex items-center justify-center text-green-400 border border-green-500/15 flex-shrink-0">
+        <div className="glass-panel admin-stat-card">
+          <div className="admin-stat-icon" style={{ background: 'rgba(50, 215, 75, 0.1)', color: '#32d74b', borderColor: 'rgba(50, 215, 75, 0.15)' }}>
             <TrendingUp size={18} />
           </div>
           <div className="min-w-0">
-            <span className="block text-xs text-muted font-medium uppercase tracking-wider">Latest Publish</span>
-            <span className="text-sm font-bold text-white font-heading block truncate mt-0.5">{latestPost?.date || 'No Posts'}</span>
+            <span className="admin-stat-label">Latest Publish</span>
+            <span className="admin-stat-value-small">{latestPost?.date || 'No Posts'}</span>
           </div>
         </div>
 
-        <div className="glass-panel p-5 flex gap-4 items-center">
-          <div className="w-11 h-11 bg-purple-500/8 rounded-xl flex items-center justify-center text-purple-400 border border-purple-500/15 flex-shrink-0">
+        <div className="glass-panel admin-stat-card">
+          <div className="admin-stat-icon" style={{ background: 'rgba(191, 90, 242, 0.1)', color: '#bf5af2', borderColor: 'rgba(191, 90, 242, 0.15)' }}>
             <PenLine size={18} />
           </div>
           <div className="min-w-0">
-            <span className="block text-xs text-muted font-medium uppercase tracking-wider">Quick Action</span>
+            <span className="admin-stat-label">Quick Action</span>
             <a href="/admin/new" className="text-sm font-semibold text-accent no-underline hover:underline">Write Article</a>
           </div>
         </div>
@@ -93,32 +108,26 @@ export default async function AdminDashboardPage() {
 
       {/* Recent Activity */}
       {recentPosts.length > 0 && (
-        <div className="glass-panel p-6 space-y-4">
-          <div className="flex items-center gap-2">
-            <Clock size={16} className="text-muted" />
+        <div className="glass-panel admin-recent-section">
+          <div className="flex items-center gap-2 mb-4">
+            <Clock size={16} className="text-muted flex-shrink-0" />
             <h2 className="text-base font-semibold text-white m-0">Recently Published</h2>
           </div>
           <div className="divide-y divide-white/5">
             {recentPosts.map((post, i) => (
-              <div key={post.id} className="flex items-center gap-4 py-3">
-                <span className="text-xs text-muted w-5 text-right font-mono">{i + 1}</span>
+              <div key={post.id} className="admin-recent-item">
+                <span className="admin-recent-num">{i + 1}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-white truncate m-0">{post.title}</p>
-                  <p className="text-xs text-muted truncate m-0">{post.excerpt}</p>
+                  <p className="admin-recent-title">{post.title}</p>
+                  <p className="admin-recent-excerpt">{post.excerpt}</p>
                 </div>
-                <span className="text-xs text-muted whitespace-nowrap flex items-center gap-1.5">
-                  <Calendar size={11} />
-                  {post.date}
-                </span>
-                <span className="text-xs px-2.5 py-1 rounded-full font-medium"
-                  style={{
-                    background: 'rgba(41, 151, 255, 0.1)',
-                    color: '#2997ff',
-                    border: '1px solid rgba(41, 151, 255, 0.2)'
-                  }}
-                >
-                  {post.category || 'SEO'}
-                </span>
+                <div className="admin-recent-meta">
+                  <span className="admin-recent-date">
+                    <Calendar size={11} />
+                    {post.date}
+                  </span>
+                  <span className="admin-recent-cat">{post.category || 'SEO'}</span>
+                </div>
               </div>
             ))}
           </div>

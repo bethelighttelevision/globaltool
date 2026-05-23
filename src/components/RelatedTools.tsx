@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { Search, Image, Zap, FileText, Activity, DollarSign, Home, CreditCard, FileJson, PlayCircle, Camera, Globe, Download, Eye, List, Music } from 'lucide-react';
 
 const toolIcons: Record<string, React.ReactNode> = {
-  '/seo-analyzer': <Search size={24} />,
+  '/site-audit': <Search size={24} />,
   '/youtube-seo': <PlayCircle size={24} />,
-  '/crypto': <DollarSign size={24} />,
+  '/crypto-profit': <DollarSign size={24} />,
   '/ai-hook': <Zap size={24} />,
   '/word-counter': <FileText size={24} />,
   '/car-loan-calculator': <CreditCard size={24} />,
@@ -24,9 +24,9 @@ const toolIcons: Record<string, React.ReactNode> = {
 };
 
 const tools = [
-  { name: 'SEO Analyzer', path: '/seo-analyzer', desc: 'Instant site audit & health check' },
+  { name: 'SEO Analyzer', path: '/site-audit', desc: 'Instant site audit & health check' },
   { name: 'YouTube SEO', path: '/youtube-seo', desc: 'Optimize your video rankings' },
-  { name: 'Crypto Calc', path: '/crypto', desc: 'Profit & ROI calculator' },
+  { name: 'Crypto Calc', path: '/crypto-profit', desc: 'Profit & ROI calculator' },
   { name: 'AI Viral Hooks', path: '/ai-hook', desc: 'Scroll-stopping hooks' },
   { name: 'Word Counter', path: '/word-counter', desc: 'Count words & reading time' },
   { name: 'Car Loan Calc', path: '/car-loan-calculator', desc: 'EMI & interest calculator' },

@@ -1,43 +1,186 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import { Download, Plus, Trash2, ChevronRight, ChevronLeft, Layout, User, Briefcase, GraduationCap, Code, FileText } from 'lucide-react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { Download, Plus, Trash2, ChevronRight, ChevronLeft, Layout, User, Briefcase, GraduationCap, Code, FileText, Sparkles, Save, Award, AlertCircle } from 'lucide-react';
 import { CVData, Templates } from './CVTemplates';
+import { generateAICentent } from '../app/actions/ai';
 
-const initialData: CVData = {
+const STORAGE_KEY = 'toolsnappy_cv_data';
+
+const defaultData: CVData = {
   personalInfo: {
-    fullName: 'Salem Ali',
-    email: 'salem.ali@example.com',
-    phone: '+971 50 123 4567',
-    address: 'Dubai, UAE',
-    jobTitle: 'Retail Sales Executive',
+    fullName: '',
+    email: '',
+    phone: '',
+    address: '',
+    jobTitle: '',
     website: '',
     photo: '',
   },
-  experience: [
-    { 
-      company: 'Global Retail Group', 
-      position: 'Senior Sales Executive', 
-      startDate: 'Jan 2021', 
-      endDate: 'Present', 
-      description: 'Increased monthly sales by 15% through effective upselling and cross-selling. Managed a team of 5 sales associates.' 
-    }
-  ],
-  education: [
-    { school: 'United Arab Emirates University', degree: 'B.A. Business Administration', year: '2016 - 2020' }
-  ],
-  skills: ['Customer Service', 'Sales Management', 'Inventory Control', 'Communication'],
-  summary: 'Customer-focused Sales & Retail professional with over 5 years of experience in high-end retail environments. Proven track record of exceeding sales targets and delivering exceptional customer service.',
+  experience: [],
+  education: [],
+  skills: [],
+  summary: '',
 };
 
+const initialData: CVData = (() => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed && parsed.personalInfo) return parsed;
+    }
+  } catch {}
+  return defaultData;
+})();
+
 type Step = 'template' | 'personal' | 'experience' | 'education' | 'skills' | 'summary';
+
+function calculateAtsScore(data: CVData): { score: number; details: { label: string; pass: boolean; tip: string }[] } {
+  const details: { label: string; pass: boolean; tip: string }[] = [];
+  let score = 0;
+
+  if (data.personalInfo.fullName) { score += 5; details.push({ label: 'Full name provided', pass: true, tip: '' }); }
+  else { details.push({ label: 'Full name provided', pass: false, tip: 'Recruiters need your name at the top.' }); }
+
+  if (data.personalInfo.email) { score += 5; details.push({ label: 'Email included', pass: true, tip: '' }); }
+  else { details.push({ label: 'Email included', pass: false, tip: 'Include a professional email address.' }); }
+
+  if (data.personalInfo.phone) { score += 5; details.push({ label: 'Phone included', pass: true, tip: '' }); }
+  else { details.push({ label: 'Phone included', pass: false, tip: 'Add your phone number for calls.' }); }
+
+  if (data.summary.length > 50) { score += 10; details.push({ label: 'Professional summary (50+ chars)', pass: true, tip: '' }); }
+  else { score += 2; details.push({ label: 'Professional summary (50+ chars)', pass: false, tip: 'A strong summary increases interview chances by 40%.' }); }
+
+  const expCount = data.experience.length;
+  if (expCount >= 2) { score += 15; details.push({ label: '2+ work experiences listed', pass: true, tip: '' }); }
+  else if (expCount === 1) { score += 7; details.push({ label: 'Work experience listed', pass: true, tip: 'Add more positions if available.' }); }
+  else { details.push({ label: 'Work experience listed', pass: false, tip: 'List at least your most recent role.' }); }
+
+  const hasDetails = data.experience.some(e => e.description.length > 30);
+  if (hasDetails) { score += 10; details.push({ label: 'Experience descriptions with details', pass: true, tip: '' }); }
+  else if (expCount > 0) { score += 3; details.push({ label: 'Experience descriptions with details', pass: false, tip: 'Add achievements with numbers and metrics.' }); }
+
+  if (data.education.length > 0) { score += 10; details.push({ label: 'Education section filled', pass: true, tip: '' }); }
+  else { details.push({ label: 'Education section filled', pass: false, tip: 'Include your highest degree at minimum.' }); }
+
+  if (data.skills.length >= 5) { score += 10; details.push({ label: '5+ skills listed', pass: true, tip: '' }); }
+  else if (data.skills.length > 0) { score += 5; details.push({ label: 'Skills listed', pass: true, tip: 'Add more relevant skills (aim for 5-10).' }); }
+  else { details.push({ label: 'Skills listed', pass: false, tip: 'Skills are highly weighted by ATS systems.' }); }
+
+  const totalChars = data.summary.length + data.experience.reduce((a, e) => a + e.description.length, 0);
+  if (totalChars > 500) { score += 10; details.push({ label: 'Sufficient content depth', pass: true, tip: '' }); }
+  else { score += 3; details.push({ label: 'Sufficient content depth', pass: false, tip: 'Aim for 400-800 words of relevant experience.' }); }
+
+  const hasNumbers = data.experience.some(e => /\d+/.test(e.description));
+  if (hasNumbers) { score += 10; details.push({ label: 'Quantified achievements (numbers)', pass: true, tip: '' }); }
+  else { score += 2; details.push({ label: 'Quantified achievements (numbers)', pass: false, tip: 'Use metrics like increased sales by 20%.' }); }
+
+  const actionWords = ['managed', 'led', 'developed', 'created', 'improved', 'increased', 'reduced', 'achieved', 'implemented', 'launched'];
+  const hasAction = data.experience.some(e => actionWords.some(w => e.description.toLowerCase().includes(w)));
+  if (hasAction) { score += 10; details.push({ label: 'Strong action verbs used', pass: true, tip: '' }); }
+  else { score += 3; details.push({ label: 'Strong action verbs used', pass: false, tip: 'Start bullets with action words like Led or Developed.' }); }
+
+  if (data.personalInfo.jobTitle) { score += 5; details.push({ label: 'Job title listed', pass: true, tip: '' }); }
+  else { details.push({ label: 'Job title listed', pass: false, tip: 'Add your target/current job title.' }); }
+
+  if (data.personalInfo.fullName && data.personalInfo.email && data.experience.length > 0 && data.skills.length > 0 && data.summary.length > 30) {
+    score += 5; details.push({ label: 'All critical sections complete', pass: true, tip: '' });
+  } else {
+    details.push({ label: 'All critical sections complete', pass: false, tip: 'Fill in name, email, experience, skills, and summary.' });
+  }
+
+  return { score: Math.min(100, score), details };
+}
 
 export default function CVMaker() {
   const [data, setData] = useState<CVData>(initialData);
   const [activeStep, setActiveStep] = useState<Step>('personal');
   const [selectedTemplate, setSelectedTemplate] = useState<keyof typeof Templates>('modern');
   const [skillInput, setSkillInput] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [showAts, setShowAts] = useState(false);
+  const [downloadStatus, setDownloadStatus] = useState<'idle' | 'generating' | 'done'>('idle');
   const previewRef = useRef<HTMLDivElement>(null);
+  const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const atsScore = calculateAtsScore(data);
+  const allTemplates = Object.keys(Templates) as (keyof typeof Templates)[];
+
+  useEffect(() => {
+    saveTimerRef.current = setInterval(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch {}
+    }, 3000);
+    return () => {
+      if (saveTimerRef.current) clearInterval(saveTimerRef.current);
+    };
+  }, [data]);
+
+  const exportPdf = useCallback(async () => {
+    setDownloadStatus('generating');
+    try {
+      const html2canvas = (await import('html2canvas')).default;
+      const jsPDF = (await import('jspdf')).default;
+      const previewEl = previewRef.current;
+      if (!previewEl) return;
+      const canvas = await html2canvas(previewEl, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+      const imgData = canvas.toDataURL('image/png');
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      let heightLeft = imgHeight;
+      let position = 0;
+      const pageHeight = 297;
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      pdf.save(`${data.personalInfo.fullName || 'CV'}_ToolSnappy.pdf`);
+      setDownloadStatus('done');
+      setTimeout(() => setDownloadStatus('idle'), 2000);
+    } catch (err) {
+      setDownloadStatus('idle');
+    }
+  }, [data]);
+
+  const generateAISummary = useCallback(async () => {
+    if (data.experience.length === 0 && data.skills.length === 0) return;
+    setIsGenerating(true);
+    const expText = data.experience.map(e => `- ${e.position} at ${e.company} (${e.startDate}-${e.endDate}): ${e.description}`).join('\n');
+    const skillsText = data.skills.join(', ');
+    const prompt = `Write a professional CV summary (3-4 sentences) for a ${data.personalInfo.jobTitle || 'professional'}.
+
+Experience:
+${expText || 'No experience listed yet.'}
+
+Skills: ${skillsText || 'Not specified.'}
+
+Requirements:
+- First-person, professional tone
+- Highlight key achievements and years of experience
+- Mention top skills
+- Keep it under 100 words
+- Do not use placeholders or generic phrases`;
+    try {
+      const result = await generateAICentent(prompt);
+      const cleaned = result.replace(/^["']|["']$/g, '').trim();
+      if (cleaned.length > 20) {
+        setData(prev => ({ ...prev, summary: cleaned }));
+      }
+    } catch {}
+    setIsGenerating(false);
+  }, [data]);
+
+  const resetAll = () => {
+    setData(defaultData);
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  };
 
   const steps: { id: Step; label: string; icon: React.ComponentType<{ size?: number }> }[] = [
     { id: 'template', label: 'Template', icon: Layout },
@@ -126,10 +269,6 @@ export default function CVMaker() {
     setData(prev => ({ ...prev, skills: prev.skills.filter(s => s !== skill) }));
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
   const SelectedTemplateComponent = Templates[selectedTemplate];
 
   const stepMeta = {
@@ -168,6 +307,19 @@ export default function CVMaker() {
             <step.icon size={20} />
           </button>
         ))}
+        <div style={{ marginTop: 'auto', paddingTop: '20px', borderTop: '1px solid var(--card-border)' }}>
+          <button
+            onClick={() => setShowAts(!showAts)}
+            title="ATS Score"
+            style={{
+              width: '50px', height: '50px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              background: showAts ? 'var(--accent)' : 'rgba(255,255,255,0.03)',
+              color: showAts ? '#fff' : 'var(--muted)', border: '1px solid var(--card-border)', cursor: 'pointer', margin: '0 auto'
+            }}
+          >
+            <Award size={20} />
+          </button>
+        </div>
       </div>
 
       {/* CENTER: FORM SIDE */}
@@ -177,11 +329,37 @@ export default function CVMaker() {
           <p style={{ color: 'var(--muted)', fontSize: '15px' }}>{stepMeta[activeStep].sub}</p>
         </div>
 
+        {showAts && (
+          <div className="animate-fade-in" style={{ marginBottom: '24px', padding: '20px', background: 'rgba(255,255,255,0.03)', borderRadius: '16px', border: '1px solid var(--card-border)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <h3 style={{ margin: 0, fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Award size={20} color="var(--accent)" /> ATS Resume Score
+              </h3>
+              <div style={{ position: 'relative', width: '60px', height: '60px' }}>
+                <svg width="60" height="60" viewBox="0 0 60 60">
+                  <circle cx="30" cy="30" r="26" fill="none" stroke="var(--card-border)" strokeWidth="5" />
+                  <circle cx="30" cy="30" r="26" fill="none" stroke={atsScore.score >= 70 ? '#32d74b' : atsScore.score >= 40 ? '#ff9f0a' : '#ff3b30'} strokeWidth="5" strokeDasharray={`${(atsScore.score / 100) * 163} 163`} transform="rotate(-90 30 30)" />
+                </svg>
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontWeight: 800, fontSize: '18px', color: atsScore.score >= 70 ? '#32d74b' : atsScore.score >= 40 ? '#ff9f0a' : '#ff3b30' }}>{atsScore.score}</div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              {atsScore.details.map((d, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontSize: '13px', padding: '4px 0' }}>
+                  {d.pass ? <span style={{ color: '#32d74b', flexShrink: 0 }}>✓</span> : <span style={{ color: '#ff9f0a', flexShrink: 0 }}>○</span>}
+                  <span style={{ color: d.pass ? 'var(--muted)' : '#ff9f0a' }}>{d.label}</span>
+                  {!d.pass && d.tip && <span style={{ color: 'var(--muted)', fontSize: '12px', marginLeft: '4px' }}>— {d.tip}</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="step-content" style={{ flex: 1 }}>
           {activeStep === 'template' && (
             <div className="animate-fade-in">
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '25px' }}>
-                {(Object.keys(Templates) as Array<keyof typeof Templates>).map(t => (
+                {allTemplates.map(t => (
                   <div
                     key={t}
                     onClick={() => setSelectedTemplate(t)}
@@ -405,63 +583,89 @@ export default function CVMaker() {
           {activeStep === 'summary' && (
             <div className="animate-fade-in">
               <div style={{ background: 'rgba(255,255,255,0.02)', padding: '30px', borderRadius: '20px', border: '1px solid var(--card-border)' }}>
-                <label className="label-text">Summary Text</label>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+                  <label className="label-text" style={{ margin: 0 }}>Professional Summary</label>
+                  <button
+                    onClick={generateAISummary}
+                    disabled={isGenerating}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 16px',
+                      borderRadius: '10px', border: '1px solid rgba(99,102,241,0.3)',
+                      background: 'rgba(99,102,241,0.1)', color: 'var(--accent)',
+                      cursor: isGenerating ? 'not-allowed' : 'pointer', fontSize: '13px', fontWeight: 600,
+                      opacity: isGenerating ? 0.6 : 1
+                    }}
+                  >
+                    <Sparkles size={16} /> {isGenerating ? 'Generating...' : 'AI Write Summary'}
+                  </button>
+                </div>
                 <textarea
                   className="premium-input"
                   value={data.summary}
                   onChange={(e) => setData(prev => ({ ...prev, summary: e.target.value }))}
-                  placeholder="Focus on your most relevant achievements..."
+                  placeholder="Your professional summary — describe your career highlights, key skills, and what you bring to a role."
                   style={{ height: '250px', resize: 'vertical' }}
                 />
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                  <span style={{ fontSize: '12px', color: data.summary.length > 50 ? 'var(--muted)' : '#ff9f0a' }}>
+                    {data.summary.length} characters {data.summary.length < 50 ? '(aim for 50+)' : ''}
+                  </span>
+                </div>
               </div>
             </div>
           )}
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', paddingTop: '30px', borderTop: '1px solid var(--card-border)' }}>
-          <button
-            onClick={() => {
-              const currentIndex = steps.findIndex(s => s.id === activeStep);
-              if (currentIndex > 0) setActiveStep(steps[currentIndex - 1].id);
-            }}
-            disabled={activeStep === steps[0].id}
-            style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '10px', 
-              padding: '12px 24px',
-              borderRadius: '12px',
-              border: '1px solid var(--card-border)',
-              background: 'rgba(255,255,255,0.03)',
-              color: '#fff',
-              cursor: 'pointer',
-              opacity: activeStep === steps[0].id ? 0.3 : 1,
-              transition: 'all 0.3s'
-            }}
-          >
-            <ChevronLeft size={20} /> Back
-          </button>
-          
-          {activeStep === steps[steps.length - 1].id ? (
-            <button 
-              onClick={handlePrint} 
-              className="no-print" 
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button
+              onClick={() => {
+                const currentIndex = steps.findIndex(s => s.id === activeStep);
+                if (currentIndex > 0) setActiveStep(steps[currentIndex - 1].id);
+              }}
+              disabled={activeStep === steps[0].id}
               style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '10px', 
-                padding: '12px 24px',
-                borderRadius: '12px',
-                border: '1px solid var(--accent)',
-                background: 'rgba(41, 151, 255, 0.1)',
-                color: 'var(--accent)',
-                cursor: 'pointer',
-                transition: 'all 0.3s',
-                fontWeight: 600
+                display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 24px',
+                borderRadius: '12px', border: '1px solid var(--card-border)',
+                background: 'rgba(255,255,255,0.03)', color: '#fff', cursor: 'pointer',
+                opacity: activeStep === steps[0].id ? 0.3 : 1, transition: 'all 0.3s'
               }}
             >
-              <Download size={20} /> Download PDF
+              <ChevronLeft size={20} /> Back
             </button>
+            {activeStep !== steps[0].id && activeStep !== steps[steps.length - 1].id && (
+              <button onClick={() => setActiveStep('template')} style={{ background: 'none', border: '1px solid var(--card-border)', color: 'var(--muted)', padding: '12px 16px', borderRadius: '12px', cursor: 'pointer', fontSize: '13px' }}>
+                <Layout size={16} />
+              </button>
+            )}
+          </div>
+          
+          {activeStep === steps[steps.length - 1].id ? (
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                onClick={exportPdf}
+                disabled={downloadStatus === 'generating'}
+                style={{ 
+                  display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 32px',
+                  borderRadius: '12px', border: 'none',
+                  background: downloadStatus === 'done' ? '#32d74b' : 'var(--accent)',
+                  color: '#fff', cursor: downloadStatus === 'generating' ? 'not-allowed' : 'pointer',
+                  fontWeight: 600, fontSize: '15px', transition: 'all 0.3s',
+                  opacity: downloadStatus === 'generating' ? 0.7 : 1
+                }}
+              >
+                {downloadStatus === 'generating' ? <>Generating PDF...</> : downloadStatus === 'done' ? <>✓ PDF Saved</> : <><Download size={20} /> Download PDF</>}
+              </button>
+              <button
+                onClick={() => setShowAts(!showAts)}
+                style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--card-border)', background: showAts ? 'rgba(41,151,255,0.1)' : 'rgba(255,255,255,0.03)', color: 'var(--accent)', cursor: 'pointer', fontSize: '13px', fontWeight: 600 }}
+              >
+                <Award size={18} /> Score
+              </button>
+              <button onClick={resetAll} style={{ background: 'rgba(255,68,68,0.1)', border: 'none', color: '#ff4444', padding: '12px 16px', borderRadius: '12px', cursor: 'pointer', fontSize: '13px' }} title="Reset All">
+                <Trash2 size={16} />
+              </button>
+            </div>
           ) : (
             <button
               onClick={() => {
@@ -479,23 +683,16 @@ export default function CVMaker() {
 
       {/* RIGHT: PREVIEW SIDE */}
       <div className="preview-container">
-        <div className="print-hidden" style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="print-hidden" style={{ marginBottom: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px' }}>
           <span style={{ 
-            fontSize: '13px', 
-            color: 'var(--accent)', 
-            textTransform: 'uppercase', 
-            letterSpacing: '0.15em', 
-            fontWeight: 700,
-            background: 'rgba(41, 151, 255, 0.1)',
-            padding: '8px 20px',
-            borderRadius: '20px',
-            border: '1px solid rgba(41, 151, 255, 0.2)'
+            fontSize: '13px', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: 700,
+            background: 'rgba(41, 151, 255, 0.1)', padding: '8px 20px', borderRadius: '20px', border: '1px solid rgba(41, 151, 255, 0.2)'
           }}>
-            Live Preview
+            Live Preview — A4
           </span>
         </div>
-        <div className="glass-panel cv-print-container">
-          <div id="cv-preview-root" ref={previewRef} style={{ width: '100%', height: '100%' }}>
+        <div className="glass-panel cv-paper">
+          <div id="cv-preview-root" ref={previewRef}>
             <SelectedTemplateComponent data={data} />
           </div>
         </div>
@@ -511,8 +708,7 @@ export default function CVMaker() {
           flex-direction: column;
           align-items: center;
         }
-
-        .cv-print-container {
+        .cv-paper {
           padding: 0;
           overflow: hidden;
           transform: scale(0.6);
@@ -520,144 +716,28 @@ export default function CVMaker() {
           box-shadow: 0 30px 60px rgba(0,0,0,0.5);
           margin-bottom: -450px;
           width: 794px;
-          height: 1123px;
+          min-height: 1123px;
           background: #fff;
           transition: all 0.3s ease;
         }
-
-        @media print {
-          /* Hide all explicitly marked elements */
-          .print-hidden, header, nav, footer, .ad-container, iframe {
-            display: none !important;
-          }
-
-          /* Ensure the body and html have white backgrounds */
-          body, html {
-            background: white !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            color: black !important;
-          }
-
-          /* Remove all layout from the wrapper so the preview can fill the page */
-          .cv-maker-wrapper, .preview-container {
-            display: block !important;
-            position: static !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-          }
-
-          /* Strip the 0.7 scale and margins so the CV prints full size */
-          .preview-container .glass-panel {
-            transform: scale(1) !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            box-shadow: none !important;
-            border: none !important;
-            width: 794px !important;
-            height: auto !important;
-            background: white !important;
-            position: static !important;
-          }
-
-          #cv-preview-root {
-            width: 794px !important;
-            height: auto !important;
-            display: block !important;
-            background: white !important;
-            position: static !important;
-          }
-
-          .cv-preview {
-            width: 794px !important;
-            min-height: 1123px !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            box-shadow: none !important;
-            box-sizing: border-box !important;
-          }
-
-          @page {
-            size: A4;
-            margin: 0;
-          }
-
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
+        @media (max-width: 1300px) {
+          .preview-container { flex: 0 0 400px; }
+          .cv-paper { transform: scale(0.48) !important; margin-bottom: -590px !important; }
         }
-
         @media (max-width: 1024px) {
-          .cv-maker-wrapper {
-            flex-direction: column !important;
-            flex-wrap: nowrap !important;
-            align-items: center !important;
-          }
-          .cv-sidebar {
-            display: grid !important;
-            grid-template-columns: repeat(3, 1fr) !important;
-            gap: 10px !important;
-            width: 100% !important;
-            flex: 0 0 auto !important;
-            position: static !important;
-            padding: 15px !important;
-            overflow: visible !important;
-          }
-          .cv-sidebar button {
-            width: 100% !important;
-            height: 45px !important;
-            margin: 0 !important;
-            border-radius: 12px !important;
-          }
-          .cv-form {
-            width: 100% !important;
-            flex: 1 1 auto !important;
-            padding: 20px !important;
-          }
-          .preview-container {
-            width: 100% !important;
-            max-width: 100% !important;
-            flex: 1 1 auto !important;
-            position: relative !important;
-            overflow: hidden !important;
-            display: block !important;
-          }
-          .cv-print-container {
-            position: absolute !important;
-            left: 50% !important;
-            top: 60px !important;
-            transform-origin: top center !important;
-            margin: 0 !important;
-          }
+          .cv-maker-wrapper { flex-direction: column !important; flex-wrap: nowrap !important; align-items: center !important; }
+          .cv-sidebar { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; width: 100% !important; flex: 0 0 auto !important; position: static !important; padding: 15px !important; overflow: visible !important; }
+          .cv-sidebar button { width: 100% !important; height: 45px !important; margin: 0 !important; border-radius: 12px !important; }
+          .cv-form { width: 100% !important; flex: 1 1 auto !important; padding: 20px !important; }
+          .preview-container { width: 100% !important; max-width: 100% !important; flex: 1 1 auto !important; position: relative !important; overflow: hidden !important; display: block !important; }
+          .cv-paper { position: absolute !important; left: 50% !important; top: 60px !important; transform-origin: top center !important; margin: 0 !important; }
         }
-
-        /* Responsive scales based on screen width */
-        @media (max-width: 1024px) {
-          .preview-container { height: 1100px !important; }
-          .cv-print-container { transform: translate(-50%, 0) scale(0.85) !important; }
-        }
-        @media (max-width: 768px) {
-          .preview-container { height: 960px !important; }
-          .cv-print-container { transform: translate(-50%, 0) scale(0.75) !important; }
-        }
-        @media (max-width: 600px) {
-          .preview-container { height: 780px !important; }
-          .cv-print-container { transform: translate(-50%, 0) scale(0.6) !important; }
-        }
-        @media (max-width: 480px) {
-          .preview-container { height: 660px !important; }
-          .cv-print-container { transform: translate(-50%, 0) scale(0.5) !important; }
-        }
-        @media (max-width: 400px) {
-          .preview-container { height: 600px !important; }
-          .cv-print-container { transform: translate(-50%, 0) scale(0.45) !important; }
-        }
-        @media (max-width: 360px) {
-          .preview-container { height: 550px !important; }
-          .cv-print-container { transform: translate(-50%, 0) scale(0.4) !important; }
-        }
+        @media (max-width: 1024px) { .preview-container { height: 1100px !important; } .cv-paper { transform: translate(-50%, 0) scale(0.85) !important; } }
+        @media (max-width: 768px) { .preview-container { height: 960px !important; } .cv-paper { transform: translate(-50%, 0) scale(0.75) !important; } }
+        @media (max-width: 600px) { .preview-container { height: 780px !important; } .cv-paper { transform: translate(-50%, 0) scale(0.6) !important; } }
+        @media (max-width: 480px) { .preview-container { height: 660px !important; } .cv-paper { transform: translate(-50%, 0) scale(0.5) !important; } }
+        @media (max-width: 400px) { .preview-container { height: 600px !important; } .cv-paper { transform: translate(-50%, 0) scale(0.45) !important; } }
+        @media (max-width: 360px) { .preview-container { height: 550px !important; } .cv-paper { transform: translate(-50%, 0) scale(0.4) !important; } }
       `}</style>
     </div>
   );
