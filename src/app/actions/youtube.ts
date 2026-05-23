@@ -122,20 +122,56 @@ export async function getThumbnailUrls(videoUrl: string) {
     { label: "High (480x360)", filename: "hqdefault.jpg", width: 480, height: 360 },
     { label: "SD (640x480)", filename: "sddefault.jpg", width: 640, height: 480 },
     { label: "HD (1280x720)", filename: "maxresdefault.jpg", width: 1280, height: 720 },
+    { label: "Full HD (1920x1080)", filename: "maxresdefault.webp", width: 1920, height: 1080, webp: true },
   ];
 
   const oembedUrl = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
   const oembedRes = await fetch(oembedUrl);
   const oembedData = await oembedRes.json();
 
+  const baseUrl = `https://img.youtube.com/vi/${videoId}/`;
+  const webpBaseUrl = `https://i.ytimg.com/vi_webp/${videoId}/`;
+
+  const results = await Promise.allSettled(
+    resolutions.map(async (r) => {
+      const url = r.webp
+        ? `${webpBaseUrl}${r.filename}`
+        : `${baseUrl}${r.filename}`;
+      const headRes = await fetch(url, { method: 'HEAD' });
+      return {
+        label: r.label,
+        filename: r.filename,
+        width: r.width,
+        height: r.height,
+        url: headRes.ok ? url : `${baseUrl}maxresdefault.jpg`,
+        available: headRes.ok,
+      };
+    })
+  );
+
+  const thumbnails = results
+    .filter((r) => r.status === 'fulfilled')
+    .map((r) => (r as PromiseFulfilledResult<{
+      label: string; filename: string; width: number; height: number; url: string; available: boolean;
+    }>).value)
+    .filter((t) => t.available);
+
+  if (thumbnails.length === 0) {
+    thumbnails.push({
+      label: "HD (1280x720)",
+      filename: "maxresdefault.jpg",
+      width: 1280,
+      height: 720,
+      url: `${baseUrl}maxresdefault.jpg`,
+      available: true,
+    });
+  }
+
   return {
     videoId,
     title: oembedData.title || "Unknown Video",
     author: oembedData.author_name || "Unknown Creator",
-    thumbnails: resolutions.map((r) => ({
-      ...r,
-      url: `https://img.youtube.com/vi/${videoId}/${r.filename}`,
-    })),
+    thumbnails,
   };
 }
 

@@ -2,14 +2,21 @@
 
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
-import { Sparkles, Loader2, Download, ExternalLink, Music } from 'lucide-react';
+import { Sparkles, Loader2, Download, ExternalLink, Music, CheckCircle2 } from 'lucide-react';
 import { getVideoDownloadInfo } from '../actions/video';
+
 interface VideoUrlItem {
   url: string;
+  quality: string;
+  contentLength?: number;
+  hasAudio?: boolean;
+  noWatermark?: boolean;
+  httpHeaders?: Record<string, string>;
 }
 
 interface VideoDownloadResult {
   title: string;
+  author: string;
   thumbnailUrl: string;
   videoUrls: VideoUrlItem[];
 }
@@ -18,6 +25,7 @@ export default function TiktokVideoDownloaderPage() {
 
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
+  const [downloadingId, setDownloadingId] = useState<number | null>(null);
   const [result, setResult] = useState<VideoDownloadResult | null>(null);
   const [error, setError] = useState('');
 
@@ -34,6 +42,43 @@ export default function TiktokVideoDownloaderPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDownload = async (v: VideoUrlItem, index: number) => {
+    setDownloadingId(index);
+    try {
+      const res = await fetch('/api/proxy-download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url: url.trim(),
+          platform: 'tiktok',
+          filename: (result?.title || 'tiktok') + '.mp4',
+        }),
+      });
+      if (!res.ok) {
+        const errData = await res.json().catch(() => null);
+        throw new Error(errData?.error || `Download failed: ${res.statusText}`);
+      }
+      const blob = await res.blob();
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${result?.title || 'tiktok'}.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Download failed");
+    } finally {
+      setDownloadingId(null);
+    }
+  };
+
+  const formatSize = (bytes: number) => {
+    if (!bytes) return "";
+    const mb = bytes / (1024 * 1024);
+    return mb > 1 ? `(${mb.toFixed(1)} MB)` : `(${(bytes / 1024).toFixed(0)} KB)`;
   };
 
   return (
@@ -63,11 +108,6 @@ export default function TiktokVideoDownloaderPage() {
           <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
             Open the TikTok app or website and navigate to the video you want to save. Tap the Share button and select Copy Link to copy the video URL to your clipboard. Paste the URL into our downloader input and click Get Video. Our tool processes the request and returns a clean download link. Click the download button to save the video file to your device in MP4 format. The tool works with all public TikTok videos, including those from both personal accounts and verified creator profiles. Processing typically completes within seconds for standard-length TikTok content.
           </p>
-
-          <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Responsible Use of Downloaded TikTok Content</h3>
-          <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-            Always credit original creators when using downloaded TikTok content in any public context, including presentations, social media posts, and video compilations. Respect content creators&rsquo; intellectual property rights and avoid claiming downloaded videos as your own work. Our tool is designed for personal reference, educational use, creative inspiration, and content curation purposes. If you plan to use downloaded TikTok videos in commercial projects, seek appropriate permissions from the original creators. Responsible use of download tools helps maintain a healthy creator ecosystem where everyone&rsquo;s work is respected and properly attributed.
-          </p>
         </article>
       }
       results={
@@ -81,34 +121,52 @@ export default function TiktokVideoDownloaderPage() {
               )}
               <div style={{ flex: 1, minWidth: '150px' }}>
                 <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#fff', margin: 0 }}>{result.title}</h3>
-                <p style={{ fontSize: '13px', color: 'var(--muted)', margin: '4px 0 0' }}>TikTok Video</p>
+                <p style={{ fontSize: '13px', color: 'var(--muted)', margin: '4px 0 0' }}>{result.author}</p>
               </div>
             </div>
 
-            <div className="glass-panel" style={{ padding: '24px' }}>
-              <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Download size={18} color="#00f2ea" /> Download
-              </h3>
-              {result.videoUrls.length > 0 ? (
+            {result.videoUrls.length > 0 && (
+              <div className="glass-panel" style={{ padding: '24px' }}>
+                <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#fff', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Download size={18} color="#00f2ea" /> Download
+                </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {result.videoUrls.map((v, i) => (
-                    <a key={i} href={v.url} target="_blank" rel="noopener noreferrer"
-                      className="premium-button"
-                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px', textDecoration: 'none', fontSize: '15px' }}>
-                      <Download size={18} /> Download Video
-                    </a>
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(255,255,255,0.03)', borderRadius: '10px', flexWrap: 'wrap', gap: '8px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        {v.noWatermark ? (
+                          <CheckCircle2 size={18} color="#34c759" />
+                        ) : (
+                          <Download size={18} color="#ff9500" />
+                        )}
+                        <span style={{ color: '#fff', fontSize: '14px', fontWeight: 600 }}>
+                          {v.quality} {v.noWatermark ? "(Without Watermark)" : "(With Watermark)"}
+                        </span>
+                        {v.contentLength && v.contentLength > 0 && (
+                          <span style={{ color: 'var(--muted)', fontSize: '12px' }}>{formatSize(v.contentLength)}</span>
+                        )}
+                      </div>
+                      <button onClick={() => handleDownload(v, i)} disabled={downloadingId === i}
+                        className="premium-button"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 18px', fontSize: '13px', cursor: 'pointer', border: 'none' }}>
+                        {downloadingId === i ? <Loader2 size={14} className="spin" /> : <Download size={14} />}
+                        {downloadingId === i ? 'Downloading...' : 'Download'}
+                      </button>
+                    </div>
                   ))}
                 </div>
-              ) : (
-                <div style={{ padding: '20px', textAlign: 'center' }}>
-                  <p style={{ color: 'var(--muted)', fontSize: '14px' }}>Direct download not available. Open on TikTok.</p>
-                  <a href={url} target="_blank" rel="noopener noreferrer"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#00f2ea', fontSize: '14px', marginTop: '8px' }}>
-                    <ExternalLink size={14} /> Open on TikTok
-                  </a>
-                </div>
-              )}
-            </div>
+              </div>
+            )}
+
+            {result.videoUrls.length === 0 && (
+              <div className="glass-panel" style={{ padding: '24px', textAlign: 'center' }}>
+                <p style={{ color: 'var(--muted)', fontSize: '14px' }}>Direct download not available. Open on TikTok.</p>
+                <a href={url} target="_blank" rel="noopener noreferrer"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#00f2ea', fontSize: '14px', marginTop: '8px' }}>
+                  <ExternalLink size={14} /> Open on TikTok
+                </a>
+              </div>
+            )}
           </div>
         )
       }
@@ -135,4 +193,3 @@ export default function TiktokVideoDownloaderPage() {
     </ToolLayout>
   );
 }
-

@@ -62,10 +62,10 @@ export default function YoutubeThumbnailDownloaderPage() {
     <ToolLayout
       icon={<Download size={44} />}
       title="YouTube Thumbnail Downloader"
-      description="Download YouTube video thumbnails in all resolutions â€” from default to full HD."
+      description="Download YouTube video thumbnails in all resolutions — from default up to Full HD 1920x1080."
       seo={{
         toolName: "YouTube Thumbnail Downloader",
-        description: "Free YouTube thumbnail downloader. Download video thumbnails in all resolutions: HD, SD, HQ, MQ, and default.",
+        description: "Free YouTube thumbnail downloader. Download video thumbnails in all resolutions from default to Full HD 1920x1080.",
         url: "https://toolsnappy.com/youtube-thumbnail-downloader"
       }}
       currentPath="/youtube-thumbnail-downloader"
@@ -78,7 +78,7 @@ export default function YoutubeThumbnailDownloaderPage() {
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>Available Thumbnail Resolutions and Their Uses</h3>
           <p style={{ color: 'var(--muted)', lineHeight: '1.8', marginBottom: '20px' }}>
-            YouTube provides thumbnails in several standard resolutions. The maximum resolution thumbnail at 1280 by 720 pixels is ideal for presentations, social media sharing, and detailed visual analysis. The high-quality variant at 480 by 360 pixels works well for blog posts and article illustrations. Standard definition at 320 by 180 pixels is suitable for thumbnail grids and comparison tools. The default resolution at 120 by 90 pixels serves as a small preview for database entries and quick reference purposes. Our tool automatically detects and displays all available resolutions for each video, handling the complex URL construction and resolution mapping so you do not have to remember YouTube&rsquo;s image naming conventions.
+            YouTube provides thumbnails in several standard resolutions. The maximum resolution thumbnail at 1920 by 1080 pixels (Full HD WebP format) is ideal for presentations, social media sharing, and detailed visual analysis. The high-definition variant at 1280 by 720 pixels works well for blog posts and article illustrations. Standard and medium resolutions are suitable for thumbnail grids and comparison tools. Our tool automatically detects and displays all available resolutions for each video, handling the complex URL construction and resolution mapping so you do not have to remember YouTube&rsquo;s image naming conventions.
           </p>
 
           <h3 style={{ fontSize: '24px', marginTop: '40px', marginBottom: '16px' }}>How to Use Downloaded Thumbnails Effectively</h3>

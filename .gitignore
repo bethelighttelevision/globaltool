@@ -45,3 +45,10 @@ next-env.d.ts
 # generated article exports
 article*.md
 articles_output.*
+
+# yt-dlp binary (downloaded during build)
+/bin/yt-dlp*
+/bin/*.exe
+
+# temporary player scripts
+[0-9]*-player-script.js
