@@ -1,29 +1,63 @@
-import React from 'react';
-import { getGuestRequests } from '../../actions/blog';
-import { MessageSquare, Mail, Globe, FileText, Clock, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { MessageSquare, Mail, Globe, FileText, Clock, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
-export const dynamic = 'force-dynamic';
-
 function StatusBadge({ status }: { status: string }) {
-  const styles: Record<string, { bg: string; color: string; icon: React.ReactNode; label: string }> = {
-    pending: { bg: 'rgba(255, 204, 0, 0.1)', color: '#ffcc00', icon: <Clock size={12} />, label: 'Pending' },
-    approved: { bg: 'rgba(50, 215, 75, 0.1)', color: '#32d74b', icon: <CheckCircle size={12} />, label: 'Approved' },
-    rejected: { bg: 'rgba(255, 69, 58, 0.1)', color: '#ff453a', icon: <XCircle size={12} />, label: 'Rejected' },
+  const styles: Record<string, { bg: string; color: string; label: string }> = {
+    pending: { bg: 'rgba(255, 204, 0, 0.1)', color: '#ffcc00', label: 'Pending' },
+    approved: { bg: 'rgba(50, 215, 75, 0.1)', color: '#32d74b', label: 'Approved' },
+    rejected: { bg: 'rgba(255, 69, 58, 0.1)', color: '#ff453a', label: 'Rejected' },
   };
   const s = styles[status] || styles.pending;
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 12px', borderRadius: '100px', fontSize: '12px', fontWeight: 700, background: s.bg, color: s.color, border: `1px solid ${s.color}20` }}>
-      {s.icon} {s.label}
+      {s.label}
     </span>
   );
 }
 
-export default async function GuestRequestsPage() {
-  const result = await getGuestRequests();
-  const requests = result.success ? result.data : [];
+export default function GuestRequestsPage() {
+  const [requests, setRequests] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    fetch('/api/guest-requests')
+      .then(r => r.json())
+      .then(res => {
+        if (res.success) {
+          setRequests(res.data);
+        } else {
+          let errMsg = res.error || 'Unknown error';
+          if (errMsg.startsWith('{') || errMsg.startsWith('[')) {
+            try { const parsed = JSON.parse(errMsg); errMsg = parsed.message || parsed.error || errMsg; } catch {}
+          }
+          setError(errMsg);
+        }
+      })
+      .catch(err => setError(String(err)))
+      .finally(() => setLoading(false));
+  }, []);
 
   const pendingCount = requests.filter((r: any) => r.status === 'pending').length;
+
+  if (loading) {
+    return (
+      <div className="admin-dashboard">
+        <div className="admin-dashboard-header">
+          <div>
+            <h1 className="admin-title gradient-text">Guest Requests</h1>
+            <p className="text-muted m-0 text-sm">Loading submissions...</p>
+          </div>
+        </div>
+        <div className="glass-panel" style={{ padding: '48px', textAlign: 'center' }}>
+          <p style={{ color: 'var(--muted)' }}>Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-dashboard">
@@ -38,13 +72,13 @@ export default async function GuestRequestsPage() {
         </div>
       </div>
 
-      {!result.success && (
+      {error && (
         <div style={{ padding: '16px', borderRadius: '12px', background: 'rgba(255, 69, 58, 0.08)', border: '1px solid rgba(255, 69, 58, 0.15)', color: '#ff453a', fontSize: '14px' }}>
-          Error loading requests: {result.error}
+          Error loading requests: {error}
         </div>
       )}
 
-      {requests.length === 0 ? (
+      {!error && requests.length === 0 ? (
         <div className="glass-panel" style={{ padding: '48px', textAlign: 'center' }}>
           <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(41, 151, 255, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', color: 'var(--accent)' }}>
             <MessageSquare size={28} />
@@ -63,7 +97,7 @@ export default async function GuestRequestsPage() {
                   </div>
                   <div>
                     <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#fff', margin: 0 }}>{req.author_name}</h4>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px', flexWrap: 'wrap' }}>
                       <Mail size={11} style={{ color: 'var(--muted)' }} />
                       <a href={`mailto:${req.author_email}`} style={{ color: 'var(--accent)', fontSize: '13px', textDecoration: 'none' }}>{req.author_email}</a>
                       {req.website && (
