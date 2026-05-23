@@ -43,7 +43,12 @@ interface BlogRecord {
 }
 
 function getErrorMessage(err: unknown): string {
-  return err instanceof Error ? err.message : String(err);
+  if (err instanceof Error) return err.message;
+  if (typeof err === 'object' && err !== null) {
+    const obj = err as Record<string, unknown>;
+    return (obj.message as string) || (obj.error as string) || (obj.details as string) || JSON.stringify(err);
+  }
+  return String(err);
 }
 
 // Fetch all articles for the admin dashboard
