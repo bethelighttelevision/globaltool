@@ -2,12 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Globe, Zap, Users, Shield, Mail, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Globe, Zap, Shield, Mail, ExternalLink } from 'lucide-react';
 
 const stats = [
   { icon: Zap, value: '30+', label: 'Free Tools' },
-  { icon: Globe, value: '50K+', label: 'Monthly Visitors' },
-  { icon: Users, value: '10K+', label: 'Active Users' },
   { icon: Shield, value: '100%', label: 'Free Forever' },
 ];
 
@@ -59,10 +57,26 @@ export default function AboutUs() {
             So we built something better. A single place where anyone can access professional-quality utility tools — for free, without sign-up, without limits.
           </p>
           <p>
-            What started as a collection of a few basic utilities has grown into a comprehensive suite of 30+ tools serving thousands of users worldwide. From background removal to SEO analysis, crypto profit calculations to video downloads, we cover the tools that digital creators actually need every day.
+            What started as a collection of a few basic utilities has grown into a comprehensive suite of 30+ tools serving users worldwide. From background removal to SEO analysis, crypto profit calculations to social media tools, we cover the resources that digital creators actually need every day.
           </p>
           <p>
             Our mission is simple: democratize access to professional digital tools. Whether you are a freelancer in New York, a small business owner in London, or a content creator in Berlin, ToolSnappy gives you the tools you need to succeed — without asking for a credit card.
+          </p>
+        </div>
+      </div>
+
+      {/* Meet the Founder */}
+      <div className="glass-panel animate-slide-up" style={{ padding: '40px 32px', marginBottom: '40px' }}>
+        <h2 className="text-2xl font-bold" style={{ marginBottom: '20px' }}>Meet the Founder</h2>
+        <div className="article-content" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <p>
+            <strong>Aurelio Renato</strong> is the solo creator behind ToolSnappy. With a background in software development and digital marketing, Aureliano built ToolSnappy to solve a problem he experienced firsthand: the lack of reliable, free, privacy-respecting tools for creators and small businesses.
+          </p>
+          <p>
+            "I was tired of signing up for yet another tool, only to find critical features locked behind a $30/month subscription. I knew I could build alternatives that were just as good — and give them away for free. No ads that trick you, no data collection, no upsells. Just tools that work."
+          </p>
+          <p>
+            When he is not building tools, Aureliano writes about SEO, digital marketing strategies, and financial literacy on the ToolSnappy blog. He is passionate about helping small creators compete with big players by giving them access to the same quality of tools.
           </p>
         </div>
       </div>

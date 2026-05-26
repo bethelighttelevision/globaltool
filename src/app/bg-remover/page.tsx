@@ -59,7 +59,7 @@ export default function BackgroundRemover() {
       description="Remove image backgrounds instantly with AI. Upload any photo and get a clean transparent PNG in seconds."
       seo={{
         toolName: "Professional AI Background Remover",
-        description: "Adobe-grade AI background removal directly in your browser. Powered by neural networks for perfect edge detection and HD transparency.",
+        description: "AI-powered background removal directly in your browser. Clean edge detection and HD transparency.",
         url: "https://toolsnappy.com/bg-remover"
       }}
       currentPath="/bg-remover"

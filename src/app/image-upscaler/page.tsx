@@ -67,7 +67,7 @@ export default function ImageUpscaler() {
       description="Instant High-Definition Upscaling powered by Cloud GPUs. Experience Adobe-level detail recovery without freezing your computer."
       seo={{
         toolName: "Cloud AI Image Upscaler",
-        description: "Upscale and enhance images instantly using DeepAI Cloud Neural Networks. True Adobe-grade quality without server lag.",
+        description: "Upscale and enhance images instantly using AI. High-quality results without server lag.",
         url: "https://toolsnappy.com/image-upscaler"
       }}
       currentPath="/image-upscaler"

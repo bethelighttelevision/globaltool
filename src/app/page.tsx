@@ -249,7 +249,7 @@ export default function Home() {
         <div style={{ marginTop: '48px' }}>
           <SectionHeader icon={<ImageIcon />} label="Images & Media Tools" color="#ff9f0a" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
-            <ToolCard href="/bg-remover" icon={<ImageIcon />} label="AI Background Remover" desc="Adobe-grade neural engine. Remove backgrounds instantly." color="#ff9f0a" borderColor="#ff9f0a" badge={{ text: 'AI', color: '#ff9f0a' }} />
+            <ToolCard href="/bg-remover" icon={<ImageIcon />} label="AI Background Remover" desc="Remove backgrounds instantly with AI-powered precision." color="#ff9f0a" borderColor="#ff9f0a" badge={{ text: 'AI', color: '#ff9f0a' }} />
             <ToolCard href="/image-upscaler" icon={<ImageIcon />} label="Image Upscaler" desc="Increase resolution of low-quality images using AI." color="#32d74b" borderColor="#32d74b" badge={{ text: 'New', color: '#32d74b' }} />
             <ToolCard href="/pdf-converter" icon={<FileText />} label="PDF to SVG Converter" desc="Private, client-side vector conversion with page previews." color="#ff3b30" borderColor="#ff3b30" />
             <ToolCard href="/base64-converter" icon={<FileCode2 />} label="Image to Base64" desc="Instant image encoding for developers." color="#32d74b" borderColor="#32d74b" />
@@ -261,7 +261,7 @@ export default function Home() {
           <SectionHeader icon={<Code />} label="Developer Tools" color="#a8c7fa" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
             <ToolCard href="/json-formatter" icon={<Braces />} label="JSON Formatter" desc="Validate and beautify JSON strings instantly." color="#a8c7fa" borderColor="#a8c7fa" />
-            <ToolCard href="/password-gen" icon={<ShieldCheck />} label="Password Generator" desc="Secure, military-grade random key generation." color="#ffcc00" borderColor="#ffcc00" />
+            <ToolCard href="/password-gen" icon={<ShieldCheck />} label="Password Generator" desc="Generate secure, random passwords locally in your browser." color="#ffcc00" borderColor="#ffcc00" />
             <ToolCard href="/word-counter" icon={<Type />} label="Word Counter" desc="Readability analysis and density statistics." color="#0071e3" borderColor="#0071e3" />
             <ToolCard href="/cv-maker" icon={<FileText />} label="CV / Resume Maker" desc="Professional resume builder with ATS scoring." color="#818cf8" borderColor="#818cf8" badge={{ text: 'Pro', color: '#818cf8' }} />
             <ToolCard href="/lucky-number" icon={<Star />} label="AI Lucky Number Finder" desc="Find your destiny number and 2026 predictions." color="#a8c7fa" borderColor="#a8c7fa" badge={{ text: 'Fun', color: '#a8c7fa' }} />

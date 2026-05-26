@@ -18,7 +18,7 @@ export default function TermsOfService() {
         </div>
 
         <div className="article-content">
-          <p>Last Updated: May 14, 2026</p>
+          <p>Last Updated: May 26, 2026</p>
 
           <h2>1. Acceptance of Terms</h2>
           <p>By accessing and using ToolSnappy, you agree to be bound by these Terms of Service and all applicable laws and regulations.</p>
@@ -29,13 +29,19 @@ export default function TermsOfService() {
           <h2>3. Disclaimer</h2>
           <p>The materials on ToolSnappy are provided on an &apos;as is&apos; basis. We make no warranties, expressed or implied, and hereby disclaim all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
 
-          <h2>4. Limitations</h2>
+          <h2>4. Financial Disclaimer</h2>
+          <p>ToolSnappy provides financial calculators, tax estimators, salary calculators, retirement calculators, and crypto profit tools for informational and educational purposes only. They are not intended as financial, tax, investment, or legal advice. You should consult a qualified professional for advice specific to your situation. Results from these tools are estimates and should not be relied upon for making financial decisions. We make no guarantees regarding the accuracy, completeness, or timeliness of the calculations.</p>
+
+          <h2>5. AI Content Disclaimer</h2>
+          <p>ToolSnappy offers tools that assist with text refinement and content improvement. Output from these tools should be reviewed and edited by a human before publication. We make no claims about the originality, accuracy, or suitability of generated content. Users are responsible for verifying all content produced using our tools.</p>
+
+          <h2>6. Limitations</h2>
           <p>In no event shall ToolSnappy or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the tools on our website.</p>
 
-          <h2>5. Third-Party Content</h2>
+          <h2>7. Third-Party Content</h2>
           <p>Our tools may display data or links from third-party sources. We do not endorse or assume any responsibility for any such third-party sites, information, materials, products, or services.</p>
 
-          <h2>6. Governing Law</h2>
+          <h2>8. Governing Law</h2>
           <p>These terms and conditions are governed by and construed in accordance with the laws of the United States and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
         </div>
       </div>

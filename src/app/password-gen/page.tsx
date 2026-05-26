@@ -59,7 +59,7 @@ export default function PasswordGenPage() {
     <ToolLayout
       icon={<ShieldCheck size={40} />}
       title="Secure Password Generator"
-      description="Generate military-grade, cryptographically secure passwords locally in your browser. No data is ever sent to a server."
+      description="Generate secure, cryptographically strong passwords locally in your browser. No data is ever sent to a server."
       seo={{
         toolName: "Secure Password Generator",
         description: "Generate strong, randomized, and secure passwords instantly to protect your online accounts.",

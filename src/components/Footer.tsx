@@ -31,7 +31,7 @@ export default function Footer() {
               </h3>
             </div>
             <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.7, maxWidth: '320px', marginBottom: '24px' }}>
-              The world&apos;s most advanced 100% free tool suite. Engineered for speed, privacy, and digital dominance in {currentYear}.
+               Free online tools for creators, marketers, and professionals. Built for speed and privacy in {currentYear}.
             </p>
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
               <div style={{

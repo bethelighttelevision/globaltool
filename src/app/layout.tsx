@@ -80,7 +80,7 @@ export default function RootLayout({
               "url": "https://toolsnappy.com",
               "name": "ToolSnappy",
               "logo": "https://toolsnappy.com/logo.svg",
-              "description": "Engineered for speed, privacy, and digital dominance."
+              "description": "Engineered for speed, privacy, and utility."
             },
             {
               "@type": "WebApplication",
