@@ -7,6 +7,8 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   image: string;
+  authorName: string;
+  authorBio: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -289,6 +291,8 @@ For a full breakdown of how your current videos are optimized, try our [YouTube 
 
 *This article was written for educational and informational purposes only.*
   `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '1',
@@ -429,7 +433,9 @@ Start with the ten steps above. Use our [SEO Analyzer](/site-audit) to speed up 
 If you found this guide helpful, check out our other articles on [YouTube SEO](/blog/youtube-seo-optimization-ultimate-guide) and [common SEO mistakes](/blog/sneaky-seo-mistakes-killing-rankings) for more insights.
 
 *This article is for educational and informational purposes only. Results may vary based on competition, industry, and other factors.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '2',
@@ -565,7 +571,9 @@ The days of needing expensive software and hours of practice are over. AI-powere
 Try our [BG Remover](/bg-remover) for free and see the difference for yourself. No sign-up, no credit card, no limits.
 
 *This article is for educational and informational purposes only. Results may vary based on image quality and subject complexity.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '3',
@@ -732,7 +740,9 @@ Our [Crypto Profit Calculator](/crypto-profit) is designed to make this easy. It
 If you are interested in learning more about the psychological side of trading, read our article on [crypto trading psychology](/blog/crypto-trading-psychology-math-wins).
 
 *This article is for educational and informational purposes only. Cryptocurrency trading carries significant risk. Past performance does not guarantee future results.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '4',
@@ -906,7 +916,9 @@ Master the seven hook patterns above. Practice writing hooks for every piece of 
 Remember: you have two seconds. Make them count.
 
 *This article is for educational and informational purposes only. Results may vary based on audience, platform, and content quality.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '5',
@@ -1035,7 +1047,9 @@ Start by fixing the ten mistakes above. Each fix will move your site closer to p
 For a more comprehensive guide, read our [SEO audit checklist](/blog/seo-audit-checklist-2026) and our article on [Google ranking secrets](/blog/google-ranking-secrets-2026).
 
 *This article is for educational and informational purposes only. SEO results vary based on competition, industry, and other factors.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '6',
@@ -1165,7 +1179,9 @@ Start by identifying your biggest time drains. Which tasks take you the most tim
 Try our tools and see how much time you can save. Every minute counts.
 
 *This article is for educational and informational purposes only. Time savings may vary based on individual workflow and usage patterns.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '7',
@@ -1312,7 +1328,9 @@ Meeting platform requirements is straightforward when you have the right tools. 
 For more e-commerce tips, check out our article on [removing backgrounds like a pro](/blog/remove-backgrounds-like-pro).
 
 *This article is for educational and informational purposes only. Platform requirements may change. Always check current requirements on each platform.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '8',
@@ -1444,7 +1462,9 @@ Build a system. Use the math. Stick to the plan. And when you feel the urge to m
 For a deeper look at the calculations behind successful trading, read our article on [calculating crypto ROI](/blog/calculate-crypto-roi-smart-way).
 
 *This article is for educational and informational purposes only. Cryptocurrency trading carries significant risk. Past performance does not guarantee future results.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '9',
@@ -1611,7 +1631,9 @@ There are no shortcuts. But if you apply these principles consistently, you will
 For more detailed guides, read our [SEO audit checklist](/blog/seo-audit-checklist-2026) and our article on [common SEO mistakes](/blog/sneaky-seo-mistakes-killing-rankings).
 
 *This article is for educational and informational purposes only. SEO results vary based on competition, industry, and other factors.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '10',
@@ -1787,7 +1809,9 @@ Start by identifying your biggest time sinks. Which tasks take you the longest? 
 Bookmark [ToolSnappy](/) and keep us in your creative toolkit. We are constantly adding new tools to help creators like you succeed.
 
 *This article is for educational and informational purposes only. Always verify tool suitability for your specific use case.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '12',
@@ -1913,7 +1937,9 @@ Most crypto tax tools integrate with TurboTax, TaxAct, and other major tax prepa
 Crypto taxation is complex but manageable with the right tools and habits. Track every transaction, understand your cost basis method, harvest losses strategically, and never ignore the Form 1040 crypto question. The IRS is watching — but if you stay organized and compliant, you can minimize your tax bill and sleep soundly through tax season.
 
 *This article is for informational purposes only. Consult a qualified tax professional for advice specific to your situation.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '13',
@@ -2033,7 +2059,9 @@ Lenders evaluate more than just your credit score and income. They look at your 
 If you find a home you love and can afford the payments at current rates, buying now makes sense. Trying to time the market is risky. You can always refinance if rates drop. What matters most is finding a home that fits your budget and your life. Use our [Mortgage Calculator](/mortgage) to run the numbers before you start house hunting, and you will enter the process with confidence.
 
 *This article is for informational purposes only. Consult a mortgage professional for personalized advice.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '14',
@@ -2172,7 +2200,9 @@ Get pre-approved by a bank or credit union before visiting the dealership. Deale
 The best car purchase is one that fits your budget today and for the life of the loan. Use the 20/4/10 rule, consider total ownership costs, and never let a monthly payment number trick you into a bad deal. Run the numbers with our [Car Loan Calculator](/car-loan), and drive away knowing you made a smart financial decision.
 
 *This article is for informational purposes only. Consult a financial advisor for personalized advice.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '15',
@@ -2327,7 +2357,9 @@ The most common mistake is failing to contribute at all. Many people assume they
 A Roth IRA is one of the most valuable retirement tools available. Tax-free growth, flexible withdrawal rules, and no required minimum distributions make it an essential part of any retirement plan. Maximize your contributions every year, invest for growth, and watch your retirement savings compound without the tax man taking a cut. Use our retirement calculators to model different scenarios and see how much a Roth IRA could be worth in your future.
 
 *This article is for informational purposes only. Consult a tax professional for personalized retirement advice.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '16',
@@ -2443,7 +2475,9 @@ The IRS distinguishes between a business and a hobby. A business is operated wit
 Self-employment tax is a significant expense, but understanding how it works and maximizing your deductions can substantially reduce your burden. Track expenses diligently, make quarterly estimated payments, and invest in retirement accounts that reduce your taxable income. With the right habits and tools, you can keep more of what you earn and avoid IRS surprises.
 
 *This article is for informational purposes only. Consult a CPA for advice specific to your situation.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '17',
@@ -2571,7 +2605,9 @@ Create a monthly reporting dashboard that tracks these key metrics. Use Google D
 Local SEO is the most cost-effective marketing strategy for small businesses. By optimizing your Google Business Profile, building consistent citations, managing reviews, and earning local links, you can dominate local search results without a massive advertising budget. Start with the basics, stay consistent, and watch your local visibility grow.
 
 *This article is for informational purposes only. Results vary based on competition and location.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '18',
@@ -2705,7 +2741,9 @@ Track your Google Business Profile insights including search queries driving imp
 Dominating the local pack requires a multi-faceted approach. Optimize your Google Business Profile categories, build a steady stream of reviews, create locally relevant content, and ensure your technical foundation is solid. Local SEO is a marathon, not a sprint, but the businesses that consistently execute these strategies will dominate their local markets.
 
 *This article is for informational purposes only. Ranking factors change over time.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '19',
@@ -2849,7 +2887,9 @@ Many creators focus on follower count as the primary metric, but engagement and 
 Instagram growth in 2026 is about quality, consistency, and community. Master Reels, build genuine connections, optimize your profile for search, and let data guide your decisions. There are no shortcuts, but these strategies will build a real, engaged following that drives results for your brand.
 
 *This article is for informational purposes only. Results vary based on niche and execution.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '20',
@@ -2975,7 +3015,9 @@ Audit your existing content for helpfulness and E-E-A-T signals. Improve Core We
 Google's 2026 updates are a clear signal that quality, expertise, and user experience matter more than ever. The days of gaming the algorithm with thin content or automated production are over. Focus on creating genuinely helpful content, building your brand's authority, and delivering an excellent user experience, and your rankings will reflect that effort.
 
 *This article is for informational purposes only. SEO is an evolving field.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '21',
@@ -3103,7 +3145,9 @@ The best times to upload for US audiences are Tuesday to Thursday between 11 AM 
 Ranking in the competitive US YouTube market requires understanding the unique preferences and behaviors of American viewers. Hook them fast, target US-specific keywords with the right seasonal timing, design thumbnails that command attention, and build genuine community engagement. With these strategies, you can compete effectively even in the most crowded niches.
 
 *This article is for informational purposes only. Results vary based on niche and execution.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '22',
@@ -3224,7 +3268,9 @@ Input your household income, deposit amount, property price, mortgage term (typi
 Buying your first home in the UK is achievable with the right preparation. Understand how lenders calculate affordability, improve your credit profile, take advantage of government schemes, and use a mortgage calculator to find your budget. With rates stabilising and schemes available for first-time buyers, 2026 is a good time to take the first step on the property ladder.
 
 *This article is for informational purposes only. Speak to a qualified mortgage adviser for personalised advice.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '23',
@@ -3354,7 +3400,9 @@ A good rule of thumb is to set aside 20 to 30 percent of each payment in a separ
 Self Assessment in the UK has become more digital and more frequent with MTD, but the fundamentals remain the same. Track your income and expenses, claim all allowable deductions, meet your deadlines, and set aside money for tax throughout the year. With the right software and habits, filing your Self Assessment can be a straightforward process rather than a source of stress.
 
 *This article is for informational purposes only. Consult a qualified accountant for advice specific to your situation.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '24',
@@ -3480,7 +3528,9 @@ The best times to upload for UK audiences are weekdays between 6 AM and 9 AM (fo
 The UK YouTube market offers significant opportunities for creators who understand British search behaviour, cultural preferences, and engagement patterns. Use UK-specific keywords, design thumbnails that appeal to British aesthetics, create content that addresses UK topics, and engage with your community in an authentic British voice. With these strategies, you can build a loyal UK audience and rank higher in British search results.
 
 *This article is for informational purposes only. Results vary based on niche and execution.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '25',
@@ -3602,7 +3652,9 @@ Different industries have specific software needs. Retail businesses need EPOS (
 The right software stack makes running a UK small business significantly easier. Start with MTD-compatible accounting software as your foundation. Add VAT management, payroll, and GDPR tools as your business grows. Choose productivity and collaboration tools that match your team's workflow. With the right tools in place, you can focus on growing your business rather than wrestling with compliance and administration.
 
 *This article is for informational purposes only. Verify tool suitability for your specific business needs.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '26',
@@ -3714,7 +3766,9 @@ If you receive a nudge letter from HMRC about your crypto transactions, do not i
 Crypto taxation in the UK is complex but manageable. Understand the difference between capital gains and income, keep detailed records of every transaction, report your gains on your Self Assessment, and come forward voluntarily if you have past unreported gains. HMRC is actively pursuing crypto tax compliance, but with the right tools and habits, you can stay compliant and avoid penalties.
 
 *This article is for informational purposes only. Consult a qualified tax adviser for advice specific to your situation.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '27',
@@ -3840,7 +3894,9 @@ Our suite of privacy-focused tools never stores your images, files, or data on o
 GDPR compliance requires a systematic approach with the right tools. Implement cookie consent management, maintain an up-to-date privacy policy, prepare for DSARs and breach notifications, and conduct regular compliance audits. While the tools require investment, the cost of non-compliance — up to 20 million euros or 4 percent of global turnover — makes compliance spending a wise business decision.
 
 *This article is for informational purposes only. Consult a legal professional for compliance advice.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '28',
@@ -3956,7 +4012,9 @@ Implement automatic language detection based on browser settings, but always let
 European SEO requires a fundamentally different approach than SEO for English-speaking markets. Invest in professional translation and localisation, choose the right domain strategy, implement hreflang tags correctly, understand regional search engines, and build local links in each market. While the effort is significant, the reward is access to hundreds of millions of high-intent European searchers.
 
 *This article is for informational purposes only. SEO results vary by market and competition.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '29',
@@ -4078,7 +4136,9 @@ Automatic rate detection based on product type and customer location. Support fo
 European VAT is complex, but the right tools and schemes make it manageable. Use OSS for cross-border B2C sales within the EU, IOSS for imports from outside the EU, and stay informed about digital reporting requirements in each country where you sell. With proper systems in place, you can comply with VAT obligations across Europe and focus on growing your business.
 
 *This article is for informational purposes only. Consult a VAT specialist for advice specific to your business.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '30',
@@ -4200,7 +4260,9 @@ Remote work can blur the boundaries between work and personal life. Encourage te
 Building the right SaaS stack is essential for remote team success. Choose a communication hub that fits your workflow, implement consistent project management practices, build a searchable knowledge base, and invest in security tools that protect your team and data. The best tool stack is one that your team actually uses — prioritise adoption and simplicity over feature count.
 
 *This article is for informational purposes only. Tool suitability depends on specific team needs.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '31',
@@ -4320,7 +4382,9 @@ Spain's "Beckham Law" offers a special tax regime for certain remote workers, bu
 Digital nomad taxation requires careful planning and diligent recordkeeping. Understand where you owe tax, track your days in each country, leverage tax treaties and exclusions, and consider countries with nomad-friendly tax regimes. The key is staying organised, working with a cross-border tax specialist, and never assuming that being outside your home country means you do not owe tax.
 
 *This article is for informational purposes only. Consult a cross-border tax specialist for advice specific to your situation.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '32',
@@ -4454,7 +4518,9 @@ The trap many European founders fall into is signing up for too many tools befor
 Scaling a startup across European borders is challenging but achievable with the right tools. Invest in proper legal structuring, use multi-currency banking and payment platforms, build a multi-language support system, stay compliant with local regulations, and choose e-commerce tools that handle European complexity. With the right stack, you can operate seamlessly across European markets and focus on growth rather than administrative overhead.
 
 *This article is for informational purposes only. Consult legal and financial professionals for specific advice.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '33',
@@ -4508,7 +4574,9 @@ The TCJA limited \\u00a71031 to real property only. Any crypto-to-crypto trade \
 Step 1: Calculate your real numbers using the Crypto Profit Calculator. Step 2: Harvest losses before year-end. Step 3: Defer gains past the one-year holding period. Step 4: Donate winners you don't want. Step 5: Consider a Roth SDIRA for new money.
 
 *Disclaimer: This article is for informational purposes only. Consult a qualified tax professional before implementing any tax strategy.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '34',
@@ -4567,7 +4635,9 @@ Credit 720+ with at least 5% down. Putting 10% or more down. Buying in a competi
 Before deciding, model both loans in ToolSnappy's Mortgage Calculator. It shows your full payment breakdown \\u2014 principal, interest, taxes, insurance \\u2014 across different down payments and rates.
 
 *This article is for informational purposes only. Consult a qualified mortgage professional.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '35',
@@ -4621,7 +4691,9 @@ Staking rewards on Ethereum/Solana range 3-8% but come with principal risk, lock
 ## The Bottom Line
 
 Open an account this week. Move your cash. Let it earn while you focus on what you actually want to be doing. The math is simple, and in 2026, the rates make it an easy call.
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '36',
@@ -4680,7 +4752,9 @@ Model your mortgage with the Mortgage Calculator to see how housing costs intera
 Open a Roth IRA if you don't have one. Set up a Solo 401(k) if you're self-employed. Determine your contribution split. Automate everything. Model your numbers.
 
 *This article is for educational purposes only. Consult a qualified CPA or financial advisor.*
-    `
+    `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   },
   {
     id: '37',
@@ -4744,6 +4818,8 @@ Check your YouTube earnings with the YouTube Monetization Checker to estimate CP
 The IRS matches 1099-K forms to returns automatically. Underpayment penalties compound daily. A side hustler earning $25,000 who reports nothing could face $8,000-$10,000 in combined tax, penalties, and interest. Stay compliant.
 
 *This article is for informational purposes only. Consult a qualified tax professional.*
-    `
+  `,
+    authorName: 'Aureliano Renato Ksa',
+    authorBio: 'Content creator and digital tools enthusiast. Running ToolSnappy since 2026 with a focus on practical SEO, productivity, and creator-focused resources.',
   }
 ];

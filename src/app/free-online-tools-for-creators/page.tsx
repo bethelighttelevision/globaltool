@@ -73,7 +73,6 @@ const categories = [
       { name: 'ToolSnappy Thumbnail Analyzer', url: '/youtube-thumbnail-analyzer', own: true },
       { name: 'ToolSnappy Thumbnail A/B Tester', url: '/youtube-thumbnail-tester', own: true },
       { name: 'ToolSnappy Thumbnail Downloader', url: '/youtube-thumbnail-downloader', own: true },
-      { name: 'ToolSnappy Video Downloader', url: '/youtube-video-downloader', own: true },
       { name: 'ToolSnappy Tag Extractor', url: '/youtube-tag-extractor', own: true },
       { name: 'OBS Studio', url: 'https://obsproject.com', ext: true },
       { name: 'DaVinci Resolve', url: 'https://blackmagicdesign.com/products/davinciresolve', ext: true },

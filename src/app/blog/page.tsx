@@ -38,6 +38,8 @@ export default async function BlogPage() {
           image: d.image || '/blog-banner.png',
           date: d.date || '',
           category: d.category || slugToCategory.get(d.slug) || 'SEO',
+          authorName: '',
+          authorBio: '',
         };
       });
 

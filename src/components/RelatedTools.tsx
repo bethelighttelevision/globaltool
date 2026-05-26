@@ -17,10 +17,7 @@ const toolIcons: Record<string, React.ReactNode> = {
   '/youtube-thumbnail-analyzer': <Image size={24} />,
   '/youtube-thumbnail-tester': <Eye size={24} />,
   '/youtube-thumbnail-downloader': <Download size={24} />,
-  '/youtube-video-downloader': <Download size={24} />,
-  '/facebook-video-downloader': <Globe size={24} />,
-  '/instagram-video-downloader': <Camera size={24} />,
-  '/tiktok-video-downloader': <Music size={24} />,
+
 };
 
 const tools = [
@@ -38,10 +35,7 @@ const tools = [
   { name: 'YT Thumbnail Analyzer', path: '/youtube-thumbnail-analyzer', desc: 'AI thumbnail score & feedback' },
   { name: 'YT Thumbnail Tester', path: '/youtube-thumbnail-tester', desc: 'Preview in YouTube UI mockups' },
   { name: 'YT Thumbnail Downloader', path: '/youtube-thumbnail-downloader', desc: 'Download all resolution thumbnails' },
-  { name: 'YT Video Downloader', path: '/youtube-video-downloader', desc: 'Download YouTube videos in HD' },
-  { name: 'FB Video Downloader', path: '/facebook-video-downloader', desc: 'Download Facebook videos' },
-  { name: 'IG Video Downloader', path: '/instagram-video-downloader', desc: 'Download Instagram videos & reels' },
-  { name: 'TikTok Video Downloader', path: '/tiktok-video-downloader', desc: 'Download TikTok videos' },
+
 ];
 
 export default function RelatedTools({ currentPath }: { currentPath: string }) {

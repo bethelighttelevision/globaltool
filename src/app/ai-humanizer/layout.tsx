@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Free AI Content Humanizer Tool',
-  description: 'Humanize AI text to bypass AI detectors. Free AI humanizer for ChatGPT, Claude, and Gemini content. Undetectable AI rewriting tool.',
+  title: 'Free AI Writing Improver & Content Refinement Tool',
+  description: 'Polish and refine AI-generated text to sound more natural. Free writing assistant for ChatGPT, Claude, and Gemini content.',
   alternates: {
     canonical: 'https://toolsnappy.com/ai-humanizer',
   },
   openGraph: {
-    title: 'Free AI Content Humanizer | ToolSnappy',
-    description: 'Humanize AI text to bypass AI detectors. Free AI humanizer for ChatGPT, Claude, and Gemini content. Undetectable AI rewriting tool.',
+    title: 'Free AI Writing Improver | ToolSnappy',
+    description: 'Polish and refine AI-generated text to sound more natural. Free writing assistant for ChatGPT, Claude, and Gemini content.',
     url: 'https://toolsnappy.com/ai-humanizer',
     siteName: 'ToolSnappy',
     images: [{ url: 'https://toolsnappy.com/logo.svg', width: 256, height: 256 }],
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free AI Content Humanizer | ToolSnappy',
-    description: 'Humanize AI text to bypass AI detectors. Free AI humanizer for ChatGPT, Claude, and Gemini content.',
+    title: 'Free AI Writing Improver | ToolSnappy',
+    description: 'Polish and refine AI-generated text to sound more natural. Free writing assistant for ChatGPT, Claude, and Gemini content.',
     images: ['https://toolsnappy.com/logo.svg'],
   },
 };

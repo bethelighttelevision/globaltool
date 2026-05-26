@@ -27,6 +27,16 @@ interface PostData {
   category?: string;
   author_name?: string;
   author_bio?: string;
+  authorName?: string;
+  authorBio?: string;
+}
+
+function getAuthorName(post: PostData): string {
+  return post.authorName || post.author_name || 'ToolSnappy Editorial Team';
+}
+
+function getAuthorBio(post: PostData): string {
+  return post.authorBio || post.author_bio || 'Providing practical tools and resources for creators, marketers, and professionals.';
 }
 
 export async function generateStaticParams() {
@@ -160,7 +170,9 @@ export default async function BlogPostPage(props: BlogPostProps) {
         content: d.content || '',
         image: d.image || '/blog-banner.png',
         date: d.date || '',
-        category: slugToCategory.get(d.slug) || 'SEO'
+        category: slugToCategory.get(d.slug) || 'SEO',
+        authorName: '',
+        authorBio: ''
       }));
     }
   } catch {}
@@ -226,31 +238,33 @@ export default async function BlogPostPage(props: BlogPostProps) {
         {/* Author information card */}
         <div style={{ 
           display: 'flex', 
-          alignItems: 'center', 
+          alignItems: 'flex-start', 
           gap: '14px',
           background: 'rgba(255, 255, 255, 0.02)',
           border: '1px solid var(--card-border)',
-          padding: '12px 20px',
+          padding: '16px 20px',
           borderRadius: '16px',
-          width: 'fit-content'
+          maxWidth: '100%'
         }}>
           <div style={{ 
-            height: '40px', 
-            width: '40px', 
+            height: '44px', 
+            width: '44px', 
             borderRadius: '50%', 
             background: 'linear-gradient(135deg, var(--accent) 0%, #1a5ab5 100%)', 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
             color: '#fff', 
-            fontWeight: 'bold',
+            fontWeight: 'bold', 
+            fontSize: '16px',
+            flexShrink: 0,
             boxShadow: '0 4px 12px rgba(41, 151, 255, 0.3)'
           }}>
-            {post.author_name ? post.author_name.charAt(0).toUpperCase() : 'TS'}
+            {getAuthorName(post).charAt(0).toUpperCase()}
           </div>
-          <div>
-            <p style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: 'var(--foreground)' }}>{post.author_name || 'ToolSnappy Editorial Team'}</p>
-            <p style={{ margin: 0, fontSize: '12px', color: 'var(--muted)' }}>{post.author_name ? 'Guest Contributor' : 'Verified Expert Account'}</p>
+          <div style={{ minWidth: 0 }}>
+            <p style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: 'var(--foreground)' }}>{getAuthorName(post)}</p>
+            <p style={{ margin: '4px 0 0', fontSize: '13px', lineHeight: '1.5', color: 'var(--muted)' }}>{getAuthorBio(post)}</p>
           </div>
         </div>
       </div>
@@ -284,8 +298,8 @@ export default async function BlogPostPage(props: BlogPostProps) {
                 "image": post.image,
                 "datePublished": post.date,
                 "author": {
-                  "@type": post.author_name ? "Person" : "Organization",
-                  "name": post.author_name || "ToolSnappy Editorial Team"
+                  "@type": "Person",
+                  "name": getAuthorName(post)
                 },
                 "publisher": {
                   "@type": "Organization",

@@ -4,7 +4,7 @@ import Script from 'next/script';
 import AdSensePlaceholder from '../components/AdSensePlaceholder';
 import {
   Search, Globe, Bot, FileCode2, Tags, ShieldCheck, Braces, Play, Camera,
-  Type, Image as ImageIcon, TrendingUp, Star, Video, Hash, Download, Eye, List,
+  Type, Image as ImageIcon, TrendingUp, Star, Hash, Download, Eye, List,
   DollarSign, FileText, Music, Sparkles, RefreshCw, Layers, Calculator, Zap,
   ArrowRight, CheckCircle2, Quote, Code,
 } from 'lucide-react';
@@ -227,7 +227,6 @@ export default function Home() {
             <ToolCard href="/youtube-thumbnail-tester" icon={<Eye />} label="Thumbnail Tester" desc="Preview in search, suggested, and home page mockups." color="#ffcc00" borderColor="#ffcc00" />
             <ToolCard href="/youtube-thumbnail-downloader" icon={<Download />} label="Thumbnail Downloader" desc="Download in HD to default quality." color="#ff3b30" borderColor="#ff3b30" />
             <ToolCard href="/youtube-tag-extractor" icon={<List />} label="Tag Extractor" desc="Extract tags, hashtags, and keywords from any video." color="#0071e3" borderColor="#0071e3" />
-            <ToolCard href="/youtube-video-downloader" icon={<Download />} label="Video Downloader" desc="Download YouTube videos in HD quality." color="#ff0000" borderColor="#ff0000" />
           </div>
         </div>
 
@@ -245,16 +244,6 @@ export default function Home() {
         </div>
 
         <AdSensePlaceholder type="mid-content" />
-
-        {/* ---- Video Downloaders ---- */}
-        <div style={{ marginTop: '48px' }}>
-          <SectionHeader icon={<Download />} label="Video Downloaders" color="#0071e3" />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
-            <ToolCard href="/facebook-video-downloader" icon={<Video />} label="Facebook Video Downloader" desc="Download any Facebook video. Paste and save." color="#1877f2" borderColor="#1877f2" />
-            <ToolCard href="/instagram-video-downloader" icon={<Camera />} label="Instagram Video Downloader" desc="Download reels, videos, and stories." color="#cc2366" borderColor="#cc2366" />
-            <ToolCard href="/tiktok-video-downloader" icon={<Music />} label="TikTok Video Downloader" desc="Download TikTok videos without watermark." color="#00f2ea" borderColor="#00f2ea" />
-          </div>
-        </div>
 
         {/* ---- Images & Media ---- */}
         <div style={{ marginTop: '48px' }}>

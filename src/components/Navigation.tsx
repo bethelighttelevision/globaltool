@@ -58,7 +58,7 @@ const categories: CategoryGroup[] = [
       { label: 'Thumbnail Tester', path: '/youtube-thumbnail-tester', desc: 'Preview in search results', icon: Eye },
       { label: 'Thumbnail Downloader', path: '/youtube-thumbnail-downloader', desc: 'Save HD thumbnails', icon: Download },
       { label: 'Tag Extractor', path: '/youtube-tag-extractor', desc: 'Extract video tags', icon: List },
-      { label: 'YT Video Downloader', path: '/youtube-video-downloader', desc: 'Download HD videos', icon: Download },
+
     ],
   },
   {
@@ -90,9 +90,7 @@ const categories: CategoryGroup[] = [
     color: '#0071e3',
     icon: Download,
     tools: [
-      { label: 'Facebook Downloader', path: '/facebook-video-downloader', desc: 'Save FB videos', icon: Video },
-      { label: 'Instagram Downloader', path: '/instagram-video-downloader', desc: 'Save IG videos', icon: Camera },
-      { label: 'TikTok Downloader', path: '/tiktok-video-downloader', desc: 'Save TikTok videos', icon: Music },
+
     ],
   },
   {
