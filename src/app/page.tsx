@@ -212,7 +212,7 @@ export default function Home() {
           <SectionHeader icon={<Bot />} label="AI & Content Creation" color="#818cf8" />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
             <ToolCard href="/ai-hook" icon={<Bot />} label="AI Hook Generator" desc="Psychological frameworks for viral content retention." color="#818cf8" borderColor="#818cf8" badge={{ text: 'Hot', color: '#818cf8' }} />
-            <ToolCard href="/ai-humanizer" icon={<Sparkles />} label="AI Content Humanizer" desc="Make AI text sound human. Bypass detectors." color="#818cf8" borderColor="#818cf8" />
+            <ToolCard href="/ai-humanizer" icon={<Sparkles />} label="AI Content Humanizer" desc="Refine AI-generated text to sound more natural and engaging." color="#818cf8" borderColor="#818cf8" />
             <ToolCard href="/blog-to-social" icon={<RefreshCw />} label="Blog to Social Repurposer" desc="Convert blog posts into social media content." color="#1da1f2" borderColor="#1da1f2" />
             <ToolCard href="/instagram-caption" icon={<Camera />} label="Instagram Caption Generator" desc="AI-driven captions for reels and posts." color="#cc2366" borderColor="#cc2366" />
             <ToolCard href="/tiktok-hashtags" icon={<Hash />} label="TikTok Hashtag Generator" desc="High-velocity trending tag generation." color="#00f2ea" borderColor="#00f2ea" />
@@ -345,7 +345,7 @@ export default function Home() {
           <p style={{
             fontSize: '12px', color: 'var(--muted)', textTransform: 'uppercase',
             letterSpacing: '0.12em', fontWeight: 600, marginBottom: '20px',
-          }}>Trusted by creators & professionals worldwide</p>
+          }}>Built for creators, marketers, and professionals</p>
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             gap: '32px', flexWrap: 'wrap',

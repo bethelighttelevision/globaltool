@@ -96,7 +96,7 @@ export default function WriteForUsPage() {
       {/* Benefits Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '60px' }}>
         {[
-          { icon: <Globe size={24} />, title: 'Reach 10K+ Readers', desc: 'Your work gets in front of thousands of targeted monthly visitors actively searching for expert content.', color: '#2997ff' },
+          { icon: <Globe size={24} />, title: 'Grow Your Audience', desc: 'Your work gets in front of targeted visitors actively searching for expert content in your niche.', color: '#2997ff' },
           { icon: <ArrowUpRight size={24} />, title: 'Dofollow Backlink', desc: 'Earn a high-authority dofollow backlink from a trusted domain to boost your own site&rsquo;s SEO.', color: '#32d74b' },
           { icon: <Shield size={24} />, title: 'Build Authority', desc: 'Establish yourself as a thought leader in SEO, digital marketing, finance, or AI content creation.', color: '#bf5af2' },
           { icon: <Sparkles size={24} />, title: 'Social Media Promotion', desc: 'We promote your article across our Twitter and LinkedIn network for extra visibility.', color: '#ff9f0a' },
