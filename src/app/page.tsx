@@ -135,16 +135,16 @@ export default function Home() {
             fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 700,
             lineHeight: 1.05, marginBottom: '20px', letterSpacing: '-0.03em',
           }}>
-            Your Ultimate Digital<br />
-            <span className="gradient-text-accent">Tool Arsenal</span>
+            Your Complete Digital<br />
+            <span className="gradient-text-accent">Toolbox</span>
           </h1>
 
           <p className="animate-slide-up" style={{
             fontSize: '18px', color: 'var(--muted-light)', maxWidth: '600px',
             margin: '0 auto 40px', lineHeight: 1.65,
           }}>
-            Dominate search, social, and finance with premium AI-powered tools.
-            Engineered for speed, privacy, and professionals.
+            Free online tools for SEO, social media, finance, and content creation.
+            Built for speed, privacy, and professional results.
           </p>
 
           {/* CTA Buttons */}
