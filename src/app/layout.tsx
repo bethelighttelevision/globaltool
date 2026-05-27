@@ -17,7 +17,7 @@ export const viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://toolsnappy.com'),
   title: {
-    default: "ToolSnappy | #1 Free SEO & Social Media Suite 2026",
+    default: "ToolSnappy | Free SEO & Social Media Toolkit 2026",
     template: "%s | ToolSnappy"
   },
   description: "Access 12+ professional, high-performance utility tools for SEO, Social Media, Crypto, and Developer productivity. Engineered for speed and precision.",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     google: "SLVPBBxmjf4OTG8ool0m5oHhotoFZiK5K_16cpautYs",
   },
   openGraph: {
-    title: "ToolSnappy | #1 Free SEO & Social Media Suite 2026",
+    title: "ToolSnappy | Free SEO & Social Media Toolkit 2026",
     description: "Access 12+ professional, high-performance utility tools for SEO, Social Media, Crypto, and Developer productivity. Engineered for speed and precision.",
     url: "https://toolsnappy.com",
     siteName: "ToolSnappy",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ToolSnappy | #1 Free SEO & Social Media Suite 2026",
+    title: "ToolSnappy | Free SEO & Social Media Toolkit 2026",
     description: "Access 12+ professional, high-performance utility tools for SEO, Social Media, Crypto, and Developer productivity. Engineered for speed and precision.",
     images: ["https://toolsnappy.com/logo.svg"],
   },
