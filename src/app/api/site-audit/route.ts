@@ -1,24 +1,29 @@
-"use server";
+import { NextResponse } from 'next/server';
+import { generateContent } from '../../../lib/ai-provider';
 
-import { generateAICentent } from '../actions/ai';
-
-export async function analyzeSEOAction(targetUrl: string) {
+export async function POST(request: Request) {
   try {
-    let formattedUrl = targetUrl.trim();
+    const { url } = await request.json();
+    if (!url?.trim()) {
+      return NextResponse.json({ success: false, error: 'URL is required.' });
+    }
+
+    let formattedUrl = url.trim();
     if (!formattedUrl.startsWith('http')) {
       formattedUrl = `https://${formattedUrl}`;
     }
-    
+
     const response = await fetch(formattedUrl, {
-      headers: {
-        'User-Agent': 'GlobalToolbox-SEO-Analyzer/1.0 (Professional Audit Bot 2026)',
-      },
-      next: { revalidate: 3600 }
+      headers: { 'User-Agent': 'GlobalToolbox-SEO-Analyzer/1.0' },
+      next: { revalidate: 3600 },
     });
 
-    if (!response.ok) throw new Error(`Failed to fetch site: ${response.statusText}`);
+    if (!response.ok) {
+      return NextResponse.json({ success: false, error: `Failed to fetch site: ${response.statusText}` });
+    }
+
     const html = await response.text();
-    
+
     const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
     const title = titleMatch ? titleMatch[1].trim() : 'No Title Found';
     const descMatch = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/i);
@@ -27,7 +32,7 @@ export async function analyzeSEOAction(targetUrl: string) {
     const imgMatches = Array.from(html.matchAll(/<img[^>]*>/gi));
     const imgsWithoutAlt = imgMatches.filter(img => !/alt=["']([^"']*)["']/i.test(img[0])).length;
     const hasSsl = formattedUrl.startsWith('https');
-    
+
     let score = 50;
     if (title !== 'No Title Found') score += 10;
     if (description !== 'No Meta Description Found') score += 10;
@@ -39,25 +44,24 @@ export async function analyzeSEOAction(targetUrl: string) {
       { name: 'Meta Title', status: title !== 'No Title Found' ? 'pass' : 'fail', desc: title },
       { name: 'Meta Description', status: description !== 'No Meta Description Found' ? 'pass' : 'fail', desc: description },
       { name: 'H1 Heading', status: h1Matches.length === 1 ? 'pass' : 'warn', desc: `${h1Matches.length} H1 tags.` },
-      { name: 'SSL Security', status: hasSsl ? 'pass' : 'fail', desc: hasSsl ? 'Secure' : 'Not Secure' }
+      { name: 'SSL Security', status: hasSsl ? 'pass' : 'fail', desc: hasSsl ? 'Secure' : 'Not Secure' },
     ];
 
-    // Generate AI Advice
-    let expertAdvice = "Keep optimizing your content for better rankings.";
+    let expertAdvice = 'Keep optimizing your content for better rankings.';
     try {
       const prompt = `Act as an SEO expert. Analyze these metrics for ${formattedUrl}:
-      Title: ${title}
-      Description: ${description}
-      H1 Count: ${h1Matches.length}
-      Images without Alt: ${imgsWithoutAlt}
-      
-      Give me a 3-sentence professional advice to improve this site's SEO.`;
-      expertAdvice = await generateAICentent(prompt);
+Title: ${title}
+Description: ${description}
+H1 Count: ${h1Matches.length}
+Images without Alt: ${imgsWithoutAlt}
+
+Give me a 3-sentence professional advice to improve this site's SEO.`;
+      expertAdvice = await generateContent(prompt);
     } catch (e) {
-      console.error("AI Advice failed:", e);
+      console.error('AI advice failed:', e);
     }
 
-    return {
+    return NextResponse.json({
       success: true,
       score: Math.min(score, 100),
       metrics,
@@ -65,11 +69,12 @@ export async function analyzeSEOAction(targetUrl: string) {
       details: {
         title,
         description,
-        headings: h1Matches.map(h => `H1: ${h}`).slice(0, 10)
-      }
-    };
-
-    } catch {
-      return { success: false, error: 'Failed to analyze URL' };
+        headings: h1Matches.map(h => `H1: ${h}`).slice(0, 10),
+      },
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error('Site audit error:', msg);
+    return NextResponse.json({ success: false, error: 'Failed to analyze URL' });
   }
 }

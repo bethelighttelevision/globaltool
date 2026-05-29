@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Zap } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { generateAICentent } from '../actions/ai';
 export default function AIHookPage() {
 
   const [topic, setTopic] = useState('');
@@ -15,16 +14,22 @@ export default function AIHookPage() {
     setIsLoading(true);
 
     try {
-      const prompt = `Generate 9 viral hooks for a video about "${topic}". 
+      const prompt = `Generate 9 viral hooks for a video about "${topic}".
       Divide them into 3 categories:
       1. Psychological Hooks (Emotional/FOMO)
       2. Curiosity Hooks (Mystery/Secret)
       3. Data-Driven Hooks (Numbers/Proof)
 
-      Format the output as a JSON object with keys "psychological", "curiosity", and "data", each being an array of 3 strings. 
+      Format the output as a JSON object with keys "psychological", "curiosity", and "data", each being an array of 3 strings.
       Only return the JSON.`;
 
-      const response = await generateAICentent(prompt);
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+      if (!res.ok) throw new Error('Failed to generate hooks.');
+      const { text: response }: { text: string } = await res.json();
 
       let data;
       try {

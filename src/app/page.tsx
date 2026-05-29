@@ -6,12 +6,12 @@ import {
   Search, Globe, Bot, FileCode2, Tags, ShieldCheck, Braces, Play, Camera,
   Type, Image as ImageIcon, TrendingUp, Star, Hash, Download, Eye, List,
   DollarSign, FileText, Music, Sparkles, RefreshCw, Layers, Calculator, Zap,
-  ArrowRight, CheckCircle2, Quote, Code,
+  ArrowRight, CheckCircle2, Quote, Code, Film, ShoppingBag, Package,
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'ToolSnappy | #1 Free SEO & Social Media Suite 2026',
-  description: 'Access 32+ professional tools: SEO Analyzer, AI Humanizer, Crypto Calculator, Tax Calculator, YouTube tools, and more. 100% Free. No sign-up required.',
+  title: 'ToolSnappy | Free SEO & Social Media Toolkit 2026',
+  description: 'Access 34+ professional tools: SEO Analyzer, AI Humanizer, Crypto Calculator, Tax Calculator, YouTube tools, and more. 100% Free. No sign-up required.',
   keywords: 'ToolSnappy, Free SEO Tools, AI Hook Generator, Crypto Calculator, YouTube SEO, TikTok Tools, US Tax Calculator, Salary Calculator',
   alternates: { canonical: 'https://toolsnappy.com' },
 };
@@ -126,7 +126,7 @@ export default function Home() {
               <Zap size={13} color="var(--accent)" />
             </div>
             <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--accent)' }}>
-              32+ Free Tools — No Sign-up Required
+               34+ Free Tools — No Sign-up Required
             </span>
           </div>
 
@@ -159,7 +159,7 @@ export default function Home() {
             </Link>
             <Link href="/free-online-tools-for-creators" style={{ textDecoration: 'none' }}>
               <span className="secondary-button" style={{ fontSize: '15px', padding: '16px 32px' }}>
-                View All 32+ Tools
+                View All 34+ Tools
               </span>
             </Link>
           </div>
@@ -170,7 +170,7 @@ export default function Home() {
             marginTop: '64px', flexWrap: 'wrap',
           }}>
             {[
-              { value: '32+', label: 'Free Tools' },
+                { value: '34+', label: 'Free Tools' },
               { value: '100%', label: 'Free to Use' },
               { value: '0', label: 'Sign-ups Required' },
               { value: '2026', label: 'Latest Updates' },
@@ -227,6 +227,7 @@ export default function Home() {
             <ToolCard href="/youtube-thumbnail-tester" icon={<Eye />} label="Thumbnail Tester" desc="Preview in search, suggested, and home page mockups." color="#ffcc00" borderColor="#ffcc00" />
             <ToolCard href="/youtube-thumbnail-downloader" icon={<Download />} label="Thumbnail Downloader" desc="Download in HD to default quality." color="#ff3b30" borderColor="#ff3b30" />
             <ToolCard href="/youtube-tag-extractor" icon={<List />} label="Tag Extractor" desc="Extract tags, hashtags, and keywords from any video." color="#0071e3" borderColor="#0071e3" />
+            <ToolCard href="/shorts-ideas" icon={<Film />} label="Shorts Ideas Generator" desc="10 viral Shorts ideas with hooks, scripts & hashtags." color="#818cf8" borderColor="#818cf8" badge={{ text: 'New', color: '#818cf8' }} />
           </div>
         </div>
 
@@ -253,6 +254,15 @@ export default function Home() {
             <ToolCard href="/image-upscaler" icon={<ImageIcon />} label="Image Upscaler" desc="Increase resolution of low-quality images using AI." color="#32d74b" borderColor="#32d74b" badge={{ text: 'New', color: '#32d74b' }} />
             <ToolCard href="/pdf-converter" icon={<FileText />} label="PDF to SVG Converter" desc="Private, client-side vector conversion with page previews." color="#ff3b30" borderColor="#ff3b30" />
             <ToolCard href="/base64-converter" icon={<FileCode2 />} label="Image to Base64" desc="Instant image encoding for developers." color="#32d74b" borderColor="#32d74b" />
+          </div>
+        </div>
+
+        {/* ---- E-commerce (Amazon Seller Tools) ---- */}
+        <div style={{ marginTop: '48px' }}>
+          <SectionHeader icon={<ShoppingBag />} label="E-commerce Tools" color="#ff9500" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '16px' }}>
+            <ToolCard href="/amazon-listing-optimizer" icon={<Package />} label="Amazon Listing Optimizer" desc="Generate AI-powered titles, bullets, and descriptions." color="#ff9500" borderColor="#ff9500" badge={{ text: 'New', color: '#ff9500' }} />
+            <ToolCard href="/amazon-keyword-tool" icon={<Tags />} label="Amazon Keyword Researcher" desc="Organized keyword ideas for product research." color="#ff9500" borderColor="#ff9500" badge={{ text: 'New', color: '#ff9500' }} />
           </div>
         </div>
 
@@ -297,7 +307,7 @@ export default function Home() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', position: 'relative' }}>
             <Link href="/free-online-tools-for-creators" style={{ textDecoration: 'none' }}>
               <span className="premium-button" style={{ fontSize: '15px' }}>
-                Browse All 32+ Tools <ArrowRight size={18} />
+                Browse All 34+ Tools <ArrowRight size={18} />
               </span>
             </Link>
             <Link href="/contact" style={{ textDecoration: 'none' }}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Search, Image, Zap, FileText, Activity, DollarSign, Home, CreditCard, FileJson, PlayCircle, Camera, Globe, Download, Eye, List, Music } from 'lucide-react';
+import { Search, Image, Zap, FileText, Activity, DollarSign, Home, CreditCard, FileJson, PlayCircle, Camera, Globe, Download, Eye, List, Music, Film, ShoppingBag, Package, Tags } from 'lucide-react';
 
 const toolIcons: Record<string, React.ReactNode> = {
   '/site-audit': <Search size={24} />,
@@ -17,6 +17,9 @@ const toolIcons: Record<string, React.ReactNode> = {
   '/youtube-thumbnail-analyzer': <Image size={24} />,
   '/youtube-thumbnail-tester': <Eye size={24} />,
   '/youtube-thumbnail-downloader': <Download size={24} />,
+  '/shorts-ideas': <Film size={24} />,
+  '/amazon-listing-optimizer': <Package size={24} />,
+  '/amazon-keyword-tool': <Tags size={24} />,
 
 };
 
@@ -35,6 +38,9 @@ const tools = [
   { name: 'YT Thumbnail Analyzer', path: '/youtube-thumbnail-analyzer', desc: 'AI thumbnail score & feedback' },
   { name: 'YT Thumbnail Tester', path: '/youtube-thumbnail-tester', desc: 'Preview in YouTube UI mockups' },
   { name: 'YT Thumbnail Downloader', path: '/youtube-thumbnail-downloader', desc: 'Download all resolution thumbnails' },
+  { name: 'Shorts Ideas Generator', path: '/shorts-ideas', desc: 'AI Shorts idea & script generator' },
+  { name: 'Amazon Listing Optimizer', path: '/amazon-listing-optimizer', desc: 'AI listing generator for sellers' },
+  { name: 'Amazon Keyword Researcher', path: '/amazon-keyword-tool', desc: 'AI keyword ideas organized' },
 
 ];
 

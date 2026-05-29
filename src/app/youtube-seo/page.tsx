@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { PlayCircle, Play, Copy, CheckCircle2, Search, Sparkles } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { generateAICentent } from '../actions/ai';
 export default function YoutubeSEOPage() {
 
   const [topic, setTopic] = useState('');
@@ -34,7 +33,13 @@ export default function YoutubeSEOPage() {
       Format the output as a JSON object with keys "titles" (array), "description" (string), and "tags" (array).
       Only return the JSON.`;
 
-      const response = await generateAICentent(prompt);
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+      if (!res.ok) throw new Error('Failed to generate.');
+      const { text: response }: { text: string } = await res.json();
       const cleanJson = response.replace(/```json|```/g, '').trim();
       const data = JSON.parse(cleanJson);
 

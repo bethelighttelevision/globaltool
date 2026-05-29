@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Download, Plus, Trash2, ChevronRight, ChevronLeft, Layout, User, Briefcase, GraduationCap, Code, FileText, Sparkles, Save, Award, AlertCircle } from 'lucide-react';
 import { CVData, Templates } from './CVTemplates';
-import { generateAICentent } from '../app/actions/ai';
 
 const STORAGE_KEY = 'toolsnappy_cv_data';
 
@@ -168,13 +167,19 @@ Requirements:
 - Keep it under 100 words
 - Do not use placeholders or generic phrases`;
     try {
-      const result = await generateAICentent(prompt);
-      const cleaned = result.replace(/^["']|["']$/g, '').trim();
-      if (cleaned.length > 20) {
-        setData(prev => ({ ...prev, summary: cleaned }));
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+      if (res.ok) {
+        const { text: result }: { text: string } = await res.json();
+        const cleaned = result.replace(/^["']|["']$/g, '').trim();
+        if (cleaned.length > 20) {
+          setData(prev => ({ ...prev, summary: cleaned }));
+        }
       }
     } catch {}
-    setIsGenerating(false);
   }, [data]);
 
   const resetAll = () => {

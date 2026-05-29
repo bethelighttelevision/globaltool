@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import ToolLayout from '../../components/ToolLayout';
 import { Globe, ShieldAlert, Check, AlertCircle, Sparkles } from 'lucide-react';
-import { analyzeSEOAction } from './actions';
 export default function SEOAnalyzerPage() {
 
   const [url, setUrl] = useState('');
@@ -24,7 +23,12 @@ export default function SEOAnalyzerPage() {
     setError(null);
     setAudit(null);
 
-    const result = await analyzeSEOAction(url);
+    const res = await fetch('/api/site-audit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: url.trim() }),
+    });
+    const result = await res.json();
 
     if (result.success) {
       setAudit(result as typeof audit);

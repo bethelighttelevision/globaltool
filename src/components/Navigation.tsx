@@ -7,8 +7,8 @@ import { usePathname } from 'next/navigation';
 import {
   Menu, X, Search, Globe, Bot, ImageIcon, Video, DollarSign, Code, FileText,
   Layers, Sparkles, RefreshCw, Calculator, TrendingUp, Pen, Hash, Camera, Eye,
-  Download, List, ShieldCheck, Braces, FileCode2, Tags, Star, Type, Music, Play,
-  ChevronDown, ArrowUpRight,
+  Download, List, ShieldCheck, Braces, FileCode2, Tags, Star, Type, Music, Play, Film,
+  ChevronDown, ArrowUpRight, ShoppingBag, Package,
 } from 'lucide-react';
 
 interface ToolItem {
@@ -58,6 +58,7 @@ const categories: CategoryGroup[] = [
       { label: 'Thumbnail Tester', path: '/youtube-thumbnail-tester', desc: 'Preview in search results', icon: Eye },
       { label: 'Thumbnail Downloader', path: '/youtube-thumbnail-downloader', desc: 'Save HD thumbnails', icon: Download },
       { label: 'Tag Extractor', path: '/youtube-tag-extractor', desc: 'Extract video tags', icon: List },
+      { label: 'Shorts Ideas', path: '/shorts-ideas', desc: 'AI Shorts idea generator', icon: Film },
 
     ],
   },
@@ -91,6 +92,15 @@ const categories: CategoryGroup[] = [
     icon: Download,
     tools: [
 
+    ],
+  },
+  {
+    label: 'E-commerce',
+    color: '#ff9500',
+    icon: ShoppingBag,
+    tools: [
+      { label: 'Listing Optimizer', path: '/amazon-listing-optimizer', desc: 'AI Amazon listing generator', icon: Package },
+      { label: 'Keyword Researcher', path: '/amazon-keyword-tool', desc: 'AI keyword ideas organized', icon: Tags },
     ],
   },
   {
@@ -249,7 +259,7 @@ export default function Navigation() {
                     onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(41,151,255,0.15)'; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(41,151,255,0.08)'; }}
                   >
-                    View All 32+ Free Tools <ArrowUpRight size={14} />
+                    View All 34+ Free Tools <ArrowUpRight size={14} />
                   </Link>
                 </div>
               </div>
@@ -367,7 +377,7 @@ export default function Navigation() {
                 padding: '12px 8px', marginTop: '4px',
                 background: 'rgba(41,151,255,0.06)', borderRadius: '10px',
               }}
-            >View All 32+ Free Tools <ArrowUpRight size={14} /></Link>
+            >View All 34+ Free Tools <ArrowUpRight size={14} /></Link>
           </div>
         </div>
       )}

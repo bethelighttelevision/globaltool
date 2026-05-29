@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Image, Copy, CheckCircle2 } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { generateAICentent } from '../actions/ai';
 export default function InstagramCaptionPage() {
 
   const [topic, setTopic] = useState('');
@@ -17,13 +16,19 @@ export default function InstagramCaptionPage() {
     setIsLoading(true);
 
     try {
-      const prompt = `Generate 4 viral Instagram captions for the topic: "${topic}". 
-      The tone should be ${tone}. 
-      Include relevant emojis and hashtags. 
-      Format each caption clearly, separated by a unique delimiter like "---". 
+      const prompt = `Generate 4 viral Instagram captions for the topic: "${topic}".
+      The tone should be ${tone}.
+      Include relevant emojis and hashtags.
+      Format each caption clearly, separated by a unique delimiter like "---".
       Don't include any extra text, just the 4 captions.`;
 
-      const response = await generateAICentent(prompt);
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+      if (!res.ok) throw new Error('Failed to generate captions.');
+      const { text: response }: { text: string } = await res.json();
 
       let results: string[] = [];
       if (response.includes('---')) {

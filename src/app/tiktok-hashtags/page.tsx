@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Hash, Copy, CheckCircle2, TrendingUp } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { generateAICentent } from '../actions/ai';
 export default function TikTokHashtagsPage() {
 
   const [topic, setTopic] = useState('');
@@ -16,16 +15,22 @@ export default function TikTokHashtagsPage() {
     setIsLoading(true);
 
     try {
-      const prompt = `Generate 15 trending and viral TikTok hashtags for the topic: "${topic}". 
+      const prompt = `Generate 15 trending and viral TikTok hashtags for the topic: "${topic}".
       Include a mix of:
       1. Mega tags (broad reach)
       2. Niche-specific tags
       3. Community tags
 
-      Return the hashtags as a comma-separated list, starting with #. 
+      Return the hashtags as a comma-separated list, starting with #.
       Only return the hashtags.`;
 
-      const response = await generateAICentent(prompt);
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+      if (!res.ok) throw new Error('Failed to generate hashtags.');
+      const { text: response }: { text: string } = await res.json();
 
       // Grab all words starting with # from anywhere in the LLM response
       const matches = response.match(/#[a-zA-Z0-9_]+/g);

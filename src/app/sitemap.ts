@@ -41,6 +41,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/salary-calculator',
     '/retirement-calculator',
     '/write-for-us',
+    '/shorts-ideas',
+    '/amazon-listing-optimizer',
+    '/amazon-keyword-tool',
   ].map(route => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Sparkles, Moon, Sun, RefreshCw } from 'lucide-react';
 import ToolLayout from '../../components/ToolLayout';
-import { generateAICentent } from '../actions/ai';
 export default function LuckyNumberPage() {
 
   const [name, setName] = useState('');
@@ -52,7 +51,13 @@ export default function LuckyNumberPage() {
       Format the output as a JSON object with keys "analysis", "color", "day", and "prediction".
       Only return the JSON.`;
 
-      const response = await generateAICentent(prompt);
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
+      });
+      if (!res.ok) throw new Error('Failed to generate.');
+      const { text: response }: { text: string } = await res.json();
 
       let aiData;
       try {
