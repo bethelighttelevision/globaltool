@@ -24,9 +24,6 @@ export default function NotFound() {
           <Link href="/" className="premium-button" style={{ padding: '12px 28px', fontSize: '14px', textDecoration: 'none' }}>
             Back to Home
           </Link>
-          <Link href="/blog" className="modern-button" style={{ padding: '12px 28px', fontSize: '14px', textDecoration: 'none', background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}>
-            Browse Blog
-          </Link>
         </div>
       </div>
     </div>

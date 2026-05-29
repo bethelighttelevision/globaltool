@@ -99,7 +99,6 @@ export default function Footer() {
             }}>Resources</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {[
-                { label: 'Blog', path: '/blog' },
                 { label: '50 Free Tools', path: '/free-online-tools-for-creators' },
                 { label: 'All Calculators', path: '/free-online-tools-for-creators' },
                 { label: 'SEO Tools', path: '/free-online-tools-for-creators' },

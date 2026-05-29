@@ -268,7 +268,6 @@ export default function Navigation() {
 
           {/* Nav Links */}
           {[
-            { label: 'Blog', path: '/blog' },
             { label: 'About', path: '/about' },
             { label: 'Contact', path: '/contact' },
           ].map((link) => {
@@ -361,9 +360,6 @@ export default function Navigation() {
             );
           })}
           <div style={{ borderTop: '1px solid rgba(255,255,255,0.04)', paddingTop: '16px', marginTop: '8px' }}>
-            <Link href="/blog" onClick={() => setIsOpen(false)}
-              style={{ display: 'block', textDecoration: 'none', color: 'var(--foreground)', fontSize: '15px', fontWeight: 600, padding: '10px 8px' }}
-            >Blog</Link>
             <Link href="/about" onClick={() => setIsOpen(false)}
               style={{ display: 'block', textDecoration: 'none', color: 'var(--foreground)', fontSize: '15px', fontWeight: 600, padding: '10px 8px' }}
             >About</Link>

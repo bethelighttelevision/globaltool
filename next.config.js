@@ -21,11 +21,6 @@ const nextConfig = {
         destination: '/site-audit',
         permanent: true,
       },
-      {
-        source: '/blog/:slug',
-        destination: '/blog',
-        permanent: false,
-      },
     ];
   },
   experimental: {

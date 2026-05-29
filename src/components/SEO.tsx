@@ -25,7 +25,7 @@ export default function SEO({ toolName, description, url }: SEOProps) {
         },
         "author": {
           "@type": "Organization",
-          "name": "Global Utility Toolbox"
+          "name": "ToolSnappy"
         }
       },
       {

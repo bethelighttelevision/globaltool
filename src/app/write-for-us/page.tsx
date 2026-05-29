@@ -66,7 +66,7 @@ export default function WriteForUsPage() {
         <div className="glass-panel" style={{ padding: '24px', maxWidth: '450px', margin: '0 auto', borderLeft: '4px solid var(--accent)' }}>
           <p style={{ color: 'var(--muted)', fontSize: '14px', lineHeight: 1.6, margin: 0 }}>
             In the meantime, explore our <Link href="/free-online-tools-for-creators" style={{ color: 'var(--accent)' }}>free online tools</Link> 
-            {' '}or read our latest <Link href="/blog" style={{ color: 'var(--accent)' }}>expert guides</Link>.
+            {' '}or check out our <Link href="/free-online-tools-for-creators" style={{ color: 'var(--accent)' }}>free tools</Link>.
           </p>
         </div>
       </div>

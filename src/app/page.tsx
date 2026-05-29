@@ -12,7 +12,7 @@ import {
 import OrgSection from '../components/OrgSection';
 
 export const metadata = {
-  title: 'ToolSnappy | Free SEO & Social Media Toolkit 2026',
+  title: 'ToolSnappy — Free SEO, Social & AI Tools 2026',
   description: 'Access 34+ professional tools: SEO Analyzer, AI Humanizer, Crypto Calculator, Tax Calculator, YouTube tools, and more. 100% Free. No sign-up required.',
   keywords: 'ToolSnappy, Free SEO Tools, AI Hook Generator, Crypto Calculator, YouTube SEO, TikTok Tools, US Tax Calculator, Salary Calculator',
   alternates: { canonical: 'https://toolsnappy.com' },
@@ -238,6 +238,7 @@ export default function Home() {
             <ToolCard href="/youtube-thumbnail-downloader" icon={<Download />} label="Thumbnail Downloader" desc="Download in HD to default quality." color="#ff3b30" borderColor="#ff3b30" />
             <ToolCard href="/youtube-tag-extractor" icon={<List />} label="Tag Extractor" desc="Extract tags, hashtags, and keywords from any video." color="#0071e3" borderColor="#0071e3" />
             <ToolCard href="/shorts-ideas" icon={<Film />} label="Shorts Ideas Generator" desc="10 viral Shorts ideas with hooks, scripts & hashtags." color="#818cf8" borderColor="#818cf8" badge={{ text: 'New', color: '#818cf8' }} />
+            <ToolCard href="/thumbnail-generator" icon={<ImageIcon />} label="AI Thumbnail Generator" desc="Create click-worthy YouTube thumbnails with AI text overlay." color="#ff0050" borderColor="#ff0050" badge={{ text: 'New', color: '#ff0050' }} />
           </div>
         </div>
 

@@ -29,7 +29,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   const bottomLinks = [
-    { href: '/blog', label: 'View Live Blog', icon: <ExternalLink size={15} />, external: true },
     { href: '/', label: 'Back to Tools', icon: <ArrowLeft size={15} /> },
   ];
 
@@ -81,7 +80,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="w-full h-px bg-white/8" />
           <nav className="flex flex-col gap-1">
             {bottomLinks.map(l => (
-              <Link key={l.href} href={l.href} target={l.external ? '_blank' : undefined}
+              <Link key={l.href} href={l.href}
                 className="admin-nav-link text-foreground hover:text-accent"
                 style={{ fontWeight: 400, background: 'transparent', border: '1px solid transparent', color: 'var(--foreground)' }}
               >
