@@ -2,7 +2,8 @@
 
 export const metadata: Metadata = {
   title: 'Free AI Lucky Number Generator',
-  description: 'Generate personalized lucky numbers based on name analysis. Free AI number prediction tool.',
+  description: 'Generate personalized lucky numbers based on name analysis and numerology. Free AI-powered number prediction tool with 2026 horoscope insights and destiny number calculator.',
+  keywords: ['lucky number generator', 'AI lucky number', 'numerology', 'destiny number', 'lucky number finder', 'name numerology', 'lucky number 2026', 'number prediction'],
   alternates: {
     canonical: 'https://toolsnappy.com/lucky-number',
   },

@@ -2,7 +2,8 @@
 
 export const metadata: Metadata = {
   title: 'Free Instagram Caption Generator',
-  description: 'Generate AI-powered captions for Instagram reels and posts. Free Instagram caption generator.',
+  description: 'Generate AI-powered captions for Instagram reels and posts. Free online tool for creating engaging captions with hashtags, emojis, and CTAs tailored to your brand voice.',
+  keywords: ['Instagram caption generator', 'Instagram captions', 'AI caption writer', 'Instagram reels caption', 'caption ideas', 'Instagram marketing', 'social media captions', 'caption with hashtags'],
   alternates: {
     canonical: 'https://toolsnappy.com/instagram-caption',
   },

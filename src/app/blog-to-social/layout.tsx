@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Free Blog to Social Media Repurposer',
-  description: 'Convert blog posts into social media content. Free content repurposing tool for Twitter, LinkedIn, Instagram, and email newsletters.',
+  description: 'Convert blog posts into social media content. Free content repurposing tool for Twitter, LinkedIn, Instagram, and email newsletters. Turn one post into multiple social updates.',
+  keywords: ['blog to social', 'content repurposing', 'social media content', 'repurpose blog content', 'blog to Twitter', 'blog to LinkedIn', 'blog to Instagram', 'content marketing tool'],
   alternates: {
     canonical: 'https://toolsnappy.com/blog-to-social',
   },

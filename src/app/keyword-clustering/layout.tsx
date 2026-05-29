@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Free Keyword Clustering Tool',
-  description: 'Free keyword clustering tool. Group keywords by topic and search intent for SEO content planning.',
+  description: 'Free keyword clustering tool. Group keywords by topic and search intent for SEO content planning. Analyze and organize hundreds of keywords into actionable clusters instantly.',
+  keywords: ['keyword clustering', 'keyword grouping', 'SEO keyword clusters', 'topic clustering', 'search intent grouping', 'keyword organization', 'content planning tool', 'SEO content strategy'],
   alternates: {
     canonical: 'https://toolsnappy.com/keyword-clustering',
   },

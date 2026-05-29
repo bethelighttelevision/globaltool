@@ -2,7 +2,8 @@
 
 export const metadata: Metadata = {
   title: 'Free Online CV Maker - Professional Resume Builder 2026',
-  description: 'Create a professional CV in minutes with our free online CV maker.',
+  description: 'Create a professional CV in minutes with our free online CV maker. ATS-friendly templates, multiple layouts, and PDF download. Build a job-winning resume for free.',
+  keywords: ['CV maker', 'resume builder', 'free CV maker', 'professional resume', 'ATS-friendly resume', 'online CV', 'CV template', 'resume creator', 'job application tool'],
   alternates: {
     canonical: 'https://toolsnappy.com/cv-maker',
   },

@@ -2,12 +2,14 @@
 import Link from 'next/link';
 import Script from 'next/script';
 import AdSensePlaceholder from '../components/AdSensePlaceholder';
+import Mascot from '../components/Mascot';
 import {
   Search, Globe, Bot, FileCode2, Tags, ShieldCheck, Braces, Play, Camera,
   Type, Image as ImageIcon, TrendingUp, Star, Hash, Download, Eye, List,
   DollarSign, FileText, Music, Sparkles, RefreshCw, Layers, Calculator, Zap,
   ArrowRight, CheckCircle2, Quote, Code, Film, ShoppingBag, Package,
 } from 'lucide-react';
+import OrgSection from '../components/OrgSection';
 
 export const metadata = {
   title: 'ToolSnappy | Free SEO & Social Media Toolkit 2026',
@@ -147,6 +149,11 @@ export default function Home() {
             Built for speed, privacy, and professional results.
           </p>
 
+          {/* Mascot */}
+          <div style={{ marginBottom: '40px' }}>
+            <Mascot />
+          </div>
+
           {/* CTA Buttons */}
           <div className="animate-slide-up" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -188,6 +195,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ==================== ORG SECTION ==================== */}
+      <OrgSection />
 
       {/* ==================== TOOLS GRID ==================== */}
       <div className="content-container" style={{ paddingBottom: '80px' }}>

@@ -2,8 +2,9 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "YouTube Shorts Ideas Generator — Viral Short Ideas & Scripts | ToolSnappy",
-  description: "Generate 10 viral YouTube Shorts ideas with hooks, scripts, hashtags, and thumbnail text. Free AI-powered tool for creators who want to grow faster.",
+  title: "YouTube Shorts Ideas Generator — Viral Short Ideas & Scripts",
+  description: "Generate 10 viral YouTube Shorts ideas with hooks, scripts, hashtags, and thumbnail text. Free AI-powered tool for creators who want to grow faster. Includes trending formats, hooks for each niche, and SEO-optimized hashtags.",
+  keywords: ["YouTube Shorts", "Shorts ideas generator", "viral Shorts", "YouTube script generator", "AI Shorts", "content creator tools", "Shorts hashtags", "viral video hooks"],
   openGraph: {
     title: "YouTube Shorts Ideas Generator — Viral Short Ideas & Scripts",
     description: "Generate 10 viral YouTube Shorts ideas with hooks, scripts, hashtags, and thumbnail text. Free AI-powered tool for creators.",

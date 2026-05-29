@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Free Amazon Keyword Researcher',
-  description: 'Generate Amazon keyword ideas with AI. Free tool for high-intent, long-tail, feature, and benefit keyword research organized by category.',
+  description: 'Generate Amazon keyword ideas with AI. Free tool for high-intent, long-tail, feature, and benefit keyword research organized by category. Find profitable keywords for your Amazon products.',
+  keywords: ['Amazon keyword research', 'Amazon keyword tool', 'Amazon product keywords', 'long-tail keywords Amazon', 'Amazon SEO keywords', 'high-intent keywords', 'Amazon seller keywords', 'product research tool'],
   alternates: {
     canonical: 'https://toolsnappy.com/amazon-keyword-tool',
   },

@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Free Amazon Listing Optimizer',
-  description: 'Generate optimized Amazon product listings with AI. Free tool for creating titles, bullet points, descriptions, and backend search terms.',
+  description: 'Generate optimized Amazon product listings with AI. Free tool for creating SEO-friendly titles, bullet points, product descriptions, and backend search terms to boost sales and visibility.',
+  keywords: ['Amazon listing optimizer', 'Amazon product listing', 'Amazon SEO', 'Amazon title generator', 'Amazon bullet points', 'Amazon backend keywords', 'product listing optimization', 'Amazon seller tools'],
   alternates: {
     canonical: 'https://toolsnappy.com/amazon-listing-optimizer',
   },

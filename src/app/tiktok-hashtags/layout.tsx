@@ -2,7 +2,8 @@
 
 export const metadata: Metadata = {
   title: 'Free TikTok Hashtag Generator',
-  description: 'Generate high-velocity trending hashtags for TikTok virality. Free TikTok hashtag tool.',
+  description: 'Generate high-velocity trending hashtags for TikTok virality. Free online tool that analyzes your niche and suggests the best hashtag combinations for maximum reach.',
+  keywords: ['TikTok hashtag generator', 'TikTok hashtags', 'trending hashtags TikTok', 'viral hashtags', 'TikTok growth', 'hashtag strategy', 'TikTok marketing tool', 'hashtag suggestions'],
   alternates: {
     canonical: 'https://toolsnappy.com/tiktok-hashtags',
   },

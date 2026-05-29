@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Free SEO Analyzer & Website Audit Tool',
-  description: 'Audit any website instantly for SEO issues: missing meta tags, headings, image alt text, and more. Free real-time SEO analysis tool.',
+  description: 'Audit any website instantly for SEO issues: missing meta tags, headings, image alt text, and more. Free real-time SEO analysis tool with actionable recommendations.',
+  keywords: ['SEO analyzer', 'website audit tool', 'SEO audit', 'meta tag checker', 'heading structure', 'SEO checker', 'free SEO tool', 'on-page SEO analysis'],
   alternates: {
     canonical: 'https://toolsnappy.com/site-audit',
   },

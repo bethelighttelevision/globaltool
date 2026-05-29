@@ -2,7 +2,8 @@
 
 export const metadata: Metadata = {
   title: 'Free YouTube SEO Optimization Tool',
-  description: 'Optimize your YouTube titles, descriptions, and tags for higher rankings. Free YouTube SEO tool.',
+  description: 'Optimize your YouTube titles, descriptions, and tags for higher rankings. Free YouTube SEO tool with real-time scoring, keyword suggestions, and AI-powered title generation.',
+  keywords: ['YouTube SEO', 'YouTube optimization', 'YouTube title generator', 'YouTube tags', 'video SEO', 'YouTube description', 'YouTube ranking', 'YouTube keyword tool'],
   alternates: {
     canonical: 'https://toolsnappy.com/youtube-seo',
   },
