@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import Script from 'next/script';
+import React, { useEffect, useState } from 'react';
 
 interface PHData {
   upvotes: number;
@@ -9,16 +8,9 @@ interface PHData {
   reviewsRating: number;
 }
 
-declare global {
-  interface Window {
-    Trustpilot?: { loadFromElement: (el: HTMLElement) => void };
-  }
-}
-
 const GOOGLE_REVIEW_URL = 'https://g.page/r/CT8buu40JhIcEBM/review';
 const PH_URL = 'https://www.producthunt.com/p/toolsnappy';
 const TP_REVIEW_URL = 'https://www.trustpilot.com/review/toolsnappy.com';
-const TP_BUID = '6a1a3290bf4d2e353724ac45';
 
 function StarIcon() {
   return (
@@ -28,11 +20,17 @@ function StarIcon() {
   );
 }
 
+function TpStarIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="#00E676">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  );
+}
+
 export default function SocialProof() {
   const [ph, setPh] = useState<PHData | null>(null);
   const [phError, setPhError] = useState(false);
-  const [tpLoaded, setTpLoaded] = useState(false);
-  const tpRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch('/api/producthunt')
@@ -41,19 +39,8 @@ export default function SocialProof() {
       .catch(() => setPhError(true));
   }, []);
 
-  useEffect(() => {
-    if (!tpLoaded || !tpRef.current || !window.Trustpilot) return;
-    window.Trustpilot.loadFromElement(tpRef.current);
-  }, [tpLoaded]);
-
   return (
     <div className="content-container" style={{ padding: '40px 24px 0' }}>
-      <Script
-        id="trustpilot-script"
-        src="//widget.trustpilot.com/bootstrap/v5/tp.widget.sync.bootstrap.min.js"
-        strategy="lazyOnload"
-        onLoad={() => setTpLoaded(true)}
-      />
       <div style={{
         display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap',
       }}>
@@ -112,7 +99,7 @@ export default function SocialProof() {
                 {ph && !phError ? (
                   <span>▲ {ph.upvotes} points</span>
                 ) : (
-                  <span>Product Hunt</span>
+                  <span style={{ color: '#fff' }}>Product Hunt</span>
                 )}
               </div>
               <span style={{ fontSize: '11px', color: 'var(--muted)', fontWeight: 500 }}>
@@ -128,37 +115,25 @@ export default function SocialProof() {
             display: 'flex', alignItems: 'center', gap: '12px',
             padding: '14px 24px', borderRadius: '14px',
             transition: 'all 0.2s', cursor: 'pointer',
+            border: '1px solid rgba(0, 230, 118, 0.2)',
           }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; }}>
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0, 230, 118, 0.5)'; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0, 230, 118, 0.2)'; }}>
             <div style={{
               width: '36px', height: '36px', borderRadius: '50%',
-              background: '#00b67a', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexShrink: 0,
+              background: '#00e676', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, boxShadow: '0 0 12px rgba(0, 230, 118, 0.3)',
             }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#0a0a0f">
                 <path d="M12 0c-1.2 0-2.2.9-2.4 2.1L8.9 7.6H3.2c-1.2 0-2.2.9-2.4 2.1-.2 1.2.4 2.5 1.5 3.1l4.6 3.1-1.8 5.5c-.4 1.2.1 2.5 1.2 3.1s2.4.3 3.3-.4L12 18.3l4.4 3.2c.9.7 2.2.8 3.3.4s1.6-1.9 1.2-3.1l-1.8-5.5 4.6-3.1c1.1-.6 1.7-1.9 1.5-3.1-.2-1.2-1.2-2.1-2.4-2.1h-5.7l-.7-5.5C14.2.9 13.2 0 12 0z" />
               </svg>
             </div>
             <div>
-              <div ref={tpRef}
-                className="trustpilot-widget"
-                data-locale="en-US"
-                data-template-id="5419b732fbfb950b10de65e5"
-                data-businessunit-id={TP_BUID}
-                data-style-height="24px"
-                data-style-width="100%"
-                data-theme="dark"
-                data-stars="5"
-                data-review-languages="en"
-                style={{ minWidth: '120px', lineHeight: 1 }}>
-                <a href={TP_REVIEW_URL} target="_blank" rel="noopener noreferrer"
-                  style={{ fontSize: '13px', fontWeight: 700, color: '#fff', textDecoration: 'none' }}>
-                  Trustpilot
-                </a>
+              <div style={{ display: 'flex', gap: '2px', fontSize: '13px', lineHeight: 1, marginBottom: '2px' }}>
+                {[1,2,3,4,5].map(i => <TpStarIcon key={i} />)}
               </div>
-              <span style={{ fontSize: '11px', color: 'var(--muted)', fontWeight: 500 }}>
-                See our reviews
+              <span style={{ fontSize: '12px', color: '#00E676', fontWeight: 700 }}>
+                Trustpilot
               </span>
             </div>
           </div>
