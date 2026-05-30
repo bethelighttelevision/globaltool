@@ -10,6 +10,7 @@ import {
   ArrowRight, CheckCircle2, Quote, Code, Film, ShoppingBag, Package,
 } from 'lucide-react';
 import OrgSection from '../components/OrgSection';
+import SocialProof from '../components/SocialProof';
 
 export const metadata = {
   title: 'ToolSnappy — Free SEO, Social & AI Tools 2026',
@@ -382,6 +383,9 @@ export default function Home() {
             ))}
           </div>
         </div>
+
+        {/* ==================== SOCIAL PROOF BADGES ==================== */}
+        <SocialProof />
 
       </div>
     </>
