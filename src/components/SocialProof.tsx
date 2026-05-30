@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Script from 'next/script';
 
 interface PHData {
   upvotes: number;
@@ -8,9 +9,16 @@ interface PHData {
   reviewsRating: number;
 }
 
+declare global {
+  interface Window {
+    Trustpilot?: { loadFromElement: (el: HTMLElement) => void };
+  }
+}
+
 const GOOGLE_REVIEW_URL = 'https://g.page/r/CT8buu40JhIcEBM/review';
 const PH_URL = 'https://www.producthunt.com/p/toolsnappy';
-const TP_URL = 'https://www.trustpilot.com/evaluate/toolsnappy.com';
+const TP_REVIEW_URL = 'https://www.trustpilot.com/review/toolsnappy.com';
+const TP_BUID = '6a1a3290bf4d2e353724ac45';
 
 function StarIcon() {
   return (
@@ -23,6 +31,8 @@ function StarIcon() {
 export default function SocialProof() {
   const [ph, setPh] = useState<PHData | null>(null);
   const [phError, setPhError] = useState(false);
+  const [tpLoaded, setTpLoaded] = useState(false);
+  const tpRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch('/api/producthunt')
@@ -31,8 +41,19 @@ export default function SocialProof() {
       .catch(() => setPhError(true));
   }, []);
 
+  useEffect(() => {
+    if (!tpLoaded || !tpRef.current || !window.Trustpilot) return;
+    window.Trustpilot.loadFromElement(tpRef.current);
+  }, [tpLoaded]);
+
   return (
     <div className="content-container" style={{ padding: '40px 24px 0' }}>
+      <Script
+        id="trustpilot-script"
+        src="//widget.trustpilot.com/bootstrap/v5/tp.widget.sync.bootstrap.min.js"
+        strategy="lazyOnload"
+        onLoad={() => setTpLoaded(true)}
+      />
       <div style={{
         display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap',
       }}>
@@ -101,7 +122,7 @@ export default function SocialProof() {
           </div>
         </a>
 
-        <a href={TP_URL} target="_blank" rel="noopener noreferrer"
+        <a href={TP_REVIEW_URL} target="_blank" rel="noopener noreferrer"
           style={{ textDecoration: 'none' }}>
           <div className="glass-panel" style={{
             display: 'flex', alignItems: 'center', gap: '12px',
@@ -120,11 +141,24 @@ export default function SocialProof() {
               </svg>
             </div>
             <div>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff', lineHeight: 1.2 }}>
-                Trustpilot
+              <div ref={tpRef}
+                className="trustpilot-widget"
+                data-locale="en-US"
+                data-template-id="5419b732fbfb950b10de65e5"
+                data-businessunit-id={TP_BUID}
+                data-style-height="24px"
+                data-style-width="100%"
+                data-theme="dark"
+                data-stars="5"
+                data-review-languages="en"
+                style={{ minWidth: '120px', lineHeight: 1 }}>
+                <a href={TP_REVIEW_URL} target="_blank" rel="noopener noreferrer"
+                  style={{ fontSize: '13px', fontWeight: 700, color: '#fff', textDecoration: 'none' }}>
+                  Trustpilot
+                </a>
               </div>
               <span style={{ fontSize: '11px', color: 'var(--muted)', fontWeight: 500 }}>
-                Coming soon
+                See our reviews
               </span>
             </div>
           </div>
